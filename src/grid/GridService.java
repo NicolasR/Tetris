@@ -2,11 +2,11 @@ package grid;
 
 public interface GridService {
 	/** Observators */
-	int getWidth();
-	int getHeight();
-	boolean isOccupied(int x, int y);
+	public int getWidth();
+	public int getHeight();
+	public boolean isOccupied(int x, int y);
 	  //pre: x >= 1 && x <= getWidth() && y >= 1 && y <= getHeight()
-	boolean canPut(int x, int y);
+	public boolean canPut(int x, int y);
 	
 	/** Invariants
 	 * \forall x in (1<= x && x < getWidth){

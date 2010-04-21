@@ -10,7 +10,7 @@ public class GridContract extends GridDecorator {
 		for(int i=1;i<=super.getWidth();i++){
 			for(int j=1;j<=super.getHeight();j++){
 				if (super.isOccupied(i, j) == super.canPut(i, j))
-					throw new Error("Invariant invalide(1)");
+					throw new Error("[GRID]Invariant invalide(1)");
 			}
 		}
 			
@@ -20,7 +20,7 @@ public class GridContract extends GridDecorator {
 	public boolean isOccupied(int x, int y){
 		checkInvariants();
 		if (x < 1 || x > getWidth() || y < 1 || y > getHeight())
-			throw new Error("post(1)(isOccupied) invalide");
+			throw new Error("[GRID]post(1)(isOccupied) invalide");
 		boolean temp = super.isOccupied(x, y);
 		checkInvariants();
 		return temp;
@@ -35,18 +35,18 @@ public class GridContract extends GridDecorator {
 	
 	public void init(int x, int y){
 		if (x <= 0 || y <= 0 || y < x )
-			throw new Error("pre(1)(init) invalide");
+			throw new Error("[GRID]pre(1)(init) invalide");
 		
 		super.init(x, y);
 		
 		if (super.getWidth() != x || super.getHeight() != y)
-			throw new Error("post(1)(init) invalide");
+			throw new Error("[GRID]post(1)(init) invalide");
 		
 		int xtemp = 1, ytemp = 1;
 		while (xtemp <= super.getWidth()){
 			while (ytemp <= super.getHeight()){
 				if (super.isOccupied(xtemp,ytemp) || !super.canPut(xtemp, ytemp))
-					throw new Error("post(2)(init) invalide");
+					throw new Error("[GRID]post(2)(init) invalide");
 				ytemp++;
 			}
 			xtemp++;
@@ -57,7 +57,7 @@ public class GridContract extends GridDecorator {
 	public void put(int x, int y){
 		checkInvariants();
 		if (!super.canPut(x, y))
-			throw new Error("pre(1)(put) invalide");
+			throw new Error("[GRID]pre(1)(put) invalide");
 		
 		boolean grid_atPre[][] = new boolean[super.getWidth()][super.getHeight()];
 		int xtemp=1, ytemp=1;
@@ -75,10 +75,10 @@ public class GridContract extends GridDecorator {
 		super.put(x, y);
 		
 		if (grid_atPre[x][y] == super.isOccupied(x, y))
-			throw new Error("post(1)(put) invalide");
+			throw new Error("[GRID]post(1)(put) invalide");
 		
 		if (super.canPut(x,y))
-			throw new Error("post(2)(put) invalide");
+			throw new Error("[GRID]post(2)(put) invalide");
 		
 		xtemp = 1;
 		ytemp = 1;
@@ -87,10 +87,10 @@ public class GridContract extends GridDecorator {
 				if (xtemp != x || ytemp != y)
 				{
 					if (grid_atPre[xtemp][ytemp] != super.isOccupied(xtemp, ytemp))
-						throw new Error("post(3)(put) invalide");
+						throw new Error("[GRID]post(3)(put) invalide");
 					
 					if (!super.canPut(xtemp, ytemp))
-						throw new Error("post(4)(put) invalide");
+						throw new Error("[GRID]post(4)(put) invalide");
 				}
 				
 			}
@@ -106,7 +106,7 @@ public class GridContract extends GridDecorator {
 	public void remove(int x, int y){
 		checkInvariants();
 		if (!super.isOccupied(x, y))
-			throw new Error("pre(1)(put) invalide");
+			throw new Error("[GRID]pre(1)(put) invalide");
 		
 		boolean grid_atPre[][] = new boolean[super.getWidth()][super.getHeight()];
 		int xtemp=1, ytemp=1;
@@ -124,10 +124,10 @@ public class GridContract extends GridDecorator {
 		super.put(x, y);
 		
 		if (grid_atPre[x][y] == super.isOccupied(x, y))
-			throw new Error("post(1)(put) invalide");
+			throw new Error("[GRID]post(1)(put) invalide");
 		
 		if (!super.canPut(x,y))
-			throw new Error("post(2)(put) invalide");
+			throw new Error("[GRID]post(2)(put) invalide");
 		
 		xtemp = 1;
 		ytemp = 1;
@@ -136,10 +136,10 @@ public class GridContract extends GridDecorator {
 				if (xtemp != x || ytemp != y)
 				{
 					if (grid_atPre[xtemp][ytemp] == super.isOccupied(xtemp, ytemp))
-						throw new Error("post(3)(put) invalide");
+						throw new Error("[GRID]post(3)(put) invalide");
 					
 					if (!super.canPut(xtemp, ytemp))
-						throw new Error("post(4)(put) invalide");
+						throw new Error("[GRID]post(4)(put) invalide");
 				}
 				
 			}
