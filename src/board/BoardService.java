@@ -6,7 +6,7 @@ public interface BoardService {
 	
 	/** Observators*/
 	public int getNbLastCleaned();
-	public BlockService getBlock();
+//	public BlockService getBlock();
 	
 	/** Constructors
 	 * Initialise
@@ -27,5 +27,5 @@ public interface BoardService {
 	
 	public void doBottom();
 	
-	public void insert(Block bloc);
+//	public void insert(Block bloc);
 }
