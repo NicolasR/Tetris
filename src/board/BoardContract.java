@@ -1,5 +1,7 @@
 package board;
 
+import block.BlockContract;
+
 public class BoardContract extends BoardDecorator {
 
 	public BoardContract(BoardService f) {
@@ -86,7 +88,7 @@ public class BoardContract extends BoardDecorator {
 		checkInvariants();
 	}
 	
-	public void insert(BlockService bloc){
+	public void insert(BlockContract bloc){
 		checkInvariants();
 		if (super.isBlock() == true)
 			throw new Error("[BOARD]pre(1)(insert) invalide");

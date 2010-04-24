@@ -30,16 +30,18 @@ public interface GridService {
 	 
 	 /** Operators */
 	 /** pre: canPut(x,y)
+	  * pre: x >= 1 && x <= getWidth()
+	  * pre: y >= 1 && y <= getHeight()
 	  * post: not(isOccupied(x,y)@pre) == isOccupied(x,y)
 	  * post: not(canPut(x,y))
 	  * post: forall i in (1<= i && x != i && i < getWidth){
-	  * 		  forall j in (1<= j && j<y && j < getHeight){
-	  * 		  	isOccupied(i,j)@pre == isOccupied(i,j);
+	  * 		  forall j in (1<= j && j<y && j < getHeight) {
+	  * 		  	(i!=x && j!=y) <=> isOccupied(i,j)@pre == isOccupied(i,j);
 	  * 		  }
 	  * 	  }
-	  * post: forall i in (1<= i && x != i && i < getWidth){
-	  * 		  forall j in (1<= j && j<y && j < getHeight){
-	  * 		  	canPut(i,j);
+	  * post: forall i in (1<= i && x != i && i < getWidth) && i != x{
+	  * 		  forall j in (1<= j && j<y && j < getHeight) && j != y{
+	  * 		  	(i!=x && j!=y) <=> canPut(i,j)@pre != canPut(i,j);
 	  * 		  }
 	  * 	  }
 	  */
@@ -47,16 +49,18 @@ public interface GridService {
 	 
 	 /**
 	  * pre: isOccupied(x,y);
+	  * pre: x >= 1 && x <= getWidth()
+	  * pre: y >= 1 && y <= getHeight()
 	  * post: isOccupied(x,y)@pre == not(isOccupied(x,y))
 	  * post: canPut(x,y)
 	  * post: forall i in (1<= i && x != i && i < getWidth){
 	  * 		  forall j in (1<= j && j<y && j < getHeight){
-	  * 		  	isOccupied(i,j)@pre == not(isOccupied(i,j));
+	  * 		  	(i!=x && j!=y) <=> isOccupied(i,j)@pre == not(isOccupied(i,j));
 	  * 		  }
 	  * 	  }
 	  * post: forall i in (1<= i && x != i && i < getWidth){
 	  * 		  forall j in (1<= j && j<y && j < getHeight){
-	  * 		  	canPut(i,j);
+	  * 		  	(i!=x && j!=y) <=> canPut(i,j);
 	  * 		  }
 	  * 	  }
 	  */

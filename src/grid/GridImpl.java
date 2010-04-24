@@ -8,6 +8,8 @@ public class GridImpl implements GridService {
 	
 	@Override
 	public boolean canPut(int x, int y) {
+		if (x < 1 || x > this.Width || y < 1 || y > this.Height)
+			return false;
 		return !used[x-1][y-1];
 	}
 

@@ -1,5 +1,6 @@
 package board;
 
+import block.BlockContract;
 import grid.GridService;
 
 public class BoardImpl implements BoardService {

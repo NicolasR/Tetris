@@ -1,5 +1,6 @@
 package board;
 
+import block.BlockContract;
 import grid.GridService;
 
 public abstract class BoardDecorator {
@@ -9,7 +10,7 @@ public abstract class BoardDecorator {
 		this.delegate = f;
 	}
 	
-	public BlockService getcurrentBlock(){
+	public BlockContract getcurrentBlock(){
 		return this.delegate.getcurrentBlock();
 	}
 	
@@ -78,7 +79,7 @@ public abstract class BoardDecorator {
 		this.delegate.step();
 	}
 	
-	public void insert(BlockService bloc){
+	public void insert(BlockContract bloc){
 		this.delegate.insert(bloc);
 	}
 	

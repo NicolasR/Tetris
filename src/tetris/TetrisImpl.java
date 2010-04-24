@@ -2,6 +2,8 @@ package tetris;
 
 import java.util.Random;
 
+import block.BlockContract;
+import block.BlockImpl;
 import board.*;
 
 public class TetrisImpl implements TetrisService {
