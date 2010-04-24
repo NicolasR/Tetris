@@ -1,12 +1,17 @@
 package board;
 
 import block.BlockContract;
-import grid.GridService;
+import grid.GridContract;
+import grid.GridImpl;
+import java.util.LinkedList;
 
 public class BoardImpl implements BoardService {
 
-	private int XBlockMin;
-	private int YBlockMin;
+	private int XMinBlock;
+	private int YMinBlock;
+	private int NbLastCleaned;
+	private BlockContract bloc;
+	private GridContract grid;
 	
 	@Override
 	public boolean canRotateLeft() {
@@ -34,12 +39,12 @@ public class BoardImpl implements BoardService {
 
 	@Override
 	public int getXblock(int x) {
-		return this.XBlockMin+(x-1);
+		return this.XMinBlock+(x-1);
 	}
 
 	@Override
 	public int getYblock(int y) {
-		return this.YBlockMin+(y-1);
+		return this.YMinBlock+(y-1);
 	}
 	
 	@Override
@@ -62,44 +67,44 @@ public class BoardImpl implements BoardService {
 
 	@Override
 	public void doRotateLeft() {
-		// TODO Auto-generated method stub
-
+		bloc.rotateLeft();
 	}
 
 	@Override
 	public void doRotateRight() {
-		// TODO Auto-generated method stub
-
+		bloc.rotateRight();
 	}
 
 	@Override
 	public int getNbLastCleaned() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.NbLastCleaned;
 	}
 
 	@Override
-	public GridService getgrid() {
-		// TODO Auto-generated method stub
-		return null;
+	public GridContract getgrid() {
+		return this.grid;
 	}
 
 	@Override
 	public void init(int x, int y) {
-		// TODO Auto-generated method stub
-
+		bloc = null;
+		grid = new GridContract(new GridImpl());
+		grid.init(x, y);
+		NbLastCleaned = 0;
+		XMinBlock = 0;
+		YMinBlock = 0;
 	}
 
 	@Override
 	public boolean isBlock() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.bloc == null;
 	}
 
 	@Override
 	public void remove() {
-		// TODO Auto-generated method stub
-
+		this.bloc = null;
+		XMinBlock = 0;
+		YMinBlock = 0;
 	}
 
 	@Override
@@ -110,14 +115,37 @@ public class BoardImpl implements BoardService {
 
 	@Override
 	public BlockContract getcurrentBlock() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.bloc;
 	}
 
 	@Override
 	public void insert(BlockContract bloc) {
+		this.bloc = bloc;
+	}
+
+	@Override
+	public int getBottomHeight() {
 		// TODO Auto-generated method stub
-		
+		return 0;
+	}
+
+	@Override
+	public int getXMinBlock() {
+		return this.XMinBlock;
+	}
+
+	@Override
+	public int getYMinBlock() {
+		return this.YMinBlock;
+	}
+
+	@Override
+	public boolean isBottom() {
+		for(LinkedList<Integer> p: bloc.getAllPos()){
+			if (getgrid().isOccupied(p.getFirst()+1, p.getLast()+1))
+				return true;
+		}
+		return false;
 	}
 
 }

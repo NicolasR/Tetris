@@ -1,7 +1,7 @@
 package board;
 
 import block.BlockContract;
-import grid.GridService;
+import grid.GridContract;
 
 public abstract class BoardDecorator {
 	BoardService delegate;
@@ -14,8 +14,19 @@ public abstract class BoardDecorator {
 		return this.delegate.getcurrentBlock();
 	}
 	
+	public int getXMinBlock(){
+		return this.delegate.getXMinBlock();
+	}
 	
-	public GridService getgrid(){
+	public int getYMinBlock(){
+		return this.delegate.getYMinBlock();
+	}
+	
+	public int getBottomHeight(){
+		return this.delegate.getBottomHeight();
+	}
+	
+	public GridContract getgrid(){
 		return this.delegate.getgrid();
 	}
 	

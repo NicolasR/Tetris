@@ -68,6 +68,7 @@ public class TetrisImpl implements TetrisService {
 
 	@Override
 	public void next() {
+		// TODO A finaliser
 		Random r = new Random();
 		int size;
 		switch(r.nextInt(3)){
