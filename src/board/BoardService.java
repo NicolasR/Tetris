@@ -5,7 +5,7 @@ import grid.*;
 public interface BoardService {
 	
 	/** Observators*/
-	public BlockService getcurrentBlock();
+	public BlockContract getcurrentBlock();
 	public GridService getgrid();
 	public int getNbLastCleaned();
 	public boolean canRotateLeft();
@@ -13,6 +13,8 @@ public interface BoardService {
 	public boolean cangoLeft();
 	public boolean cangoRight();
 	public boolean isBlock();
+	public int getXblock(int x);
+	public int getYblock(int y);
 	
 	/** Constructors
 	 * Initialise
@@ -62,7 +64,7 @@ public interface BoardService {
 	 * post: getBlock() == bloc
 	 * 
 	 */
-	public void insert(BlockService bloc);
+	public void insert(BlockContract bloc);
 	
 	/**
 	 * pre: isBlock()

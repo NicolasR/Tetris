@@ -14,9 +14,6 @@ public interface GridService {
 	 * 				isOccupied(x,y) == not(canPut(x,y));
 	 *  		}
 	 * }
-	 * getWidth@pre = getWidth
-	 * getHeight@pre = getHeight
-	 * 
 	 */
 	
 	/** Constructors
@@ -45,8 +42,6 @@ public interface GridService {
 	  * 		  	canPut(i,j);
 	  * 		  }
 	  * 	  }
-	  * getWidth@pre = getWidth
-	  * getHeight@pre = getHeight
 	  */
 	 public void put(int x, int y);
 	 
@@ -64,8 +59,6 @@ public interface GridService {
 	  * 		  	canPut(i,j);
 	  * 		  }
 	  * 	  }
-	  * getWidth@pre = getWidth
-	  * getHeight@pre = getHeight
 	  */
 	 public void remove(int x, int y);
 	 
