@@ -15,7 +15,9 @@ public interface BoardService {
 	public boolean isBlock();
 	public int getXblock(int x);
 	public int getYblock(int y);
-	
+
+//	public BlockService getBlock();
+
 	/** Constructors
 	 * Initialise
 	 * pre: x > 0 && y > 0 && y >= x
@@ -71,4 +73,6 @@ public interface BoardService {
 	 * post: isBlock() == false
 	 */
 	public void remove();
+
+//	public void insert(Block bloc);
 }
