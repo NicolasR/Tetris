@@ -84,6 +84,9 @@ public class TetrisImpl implements TetrisService {
 		BlockContract bloc = new BlockContract(new BlockImpl());
 		bloc.init(size);
 		this.board.insert(bloc);
+		if (this.board.isConflict()){
+			this.isFinished = true;
+		}
 		this.needNext = false;
 	}
 
@@ -99,7 +102,11 @@ public class TetrisImpl implements TetrisService {
 
 	@Override
 	public void step() {
-		this.board.step(); //Vérifier si en bas?
+		this.board.step();
+		if (this.board.isBottom()){
+			this.needNext = true;
+			this.score += 20 + 50*this.board.getNbLastCleaned();
+		}
 	}
 
 }

@@ -68,8 +68,10 @@ public interface TetrisService {
 	
 	/**
 	 * pre: isRunning() == true
-	 * post: getScore()@pre == getScore()
-	 * post: needNext() == false
+	 * post: board:isBottom() => needNext() == true
+	 * post: not(board:isBottom()) => needNext() == false
+	 * post: needNext() == true => getScore() == getScore@pre + 20 + (Board:getNbLastCleaned()*50)
+	 * post: needNext() == false => getScore()@pre == getScore()
 	 * post: getBoard() == Board:step() ???????
 	 */
 	public void step();

@@ -9,12 +9,15 @@ public class BoardContract extends BoardDecorator {
 	}
 
 	public void checkInvariants(){
+		int sizeblock = 0;
+		if (super.isBlock())
+			sizeblock = super.getcurrentBlock().getSize();
 		if (super.getXMinBlock() < 0 || super.getXMinBlock() > 
-		(super.getgrid().getWidth() - super.getcurrentBlock().getSize()))
+		(super.getgrid().getWidth() - sizeblock))
 				throw new Error("[BOARD]invariant(1) invalide");
 		
 		if (super.getYMinBlock() < 0 || super.getYMinBlock() > 
-		(super.getgrid().getHeight() - super.getcurrentBlock().getSize()))
+		(super.getgrid().getHeight() - sizeblock))
 				throw new Error("[BOARD]invariant(2) invalide");
 	}
 	
@@ -26,7 +29,7 @@ public class BoardContract extends BoardDecorator {
 		
 		if (isBlock() != false)
 			throw new Error("[BOARD]post(1)(init) invalide");
-		if (getgrid().getWidth() != x || getgrid().getWidth() != y)
+		if (getgrid().getWidth() != x || getgrid().getHeight() != y)
 			throw new Error("[BOARD]post(2)(init) invalide");
 		if (getNbLastCleaned() != 0)
 			throw new Error("[BOARD]post(3)(init) invalide");
@@ -147,11 +150,11 @@ public class BoardContract extends BoardDecorator {
 		super.insert(bloc);
 		
 		/*post: Block:init(Random {2,3,4}) Vérif*/
-		if (super.isBlock() == false)
+		if (isBlock() == false)
 			throw new Error("[BOARD]post(1)(insert) invalide");
-		if (super.getcurrentBlock() != bloc)
+		if (getcurrentBlock() != bloc)
 			throw new Error("[BOARD]post(2)(insert) invalide");
-		if (getXMinBlock() != 0 || getYMinBlock() != 0)
+		if (getXMinBlock() == 0 || getYMinBlock() == 0)
 			throw new Error("[BOARD]post(3)(insert) invalide");
 		checkInvariants();
 	}

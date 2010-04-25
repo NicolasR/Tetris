@@ -54,6 +54,14 @@ public abstract class BoardDecorator {
 		return this.delegate.isBlock();
 	}
 	
+	public boolean isBottom(){
+		return this.delegate.isBottom();
+	}
+	
+	public boolean isConflict(){
+		return this.delegate.isConflict();
+	}
+
 	public int getXblock(int x){
 		return this.delegate.getXblock(x);
 	}

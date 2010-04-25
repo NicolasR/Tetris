@@ -21,6 +21,8 @@ public interface BoardService {
 		//pre: isBlock()
 	public boolean isBottom();
 		//pre: isBlock()
+	public boolean isConflict();
+		//pre: isBlock()
 	public int getXblock(int x);
 	public int getYblock(int y);
 	public int getXMinBlock();
@@ -99,7 +101,7 @@ public interface BoardService {
 	/**
 	 * pre: isBlock()
 	 * post: isBlock() == false
-	 * post: getXMinBlock() == 0 && getYMinBlock() == 0
+	 * post: getXMinBlock() != 0 && getYMinBlock() != 0
 	 */
 	public void remove();
 

@@ -122,7 +122,7 @@ public class BoardImpl implements BoardService {
 
 	@Override
 	public boolean isBlock() {
-		return this.bloc == null;
+		return this.bloc != null;
 	}
 
 	@Override

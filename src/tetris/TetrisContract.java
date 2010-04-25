@@ -17,7 +17,7 @@ public class TetrisContract extends TetrisDecorator {
 	public boolean needNext(){
 		checkInvariants();
 		
-		if (super.isRunning() == false)
+		if (isRunning() == false)
 			throw new Error("[TETRIS]pre(1)(needNext) invalide");
 		
 		boolean temp = super.needNext();
@@ -28,29 +28,29 @@ public class TetrisContract extends TetrisDecorator {
 	
 	public void init(){
 		super.init();
-		if (super.getScore() != 0)
+		if (getScore() != 0)
 			throw new Error("[TETRIS]post(1)(init) invalide");
 		//????? post2
 		
-		if (super.isRunning() == false)
+		if (isRunning() == false)
 			throw new Error("[TETRIS]post(3)(init) invalide");
-		if (super.needNext() == false)
+		if (needNext() == false)
 			throw new Error("[TETRIS]post(4)(init) invalide");
 		checkInvariants();
 	}
 	
 	public void goLeft(){
 		checkInvariants();
-		if (super.isRunning() != true)
+		if (isRunning() != true)
 			throw new Error("[TETRIS]pre(1)(goLeft) invalide");
 		
-		int getScore_atPre = super.getScore();
+		int getScore_atPre = getScore();
 		
 		super.goLeft();
 		
-		if (super.getScore() != getScore_atPre)
+		if (getScore() != getScore_atPre)
 			throw new Error("[TETRIS]post(1)(goLeft) invalide");
-		if (super.needNext() != false)
+		if (needNext() != false)
 			throw new Error("[TETRIS]post(2)(goLeft) invalide");
 		//????? post 3
 		checkInvariants();
@@ -58,32 +58,32 @@ public class TetrisContract extends TetrisDecorator {
 	
 	public void goRight(){
 		checkInvariants();
-		if (super.isRunning() != true)
-			throw new Error("[TETRIS]pre(1)(goLeft) invalide");
+		if (isRunning() != true)
+			throw new Error("[TETRIS]pre(1)(goRight) invalide");
 		
-		int getScore_atPre = super.getScore();
+		int getScore_atPre = getScore();
 		
 		super.goRight();
 		
-		if (super.getScore() != getScore_atPre)
-			throw new Error("[TETRIS]post(1)(goLeft) invalide");
-		if (super.needNext() != false)
-			throw new Error("[TETRIS]post(2)(goLeft) invalide");
+		if (getScore() != getScore_atPre)
+			throw new Error("[TETRIS]post(1)(goRight) invalide");
+		if (needNext() != false)
+			throw new Error("[TETRIS]post(2)(goRight) invalide");
 		//????? post 3
 		checkInvariants();
 	}
 	
 	public void goDown(){
 		checkInvariants();
-		if (super.isRunning() != true)
+		if (isRunning() != true)
 			throw new Error("[TETRIS]pre(1)(goDown) invalide");
 		
-		int getScore_atPre = super.getScore();
+		int getScore_atPre = getScore();
 		super.goDown();
 		
-		if (super.getScore() != (getScore_atPre + 20 + super.getBoard().getNbLastCleaned()))
+		if (getScore() != (getScore_atPre + 20 + getBoard().getNbLastCleaned()))
 			throw new Error("[TETRIS]post(1)(goDown) invalide");
-		if (super.needNext() != true)
+		if (needNext() != true)
 			throw new Error("[TETRIS]post(2)(goDown) invalide");
 		//????? post 3
 		checkInvariants();
@@ -91,15 +91,15 @@ public class TetrisContract extends TetrisDecorator {
 	
 	public void rotateLeft(){
 		checkInvariants();
-		if (super.isRunning() != true)
+		if (isRunning() != true)
 			throw new Error("[TETRIS]pre(1)(rotateLeft) invalide");
 		
-		int getScore_atPre = super.getScore();
+		int getScore_atPre = getScore();
 		super.rotateLeft();
 		
-		if (super.getScore() != getScore_atPre)
+		if (getScore() != getScore_atPre)
 			throw new Error("[TETRIS]post(1)(rotateLeft) invalide");
-		if (super.needNext() != false)
+		if (needNext() != false)
 			throw new Error("[TETRIS]post(2)(rotateLeft) invalide");
 		//????? post 3
 		
@@ -108,15 +108,15 @@ public class TetrisContract extends TetrisDecorator {
 	
 	public void rotateRight(){
 		checkInvariants();
-		if (super.isRunning() != true)
+		if (isRunning() != true)
 			throw new Error("[TETRIS]pre(1)(rotateRight) invalide");
 		
-		int getScore_atPre = super.getScore();
+		int getScore_atPre = getScore();
 		super.rotateRight();
 		
-		if (super.getScore() != getScore_atPre)
+		if (getScore() != getScore_atPre)
 			throw new Error("[TETRIS]post(1)(rotateRight) invalide");
-		if (super.needNext() != false)
+		if (needNext() != false)
 			throw new Error("[TETRIS]post(2)(rotateRight) invalide");
 		//????? post 3
 		
@@ -126,15 +126,27 @@ public class TetrisContract extends TetrisDecorator {
 	public void step(){
 		checkInvariants();
 		if (super.isRunning() != true)
-			throw new Error("[TETRIS]pre(1)(rotateLeft) invalide");
+			throw new Error("[TETRIS]pre(1)(step) invalide");
 		
 		int getScore_atPre = super.getScore();
 		super.rotateLeft();
 		
-		if (super.getScore() != getScore_atPre)
-			throw new Error("[TETRIS]post(1)(rotateLeft) invalide");
-		if (super.needNext() != false)
-			throw new Error("[TETRIS]post(2)(rotateLeft) invalide");
+		if (getBoard().isBottom()){
+			if (needNext() == false)
+				throw new Error("[TETRIS]post(1)(step) invalide");
+			else{
+				if (getScore() != getScore_atPre + 20 + (getBoard().getNbLastCleaned()*50))
+					throw new Error("[TETRIS]post(3)(step) invalide");
+			}
+		}
+		else{
+			if (needNext() == true)
+				throw new Error("[TETRIS]post(2)(step) invalide");
+			else{
+				if (getScore() != getScore_atPre)
+					throw new Error("[TETRIS]post(4)(step) invalide");
+			}
+		}
 		//????? post 3
 		
 		checkInvariants();
@@ -142,15 +154,15 @@ public class TetrisContract extends TetrisDecorator {
 	
 	public void next(){
 		checkInvariants();
-		if (super.isRunning() != true)
+		if (isRunning() != true)
 			throw new Error("[TETRIS]pre(1)(rotateLeft) invalide");
 		
-		int getScore_atPre = super.getScore();
+		int getScore_atPre = getScore();
 		super.rotateLeft();
 		
-		if (super.getScore() != getScore_atPre)
+		if (getScore() != getScore_atPre)
 			throw new Error("[TETRIS]post(1)(rotateLeft) invalide");
-		if (super.needNext() != false)
+		if (needNext() != false)
 			throw new Error("[TETRIS]post(2)(rotateLeft) invalide");
 		//????? post 3
 		
