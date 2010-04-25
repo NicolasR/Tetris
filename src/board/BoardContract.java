@@ -58,7 +58,7 @@ public class BoardContract extends BoardDecorator {
 	
 	public void doLeft(){
 		checkInvariants();
-		if (super.isBlock() == false || super.cangoLeft() == false)
+		if (isBlock() == false || cangoLeft() == false)
 			throw new Error("[BOARD]pre(1)(doLeft) invalide");
 		
 		int getXMinBlock_atPre = getXMinBlock();
@@ -75,7 +75,7 @@ public class BoardContract extends BoardDecorator {
 	
 	public void doRotateRight(){
 		checkInvariants();
-		if (super.isBlock() == false || super.canRotateRight() == false)
+		if (isBlock() == false || canRotateRight() == false)
 			throw new Error("[BOARD]pre(1)(doRotateRight) invalide");
 		
 		int getXMinBlock_atPre = getXMinBlock();
@@ -93,7 +93,7 @@ public class BoardContract extends BoardDecorator {
 	
 	public void doRight(){
 		checkInvariants();
-		if (super.isBlock() == false || super.cangoRight() == false)
+		if (isBlock() == false || cangoRight() == false)
 			throw new Error("[BOARD]pre(1)(doRight) invalide");
 		
 		int getXMinBlock_atPre = getXMinBlock();
@@ -110,7 +110,7 @@ public class BoardContract extends BoardDecorator {
 	
 	public void doBottom(){
 		checkInvariants();
-		if (super.isBlock() == false)
+		if (isBlock() == false)
 			throw new Error("[BOARD]pre(1)(doBottom) invalide");
 		
 		int getXMinBlock_atPre = getXMinBlock();
@@ -127,7 +127,7 @@ public class BoardContract extends BoardDecorator {
 	
 	public void step(){
 		checkInvariants();
-		if(super.isBlock() == false)
+		if(isBlock() == false)
 			throw new Error("[BOARD]pre(1)(step) invalide");
 		
 		int getXMinBlock_atPre = getXMinBlock();
@@ -144,7 +144,7 @@ public class BoardContract extends BoardDecorator {
 	
 	public void insert(BlockContract bloc){
 		checkInvariants();
-		if (super.isBlock() == true)
+		if (isBlock() == true)
 			throw new Error("[BOARD]pre(1)(insert) invalide");
 		
 		super.insert(bloc);
@@ -162,12 +162,12 @@ public class BoardContract extends BoardDecorator {
 	public void remove(){
 		checkInvariants();
 		
-		if(super.isBlock() == false)
+		if(isBlock() == false)
 			throw new Error("[BOARD]pre(1)(remove) invalide");
 		
 		super.remove();
 		
-		if (super.isBlock() != false)
+		if (isBlock() != false)
 			throw new Error("[BOARD]post(1)(remove) invalide");
 		
 		checkInvariants();
