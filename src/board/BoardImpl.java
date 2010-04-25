@@ -10,6 +10,7 @@ public class BoardImpl implements BoardService {
 	private int XMinBlock;
 	private int YMinBlock;
 	private int NbLastCleaned;
+	private boolean Conflict;
 	private BlockContract bloc;
 	private GridContract grid;
 	
@@ -27,14 +28,22 @@ public class BoardImpl implements BoardService {
 
 	@Override
 	public boolean cangoLeft() {
-		// TODO Auto-generated method stub
-		return false;
+		int x = getXblock(bloc.getXMin());
+		for(int y=1;y<=bloc.getSize();y++){
+			if (bloc.hasPos(bloc.getXMin(), y) && !grid.canPut(x-1, y))
+				return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean cangoRight() {
-		// TODO Auto-generated method stub
-		return false;
+		int x = getXblock(bloc.getXMax());
+		for(int y=1;y<=bloc.getSize();y++){
+			if (bloc.hasPos(bloc.getXMax(), y) && !grid.canPut(x+1, y))
+				return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -49,20 +58,36 @@ public class BoardImpl implements BoardService {
 	
 	@Override
 	public void doBottom() {
-		// TODO Auto-generated method stub
-
+		int length = getBottomHeight();
+		for(LinkedList<Integer> p: bloc.getAllPos()){
+			int x = getXblock(p.getFirst());
+			int y = getYblock(p.getLast());
+			grid.remove(x, y);
+			grid.put(x, y+length);
+		}
+		this.YMinBlock += length;
 	}
 
 	@Override
 	public void doLeft() {
-		// TODO Auto-generated method stub
-
+		for(LinkedList<Integer> p: bloc.getAllPos()){
+			int x = getXblock(p.getFirst());
+			int y = getYblock(p.getLast());
+			grid.remove(x, y);
+			grid.put(x-1, y);
+		}
+		this.XMinBlock -= 1;
 	}
 
 	@Override
 	public void doRight() {
-		// TODO Auto-generated method stub
-
+		for(LinkedList<Integer> p: bloc.getAllPos()){
+			int x = getXblock(p.getFirst());
+			int y = getYblock(p.getLast());
+			grid.remove(x, y);
+			grid.put(x+1, y);
+		}
+		this.XMinBlock += 1;
 	}
 
 	@Override
@@ -109,8 +134,13 @@ public class BoardImpl implements BoardService {
 
 	@Override
 	public void step() {
-		// TODO Auto-generated method stub
-
+		for(LinkedList<Integer> p: bloc.getAllPos()){
+			int x = getXblock(p.getFirst());
+			int y = getYblock(p.getLast());
+			grid.remove(x, y);
+			grid.put(x, y+1);
+		}
+		this.XMinBlock -= 1;
 	}
 
 	@Override
@@ -121,12 +151,35 @@ public class BoardImpl implements BoardService {
 	@Override
 	public void insert(BlockContract bloc) {
 		this.bloc = bloc;
+		for(LinkedList<Integer> p: bloc.getAllPos())
+		{
+			int x = getXblock(p.getFirst());
+			int y = getYblock(p.getLast());
+			if (!this.grid.isOccupied(x, y))
+				this.grid.put(x, y);
+			else{
+				this.Conflict = true;
+				break;
+			}
+		}
+		this.XMinBlock = grid.getWidth() - (3 + bloc.getSize());
+		this.YMinBlock = 1;
 	}
 
 	@Override
 	public int getBottomHeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		// TODO A vérifier
+		int length = 1;
+		//boolean found = false;
+		while(true){
+			for(LinkedList<Integer> p: bloc.getLowPos()){
+				int x = getXblock(p.getFirst());
+				int y = getYblock(p.getLast())+length;
+				if (!grid.canPut(x, y))
+					return length;
+			}
+			length += 1;
+		}
 	}
 
 	@Override
@@ -142,10 +195,14 @@ public class BoardImpl implements BoardService {
 	@Override
 	public boolean isBottom() {
 		for(LinkedList<Integer> p: bloc.getAllPos()){
-			if (getgrid().isOccupied(p.getFirst()+1, p.getLast()+1))
+			if (getgrid().isOccupied(getXblock(p.getFirst()), getYblock(p.getLast())+1))
 				return true;
 		}
 		return false;
+	}
+	
+	public boolean isConflict(){
+		return this.Conflict;
 	}
 
 }
