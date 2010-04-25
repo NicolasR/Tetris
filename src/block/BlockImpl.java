@@ -6,6 +6,7 @@ import java.util.Set;
 
 public class BlockImpl implements BlockService {
 
+	private char Type;
 	private int Size;
 	private int NbPos;
 	private int XMin;
@@ -13,6 +14,10 @@ public class BlockImpl implements BlockService {
 	private int YMin;
 	private int YMax;
 	private boolean[][] Pos;
+	
+	public char getType() {
+		return this.Type;
+	}
 	
 	public int getSize() {
 		return this.Size;
@@ -78,19 +83,86 @@ public class BlockImpl implements BlockService {
 		return LowPos;		
 	}
 	
-	public void init(int size) {
-		this.Size = size;
-		this.NbPos = 0;
-		this.Pos = new boolean[size][size];
+	public void init(char type) {
+		this.Type = type;
+		switch(this.Type) {
+		case 'O' : 
+			this.Size = 2;
+			break; 
+		case 'L' :
+			this.Size = 3;
+			break;
+		case 'J' : 
+			this.Size = 3;
+			break;
+		case 'T' : 
+			this.Size = 3;
+			break;
+		case 'Z' :
+			this.Size = 3;
+			break;
+		case 'S' : 
+			this.Size = 3;
+			break;
+		case 'I' : 
+			this.Size = 4;
+			break;
+		}	
+		this.Pos = new boolean[this.Size][this.Size];
 		for(int i=0; i<getSize(); i++) {
 			for(int j=0; j<getSize(); j++) {
 				Pos[i][j] = false;
 			}
 		}
-		this.XMin = size+1;
+		this.XMin = this.Size+1;
 		this.XMax = 0;
-		this.YMin = size+1;
+		this.YMin = this.Size+1;
 		this.YMax = 0;
+		this.NbPos = 0;
+		switch(this.Type) {
+		case 'O' :
+			addPos(1, 1);
+			addPos(1, 2);
+			addPos(2, 1);
+			addPos(2, 2);
+			break; 
+		case 'L' :
+			addPos(2, 1);
+			addPos(2, 2);
+			addPos(2, 3);
+			addPos(3, 3);
+			break;
+		case 'J' : 
+			addPos(1, 3);
+			addPos(2, 1);
+			addPos(2, 2);
+			addPos(2, 3);
+			break;
+		case 'T' : 
+			addPos(1, 2);
+			addPos(2, 2);
+			addPos(2, 3);
+			addPos(3, 2);
+			break;
+		case 'Z' :
+			addPos(1, 2);
+			addPos(2, 2);
+			addPos(2, 3);
+			addPos(3, 3);
+			break;
+		case 'S' : 
+			addPos(1, 3);
+			addPos(2, 2);
+			addPos(2, 3);
+			addPos(3, 2);
+			break;
+		case 'I' : 
+			addPos(2, 1);
+			addPos(2, 2);
+			addPos(2, 3);
+			addPos(2, 4);
+			break;
+		}	
 	}
 	
 	public void addPos(int x, int y) {
@@ -110,12 +182,307 @@ public class BlockImpl implements BlockService {
 		}
 	}
 	
+	public void removeAllPos() {
+		this.NbPos = 0;
+		for(int i=0; i<Size; i++) {
+			for (int j=0; j<Size; j++) {
+				Pos[i][j] = false;
+			}
+		}
+		this.XMin = this.Size+1;
+		this.XMax = 0;
+		this.YMin = this.Size+1;
+		this.YMax = 0;		
+	}
+	
 	public void rotateLeft() {
-		
+		switch(this.Type) {
+			case 'O' : return; 
+			case 'L' : 
+				if((YMin == 1) && (YMax == 3)) {
+					if(hasPos(3, 3)) {
+						removeAllPos();
+						addPos(1, 2);
+						addPos(2, 2);
+						addPos(3, 1);
+						addPos(3, 2);
+					} else { 
+						removeAllPos();
+						addPos(1, 2);
+						addPos(1, 3);
+						addPos(2, 2);
+						addPos(3, 2);
+					}
+				} else {
+					if(hasPos(3, 1)) {
+						removeAllPos();
+						addPos(1, 1);
+						addPos(2, 1);
+						addPos(2, 2);
+						addPos(2, 3);
+					} else { 
+						removeAllPos();
+						addPos(2, 1);
+						addPos(2, 2);
+						addPos(2, 3);
+						addPos(3, 3);
+					}
+				}
+				return;
+			case 'J' : 
+				if((YMin == 1) && (YMax == 3)) {
+					if(hasPos(1, 3)) {
+						removeAllPos();
+						addPos(1, 2);
+						addPos(2, 2);
+						addPos(3, 2);
+						addPos(3, 3);
+					} else { 
+						removeAllPos();
+						addPos(1, 1);
+						addPos(1, 2);
+						addPos(2, 2);
+						addPos(3, 2);
+					}
+				} else {
+					if(hasPos(1, 1)) {
+						removeAllPos();
+						addPos(1, 3);
+						addPos(2, 1);
+						addPos(2, 2);
+						addPos(2, 3);
+					} else { 
+						removeAllPos();
+						addPos(2, 1);
+						addPos(2, 2);
+						addPos(2, 3);
+						addPos(3, 1);
+					}
+				}
+				return;
+			case 'T' :
+				if((XMin == 1) && (XMax == 3)) {
+					if(hasPos(2, 3)) {
+						removeAllPos();
+						addPos(2, 1);
+						addPos(2, 2);
+						addPos(2, 3);
+						addPos(3, 2);
+					} else { 
+						removeAllPos();
+						addPos(1, 2);
+						addPos(2, 1);
+						addPos(2, 2);
+						addPos(2, 3);
+					}
+				} else {
+					if(hasPos(1, 2)) {
+						removeAllPos();
+						addPos(1, 2);
+						addPos(2, 2);
+						addPos(2, 3);
+						addPos(3, 2);
+					} else { 
+						removeAllPos();
+						addPos(1, 2);
+						addPos(2, 1);
+						addPos(2, 2);
+						addPos(3, 2);
+					}
+				}
+				return;
+			case 'Z' :
+				if(XMax == 3) {
+					removeAllPos();
+					addPos(1, 2);
+					addPos(1, 3);
+					addPos(2, 1);
+					addPos(2, 2);
+				} else {
+					removeAllPos();
+					addPos(1, 2);
+					addPos(2, 2);
+					addPos(2, 3);
+					addPos(3, 3);
+				}
+				return;
+			case 'S' :
+				if(XMax == 3) {
+					removeAllPos();
+					addPos(1, 1);
+					addPos(1, 2);
+					addPos(2, 2);
+					addPos(2, 3);
+				} else {
+					removeAllPos();
+					addPos(1, 3);
+					addPos(2, 2);
+					addPos(2, 3);
+					addPos(3, 2);
+				}
+				return;
+			case 'I' : 
+				if(XMin == XMax) {
+					removeAllPos();
+					addPos(1, 2);
+					addPos(2, 2);
+					addPos(3, 2);
+					addPos(4, 2);
+				} else {
+					removeAllPos();
+					addPos(2, 1);
+					addPos(2, 2);
+					addPos(2, 3);
+					addPos(2, 4);
+				}			
+				return;
+			default : return;
+		}
 	}
 	
 	public void rotateRight() {
-		
+		switch(this.Type) {
+		case 'O' : return; 
+		case 'L' : 
+			if((YMin == 1) && (YMax == 3)) {
+				if(hasPos(3, 3)) {
+					removeAllPos();
+					addPos(1, 2);
+					addPos(1, 3);
+					addPos(2, 2);
+					addPos(3, 2);
+				} else { 
+					removeAllPos();
+					addPos(1, 2);
+					addPos(2, 2);
+					addPos(3, 1);
+					addPos(3, 2);
+				}
+			} else {
+				if(hasPos(3, 1)) {
+					removeAllPos();
+					addPos(2, 1);
+					addPos(2, 2);
+					addPos(2, 3);
+					addPos(3, 3);
+				} else { 
+					removeAllPos();
+					addPos(1, 1);
+					addPos(2, 1);
+					addPos(2, 2);
+					addPos(2, 3);
+				}
+			}
+			return;
+		case 'J' :
+			if((YMin == 1) && (YMax == 3)) {
+				if(hasPos(1, 3)) {
+					removeAllPos();
+					addPos(1, 1);
+					addPos(1, 2);
+					addPos(2, 2);
+					addPos(3, 2);
+				} else { 
+					removeAllPos();
+					addPos(1, 2);
+					addPos(2, 2);
+					addPos(3, 2);
+					addPos(3, 3);
+				}
+			} else {
+				if(hasPos(1, 1)) {
+					removeAllPos();
+					addPos(2, 1);
+					addPos(2, 2);
+					addPos(2, 3);
+					addPos(3, 1);
+				} else { 
+					removeAllPos();
+					addPos(1, 3);
+					addPos(2, 1);
+					addPos(2, 2);
+					addPos(2, 3);
+				}
+			}
+			return;
+		case 'T' :
+			if((XMin == 1) && (XMax == 3)) {
+				if(hasPos(2, 3)) {
+					removeAllPos();
+					addPos(1, 2);
+					addPos(2, 1);
+					addPos(2, 2);
+					addPos(2, 3);					
+				} else { 
+					removeAllPos();
+					addPos(2, 1);
+					addPos(2, 2);
+					addPos(2, 3);
+					addPos(3, 2);
+				}
+			} else {
+				if(hasPos(1, 2)) {
+					removeAllPos();
+					addPos(1, 2);
+					addPos(2, 1);
+					addPos(2, 2);
+					addPos(3, 2);
+				} else { 
+					removeAllPos();
+					addPos(1, 2);
+					addPos(2, 2);
+					addPos(2, 3);
+					addPos(3, 2);
+				}
+			}
+			return;
+		case 'Z' : 
+			if(XMax == 3) {
+				removeAllPos();
+				addPos(1, 2);
+				addPos(1, 3);
+				addPos(2, 1);
+				addPos(2, 2);
+			} else {
+				removeAllPos();
+				addPos(1, 2);
+				addPos(2, 2);
+				addPos(2, 3);
+				addPos(3, 3);
+			}
+			return;
+		case 'S' : 
+			if(XMax == 3) {
+				removeAllPos();
+				addPos(1, 1);
+				addPos(1, 2);
+				addPos(2, 2);
+				addPos(2, 3);
+			} else {
+				removeAllPos();
+				addPos(1, 3);
+				addPos(2, 2);
+				addPos(2, 3);
+				addPos(3, 2);
+			}
+			return;
+		case 'I' : 
+			if(XMin == XMax) {
+				removeAllPos();
+				addPos(1, 2);
+				addPos(2, 2);
+				addPos(3, 2);
+				addPos(4, 2);
+			} else {
+				removeAllPos();
+				addPos(2, 1);
+				addPos(2, 2);
+				addPos(2, 3);
+				addPos(2, 4);
+			}
+			return;
+		default : return;
+	}
 	}
 
 }
