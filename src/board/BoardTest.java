@@ -88,6 +88,16 @@ public class BoardTest{
 	
 	@Test
 	public void testdoRight(){
+		try{
+			board.remove();
+			BlockContract bloc = new BlockContract(new BlockImpl());
+			bloc.init('O');
+			board.insert(bloc);
+			assertTrue(true);
+		}catch(Error e){
+			e.printStackTrace();
+			assertTrue(false);
+		}
 		boolean oracle_pre = board.cangoRight() && board.isBlock();
 		assertTrue(oracle_pre);
 		int getXMinBlock_atPre, getYMinBlock_atPre;
