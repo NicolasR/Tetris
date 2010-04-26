@@ -43,10 +43,11 @@ public class BoardTest{
 		BlockContract bloc = new BlockContract(new BlockImpl());
 		
 		try{
-			bloc.init(2);
+			bloc.init('O');
 			board.insert(bloc);
 			assertTrue(true);
 		}catch(Error e){
+			e.printStackTrace();
 			assertTrue(false);
 		}
 		boolean oracle_post = (board.isBlock() && board.getcurrentBlock() == bloc 
@@ -75,11 +76,12 @@ public class BoardTest{
 			board.doLeft();
 			assertTrue(true);
 		}catch(Error e){
+			e.printStackTrace();
 			assertTrue(false);
 		}
 		 
-		boolean oracle_post = board.getXMinBlock()-3 == getXMinBlock_atPre
-			&& board.getYMinBlock() == getYMinBlock_atPre;
+		boolean oracle_post = (board.getXMinBlock() == (getXMinBlock_atPre-3))
+			&& (board.getYMinBlock() == getYMinBlock_atPre);
 		
 		assertTrue(oracle_post);
 	}
@@ -100,7 +102,7 @@ public class BoardTest{
 			assertTrue(false);
 		}
 		 
-		boolean oracle_post = board.getXMinBlock()+3 == getXMinBlock_atPre
+		boolean oracle_post = board.getXMinBlock() == getXMinBlock_atPre+3
 			&& board.getYMinBlock() == getYMinBlock_atPre;
 		
 		assertTrue(oracle_post);

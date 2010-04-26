@@ -20,7 +20,7 @@ public class GridContract extends GridDecorator {
 	public boolean isOccupied(int x, int y){
 		checkInvariants();
 		if (x < 1 || x > getWidth() || y < 1 || y > getHeight())
-			throw new Error("[GRID]post(1)(isOccupied) invalide");
+			throw new Error("[GRID]pre(1)(isOccupied) invalide");
 		boolean temp = super.isOccupied(x, y);
 		checkInvariants();
 		return temp;
@@ -54,7 +54,7 @@ public class GridContract extends GridDecorator {
 	public void put(int x, int y){
 		checkInvariants();
 		if (!canPut(x, y))
-			throw new Error("[GRID]pre(1)(put) invalide");
+			throw new Error("[GRID]pre(1)(put) invalide "+x+" "+y);
 		
 		if (x < 1 || x > getWidth())
 			throw new Error("[GRID]pre(2)(put) invalide");

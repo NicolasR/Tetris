@@ -4,6 +4,7 @@ import block.BlockContract;
 import grid.GridContract;
 import grid.GridImpl;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class BoardImpl implements BoardService {
 
@@ -16,14 +17,54 @@ public class BoardImpl implements BoardService {
 	
 	@Override
 	public boolean canRotateLeft() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean canRotate = true;
+		for(LinkedList<Integer> p: bloc.getAllPos()) {
+			int x = getXblock(p.getFirst());
+			int y = getYblock(p.getLast());
+			grid.remove(x, y);
+		}		
+		bloc.rotateLeft();
+		for(LinkedList<Integer> p: bloc.getAllPos()) {
+			int x = getXblock(p.getFirst());
+			int y = getYblock(p.getLast());
+			if(this.grid.isOccupied(x, y)) {
+				canRotate = false;
+				break;
+			}
+		}		
+		bloc.rotateRight();
+		for(LinkedList<Integer> p: bloc.getAllPos()) {
+			int x = getXblock(p.getFirst());
+			int y = getYblock(p.getLast());
+			grid.put(x, y);
+		}
+		return canRotate;
 	}
 
 	@Override
 	public boolean canRotateRight() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean canRotate = true;
+		for(LinkedList<Integer> p: bloc.getAllPos()) {
+			int x = getXblock(p.getFirst());
+			int y = getYblock(p.getLast());
+			grid.remove(x, y);
+		}		
+		bloc.rotateRight();
+		for(LinkedList<Integer> p: bloc.getAllPos()) {
+			int x = getXblock(p.getFirst());
+			int y = getYblock(p.getLast());
+			if(this.grid.isOccupied(x, y)) {
+				canRotate = false;
+				break;
+			}
+		}		
+		bloc.rotateLeft();
+		for(LinkedList<Integer> p: bloc.getAllPos()) {
+			int x = getXblock(p.getFirst());
+			int y = getYblock(p.getLast());
+			grid.put(x, y);
+		}
+		return canRotate;
 	}
 
 	@Override
@@ -74,6 +115,10 @@ public class BoardImpl implements BoardService {
 			int x = getXblock(p.getFirst());
 			int y = getYblock(p.getLast());
 			grid.remove(x, y);
+		}
+		for(LinkedList<Integer> p: bloc.getAllPos()){
+			int x = getXblock(p.getFirst());
+			int y = getYblock(p.getLast());
 			grid.put(x-1, y);
 		}
 		this.XMinBlock -= 1;
@@ -85,6 +130,10 @@ public class BoardImpl implements BoardService {
 			int x = getXblock(p.getFirst());
 			int y = getYblock(p.getLast());
 			grid.remove(x, y);
+		}
+		for(LinkedList<Integer> p: bloc.getAllPos()){
+			int x = getXblock(p.getFirst());
+			int y = getYblock(p.getLast());
 			grid.put(x+1, y);
 		}
 		this.XMinBlock += 1;
@@ -151,6 +200,8 @@ public class BoardImpl implements BoardService {
 	@Override
 	public void insert(BlockContract bloc) {
 		this.bloc = bloc;
+		this.XMinBlock = grid.getWidth() - (3 + bloc.getSize());
+		this.YMinBlock = 1;
 		for(LinkedList<Integer> p: bloc.getAllPos())
 		{
 			int x = getXblock(p.getFirst());
@@ -162,8 +213,6 @@ public class BoardImpl implements BoardService {
 				break;
 			}
 		}
-		this.XMinBlock = grid.getWidth() - (3 + bloc.getSize());
-		this.YMinBlock = 1;
 	}
 
 	@Override
