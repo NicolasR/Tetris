@@ -221,6 +221,31 @@ public class BlockContract extends BlockDecorator {
 		}		
 	}
 
+	public void removeAllPos() {
+		checkInvariants();
+		int getType_atPre = super.getType();
+		int getSize_atPre = super.getSize();
+		super.removeAllPos();
+		checkInvariants();
+		if(!(super.getType() == getType_atPre)) {
+			throw new Error("post (1) (removeAllPos) invalide");
+		}
+		if(!(super.getSize() == getSize_atPre)) {
+			throw new Error("post (2) (removeAllPos) invalide");
+		}
+		if(!(super.getNbPos() == 0)) {
+			throw new Error("post (3) (removeAllPos) invalide");
+		}
+		for(int i=1; i<= super.getSize(); i++) {
+			for (int j=1; j<=super.getSize(); j++) {
+				if(!(!(super.hasPos(i, j)))) {
+					throw new Error("post (4) (removeAllPos) invalide");
+				}
+			}
+		}
+		
+	}
+
 	public void rotateLeft() {
 		checkInvariants();
 		int getType_atPre = super.getType();
