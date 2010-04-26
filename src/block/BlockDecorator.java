@@ -11,10 +11,13 @@ public abstract class BlockDecorator implements BlockService {
 		this.delegate = delegate;
 	}
 	
+	public char getType() {
+		return this.delegate.getType();
+	}
+
 	public int getSize() {
 		return this.delegate.getSize();
 	}
-	
 	
 	public int getNbPos() {
 		return this.delegate.getNbPos();
@@ -48,12 +51,16 @@ public abstract class BlockDecorator implements BlockService {
 		return this.delegate.getLowPos();
 	}
 	
-	public void init(int size) {
-		this.delegate.init(size);
+	public void init(char type) {
+		this.delegate.init(type);
 	}
 	
 	public void addPos(int x, int y) {
 		this.delegate.addPos(x, y);
+	}
+	
+	public void removeAllPos() {
+		this.delegate.removeAllPos();
 	}
 	
 	public void rotateLeft() {
