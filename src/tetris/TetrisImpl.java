@@ -68,21 +68,32 @@ public class TetrisImpl implements TetrisService {
 
 	@Override
 	public void next() {
-		// TODO A finaliser
 		Random r = new Random();
-		int size;
-		switch(r.nextInt(3)){
+		char type;
+		switch(r.nextInt(7)){
 			case 0: 
-				size = 2;
+				type = 'O';
 				break;
 			case 1:
-				size = 3;
+				type = 'L';
+				break;
+			case 2:
+				type = 'J';
+				break;
+			case 3:
+				type = 'T';
+				break;
+			case 4:
+				type = 'Z';
+				break;
+			case 5:
+				type = 'S';
 				break;
 			default:
-				size = 4;
+				type = 'I';
 		}
 		BlockContract bloc = new BlockContract(new BlockImpl());
-		bloc.init(size);
+		bloc.init(type);
 		this.board.insert(bloc);
 		if (this.board.isConflict()){
 			this.isFinished = true;
@@ -102,10 +113,17 @@ public class TetrisImpl implements TetrisService {
 
 	@Override
 	public void step() {
-		this.board.step();
-		if (this.board.isBottom()){
-			this.needNext = true;
-			this.score += 20 + 50*this.board.getNbLastCleaned();
+		if(needNext) {
+			next();
+			if(isFinished) {
+				// ???
+			}
+		} else {
+			this.board.step();
+			if (this.board.isBottom()){
+				this.needNext = true;
+				this.score += 20 + 50*this.board.getNbLastCleaned();
+			}
 		}
 	}
 

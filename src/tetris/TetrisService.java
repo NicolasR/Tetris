@@ -30,7 +30,7 @@ public interface TetrisService {
 	 * pre: isRunning() == true
 	 * post: getScore()@pre == getScore()
 	 * post: needNext() == false
-	 * post: getBoard() == Board:goLeft() ????????
+	 * post: getBoard() == getBoard()@pre.goLeft() ????????
 	 */
 	public void goLeft();
 	
@@ -38,7 +38,7 @@ public interface TetrisService {
 	 * pre: isRunning() == true
 	 * post: getScore()@pre == getScore()
 	 * post: needNext() == false
-	 * post: getBoard() == Board:goRight() ????????????
+	 * post: getBoard() == getBoard()@pre.goRight() ????????????
 	 */
 	public void goRight();
 	
@@ -46,7 +46,7 @@ public interface TetrisService {
 	 * pre: isRunning() == true
 	 * post: getScore() == getScore@pre + 20 + (Board:getNbLastCleaned()*50)
 	 * post: needNext() == true
-	 * post: getBoard() == Board:doBottom() ?????????
+	 * post: getBoard() == getBoard()@pre.doBottom() ?????????
 	 */
 	public void goDown();
 	
@@ -54,7 +54,7 @@ public interface TetrisService {
 	 * pre: isRunning() == true
 	 * post: getScore()@pre == getScore()
 	 * post: needNext() == false
-	 * post: getBoard() == Board:doRotateLeft() ??????????
+	 * post: getBoard() == getBoard()@pre.doRotateLeft() ??????????
 	 */
 	public void rotateLeft();
 	
@@ -62,7 +62,7 @@ public interface TetrisService {
 	 * pre: isRunning() == true
 	 * post: getScore()@pre == getScore()
 	 * post: needNext() == false
-	 * post: getBoard() == Board:doRotateRight() ?????????
+	 * post: getBoard() == getBoard()@pre.doRotateRight() ?????????
 	 */
 	public void rotateRight();
 	
@@ -72,15 +72,15 @@ public interface TetrisService {
 	 * post: not(board:isBottom()) => needNext() == false
 	 * post: needNext() == true => getScore() == getScore@pre + 20 + (Board:getNbLastCleaned()*50)
 	 * post: needNext() == false => getScore()@pre == getScore()
-	 * post: getBoard() == Board:step() ???????
+	 * post: getBoard() == getBoard()@pre.step() ???????
 	 */
 	public void step();
 	
 	/**
-	 * pre: isRunning() == true
+	 * pre: isRunning() == true && needNext() == true
 	 * post: getScore()@pre == getScore()
 	 * post: needNext() == false
-	 * post: getBoard() == Board:insert(bloc) bloc aléatoire.... ?????
+	 * post: getBoard() ==getBoard()@pre.insert(Block:init(???)) bloc aléatoire.... ?????
 	 */
 	public void next();
 }

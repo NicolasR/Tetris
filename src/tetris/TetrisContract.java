@@ -155,15 +155,18 @@ public class TetrisContract extends TetrisDecorator {
 	public void next(){
 		checkInvariants();
 		if (isRunning() != true)
-			throw new Error("[TETRIS]pre(1)(rotateLeft) invalide");
+			throw new Error("[TETRIS]pre(1)(next) invalide");
+		
+		if (needNext() != true)
+			throw new Error("[TETRIS]pre(1)(next) invalide");
 		
 		int getScore_atPre = getScore();
 		super.rotateLeft();
 		
 		if (getScore() != getScore_atPre)
-			throw new Error("[TETRIS]post(1)(rotateLeft) invalide");
+			throw new Error("[TETRIS]post(1)(next) invalide");
 		if (needNext() != false)
-			throw new Error("[TETRIS]post(2)(rotateLeft) invalide");
+			throw new Error("[TETRIS]post(2)(next) invalide");
 		//????? post 3
 		
 		checkInvariants();
