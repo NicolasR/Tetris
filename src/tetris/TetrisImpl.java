@@ -26,19 +26,25 @@ public class TetrisImpl implements TetrisService {
 
 	@Override
 	public void goDown() {
-		this.board.doBottom();
-		this.score += 20 + 50*this.board.getNbLastCleaned();
-		this.needNext = true;
+		if(this.board.getBottomHeight() != 0) {
+			this.board.doBottom();
+			this.score += 20 + 50*this.board.getNbLastCleaned();
+			this.needNext = true;
+		}
 	}
 
 	@Override
 	public void goLeft() {
-		this.board.doLeft();
+		if(this.board.cangoLeft()) {
+			this.board.doLeft();
+		}
 	}
 
 	@Override
 	public void goRight() {
-		this.board.doRight();
+		if(this.board.cangoRight()) {
+			this.board.doRight();
+		}
 	}
 
 	@Override
@@ -103,12 +109,16 @@ public class TetrisImpl implements TetrisService {
 
 	@Override
 	public void rotateLeft() {
-		this.board.doRotateLeft();
+		if(this.board.canRotateLeft()) {
+			this.board.doRotateLeft();
+		}
 	}
 
 	@Override
 	public void rotateRight() {
-		this.board.doRotateRight();
+		if(this.board.canRotateRight()) {
+			this.board.doRotateRight();
+		}
 	}
 
 	@Override
