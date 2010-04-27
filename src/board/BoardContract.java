@@ -13,11 +13,11 @@ public class BoardContract extends BoardDecorator {
 		if (super.isBlock())
 			sizeblock = super.getcurrentBlock().getSize();
 		if (super.getXMinBlock() < 0 || super.getXMinBlock() > 
-		(super.getgrid().getWidth() - sizeblock))
+		(super.getgrid().getWidth()+1 - sizeblock))
 				throw new Error("[BOARD]invariant(1) invalide");
 		
 		if (super.getYMinBlock() < 0 || super.getYMinBlock() > 
-		(super.getgrid().getHeight() - sizeblock))
+		(super.getgrid().getHeight()+1 - sizeblock))
 				throw new Error("[BOARD]invariant(2) invalide");
 	}
 	
@@ -115,11 +115,12 @@ public class BoardContract extends BoardDecorator {
 		
 		int getXMinBlock_atPre = getXMinBlock();
 		int getYMinBlock_atPre = getYMinBlock();
+		int getBottomHeight_atPre = getBottomHeight();
 		super.doBottom();
 		
-		if (getXMinBlock_atPre+1 != getXMinBlock())
+		if (getXMinBlock_atPre != getXMinBlock())
 			throw new Error("[BOARD]post(1)(doBottom) invalide");
-		if (getYMinBlock_atPre+getBottomHeight()!= getYMinBlock())
+		if ((getYMinBlock_atPre+getBottomHeight_atPre) != getYMinBlock())
 			throw new Error("[BOARD]post(2)(doBottom) invalide");
 		
 		checkInvariants();
@@ -169,6 +170,9 @@ public class BoardContract extends BoardDecorator {
 		
 		if (isBlock() != false)
 			throw new Error("[BOARD]post(1)(remove) invalide");
+		
+		if (getXMinBlock() != 0 && getYMinBlock() != 0)
+			throw new Error("[BOARD]post(2)(remove) invalide");
 		
 		checkInvariants();
 	}

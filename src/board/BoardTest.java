@@ -10,16 +10,17 @@ import block.BlockImpl;
 
 public class BoardTest{
 	
+	private static BoardImpl impl;
 	private static BoardContract board;
 	
 	@BeforeClass
 	public static void initialize(){
-		BoardImpl impl = new BoardImpl();
-		board = new BoardContract(impl);
+		impl = new BoardImpl();
 	}
 	
 	@Test
 	public void testinit(){
+		board = new BoardContract(impl);
 		try{
 			board.init(10,9);
 			assertTrue(false);
@@ -28,7 +29,12 @@ public class BoardTest{
 		}
 		
 		board = new BoardContract(new BoardImpl());
-		board.init(10,22);
+		try{
+			board.init(10,22);
+			assertTrue(true);
+		}catch(Error e){
+			assertTrue(false);
+		}
 		boolean oracle_post = (board.getgrid().getWidth() == 10) && (board.getgrid().getHeight() == 22);
 		assertTrue(oracle_post);	
 		
@@ -38,25 +44,27 @@ public class BoardTest{
 	
 	@Test
 	public void testinsert(){
+		board = new BoardContract(impl);
+		board.init(10, 22);
+		
 		boolean oracle_pre = (!board.isBlock());
 		assertTrue(oracle_pre);
-		BlockContract bloc = new BlockContract(new BlockImpl());
+		BlockContract block = new BlockContract(new BlockImpl());
 		
 		try{
-			bloc.init('O');
-			board.insert(bloc);
+			block.init('O');
+			board.insert(block);
 			assertTrue(true);
 		}catch(Error e){
-			e.printStackTrace();
 			assertTrue(false);
 		}
-		boolean oracle_post = (board.isBlock() && board.getcurrentBlock() == bloc 
+		boolean oracle_post = (board.isBlock() && board.getcurrentBlock() == block 
 				&& board.getXMinBlock()>0 && board.getYMinBlock() == 1);
 		assertTrue(oracle_post);
 		
 		try{
-			bloc = new BlockContract(new BlockImpl());
-			board.insert(bloc);
+			block = new BlockContract(new BlockImpl());
+			board.insert(block);
 			assertTrue(false);
 		}catch(Error e){
 			assertTrue(true);
@@ -64,7 +72,42 @@ public class BoardTest{
 	}
 	
 	@Test
+	public void testdoRotateLeft(){
+		board = new BoardContract(impl);
+		board.init(10, 22);
+		BlockContract block = new BlockContract(new BlockImpl());
+		block.init('L');
+		board.insert(block);
+		
+		boolean oracle_pre = board.canRotateLeft() && board.isBlock();
+		assertTrue(oracle_pre);
+		int getXMinBlock_atPre, getYMinBlock_atPre;
+		getXMinBlock_atPre = board.getXMinBlock();
+		getYMinBlock_atPre = board.getYMinBlock();
+		try{
+			board.doRotateLeft();
+			board.doRotateLeft();
+			board.doRotateLeft();
+			board.doRotateLeft();
+			assertTrue(true);
+		}catch(Error e){
+			assertTrue(false);
+		}
+		 
+		boolean oracle_post = (board.getXMinBlock() == getXMinBlock_atPre)
+			&& (board.getYMinBlock() == getYMinBlock_atPre);
+		
+		assertTrue(oracle_post);
+	}
+	
+	@Test
 	public void testdoLeft(){
+		board = new BoardContract(impl);
+		board.init(10, 22);
+		BlockContract block = new BlockContract(new BlockImpl());
+		block.init('O');
+		board.insert(block);
+		
 		boolean oracle_pre = board.cangoLeft() && board.isBlock();
 		assertTrue(oracle_pre);
 		int getXMinBlock_atPre, getYMinBlock_atPre;
@@ -74,30 +117,61 @@ public class BoardTest{
 			board.doLeft();
 			board.doLeft();
 			board.doLeft();
+			board.doLeft();
 			assertTrue(true);
 		}catch(Error e){
-			e.printStackTrace();
 			assertTrue(false);
 		}
+		try{
+			board.doLeft();
+			assertTrue(false);
+		}catch(Error e){
+			assertTrue(true);
+		}
 		 
-		boolean oracle_post = (board.getXMinBlock() == (getXMinBlock_atPre-3))
+		boolean oracle_post = (board.getXMinBlock() == (getXMinBlock_atPre-4))
 			&& (board.getYMinBlock() == getYMinBlock_atPre);
 		
 		assertTrue(oracle_post);
 	}
 	
 	@Test
-	public void testdoRight(){
+	public void testdoRotateRight(){
+		board = new BoardContract(impl);
+		board.init(10, 22);
+		BlockContract block = new BlockContract(new BlockImpl());
+		block.init('L');
+		board.insert(block);
+		
+		boolean oracle_pre = board.canRotateRight() && board.isBlock();
+		assertTrue(oracle_pre);
+		int getXMinBlock_atPre, getYMinBlock_atPre;
+		getXMinBlock_atPre = board.getXMinBlock();
+		getYMinBlock_atPre = board.getYMinBlock();
 		try{
-			board.remove();
-			BlockContract bloc = new BlockContract(new BlockImpl());
-			bloc.init('O');
-			board.insert(bloc);
+			board.doRotateRight();
+			board.doRotateRight();
+			board.doRotateRight();
+			board.doRotateRight();
 			assertTrue(true);
 		}catch(Error e){
-			e.printStackTrace();
 			assertTrue(false);
 		}
+		 
+		boolean oracle_post = (board.getXMinBlock() == getXMinBlock_atPre)
+			&& (board.getYMinBlock() == getYMinBlock_atPre);
+		
+		assertTrue(oracle_post);
+	}
+	
+	@Test
+	public void testdoRight(){	
+		board = new BoardContract(impl);
+		board.init(10, 22);
+		BlockContract block = new BlockContract(new BlockImpl());
+		block.init('O');
+		board.insert(block);
+		
 		boolean oracle_pre = board.cangoRight() && board.isBlock();
 		assertTrue(oracle_pre);
 		int getXMinBlock_atPre, getYMinBlock_atPre;
@@ -107,19 +181,85 @@ public class BoardTest{
 			board.doRight();
 			board.doRight();
 			board.doRight();
+			board.doRight();
 			assertTrue(true);
 		}catch(Error e){
 			assertTrue(false);
 		}
+		try{
+			board.doRight();
+			assertTrue(false);
+		}catch(Error e){
+			assertTrue(true);
+		}
 		 
-		boolean oracle_post = board.getXMinBlock() == getXMinBlock_atPre+3
-			&& board.getYMinBlock() == getYMinBlock_atPre;
+		boolean oracle_post = (board.getXMinBlock() == (getXMinBlock_atPre+4))
+			&& (board.getYMinBlock() == getYMinBlock_atPre);
 		
 		assertTrue(oracle_post);
 	}
 	
 	@Test
+	public void testdoBottom(){
+		board = new BoardContract(impl);
+		board.init(10, 22);
+		BlockContract block = new BlockContract(new BlockImpl());
+		block.init('O');
+		board.insert(block);
+		
+		boolean oracle_pre = board.isBlock();
+		assertTrue(oracle_pre);
+		int getXMinBlock_atPre, getYMinBlock_atPre, getBottomHeight_atPre;
+		getXMinBlock_atPre = board.getXMinBlock();
+		getYMinBlock_atPre = board.getYMinBlock();	
+		getBottomHeight_atPre = board.getBottomHeight();
+		try{
+			board.doBottom();
+			assertTrue(true);
+		}catch(Error e){
+			assertTrue(false);
+		}
+		 
+		boolean oracle_post = (board.getXMinBlock() == (getXMinBlock_atPre))
+			&& (board.getYMinBlock() == getYMinBlock_atPre + getBottomHeight_atPre);
+		
+		assertTrue(oracle_post);
+	}
+	
+	@Test
+	public void testdoStep(){
+		board = new BoardContract(impl);
+		board.init(10, 22);
+		BlockContract block = new BlockContract(new BlockImpl());
+		block.init('O');
+		board.insert(block);
+		
+		boolean oracle_pre = board.isBlock();
+		assertTrue(oracle_pre);
+		int getXMinBlock_atPre, getYMinBlock_atPre;
+		getXMinBlock_atPre = board.getXMinBlock();
+		getYMinBlock_atPre = board.getYMinBlock();	
+		try{
+			board.step();
+			assertTrue(true);
+		}catch(Error e){
+			assertTrue(false);
+		}
+		 
+		boolean oracle_post = (board.getXMinBlock() == (getXMinBlock_atPre))
+			&& (board.getYMinBlock() == getYMinBlock_atPre+1);
+		
+		assertTrue(oracle_post);
+	}
+		
+	@Test
 	public void testremove(){
+		board = new BoardContract(impl);
+		board.init(10, 22);
+		BlockContract block = new BlockContract(new BlockImpl());
+		block.init('O');
+		board.insert(block);
+		
 		boolean oracle_pre = board.isBlock();
 		assertTrue(oracle_pre);
 		

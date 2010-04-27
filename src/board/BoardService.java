@@ -18,7 +18,7 @@ public interface BoardService {
 	public boolean cangoRight();
 		//pre: isBlock()
 	public boolean isBlock();
-		//pre: isBlock()
+		
 	public boolean isBottom();
 		//pre: isBlock()
 	public boolean isConflict();
@@ -32,15 +32,15 @@ public interface BoardService {
 		//pre: y>=1 && y<=getgrid().getHeight()
 
 	/** Invariants
-	 * getXMinblock >= 0 && getXblock <= getgrid().getWidth - getcurrentBlock.getSize()
-	 * getYMinblock >= 0 && getYblock <= getgrid().getWidth - getcurrentBlock.getSize()
+	 * getXMinblock() >= 0 && getXblock() <= getgrid().getWidth()+1 - getcurrentBlock.getSize()
+	 * getYMinblock() >= 0 && getYblock() <= getgrid().getHeight()+1 - getcurrentBlock.getSize()
 	 */
 	
 	/** Constructors
 	 * Initialise
 	 * pre: x > 0 && y > 0 && y >= x
 	 * post: isBlock() == false
-	 * post: getgrid().getWidth == x && getgrid().getHeight == y
+	 * post: getgrid().getWidth() == x && getgrid().getHeight() == y
 	 * post: getNbLastCleaned() == 0
 	 * post: getXMinBlock() == 0 && getYMinBlock() == 0
 	 */
@@ -101,7 +101,7 @@ public interface BoardService {
 	/**
 	 * pre: isBlock()
 	 * post: isBlock() == false
-	 * post: getXMinBlock() != 0 && getYMinBlock() != 0
+	 * post: getXMinBlock() == 0 && getYMinBlock() == 0
 	 */
 	public void remove();
 
