@@ -15,15 +15,15 @@ public class BlockContract extends BlockDecorator {
 	public void checkInvariants() {
 		// inv1 : getType() == 'O' || 'L' || 'J' || 'T' || 'Z' || 'S' || 'I'
 		if (!((super.getType() == 'O') || (super.getType() == 'L') || (super.getType() == 'J') || (super.getType() == 'T') || (super.getType() == 'Z') || (super.getType() == 'S') || (super.getType() == 'I'))) {
-			throw new Error("Invariant (1) invalide");
+			throw new Error("[BLOCK]Invariant (1) invalide");
 		}
 		// inv2 : getSize() == 2 || getSize() == 3 || getSize() == 4
 		if (!((super.getSize() == 2) || (super.getSize() == 3) || (super.getSize() == 4))) {
-			throw new Error("Invariant (2) invalide");
+			throw new Error("[BLOCK]Invariant (2) invalide");
 		}
 		// inv3 : 0 <= getNbPos() && getNbPos <= 4
 		if (!((0 <= super.getNbPos()) && (super.getNbPos() <= 4) )) {
-			throw new Error("Invariant (3) invalide");
+			throw new Error("[BLOCK]Invariant (3) invalide");
 		}
 		Iterator<LinkedList<Integer>> it = super.getAllPos().iterator();
 		int XMin = super.getSize()+1, XMax = 0, YMin = super.getSize()+1, YMax = 0;
@@ -45,19 +45,19 @@ public class BlockContract extends BlockDecorator {
 		}
 		// inv4 : getXMin() == \findmin { first(p) \in getAllPos() }
 		if (!(super.getXMin() == XMin)) {
-			throw new Error("Invariant (4) invalide");
+			throw new Error("[BLOCK]Invariant (4) invalide");
 		}
 		// inv5 : getXMax() == \findmax { first(p) \in getAllPos() }
 		if (!(super.getXMax() == XMax)) {
-			throw new Error("Invariant (5) invalide");
+			throw new Error("[BLOCK]Invariant (5) invalide");
 		}
 		// inv6 : getYMin() == \findmin { second(p) \in getAllPos() }
 		if (!(super.getYMin() == YMin)) {
-			throw new Error("Invariant (6) invalide");
+			throw new Error("[BLOCK]Invariant (6) invalide");
 		}
 		// inv7 : getYMax() == \findmax { second(p) \in getAllPos() }
 		if (!(super.getYMax() == YMax)) {
-			throw new Error("Invariant (7) invalide");
+			throw new Error("[BLOCK]Invariant (7) invalide");
 		}
 		
 		// inv8 : \forall x:int, y:int \in getHasPos((x,y)) { getAllPos().contains((x,y)) }
@@ -68,7 +68,7 @@ public class BlockContract extends BlockDecorator {
 					paire.addFirst(i);
 					paire.addLast(j);
 					if(!super.getAllPos().contains(paire)) {
-						throw new Error("Invariant (8) invalide");
+						throw new Error("[BLOCK]Invariant (8) invalide");
 					}
 				}
 			}
@@ -87,7 +87,7 @@ public class BlockContract extends BlockDecorator {
 				paire.addFirst(i);
 				paire.addLast(max);
 				if(!(super.getLowPos().contains(paire))) {
-					throw new Error("Invariant (9) invalide");
+					throw new Error("[BLOCK]Invariant (9) invalide");
 				}
 			}
 		}
@@ -145,7 +145,7 @@ public class BlockContract extends BlockDecorator {
 	
 	public boolean hasPos(int x, int y) {
 		if(!((1<=x) && (x<=super.getSize()) && (1<=y) && (y<=super.getSize()))) {
-			throw new Error("pre (hasPos) invalide");
+			throw new Error("[BLOCK]pre (hasPos) invalide");
 		}
 		checkInvariants();
 		boolean hasPos = super.hasPos(x, y);
@@ -169,21 +169,21 @@ public class BlockContract extends BlockDecorator {
 
 	public void init(char type) {
 		if(!((type == 'O') || (type == 'L') || (type == 'J') || (type == 'T') || (type == 'Z') || (type == 'S') || (type == 'I'))) {
-			throw new Error("pre init) invalide");
+			throw new Error("[BLOCK]pre init) invalide");
 		}
 		super.init(type);
 		checkInvariants();
 		if(!(super.getType() == type)) {
-			throw new Error("post (1) (init) invalide");
+			throw new Error("[BLOCK]post (1) (init) invalide");
 		}
 		if(!(super.getNbPos() == 4)) {
-			throw new Error("post (2) (init) invalide");
+			throw new Error("[BLOCK]post (2) (init) invalide");
 		}
 	}
 	 
 	public void addPos(int x, int y) {
 		if(!((1<=x) && (x<=super.getSize()) && (1<=y) && (y<=super.getSize()) && (!super.hasPos(x, y)))) {
-			throw new Error("pre (addPos) invalide");
+			throw new Error("[BLOCK]pre (addPos) invalide");
 		}
 		checkInvariants();
 		char getType_atPre = super.getType();
@@ -198,22 +198,22 @@ public class BlockContract extends BlockDecorator {
 		super.addPos(x, y);
 		checkInvariants();
 		if(!(super.getType() == getType_atPre)) {
-			throw new Error("post (1) (addPos) invalide");
+			throw new Error("[BLOCK]post (1) (addPos) invalide");
 		}
 		if(!(super.getSize() == getSize_atPre)) {
-			throw new Error("post (2) (addPos) invalide");
+			throw new Error("[BLOCK]post (2) (addPos) invalide");
 		}
 		if(!(super.getNbPos() == getNbPos_atPre+1)) {
-			throw new Error("post (3) (addPos) invalide");
+			throw new Error("[BLOCK]post (3) (addPos) invalide");
 		}
 		if(!(super.hasPos(x, y))) {
-			throw new Error("post (4) (addPos) invalide");
+			throw new Error("[BLOCK]post (4) (addPos) invalide");
 		}
 		for(int i=1; i<= super.getSize(); i++) {
 			for (int j=1; j<=super.getSize(); j++) {
 				if ((i!=x) && (j!=y)) {
 					if(!(super.hasPos(i, j) == hasPos_atPre[i-1][j-1])) {
-						throw new Error("post (5) (addPos) invalide");
+						throw new Error("[BLOCK]post (5) (addPos) invalide");
 					}
 				}
 				
