@@ -820,7 +820,7 @@ public class BlockTest {
 		Type = 'O';
 		blockC.init(Type);
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(0, 3);
 			assertTrue(false);
@@ -828,7 +828,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(1, 0);
 			assertTrue(false);
@@ -836,7 +836,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(5, 3);
 			assertTrue(false);
@@ -844,7 +844,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(3, 5);
 			assertTrue(false);
@@ -852,7 +852,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(0, 5);
 			assertTrue(false);
@@ -860,7 +860,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(2, 2);
 			assertTrue(true);
@@ -880,7 +880,7 @@ public class BlockTest {
 		Type = 'L';
 		blockC.init(Type);
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(0, 3);
 			assertTrue(false);
@@ -888,7 +888,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(1, 0);
 			assertTrue(false);
@@ -896,7 +896,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(5, 3);
 			assertTrue(false);
@@ -904,7 +904,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(3, 5);
 			assertTrue(false);
@@ -912,7 +912,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(0, 5);
 			assertTrue(false);
@@ -920,7 +920,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(2, 2);
 			assertTrue(true);
@@ -940,7 +940,7 @@ public class BlockTest {
 		Type = 'J';
 		blockC.init(Type);
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(0, 3);
 			assertTrue(false);
@@ -948,7 +948,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(1, 0);
 			assertTrue(false);
@@ -956,7 +956,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(5, 3);
 			assertTrue(false);
@@ -964,7 +964,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(3, 5);
 			assertTrue(false);
@@ -972,7 +972,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(0, 5);
 			assertTrue(false);
@@ -980,7 +980,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(2, 2);
 			assertTrue(true);
@@ -1000,7 +1000,7 @@ public class BlockTest {
 		Type = 'T';
 		blockC.init(Type);
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(0, 3);
 			assertTrue(false);
@@ -1008,7 +1008,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(1, 0);
 			assertTrue(false);
@@ -1016,7 +1016,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(5, 3);
 			assertTrue(false);
@@ -1024,7 +1024,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(3, 5);
 			assertTrue(false);
@@ -1032,7 +1032,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(0, 5);
 			assertTrue(false);
@@ -1040,7 +1040,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(2, 2);
 			assertTrue(true);
@@ -1060,7 +1060,7 @@ public class BlockTest {
 		Type = 'Z';
 		blockC.init(Type);
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(0, 3);
 			assertTrue(false);
@@ -1068,7 +1068,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(1, 0);
 			assertTrue(false);
@@ -1076,7 +1076,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(5, 3);
 			assertTrue(false);
@@ -1084,7 +1084,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(3, 5);
 			assertTrue(false);
@@ -1092,7 +1092,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(0, 5);
 			assertTrue(false);
@@ -1100,7 +1100,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(2, 2);
 			assertTrue(true);
@@ -1120,7 +1120,7 @@ public class BlockTest {
 		Type = 'S';
 		blockC.init(Type);
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(0, 3);
 			assertTrue(false);
@@ -1128,7 +1128,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(1, 0);
 			assertTrue(false);
@@ -1136,7 +1136,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(5, 3);
 			assertTrue(false);
@@ -1144,7 +1144,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(3, 5);
 			assertTrue(false);
@@ -1152,7 +1152,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(0, 5);
 			assertTrue(false);
@@ -1160,7 +1160,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(2, 2);
 			assertTrue(true);
@@ -1180,7 +1180,7 @@ public class BlockTest {
 		Type = 'I';
 		blockC.init(Type);
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(0, 3);
 			assertTrue(false);
@@ -1188,7 +1188,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(1, 0);
 			assertTrue(false);
@@ -1196,7 +1196,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(5, 3);
 			assertTrue(false);
@@ -1204,7 +1204,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(3, 5);
 			assertTrue(false);
@@ -1212,7 +1212,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(0, 5);
 			assertTrue(false);
@@ -1220,7 +1220,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.hasPos(2, 2);
 			assertTrue(true);
@@ -1601,7 +1601,7 @@ public class BlockTest {
 		BlockContract blockC = new BlockContract(blockI);
 		char Type;
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.init('A');
 			assertTrue(false);
@@ -1610,7 +1610,7 @@ public class BlockTest {
 		}
 
 		Type = 'O';
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.init(Type);
 			assertTrue(true);
@@ -1634,7 +1634,7 @@ public class BlockTest {
 		
 		
 		Type = 'L';
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.init(Type);
 			assertTrue(true);
@@ -1658,7 +1658,7 @@ public class BlockTest {
 		
 		
 		Type = 'J';
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.init(Type);
 			assertTrue(true);
@@ -1682,7 +1682,7 @@ public class BlockTest {
 		
 				
 		Type = 'T';
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.init(Type);
 			assertTrue(true);
@@ -1706,7 +1706,7 @@ public class BlockTest {
 		
 		
 		Type = 'Z';
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.init(Type);
 			assertTrue(true);
@@ -1730,7 +1730,7 @@ public class BlockTest {
 		
 		
 		Type = 'S';
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.init(Type);
 			assertTrue(true);
@@ -1754,7 +1754,7 @@ public class BlockTest {
 		
 		
 		Type = 'I';
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.init(Type);
 			assertTrue(true);
@@ -1794,7 +1794,7 @@ public class BlockTest {
 		blockC.removeAllPos();
 		blockC.addPos(2, 2);
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(0, 3);
 			assertTrue(false);
@@ -1802,7 +1802,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(1, 0);
 			assertTrue(false);
@@ -1810,7 +1810,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(5, 3);
 			assertTrue(false);
@@ -1818,7 +1818,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(3, 5);
 			assertTrue(false);
@@ -1826,7 +1826,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(0, 5);
 			assertTrue(false);
@@ -1834,7 +1834,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(2, 2);
 			assertTrue(false);
@@ -1855,7 +1855,7 @@ public class BlockTest {
 		x = 1;
 		y = 1;
 		
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(x, y);
 			assertTrue(true);
@@ -1898,7 +1898,7 @@ public class BlockTest {
 		blockC.removeAllPos();
 		blockC.addPos(2, 2);
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(0, 3);
 			assertTrue(false);
@@ -1906,7 +1906,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(1, 0);
 			assertTrue(false);
@@ -1914,7 +1914,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(5, 3);
 			assertTrue(false);
@@ -1922,7 +1922,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(3, 5);
 			assertTrue(false);
@@ -1930,7 +1930,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(0, 5);
 			assertTrue(false);
@@ -1938,7 +1938,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(2, 2);
 			assertTrue(false);
@@ -1959,7 +1959,7 @@ public class BlockTest {
 		x = 2;
 		y = 1;
 		
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(x, y);
 			assertTrue(true);
@@ -2002,7 +2002,7 @@ public class BlockTest {
 		blockC.removeAllPos();
 		blockC.addPos(2, 2);
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(0, 3);
 			assertTrue(false);
@@ -2010,7 +2010,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(1, 0);
 			assertTrue(false);
@@ -2018,7 +2018,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(5, 3);
 			assertTrue(false);
@@ -2026,7 +2026,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(3, 5);
 			assertTrue(false);
@@ -2034,7 +2034,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(0, 5);
 			assertTrue(false);
@@ -2042,7 +2042,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(2, 2);
 			assertTrue(false);
@@ -2063,7 +2063,7 @@ public class BlockTest {
 		x = 2;
 		y = 1;
 		
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(x, y);
 			assertTrue(true);
@@ -2106,7 +2106,7 @@ public class BlockTest {
 		blockC.removeAllPos();
 		blockC.addPos(2, 2);
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(0, 3);
 			assertTrue(false);
@@ -2114,7 +2114,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(1, 0);
 			assertTrue(false);
@@ -2122,7 +2122,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(5, 3);
 			assertTrue(false);
@@ -2130,7 +2130,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(3, 5);
 			assertTrue(false);
@@ -2138,7 +2138,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(0, 5);
 			assertTrue(false);
@@ -2146,7 +2146,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(2, 2);
 			assertTrue(false);
@@ -2167,7 +2167,7 @@ public class BlockTest {
 		x = 1;
 		y = 2;
 		
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(x, y);
 			assertTrue(true);
@@ -2210,7 +2210,7 @@ public class BlockTest {
 		blockC.removeAllPos();
 		blockC.addPos(2, 2);
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(0, 3);
 			assertTrue(false);
@@ -2218,7 +2218,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(1, 0);
 			assertTrue(false);
@@ -2226,7 +2226,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(5, 3);
 			assertTrue(false);
@@ -2234,7 +2234,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(3, 5);
 			assertTrue(false);
@@ -2242,7 +2242,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(0, 5);
 			assertTrue(false);
@@ -2250,7 +2250,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(2, 2);
 			assertTrue(false);
@@ -2271,7 +2271,7 @@ public class BlockTest {
 		x = 1;
 		y = 2;
 		
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(x, y);
 			assertTrue(true);
@@ -2314,7 +2314,7 @@ public class BlockTest {
 		blockC.removeAllPos();
 		blockC.addPos(2, 2);
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(0, 3);
 			assertTrue(false);
@@ -2322,7 +2322,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(1, 0);
 			assertTrue(false);
@@ -2330,7 +2330,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(5, 3);
 			assertTrue(false);
@@ -2338,7 +2338,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(3, 5);
 			assertTrue(false);
@@ -2346,7 +2346,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(0, 5);
 			assertTrue(false);
@@ -2354,7 +2354,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(2, 2);
 			assertTrue(false);
@@ -2375,7 +2375,7 @@ public class BlockTest {
 		x = 1;
 		y = 3;
 		
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(x, y);
 			assertTrue(true);
@@ -2418,7 +2418,7 @@ public class BlockTest {
 		blockC.removeAllPos();
 		blockC.addPos(2, 2);
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(0, 3);
 			assertTrue(false);
@@ -2426,7 +2426,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(1, 0);
 			assertTrue(false);
@@ -2434,7 +2434,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(5, 3);
 			assertTrue(false);
@@ -2442,7 +2442,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(3, 5);
 			assertTrue(false);
@@ -2450,7 +2450,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(0, 5);
 			assertTrue(false);
@@ -2458,7 +2458,7 @@ public class BlockTest {
 			assertTrue(true);
 		}
 		
-		/* Précondition non vérifiée */
+		/* PrÃ©condition non vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(2, 2);
 			assertTrue(false);
@@ -2479,7 +2479,7 @@ public class BlockTest {
 		x = 2;
 		y = 1;
 		
-		/* Précondition vérifiée */
+		/* PrÃ©condition vÃ©rifiÃ©e */
 		try {
 			blockC.addPos(x, y);
 			assertTrue(true);
