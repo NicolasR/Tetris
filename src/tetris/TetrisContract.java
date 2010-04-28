@@ -154,8 +154,6 @@ public class TetrisContract extends TetrisDecorator {
 	
 	public void next(){
 		checkInvariants();
-		if (isRunning() != true)
-			throw new Error("[TETRIS]pre(1)(next) invalide");
 		
 		if (needNext() != true)
 			throw new Error("[TETRIS]pre(1)(next) invalide");

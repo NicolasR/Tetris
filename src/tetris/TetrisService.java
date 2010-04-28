@@ -77,7 +77,7 @@ public interface TetrisService {
 	public void step();
 	
 	/**
-	 * pre: isRunning() == true && needNext() == true
+	 * pre: needNext() == true
 	 * post: getScore()@pre == getScore()
 	 * post: needNext() == false
 	 * post: getBoard() ==getBoard()@pre.insert(Block:init(???)) bloc aléatoire.... ?????
