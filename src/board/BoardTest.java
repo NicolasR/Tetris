@@ -217,6 +217,7 @@ public class BoardTest{
 			board.doBottom();
 			assertTrue(true);
 		}catch(Error e){
+			e.printStackTrace();
 			assertTrue(false);
 		}
 		 
@@ -227,7 +228,7 @@ public class BoardTest{
 	}
 	
 	@Test
-	public void testdoStep(){
+	public void testStep(){
 		board = new BoardContract(impl);
 		board.init(10, 22);
 		BlockContract block = new BlockContract(new BlockImpl());
@@ -279,5 +280,70 @@ public class BoardTest{
 		}catch(Error e){
 			assertTrue(true);
 		}
+	}
+	
+	@Test
+	public void testclean(){
+		board = new BoardContract(impl);
+		board.init(10, 22);
+		BlockContract block = new BlockContract(new BlockImpl());
+		block.init('O');
+		board.insert(block);
+
+		board.doBottom();
+
+		boolean oracle_pre = board.isBottom();
+		assertTrue(oracle_pre);
+		int getNbLastCleaned_atPre = board.getNbLastCleaned();	
+		try{
+			board.clean();
+			assertTrue(true);
+		}catch(Error e){
+			e.printStackTrace();
+			assertTrue(false);
+		}
+		 
+		boolean oracle_post = (board.getNbLastCleaned() >= getNbLastCleaned_atPre);
+		assertTrue(oracle_post);
+		
+		
+		board = new BoardContract(impl);
+		board.init(10, 22);
+		board.insert(block);
+			
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+		board.step();
+			
+		oracle_pre = board.isBottom();
+		assertTrue(oracle_pre);
+		getNbLastCleaned_atPre = board.getNbLastCleaned();	
+		try{
+			board.clean();
+			assertTrue(true);
+		}catch(Error e){
+			e.printStackTrace();
+			assertTrue(false);
+		}
+		 
+		oracle_post = (board.getNbLastCleaned() >= getNbLastCleaned_atPre);
+		assertTrue(oracle_post);
 	}
 }

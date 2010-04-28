@@ -105,4 +105,8 @@ public abstract class BoardDecorator {
 	public void remove(){
 		this.delegate.remove();
 	}
+	
+	public void clean() {
+		this.delegate.clean();
+	}
 }

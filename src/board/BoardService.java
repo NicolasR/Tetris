@@ -34,6 +34,7 @@ public interface BoardService {
 	/** Invariants
 	 * getXMinblock() >= 0 && getXblock() <= getgrid().getWidth()+1 - getcurrentBlock.getSize()
 	 * getYMinblock() >= 0 && getYblock() <= getgrid().getHeight()+1 - getcurrentBlock.getSize()
+	 * getNbLastCleaned >= 0
 	 */
 	
 	/** Constructors
@@ -104,5 +105,11 @@ public interface BoardService {
 	 * post: getXMinBlock() == 0 && getYMinBlock() == 0
 	 */
 	public void remove();
+	
+	/**
+	 * pre : isBottom() == true
+	 * post : getNbLastCleaned() >= getNbLastCleaned()@pre
+	 */
+	public void clean();
 
 }
