@@ -83,7 +83,8 @@ public class BoardContract extends BoardDecorator {
 		
 		int getXMinBlock_atPre = getXMinBlock();
 		int getYMinBlock_atPre = getYMinBlock();
-		super.canRotateRight();
+		
+		super.doRotateRight();
 		
 		if (getXMinBlock_atPre != getXMinBlock())
 			throw new Error("[BOARD]post(1)(doRotateRight) invalide");

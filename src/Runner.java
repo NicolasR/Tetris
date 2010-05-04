@@ -22,7 +22,7 @@ public class Runner extends Thread implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		tetris.rotateLeft();
+		tetris.rotateRight();
 		fenetre.repaint();
 		System.out.println("OK");
 		}
