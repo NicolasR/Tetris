@@ -162,7 +162,17 @@ public class BoardImpl implements BoardService {
 
 	@Override
 	public void doRotateRight() {
+		for(LinkedList<Integer> p: bloc.getAllPos()){
+			int x = getXblock(p.getFirst());
+			int y = getYblock(p.getLast());
+			grid.remove(x, y);
+		}
 		bloc.rotateRight();
+		for(LinkedList<Integer> p: bloc.getAllPos()){
+			int x = getXblock(p.getFirst());
+			int y = getYblock(p.getLast());
+			grid.put(x, y);
+		}
 	}
 
 	@Override

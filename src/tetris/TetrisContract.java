@@ -129,7 +129,7 @@ public class TetrisContract extends TetrisDecorator {
 			throw new Error("[TETRIS]pre(1)(step) invalide");
 		
 		int getScore_atPre = super.getScore();
-		super.rotateLeft();
+		super.step();
 		
 		if (getBoard().isBottom()){
 			if (needNext() == false)
@@ -159,7 +159,7 @@ public class TetrisContract extends TetrisDecorator {
 			throw new Error("[TETRIS]pre(1)(next) invalide");
 		
 		int getScore_atPre = getScore();
-		super.rotateLeft();
+		super.next();
 		
 		if (getScore() != getScore_atPre)
 			throw new Error("[TETRIS]post(1)(next) invalide");
