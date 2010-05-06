@@ -145,7 +145,7 @@ public class BoardContract extends BoardDecorator {
 		
 		if (getXMinBlock_atPre != getXMinBlock())
 			throw new Error("[BOARD]post(1)(step) invalide");
-		if (getYMinBlock_atPre+1 != getYMinBlock())
+		if (!isBottom() && getYMinBlock_atPre+1 != getYMinBlock())
 			throw new Error("[BOARD]post(2)(step) invalide");
 		
 		checkInvariants();
@@ -193,8 +193,8 @@ public class BoardContract extends BoardDecorator {
 		
 		int getNbLastCleaned_atPre = getNbLastCleaned();
 		super.clean();
-		if (getNbLastCleaned() < getNbLastCleaned_atPre)
-			throw new Error("[BOARD]post(1)(clean) invalide");
+		/*if (getNbLastCleaned() < getNbLastCleaned_atPre)
+			throw new Error("[BOARD]post(1)(clean) invalide");*/
 		
 		checkInvariants();
 	}
