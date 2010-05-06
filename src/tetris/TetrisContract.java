@@ -81,7 +81,7 @@ public class TetrisContract extends TetrisDecorator {
 		int getScore_atPre = getScore();
 		super.goDown();
 		
-		if (getScore() != (getScore_atPre + 20 + getBoard().getNbLastCleaned()))
+		if (getScore() != (getScore_atPre + 20 + 50*(getBoard().getNbLastCleaned())))
 			throw new Error("[TETRIS]post(1)(goDown) invalide");
 		if (needNext() != true)
 			throw new Error("[TETRIS]post(2)(goDown) invalide");
@@ -125,27 +125,29 @@ public class TetrisContract extends TetrisDecorator {
 	
 	public void step(){
 		checkInvariants();
-		if (super.isRunning() != true)
+		if (isRunning() != true)
 			throw new Error("[TETRIS]pre(1)(step) invalide");
 		
-		int getScore_atPre = super.getScore();
+		int getScore_atPre = getScore();
+		boolean isBottom_atPre = getBoard().isBottom();
+		boolean needNext_atPre = needNext();
+		
 		super.step();
 		
-		if (getBoard().isBottom()){
-			if (needNext() == false)
+		if (isBottom_atPre){
+			if (needNext() == true)
 				throw new Error("[TETRIS]post(1)(step) invalide");
-			else{
-				if (getScore() != getScore_atPre + 20 + (getBoard().getNbLastCleaned()*50))
+			if (getScore() != getScore_atPre + 20 + (getBoard().getNbLastCleaned()*50))
 					throw new Error("[TETRIS]post(3)(step) invalide");
-			}
+			
 		}
 		else{
-			if (needNext() == true)
+			if (needNext_atPre != needNext())
 				throw new Error("[TETRIS]post(2)(step) invalide");
-			else{
-				if (getScore() != getScore_atPre)
+			
+			if (getScore() != getScore_atPre)
 					throw new Error("[TETRIS]post(4)(step) invalide");
-			}
+			
 		}
 		//????? post 3
 		

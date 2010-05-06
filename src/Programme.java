@@ -20,20 +20,15 @@ public class Programme extends JPanel implements KeyListener {
 	
 	public void paintComponent(Graphics g){
 	    super.paintComponent(g);
-	    // à faire lors de la MàJ du panel
 	  }
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("Touche: "+e.getKeyCode());
 
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -51,11 +46,11 @@ public class Programme extends JPanel implements KeyListener {
 		TetrisContract tetris = new TetrisContract(new TetrisImpl());
 		tetris.init();
 		GridContract grid = tetris.getBoard().getgrid();
-		TetrisPanel pane = new TetrisPanel(grid);
+		TetrisPanel pane = new TetrisPanel(grid,tetris,fenetre);
 		fenetre.setContentPane(pane);
 		tetris.next();
 		fenetre.repaint();
-		Runner run = new Runner(tetris, fenetre);
+		Runner run = new Runner(tetris, fenetre, pane);
 		
 		//pane.paintComponent(pane.getGraphics());
 		//fenetre.add(new JLabel("Score:"));
@@ -77,23 +72,22 @@ public class Programme extends JPanel implements KeyListener {
 		
 		fenetre.setVisible(true);
 		fenetre.setSize(800, 600);
-		/*Thread t = new Thread() {
+		Thread t = new Thread() {
 	        public void run() {
-	          // Instanciation et lancement du traitement
-	          System.out.println("Salut");
 	          while(true){
 	  				try {
-						sleep(1000);
+						sleep(100);
+						fenetre.repaint();
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-	  				//System.out.println("Were we go we don't need roads");
+	  				//System.out.println("Where we go we don't need roads");
 	  			
 	          }
 	        }
 		};
-		t.start();*/
+		//t.start();
 		run.start();
 	}
 

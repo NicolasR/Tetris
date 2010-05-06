@@ -9,16 +9,20 @@ public class BoardContract extends BoardDecorator {
 	}
 
 	public void checkInvariants(){
-		int sizeblock = 0;
+		BlockContract bloc = super.getcurrentBlock();
 		if (super.isBlock())
-			sizeblock = super.getcurrentBlock().getSize();
-		if (super.getXMinBlock() < 0 || super.getXMinBlock() > 
-		(super.getgrid().getWidth()+1 - sizeblock))
+		{
+			if (super.getXblock(bloc.getXMin()) < 1 || super.getXblock(bloc.getXMax()) > 
+			super.getgrid().getWidth()+1)
 				throw new Error("[BOARD]invariant(1) invalide");
+			
+			
+			if (super.getYblock(bloc.getYMin()) < 1 || super.getYblock(bloc.getYMax()) > 
+			super.getgrid().getHeight()+1)
+					throw new Error("[BOARD]invariant(2) invalide");
+		}
 		
-		if (super.getYMinBlock() < 0 || super.getYMinBlock() > 
-		(super.getgrid().getHeight()+1 - sizeblock))
-				throw new Error("[BOARD]invariant(2) invalide");
+		
 		
 		if (super.getNbLastCleaned() < 0)
 				throw new Error("[BOARD]invariant(3) invalide");

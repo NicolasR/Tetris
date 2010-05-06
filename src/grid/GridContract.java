@@ -19,8 +19,9 @@ public class GridContract extends GridDecorator {
 	
 	public boolean isOccupied(int x, int y){
 		checkInvariants();
-		if (x < 1 || x > getWidth() || y < 1 || y > getHeight())
-			throw new Error("[GRID]pre(1)(isOccupied) invalide");
+		if (x < 1 || x > getWidth() || y < 1 || y > getHeight()){
+			System.out.println("x: "+x+" y: "+y);
+			throw new Error("[GRID]pre(1)(isOccupied) invalide");}
 		boolean temp = super.isOccupied(x, y);
 		checkInvariants();
 		return temp;

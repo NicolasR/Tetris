@@ -31,6 +31,7 @@ public class BlockImpl implements BlockService {
 		return this.XMin;
 	}
 
+	//abscisse maxmale dans l'ensemble de getAllPos()
 	public int getXMax() {
 		return this.XMax;
 	}
