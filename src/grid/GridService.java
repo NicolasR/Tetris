@@ -9,8 +9,8 @@ public interface GridService {
 	public boolean canPut(int x, int y);
 	
 	/** Invariants
-	 * \forall x in (1<= x && x < getWidth){
-	 * 			\forall y in (1<= y && y < getHeight){
+	 * \forall x in (1<= x && x <= getWidth){
+	 * 			\forall y in (1<= y && y <= getHeight){
 	 * 				isOccupied(x,y) == not(canPut(x,y));
 	 *  		}
 	 * }
@@ -20,8 +20,8 @@ public interface GridService {
 	 * Initialise
 	 * pre: x > 0 && y > 0 && y >= x
 	 * post: getWidth == x && getHeight == y
-	 * post: \forall x in (1<= x && x < getWidth){
-	 * 			\forall y in (1<= y && y < getHeight){
+	 * post: \forall x in (1<= x && x <= getWidth){
+	 * 			\forall y in (1<= y && y <= getHeight){
 	 * 				not(isOccupied(x,y)) && canPut(x,y);
 	 *  		}
 	 *  	 }
@@ -34,13 +34,13 @@ public interface GridService {
 	  * pre: y >= 1 && y <= getHeight()
 	  * post: not(isOccupied(x,y)@pre) == isOccupied(x,y)
 	  * post: not(canPut(x,y))
-	  * post: forall i in (1<= i && x != i && i < getWidth){
-	  * 		  forall j in (1<= j && j<y && j < getHeight) {
+	  * post: forall i in (1<= i && x != i && i <= getWidth){
+	  * 		  forall j in (1<= j && j != y && j <= getHeight) {
 	  * 		  	(i!=x && j!=y) <=> isOccupied(i,j)@pre == isOccupied(i,j);
 	  * 		  }
 	  * 	  }
-	  * post: forall i in (1<= i && x != i && i < getWidth) && i != x{
-	  * 		  forall j in (1<= j && j<y && j < getHeight) && j != y{
+	  * post: forall i in (1<= i && x != i && i <= getWidth) && i != x{
+	  * 		  forall j in (1<= j && j != y && j <= getHeight) && j != y{
 	  * 		  	(i!=x && j!=y) <=> canPut(i,j)@pre != canPut(i,j);
 	  * 		  }
 	  * 	  }
@@ -53,22 +53,17 @@ public interface GridService {
 	  * pre: y >= 1 && y <= getHeight()
 	  * post: isOccupied(x,y)@pre == not(isOccupied(x,y))
 	  * post: canPut(x,y)
-	  * post: forall i in (1<= i && x != i && i < getWidth){
-	  * 		  forall j in (1<= j && j<y && j < getHeight){
+	  * post: forall i in (1<= i && x != i && i <= getWidth){
+	  * 		  forall j in (1<= j && j != y && j <= getHeight){
 	  * 		  	(i!=x && j!=y) <=> isOccupied(i,j)@pre == not(isOccupied(i,j));
 	  * 		  }
 	  * 	  }
-	  * post: forall i in (1<= i && x != i && i < getWidth){
-	  * 		  forall j in (1<= j && j<y && j < getHeight){
+	  * post: forall i in (1<= i && x != i && i <= getWidth){
+	  * 		  forall j in (1<= j && j != y && j <= getHeight){
 	  * 		  	(i!=x && j!=y) <=> canPut(i,j);
 	  * 		  }
 	  * 	  }
 	  */
 	 public void remove(int x, int y);
 	 
-	 
-	 
-	
-	
-	
 }

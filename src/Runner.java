@@ -1,15 +1,17 @@
 import javax.swing.JFrame;
 
+import joueur.JoueurContract;
+
 import tetris.TetrisContract;
 
 
 public class Runner extends Thread implements Runnable {
-	private TetrisContract tetris;
+	private JoueurContract joueur;
 	private JFrame fenetre;
 	private TetrisPanel pane;
 	
-	public Runner(TetrisContract tetris, JFrame Fenetre, TetrisPanel pane){
-		this.tetris = tetris;
+	public Runner(JoueurContract joueur, JFrame Fenetre, TetrisPanel pane){
+		this.joueur = joueur;
 		this.fenetre = Fenetre;
 		this.pane = pane;
 	}
@@ -18,7 +20,7 @@ public class Runner extends Thread implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		
-		while(true){
+		while(!joueur.getTetris().isFinished()){
 		try {
 			Thread.sleep(700);
 		} catch (InterruptedException e) {
@@ -30,5 +32,6 @@ public class Runner extends Thread implements Runnable {
 		//fenetre.repaint();
 		//System.out.println("OK");
 		}
+		System.out.println("Fini: "+joueur.getTetris().getScore());
 	}
 }

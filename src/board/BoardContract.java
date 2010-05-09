@@ -188,8 +188,9 @@ public class BoardContract extends BoardDecorator {
 	public void clean() {
 		checkInvariants();
 		
-		if(isBottom() == false)
+		if (!(isBottom() == true))
 			throw new Error("[BOARD]pre(1)(clean) invalide");
+		
 		
 		int getNbLastCleaned_atPre = getNbLastCleaned();
 		super.clean();

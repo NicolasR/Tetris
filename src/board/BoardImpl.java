@@ -563,78 +563,89 @@ public class BoardImpl implements BoardService {
 	
 	@Override
 	public void doBottom() {
-		int length = getBottomHeight();
-		for(LinkedList<Integer> p: bloc.getAllPos()){
-			int x = getXblock(p.getFirst());
-			int y = getYblock(p.getLast());
-			grid.remove(x, y);
+		if(!isBottom()){
+			int length = getBottomHeight();
+			for(LinkedList<Integer> p: bloc.getAllPos()){
+				int x = getXblock(p.getFirst());
+				int y = getYblock(p.getLast());
+				grid.remove(x, y);
+			}
+			for(LinkedList<Integer> p: bloc.getAllPos()){
+				int x = getXblock(p.getFirst());
+				int y = getYblock(p.getLast());
+				grid.put(x, y+length);
+			}
+			this.YMinBlock += length;
+			clean();
 		}
-		for(LinkedList<Integer> p: bloc.getAllPos()){
-			int x = getXblock(p.getFirst());
-			int y = getYblock(p.getLast());
-			grid.put(x, y+length);
-		}
-		this.YMinBlock += length;
-		clean();
 	}
 
 	@Override
 	public void doLeft() {
-		for(LinkedList<Integer> p: bloc.getAllPos()){
-			int x = getXblock(p.getFirst());
-			int y = getYblock(p.getLast());
-			grid.remove(x, y);
+		if (!isBottom())
+		{
+			for(LinkedList<Integer> p: bloc.getAllPos()){
+				int x = getXblock(p.getFirst());
+				int y = getYblock(p.getLast());
+				grid.remove(x, y);
+			}
+			for(LinkedList<Integer> p: bloc.getAllPos()){
+				int x = getXblock(p.getFirst());
+				int y = getYblock(p.getLast());
+				grid.put(x-1, y);
+			}
+			this.XMinBlock -= 1;
 		}
-		for(LinkedList<Integer> p: bloc.getAllPos()){
-			int x = getXblock(p.getFirst());
-			int y = getYblock(p.getLast());
-			grid.put(x-1, y);
-		}
-		this.XMinBlock -= 1;
 	}
 
 	@Override
 	public void doRight() {
-		for(LinkedList<Integer> p: bloc.getAllPos()){
-			int x = getXblock(p.getFirst());
-			int y = getYblock(p.getLast());
-			grid.remove(x, y);
+		if (!isBottom()){
+			for(LinkedList<Integer> p: bloc.getAllPos()){
+				int x = getXblock(p.getFirst());
+				int y = getYblock(p.getLast());
+				grid.remove(x, y);
+			}
+			for(LinkedList<Integer> p: bloc.getAllPos()){
+				int x = getXblock(p.getFirst());
+				int y = getYblock(p.getLast());
+				grid.put(x+1, y);
+			}
+			this.XMinBlock += 1;
 		}
-		for(LinkedList<Integer> p: bloc.getAllPos()){
-			int x = getXblock(p.getFirst());
-			int y = getYblock(p.getLast());
-			grid.put(x+1, y);
-		}
-		this.XMinBlock += 1;
 	}
 
 	@Override
 	public void doRotateLeft() {
-		for(LinkedList<Integer> p: bloc.getAllPos()){
-			int x = getXblock(p.getFirst());
-			int y = getYblock(p.getLast());
-			grid.remove(x, y);
-		}
-		bloc.rotateLeft();
-		for(LinkedList<Integer> p: bloc.getAllPos()){
-			int x = getXblock(p.getFirst());
-			int y = getYblock(p.getLast());
-			grid.put(x, y);
+		if (!isBottom()){
+			for(LinkedList<Integer> p: bloc.getAllPos()){
+				int x = getXblock(p.getFirst());
+				int y = getYblock(p.getLast());
+				grid.remove(x, y);
+			}
+			bloc.rotateLeft();
+			for(LinkedList<Integer> p: bloc.getAllPos()){
+				int x = getXblock(p.getFirst());
+				int y = getYblock(p.getLast());
+				grid.put(x, y);
+			}
 		}
 	}
 
 	@Override
 	public void doRotateRight() {
-		for(LinkedList<Integer> p: bloc.getAllPos()){
-			int x = getXblock(p.getFirst());
-			int y = getYblock(p.getLast());
-			grid.remove(x, y);
-		}
-		bloc.rotateRight();
-		for(LinkedList<Integer> p: bloc.getAllPos()){
-			int x = getXblock(p.getFirst());
-			int y = getYblock(p.getLast());
-			grid.put(x, y);
+		if (!isBottom()){
+			for(LinkedList<Integer> p: bloc.getAllPos()){
+				int x = getXblock(p.getFirst());
+				int y = getYblock(p.getLast());
+				grid.remove(x, y);
+			}
+			bloc.rotateRight();
+			for(LinkedList<Integer> p: bloc.getAllPos()){
+				int x = getXblock(p.getFirst());
+				int y = getYblock(p.getLast());
+				grid.put(x, y);
+			}
 		}
 	}
 

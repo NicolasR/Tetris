@@ -6,7 +6,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import joueur.JoueurContract;
 
 import tetris.TetrisContract;
 
@@ -14,8 +17,9 @@ import tetris.TetrisContract;
 public class TetrisPanel extends JPanel implements KeyListener {
 
 	private GridContract grid;
-	private TetrisContract tetris;
+	private JoueurContract joueur;
 	private JFrame fenetre;
+	private JLabel score;
 	static final int GOLEFT = 1;
 	static final int GORIGHT = 2;
 	static final int GODOWN = 3;
@@ -23,14 +27,16 @@ public class TetrisPanel extends JPanel implements KeyListener {
 	static final int ROTATERIGHT = 5;
 	static final int STEP = 6;
 	
-	public TetrisPanel (GridContract grid, TetrisContract tetris, JFrame fenetre){
+	public TetrisPanel (GridContract grid, JoueurContract joueur, JFrame fenetre){
 		this.grid = grid;
-		this.tetris = tetris;
+		this.joueur = joueur;
 		this.fenetre = fenetre;
+		this.score = new JLabel("Score: ");
 		setDoubleBuffered(true);
 		GridLayout layout = new GridLayout();
 		this.setLayout(layout);
 		addKeyListener(this);
+		this.add(score);
 	}
 	
 	public void paintComponent(Graphics g){
@@ -94,36 +100,32 @@ public class TetrisPanel extends JPanel implements KeyListener {
 				System.out.println("Erreur");
 				System.exit(1);
 		}
+		score.setText("Score: "+joueur.getTetris().getScore());
 		this.fenetre.repaint();
 	}
 	
 	public void goLeft(){
-		if (!tetris.getBoard().isBottom())
-			this.tetris.goLeft();
+			this.joueur.goLeft();
 	}
 	
 	public void goRight(){
-		if (!tetris.getBoard().isBottom())
-			this.tetris.goRight();
+			this.joueur.goRight();
 	}
 	
 	public void goDown(){
-		if (!tetris.getBoard().isBottom())
-			this.tetris.goDown();
+			this.joueur.goDown();
 	}
 	
 	public void step(){
-		this.tetris.step();
+		this.joueur.getTetris().step();
 	}
 	
 	public void rotateLeft(){
-		if (!tetris.getBoard().isBottom())
-			this.tetris.rotateLeft();
+			this.joueur.rotateLeft();
 	}
 	
 	public void rotateRight(){
-		if (!tetris.getBoard().isBottom())
-			this.tetris.rotateRight();
+			this.joueur.rotateRight();
 	}
 	
 	@Override

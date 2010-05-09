@@ -9,6 +9,9 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import joueur.JoueurContract;
+import joueur.JoueurImpl;
+
 import tetris.TetrisContract;
 import tetris.TetrisImpl;
 
@@ -43,14 +46,15 @@ public class Programme extends JPanel implements KeyListener {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		final JFrame fenetre = new JFrame("Tetris");
-		TetrisContract tetris = new TetrisContract(new TetrisImpl());
-		tetris.init();
-		GridContract grid = tetris.getBoard().getgrid();
-		TetrisPanel pane = new TetrisPanel(grid,tetris,fenetre);
+		JoueurContract joueur = new JoueurContract(new JoueurImpl());
+		joueur.init();
+		joueur.getTetris().init();
+		GridContract grid = joueur.getTetris().getBoard().getgrid();
+		TetrisPanel pane = new TetrisPanel(grid,joueur,fenetre);
 		fenetre.setContentPane(pane);
-		tetris.next();
+		joueur.getTetris().next();
 		fenetre.repaint();
-		Runner run = new Runner(tetris, fenetre, pane);
+		Runner run = new Runner(joueur, fenetre, pane);
 		
 		//pane.paintComponent(pane.getGraphics());
 		//fenetre.add(new JLabel("Score:"));

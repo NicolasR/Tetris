@@ -76,5 +76,13 @@ public class JoueurContract extends JoueurDecorator {
 			throw new Error("post (rotateRight) invalide");
 		}
 	}
+
+	@Override
+	public boolean canPlay() {
+		checkInvariants();
+		boolean canPlay = super.canPlay();
+		checkInvariants();
+		return canPlay;
+	}
 	
 }

@@ -11,28 +11,37 @@ public class JoueurImpl implements JoueurService {
 		return this.tetris;
 	}
 	
+	public boolean canPlay(){
+		return tetris.isRunning() && !tetris.isFinished();
+	}
+	
 	public void init() {
 		this.tetris = new TetrisContract(new TetrisImpl());
 	}
 	
 	public void goLeft() {
-		this.tetris.goLeft();
+		if (canPlay())
+			this.tetris.goLeft();
 	}
 	
 	public void goRight() {
-		this.tetris.goRight();
+		if (canPlay())
+			this.tetris.goRight();
 	}
 	
 	public void goDown() {
-		this.tetris.goDown();
+		if (canPlay())
+			this.tetris.goDown();
 	}
 	
 	public void rotateLeft() {
-		this.tetris.rotateLeft();
+		if (canPlay())
+			this.tetris.rotateLeft();
 	}
 	
 	public void rotateRight() {
-		this.tetris.rotateRight();
+		if (canPlay())
+			this.tetris.rotateRight();
 	}
 	
 }

@@ -117,21 +117,21 @@ public class BoardTest{
 			board.doLeft();
 			board.doLeft();
 			board.doLeft();
-			board.doLeft();
 			assertTrue(true);
 		}catch(Error e){
 			assertTrue(false);
 		}
 		try{
 			board.doLeft();
+			board.doLeft();
+			board.doLeft();
 			assertTrue(false);
 		}catch(Error e){
 			assertTrue(true);
 		}
 		 
-		boolean oracle_post = (board.getXMinBlock() == (getXMinBlock_atPre-4))
+		boolean oracle_post = (board.getXMinBlock() == (getXMinBlock_atPre-5))
 			&& (board.getYMinBlock() == getYMinBlock_atPre);
-		
 		assertTrue(oracle_post);
 	}
 	
@@ -181,7 +181,6 @@ public class BoardTest{
 			board.doRight();
 			board.doRight();
 			board.doRight();
-			board.doRight();
 			assertTrue(true);
 		}catch(Error e){
 			assertTrue(false);
@@ -193,9 +192,9 @@ public class BoardTest{
 			assertTrue(true);
 		}
 		 
-		boolean oracle_post = (board.getXMinBlock() == (getXMinBlock_atPre+4))
+		boolean oracle_post = (board.getXMinBlock() == (getXMinBlock_atPre+3))
 			&& (board.getYMinBlock() == getYMinBlock_atPre);
-		
+
 		assertTrue(oracle_post);
 	}
 	

@@ -40,12 +40,14 @@ public class GridImpl implements GridService {
 
 	@Override
 	public void put(int x, int y) {
-		used[x-1][y-1] = true;
+		if (canPut(x,y))
+			used[x-1][y-1] = true;
 	}
 
 	@Override
 	public void remove(int x, int y) {
-		used[x-1][y-1] = false;
+		if (isOccupied(x,y))
+			used[x-1][y-1] = false;
 	}
 
 }

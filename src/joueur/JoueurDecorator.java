@@ -14,6 +14,10 @@ public abstract class JoueurDecorator implements JoueurService {
 		return this.delegate.getTetris();
 	}
 	
+	public boolean canPlay(){
+		return this.delegate.canPlay();
+	}
+	
 	public void init() {
 		this.delegate.init();
 	}

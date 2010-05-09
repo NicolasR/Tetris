@@ -108,7 +108,7 @@ public interface BoardService {
 	
 	/**
 	 * pre : isBottom() == true
-	 * post : getNbLastCleaned() >= getNbLastCleaned()@pre
+	 * post : getNbLastCleaned() >= getNbLastCleaned()@pre /**FAUX
 	 */
 	public void clean();
 
