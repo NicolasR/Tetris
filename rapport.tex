@@ -1,0 +1,452 @@
+\documentclass[a4paper,11pt,titlepage]{article}
+\usepackage[latin1]{inputenc} %support de l'utf8
+%\usepackage[T1]{fontenc} %support des accents
+\usepackage[francais]{babel} %support de la langue
+\usepackage{geometry}
+\geometry{hscale=0.70,vscale=0.70,centering}
+
+% Title Page
+\title{Projet de Composants: TETRIS}
+\author{Pauline CHAMOREAU \and Nicolas RIGNAULT}
+
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\newpage
+\section{Spécifications}
+
+\subsection{ADT Block}
+
+\begin{tabbing}
+\underline{Service}: \textbf{Block}\\
+\underline{Type}: char, int, bool, Set<T>, Paire<T>\\\\
+
+\underline{Observators}:\\
+\textit{getType}: [Block] -$>$ char\\
+\textit{getSize}: [Block] -$>$ int\\
+\textit{getNbPos}: [Block] -$>$ int\\
+\textit{getXMin}: [Block] -$>$ int\\
+\textit{getXMax}: [Block] -$>$ int\\
+\textit{getYMin}: [Block] -$>$ int\\
+\textit{getYMax}: [Block] -$>$ int\\
+\textit{hasPos}: [Block] * int * int -$>$ bool\\
+\underline{précondition}: \=\textit{hasPos}(B,x,y) \underline{require} $1 <= x$ \&\& $x <= \textit{getSize}(B)$ \&\& $1 <= y$ \&\& $y <= \textit{getSize}(B)$\\
+\textit{getAllPos}: [Block] -$>$ Set$<$Paire$<$int,int$>>$\\
+\textit{getLowPos}: [Block] -$>$ Set$<$Paire$<$int,int$>>$\\\\
+
+\underline{Constructor}:\\
+\textit{init}: char -$>$ [Block]\\
+\underline{précondition}: \textit{init}(t) \underline{require} $t = O \parallel t = L \parallel t = J \parallel t = T \parallel t = Z \parallel t = S \parallel t = I$\\\\
+
+\underline{Opérations}:\\
+\textit{addPos}: [Block] * int * int -$>$ [Block]\\
+\underline{précondition}: \=\textit{addPos}(B,x,y) \underline{require} $1 <= x$ \&\& $x <= \textit{getSize}(B)$ \&\& $1 <= y$ \&\& $y <= \textit{getSize}(B)$ \\
+\>\&\& $\neg$\textit{hasPos}(B,x,y) \\
+\textit{removeAllPos}: [Block] -$>$ [Block]\\
+\textit{RotateLeft}: [Block] -$>$ [Block]\\
+\textit{rotateRight}: [Block] -$>$ [Block]\\\\
+
+\underline{Observations}:
+\end{tabbing}
+\begin{itemize}
+ \item[$\circ$] \textit{invariants}\\
+$\textit{getType}(B) = O \parallel \textit{getType} = L \parallel \textit{getType}(B) = J \parallel \textit{getType}(B) = T \parallel \\
+\>\textit{getType}(B) = Z \parallel \textit{getType}(B) = S \parallel \textit{getType}(B) = I$\\
+$\textit{getSize}(B) = 2 \parallel \textit{getSize}(B) = 3 \parallel \textit{getSize}(B) = 4$\\
+$0 <= \textit{getNbPos}(B)$ \&\& $\textit{getNbPos}(B) <= 4$\\
+$getXMin(B) = min~\left\{~first(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
+$getXMax(B) = max~\left\{~first(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
+$getYMin(B) = min~\left\{~second(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
+$getYMax(B) = max~\left\{~second(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
+$\textit{getAllPos} = \left\{~(x,y) \in Pair<1..\textit{getSize}(B),1..\textit{getSize}(B)~|~\textit{hasPos(B,x,Y)}~\right\}$ \\
+$\textit{getAllPos} = \left\{~(x,y) \in \textit{\textit{getAllPos}(B)}~|~\neg \exists (x,y2) \in \textit{\textit{getAllPos}(B)}, y2>y~\right\}$ \\
+ 
+ \item[$\circ$] \textit{init}\\
+\textit{getType}(\textit{init}(type)) = type\\
+\textit{getNbPos}(\textit{init}(type)) = 4\\
+
+ \item[$\circ$] \textit{addPos}\\
+\textit{getType}(\textit{addPos}(B,x,y)) = \textit{getType}(B)\\
+\textit{getSize}(\textit{addPos}(B,x,y)) = \textit{getSize}(B)\\
+\textit{getNbPos}(\textit{addPos}(B,x,y)) = \textit{getNbPos}(B)+1\\
+$(x < \textit{getXMin}(B) \&\& \textit{getXMin}(\textit{addPos}(B,x,y)) = x)~\|~ (\textit{getXMin}(\textit{addPos}(B,x,y)) = \textit{getXMin}(B))$\\
+$(\textit{getXMax}(B) < x \&\& \textit{getXMax}((\textit{addPos}(B,x,y)) = x)~ \|~ (\textit{getXMax}(\textit{addPos}(B,x,y)) = \textit{getXMax}(B))$\\
+$(y < \textit{getYMin}(B) \&\& \textit{getYMin}(\textit{addPos}(B,x,y)) = y)~ \|~ (\textit{getYMin}(\textit{addPos}(B,x,y)) = \textit{getYMin}(B))$\\
+$(\textit{getYMax}(B) < y \&\& \textit{getYMax}(\textit{addPos}(B,x,y)) = y) ~\|~ (\textit{getYMax}(\textit{addPos}(B,x,y)) = \textit{getYMax}(B))$\\
+\textit{hasPos}(\textit{addPos}(B,x,y)) = true\\
+$\forall$ x1, y1, x1 $\ne$ x $\vee$ y1 $\ne$ y $\Rightarrow$ \textit{hasPos}(\textit{addPos}(B,x,y),x1,y1) = \textit{hasPos}(B,x1,y1)\\
+$\forall x1, y1 \in \textit{getAllPos} = \left\{~(x1,y1) \in \textit{\textit{getAllPos}(\textit{addPos}(B,x,y))}~\right\}$\\
+$(x,y) \in \textit{\textit{getAllPos}(\textit{addPos}(B,x,y))}$\\
+
+ \item[$\circ$] \textit{removeAllPos}\\
+\textit{getType}(\textit{removeAllPos}(B)) = \textit{getType}(B)\\
+\textit{getSize}(\textit{removeAllPos}(B)) = \textit{getSize}(B)\\
+\textit{getNbPos}(\textit{removeAllPos}(B)) = \textit{getNbPos}(B)\\
+\textit{getXMin}(\textit{removeAllPos}(B)) = \textit{getSize}(B)+1\\
+\textit{getXMax}(\textit{removeAllPos}(B)) = 0\\
+\textit{getYMin}(\textit{removeAllPos}(B)) = \textit{getSize}(B)+1\\
+\textit{getYMax}(\textit{removeAllPos}(B)) = 0\\
+$\forall$ x, y $\neg$ \textit{hasPos}(B)\\
+\textit{getAllPos}(\textit{removeAllPos}(B)) = null\\
+\textit{getLowPos}(\textit{removeAllPos}(B)) = null\\
+
+ \item[$\circ$] \textit{rotateLeft}\\
+\textit{getType}(\textit{rotateLeft}(B)) = \textit{getType}(B)\\
+\textit{getSize}(\textit{rotateLeft}(B)) = \textit{getSize}(B)\\
+\textit{getNbPos}(\textit{rotateLeft}(B)) = \textit{getNbPos}(B)\\
+
+ \item[$\circ$] \textit{rotateRight}\\
+\textit{getType}(\textit{rotateRight}(B)) = \textit{getType}(B)\\
+\textit{getSize}(\textit{rotateRight}(B)) = \textit{getSize}(B)\\
+\textit{getNbPos}(\textit{rotateRight}(B)) = \textit{getNbPos}(B)\\
+\end{itemize}
+\newpage
+
+\subsection{ADT Board}
+
+\begin{tabbing}
+\underline{Service}: \textbf{Board}\\
+\underline{Type}: int, bool\\
+Require: Block, Grid\\\\
+
+\underline{Observators}:\\
+\textit{getCurrentBlock}: [Board] -$>$ Block\\
+\textit{getBrid}: [Board] -$>$ Grid\\
+\textit{getNbLastCleaned}: [Board] -$>$ int\\
+\textit{canRotateLeft}: [Board] -$>$ bool\\
+\underline{précondition}: \=\textit{canRotateLeft}(B) \underline{require} \textit{isBlock}(B)\\
+\textit{canRotateRight}: [Board] -$>$ bool\\
+\underline{précondition}: \=\textit{canRotateRight}(B) \underline{require} \textit{isBlock}(B)\\
+\textit{canGoLeft}: [Board] -$>$ bool\\
+\underline{précondition}: \=\textit{canGoLeft}(B) \underline{require} \textit{isBlock}(B)\\
+\textit{cangoRight}: [Board] -$>$ bool\\
+\underline{précondition}: \=\textit{cangoRight}(B) \underline{require} \textit{isBlock}(B)\\
+\textit{isBlock}: [Board] -$>$ bool\\
+\textit{isConflict}: [Board] -$>$ bool\\
+\underline{précondition}: \=\textit{isConflict}(B) \underline{require} \textit{isBlock}(B)\\
+\textit{getXblock}: [Board] -$>$ int\\
+\textit{getYblock}: [Board] -$>$ int\\
+\textit{getXMinBlock}: [Board] -$>$ int\\
+\textit{getYMinBlock}: [Board] -$>$ int\\
+\textit{getBottomHeight}: [Board] -$>$ int\\
+\underline{précondition}: \=\textit{getBottomHeight}(B) \underline{require} \textit{isBlock}(B)\\\\
+
+\underline{Constructor}:\\
+\textit{init}: int * int -$>$ [Board]\\
+\underline{précondition}: \textit{init}(x,y) \underline{require} $x > 0$ \&\& $y > 0$ \&\& $y >= x$\\\\
+
+\underline{Opérations}:\\
+\textit{doRotateLeft}: [Board] -$>$ [Board]\\
+\underline{précondition}: \=\textit{doRotateLeft}(B) \underline{require} \textit{isBlock}(B) \&\& \textit{canRotateLeft}(B) \\
+\textit{doLeft}: [Board] -$>$ [Board]\\
+\underline{précondition}: \=\textit{doLeft}(B) \underline{require} \textit{isBlock}(B) \&\& \textit{cangoLeft}(B) \\
+\textit{doRotateRight}: [Board] -$>$ [Board]\\
+\underline{précondition}: \=\textit{doRotateRight}(B) \underline{require} \textit{isBlock}(B) \&\& \textit{canRotateRight}(B) \\
+\textit{doRight}: [Board] -$>$ [Board]\\
+\underline{précondition}: \=\textit{doRight}(B) \underline{require} \textit{isBlock}(B) \&\& \textit{cangoRight}(B) \\
+\textit{doBottom}: [Board] -$>$ [Board]\\
+\underline{précondition}: \=\textit{doBottom}(B) \underline{require} \textit{isBlock}(B)\\
+\textit{step}: [Board] -$>$ [Board]\\
+\underline{précondition}: \=\textit{step}(B) \underline{require} \textit{isBlock}(B)\\
+\textit{insert}: [Board] * Block -$>$ [Board]\\
+\underline{précondition}: \=\textit{insert}(B) \underline{require} $\neg\textit{isBlock}(B)$\\
+\textit{remove}: [Board] -$>$ [Board]\\
+\underline{précondition}: \=\textit{remove}(B) \underline{require} \textit{isBlock}(B)\\
+\textit{clean}: [Board] -$>$ [Board]\\
+\underline{précondition}: \=\textit{clean}(B) \underline{require} \textit{isBottom}(B)\\\\
+
+\underline{Observations}:
+\end{tabbing}
+\begin{itemize}
+ \item[$\circ$] \textit{invariants}\\
+$1<=\textit{getXblock}(B,\textbf{Block:}\textit{getXMin}(\textit{getcurrentBlock}(B)))$ \&\&\\ $\textit{getXblock}(B,\textbf{Block:}\textit{getXMax}(\textit{getcurrentBlock}(B)))<=\textbf{Grid:}\textit{getWidth}(\textit{getgrid}(B))+1$\\
+$1<=\textit{getYblock}(B,\textbf{Block:}\textit{getYMin}(\textit{getcurrentBlock}(B)))$ \&\&\\ $\textit{getYblock}(B,\textbf{Block:}\textit{getYMax}(\textit{getcurrentBlock}(B)))<=\textbf{Grid:}\textit{getHeight}(\textit{getgrid}(B))+1$\\
+$\textit{getNbLastCleaned}(B) >= 0$\\
+ 
+ \item[$\circ$] \textit{init}\\
+\textit{isBlock}(\textit{init}(x,y)) = false\\
+\textbf{Grid:}\textit{getWidth}(\textit{getgrid}(\textit{init}(x,y))) = x \\
+\textbf{Grid:}\textit{getHeight}(\textit{getgrid}(\textit{init}(x,y))) = y\\
+$\textit{getNbLastCleaned}(\textit{init}(x,y)) = 0$\\
+$\textit{getXMinBlock}(\textit{init}(x,y)) = 0$\\
+$\textit{getYMinBlock}(\textit{init}(x,y)) = 0$\\
+
+ \item[$\circ$] \textit{doRotateLeft}\\
+\textit{getcurrentBlock}(\textit{doRotateLeft}(B)) = \textit{getcurrentBlock}(B)\\
+\textit{getgrid}(\textit{doRotateLeft}(B)) = \textit{getgrid}(B)\\
+\textit{getNbLastCleaned}(\textit{doRotateLeft}(B)) = \textit{getNbLastCleaned}(B)\\
+\textit{isBlock}(\textit{doRotateLeft}(B)) = \textit{isBlock}(B)\\
+\textit{getXMinBlock}(\textit{doRotateLeft}(B)) = \textit{getXMinBlock}(B)\\
+\textit{getYMinBlock}(\textit{doRotateLeft}(B)) = \textit{getYMinBlock}(B)\\
+
+ \item[$\circ$] \textit{doLeft}\\
+\textit{getcurrentBlock}(\textit{doLeft}(B)) = \textit{getcurrentBlock}(B)\\
+\textit{getgrid}(\textit{doLeft}(B)) = \textit{getgrid}(B)\\
+\textit{getNbLastCleaned}(\textit{doLeft}(B)) = \textit{getNbLastCleaned}(B)\\
+\textit{isBlock}(\textit{doLeft}(B)) = \textit{isBlock}(B)\\
+\textit{getXMinBlock}(\textit{doLeft}(B)) = \textit{getXMinBlock}(B)-1\\
+\textit{getYMinBlock}(\textit{doLeft}(B)) = \textit{getYMinBlock}(B)\\
+
+ \item[$\circ$] \textit{doRotateRight}\\
+\textit{getcurrentBlock}(\textit{doRotateRight}(B)) = \textit{getcurrentBlock}(B)\\
+\textit{getgrid}(\textit{doRotateRight}(B)) = \textit{getgrid}(B)\\
+\textit{getNbLastCleaned}(\textit{v}(B)) = \textit{getNbLastCleaned}(B)\\
+\textit{isBlock}(\textit{doRotateRight}(B)) = \textit{isBlock}(B)\\
+\textit{getXMinBlock}(\textit{doRotateRight}(B)) = \textit{getXMinBlock}(B)\\
+\textit{getYMinBlock}(\textit{doRotateRight}(B)) = \textit{getYMinBlock}(B)\\
+
+ \item[$\circ$] \textit{doRight}\\
+\textit{getcurrentBlock}(\textit{doRight}(B)) = \textit{getcurrentBlock}(B)\\
+\textit{getgrid}(\textit{doRight}(B)) = \textit{getgrid}(B)\\
+\textit{getNbLastCleaned}(\textit{doRight}(B)) = \textit{getNbLastCleaned}(B)\\
+\textit{isBlock}(\textit{doRight}(B)) = \textit{isBlock}(B)\\
+\textit{getXMinBlock}(\textit{doRight}(B)) = \textit{getXMinBlock}(B)+1\\
+\textit{getYMinBlock}(\textit{doRight}(B)) = \textit{getYMinBlock}(B)\\
+
+ \item[$\circ$] \textit{doBottom}\\
+\textit{getcurrentBlock}(\textit{doBottom}(B)) = \textit{getcurrentBlock}(B)\\
+\textit{getgrid}(\textit{doBottom}(B)) = \textit{getgrid}(B)\\
+\textit{isBlock}(\textit{doBottom}(B)) = \textit{isBlock}(B)\\
+\textit{getXMinBlock}(\textit{doBottom}(B)) = \textit{getXMinBlock}(B)\\
+\textit{getYMinBlock}(\textit{doBottom}(B)) = \textit{getYMinBlock}(B) + \textit{getBottomHeight}(B)\\
+\textit{getBottomHeight}(\textit{doBottom}(B)) = 0\\
+
+ \item[$\circ$] \textit{step}\\
+\textit{getgrid}(\textit{step}(B)) = \textit{getgrid}(B)\\
+\textit{isBlock}(\textit{step}(B)) = \textit{isBlock}(B)\\
+\textit{getXMinBlock}(\textit{step}(B)) = \textit{getXMinBlock}(B)\\
+\textit{getYMinBlock}(\textit{step}(B)) = \textit{getYMinBlock}(B) + 1\\
+\textit{getBottomHeight}(\textit{step}(B)) = \textit{getBottomHeight}(B) - 1\\
+ 
+ \item[$\circ$] \textit{insert}\\
+\textit{getCurrentBlock}(\textit{insert}(B, block)) = block\\
+\textit{getgrid}(\textit{insert}(B, block)) = \textit{getgrid}(B)\\
+\textit{isBlock}(\textit{insert}(B, block)) = true\\
+
+ \item[$\circ$] \textit{remove}\\
+\textit{getcurrentBlock}(\textit{remove}(B)) = null\\
+\textit{getgrid}(\textit{remove}(B)) = \textit{getgrid}(B)\\
+\textit{getNbLastCleaned}(\textit{remove}(B)) = \textit{getNbLastCleaned}(B)\\
+\textit{isBlock}(\textit{remove}(B)) = false\\
+\textit{getXMinBlock}(\textit{remove}(B)) = 0\\
+\textit{getYMinBlock}(\textit{remove}(B)) = 0\\
+
+ \item[$\circ$] \textit{clean}\\
+\textit{getcurrentBlock}(\textit{clean}(B)) = \textit{getcurrentBlock}(B)\\
+\textit{getgrid}(\textit{clean}(B)) = \textit{getgrid}(B)\\
+
+\end{itemize}
+\newpage
+
+\subsection{ADT Grid}
+
+\begin{tabbing}
+\underline{Service}: \textbf{Grid}\\
+\underline{Type}: int, bool\\\\
+
+\underline{Observators}:\\
+\textit{getWidth}: [Grid] -$>$ int\\
+\textit{getHeight}: [Grid] -$>$ int\\
+\textit{isOccupied}: [Grid] * int * int -$>$ bool\\
+\underline{précondition}: \=\textit{isOccupied}(G,x,y) \underline{require} $x >= 1$ \&\& $x <= getWidth(G)$ \&\& $y >= 1$ \&\& \\
+\>$y <= getHeight(G)$\\
+\textit{canPut}: [Grid] * int * int -$>$ bool\\\\
+
+\underline{Constructor}:\\
+\textit{init}: int * int -$>$ [Grid]\\
+\underline{précondition}: \textit{init}(x,y) \underline{require} $x > 0$ \&\& $y > 0$ \&\& $y >= x$\\\\
+
+\underline{Opérations}:\\
+\textit{put}: [Grid] * int * int -$>$ [Grid]\\
+\underline{précondition}: \=\textit{put}(G,x,y) \underline{require} \textit{canPut}(G,x,y) \&\& x $>=$ 1 \&\& x$<=$ getWidth(G) \&\&\\
+\> y $>=1$ \&\& y $<=$ getHeight(G) \\\\
+
+\textit{remove}: [Grid] * int * int -$>$ [Grid]\\
+\underline{précondition}: \=\textit{remove}(G,x,y) \underline{require} \textit{isOccupied}(G,x,y) \&\& x $>=$ 1 \&\& x$<=$ getWidth(G) \&\&\\
+\>y $>=1$ \&\& y $<=$ getHeight(G) \\\\
+
+\underline{Observations}:
+\end{tabbing}
+\begin{itemize}
+ \item[$\circ$] \textit{invariants}\\
+$\forall$ x (1 $<=$ x \&\& x $<=$ \textit{getWidth}(G))\{\\
+$\forall$ y (1 $<=$ y \&\& y $<=$ \textit{getHeight}(G))\{ \textit{isOccupied}(G,x,y) = $\
+$\textit{canPut}(G,x,y) \}\\
+\}\\
+ 
+ \item[$\circ$] \textit{init}\\
+ \textit{getWidth}(\textit{init}()) = x \&\& \textit{getHeight}(\textit{init}()) = y\\
+$\forall$ x in (1 $<=$ x \&\& x $<=$ \textit{getWidth}(\textit{init}()))\{\\
+$\forall$ y in (1 $<=$ y \&\& y $<=$ \textit{getHeight}(\textit{init}()))\{ $\neg$\textit{isOccupied}(\textit{init}(),x,y) \&\& \textit{canPut}(\textit{init}(),x,y)\}\\
+\}\\
+
+ \item[$\circ$] \textit{put}\\
+$\neg$\textit{isOccupied}(\textit{put}(G),x,y) = \textit{isOccupied}(G,x,y)\\
+ $\neg$canPut(put(G),x,y)\\
+ $\forall$ i (1 $<=$ i \&\& x $\ne$ i \&\& i $<=$ \textit{getWidth}(\textit{put}(G)))\{\\
+ $\forall$ j in (1 $<=$ j \&\& j $\ne$ y \&\& j $<=$ \textit{getHeight}(\textit{put}(G)))\{\\
+ \textit{isOccupied}(\textit{put}(G),i,j) = \textit{isOccupied}(G,i,j) \}\\
+ \}\\
+ $\forall$ i in (1 $<=$ i \&\& x $\ne$ i \&\& i $<=$ \textit{getWidth}(\textit{put}(G)))\{\\
+ $\forall$ j in (1 $<=$ j \&\& j $\ne$ y \&\& j $<=$ \textit{getHeight}(\textit{put}(G)))\{\textit{canPut}(\textit{put}(G),i,j)\}\\
+ \}\\
+
+ \item[$\circ$] \textit{remove}\\
+ \textit{isOccupied}(\textit{remove}(G),x,y) = $\neg$\textit{isOccupied}(G,x,y)\\
+ \textit{canPut}(\textit{remove}(G),x,y)\\
+ $\forall$ i in (1 $<=$ i \&\& x $\ne$ i \&\& i $<=$ \textit{getWidth}(\textit{remove}(G)))\{\\
+ $\forall$ j in (1 $<=$ j \&\& j $\ne$ y \&\& j $<=$ \textit{getHeight}(\textit{remove}(G)))\{\\
+ \textit{isOccupied}(\textit{remove}(G),i,j) = $\neg$\textit{isOccupied}(G,i,j)\}\\
+ \}\\
+ $\forall$ i in (1 $<=$ i \&\& x $\ne$ i \&\& i $<=$ \textit{getWidth}(\textit{remove}(G)))\{\\
+ $\forall$ j in (1 $<=$ j \&\& j $\ne$ y \&\& j $<=$ \textit{getHeight}(\textit{remove}(G)))\{\textit{canPut}(\textit{remove}(G),i,j)\}\\
+ \}\\
+\end{itemize}
+\newpage
+
+\subsection{ADT Joueur}
+
+\begin{tabbing}
+\underline{Service}: \textbf{Joueur}\\
+\underline{Type}: int, bool\\
+Require: Tetris\\\\
+
+\underline{Observators}:\\
+\textit{getTetris}: [Joueur] -$>$ Tetris\\
+\textit{canPlay}: [Joueur] -$>$ bool\\\\
+
+\underline{Constructor}:\\
+\textit{init}: -$>$ [Joueur]\\\\
+
+\underline{Opérations}:\\
+\textit{goLeft}: [Joueur] -$>$ [Joueur]\\
+\underline{précondition}: \=\textit{goLeft}(J) \underline{require} \textit{canPlay}(J)\\
+\textit{goRight}: [Joueur] -$>$ [Joueur]\\
+\underline{précondition}: \=\textit{goRight}(J) \underline{require} \textit{canPlay}(J)\\
+\textit{goDown}: [Joueur] -$>$ [Joueur]\\
+\underline{précondition}: \=\textit{goDown}(J) \underline{require} \textit{canPlay}(J)\\
+\textit{rotateLeft}: [Joueur] -$>$ [Joueur]\\
+\underline{précondition}: \=\textit{rotateLeft}(J) \underline{require} \textit{canPlay}(J)\\
+\textit{rotateRight}: [Joueur] -$>$ [Joueur]\\
+\underline{précondition}: \=\textit{rotateRight}(J) \underline{require} \textit{canPlay}(J)\\\\
+
+\underline{Observations}:
+\end{tabbing}
+\begin{itemize}
+ \item[$\circ$] \textit{invariants}\\
+$\textit{getTetris}(J) \neq null$\\
+ 
+ \item[$\circ$] \textit{init}\\
+
+ \item[$\circ$] \textit{goLeft}\\
+\textit{Tetris}(\textit{goLeft}(J)) = \textit{getTetris}(J)@pre\\
+\textit{getTetris}(\textit{goLeft}(J)) = Tetris:\textit{goLeft}(\textit{getTetris}(J)@pre)\\
+
+ \item[$\circ$] \textit{goRight}\\
+\textit{Tetris}(\textit{goRight}(J)) = \textit{getTetris}(J)@pre\\
+\textit{getTetris}(\textit{goRight}(J)) = Tetris:\textit{goRight}(\textit{getTetris}(J)@pre)\\
+
+ \item[$\circ$] \textit{goDown}\\
+\textit{Tetris}(\textit{goDown}(J)) = \textit{getTetris}(J)@pre\\
+\textit{getTetris}(\textit{goDown}(J)) = Tetris:\textit{goDown}(\textit{getDown}(J)@pre)\\
+
+ \item[$\circ$] \textit{rotateLeft}\\
+\textit{Tetris}(\textit{rotateLeft}(J)) = \textit{getTetris}(J)@pre\\
+\textit{getTetris}(\textit{rotateLeft}(J)) = Tetris:\textit{rotateLeft}(\textit{getTetris}(J)@pre)\\
+
+ \item[$\circ$] \textit{rotateRight}\\
+\textit{Tetris}(\textit{rotateRight}(J)) = \textit{getTetris}(J)@pre\\
+\textit{getTetris}(\textit{rotateRight}(J)) = Tetris:\textit{rotateRight}(\textit{getTetris}(J)@pre)\\
+
+\end{itemize}
+\newpage
+
+\subsection{ADT Tetris}
+\begin{tabbing}
+\underline{Service}: Tetris\\
+\underline{Type}: int, bool\\
+\underline{Require}: Board, Block\\\\
+
+\underline{Observators}:\\
+\textit{getScore}: [Tetris] -$>$ int\\
+\textit{isFinished}: [Tetris] -$>$ bool\\
+\textit{isRunning}: [Tetris] -$>$ bool\\
+\textit{needNext}: [Tetris] -$>$ bool\\
+\underline{précondition}: needText(T) \underline{require} isRunning(T)\\
+\textit{getBoard}: [Tetris] -$>$ Board\\\\
+
+\underline{Constructor}:\\
+init: -$>$ [Tetris]\\\\
+
+\underline{Opérations}:\\
+\textit{goLeft}: [Tetris] -$>$ [Tetris]\\
+\underline{précondition}: \textit{goLeft}(T) require \textit{isRunning}(T)\\\\
+\textit{goRight}: [Tetris] -$>$ [Tetris]\\
+\underline{précondition}: \textit{goRight}(T) \underline{require} \textit{isRunning}(T)\\\\
+\textit{goDown}: [Tetris] -$>$ [Tetris]\\
+\underline{précondition}: \textit{goDown}(T) \underline{require} \textit{isRunning}(T)\\\\
+\textit{rotateLeft}: [Tetris] -$>$ [Tetris]\\
+\underline{précondition}: \textit{rotateLeft}(T) \underline{require} \textit{isRunning}(T)\\\\
+\textit{rotateRight}: [Tetris] -$>$ [Tetris]\\
+\underline{précondition}: \textit{rotateRight}(T) \underline{require} \textit{isRunning}(T)\\\\
+\textit{step}: [Tetris] -$>$ [Tetris]\\
+\underline{précondition}: \textit{step}(T) \underline{require} \textit{isRunning}(T)\\\\
+\textit{next}: [Tetris] -$>$ [Tetris]\\
+\underline{précondition}: \textit{next}(T) \underline{require} \textit{needNext}(T)\\\\
+
+\underline{Observations}:
+\end{tabbing}
+\begin{itemize}
+ \item[$\circ$] invariants\\
+ \textit{getScore}(T) $>=$ 0\\
+ \textit{isFinished}(T) = $\neg$\textit{isRunning}(T)\\
+
+ \item[$\circ$] init\\
+ \textit{getScore}(init()) = 0\\
+ \textit{getBoard}(init()) = \textbf{Board:}\textit{init}(10,22)\\
+ \textit{isRunning}(init()) = true\\
+ \textit{needNext}(init()) = true\\
+
+ \item[$\circ$] goLeft\\
+ \textit{getScore}(goLeft(T)) = \textit{getScore}(T)\\
+ \textit{needNext}(goLeft(T)) = false\\
+ \textit{getBoard}(goLeft(T)) = \textbf{Board:}\textit{doLeft}(\textit{getBoard}(T))\\
+
+\item[$\circ$] goRight\\
+ \textit{getScore}(\textit{goRight}(T)) = \textit{getScore}(T)\\
+ \textit{needNext}(\textit{goRight}(T)) = false\\
+ \textit{getBoard}(\textit{goRight}(T)) = \textbf{Board:}\textit{doRight}(\textit{getBoard}(T))\\
+
+\item[$\circ$] goDown\\
+ \textit{getScore}(\textit{goDown}(T)) = \textit{getScore}(T) + 20 + \textbf{Board:}\textit{getNbLastCleaned}(\textit{getBoard}(\textit{goDown}(T)))*50\\
+ \textit{needNext}(\textit{goDown}(T)) = true\\
+ \textit{getBoard}(\textit{goDown}(T)) == \textbf{Board:}\textit{doBottom}(\textit{getBoard}(T))\\
+
+\item[$\circ$] otateLeft\\
+ \textit{getScore}(\textit{rotateLeft}(T)) = \textit{getScore}(T)\\
+ \textit{needNext}(\textit{rotateLeft}(T)) = false\\
+ \textit{getBoard}(\textit{rotateLeft}(T)) = \textbf{Board:}\textit{doRotateLeft}(\textit{getBoard}(T))\\
+
+\item[$\circ$] rotateRight\\
+ \textit{getScore}(\textit{rotateRight}(T)) = \textit{getScore}(T)\\
+ \textit{needNext}(\textit{rotateRight}(T)) = false\\
+ \textit{getBoard}(\textit{rotateRight}(T)) = \textbf{Board:}\textit{doRotateRight}(\textit{getBoard}(T))\\
+
+\item[$\circ$] step\\
+ \textit{getScore}(\textit{step}(T)) = \textit{getScore}(T)\\
+ \textit{needNext}(\textit{step}(T)) = false\\
+ \textit{getBoard}(\textit{step}(T)) = \textbf{Board:}\textit{step}(\textit{getBoard}(T))\\
+
+\item[$\circ$] next\\
+ \textit{getScore}(\textit{next}(T)) = \textit{getScore}(T)\\
+ \textit{needNext}(\textit{next}(T)) = false\\
+ \textit{getBoard}(\textit{next}(T)) = \textbf{Board:}\textit{insert}(\textit{getBoard}(), \textbf{Block:}\textit{init}(b))\\
+
+\end{itemize}
+\newpage
+
+
+\end{document}          
