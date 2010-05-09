@@ -18,6 +18,7 @@ import tetris.TetrisImpl;
 public class Programme extends JPanel implements KeyListener {
 
 	public Programme(){
+		setDoubleBuffered(true);
 		addKeyListener(this);
 	}
 	
@@ -80,8 +81,8 @@ public class Programme extends JPanel implements KeyListener {
 	        public void run() {
 	          while(true){
 	  				try {
-						sleep(100);
-						fenetre.repaint();
+						sleep(10);
+						fenetre.paint(fenetre.getGraphics());
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

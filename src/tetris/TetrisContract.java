@@ -83,7 +83,7 @@ public class TetrisContract extends TetrisDecorator {
 		
 		super.goDown();
 		
-		if (!(getScore_atPre == getScore()))
+		if (!(getScore_atPre+20+50*(getBoard().getNbLastCleaned()) == getScore()))
 			throw new Error("[TETRIS]post(1)(goDown) invalide");
 		
 		if (!isBottom_atPre){
@@ -143,7 +143,9 @@ public class TetrisContract extends TetrisDecorator {
 		if (isBottom_atPre){
 			if (isRunning()== true && needNext() == true)
 				throw new Error("[TETRIS]post(1)(step) invalide");
-			if (getScore() != getScore_atPre + 20 + (getBoard().getNbLastCleaned()*50))
+			
+			if (!needNext_atPre)
+				if (!(getScore() == getScore_atPre + 20 + (getBoard().getNbLastCleaned()*50)))
 					throw new Error("[TETRIS]post(3)(step) invalide");
 			
 		}

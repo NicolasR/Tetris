@@ -97,9 +97,9 @@ public class GridContract extends GridDecorator {
 	
 	public void remove(int x, int y){
 		checkInvariants();
-		if (!isOccupied(x, y))
+		if (!isOccupied(x, y)){
 			throw new Error("[GRID]pre(1)(remove) invalide");
-		
+		}
 		if (!(x >= 1 && x <= getWidth()))
 			throw new Error("[GRID]pre(2)(remove) invalide");
 		

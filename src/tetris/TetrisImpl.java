@@ -29,7 +29,7 @@ public class TetrisImpl implements TetrisService {
 		if(this.board.getBottomHeight() != 0) {
 			this.board.doBottom();
 			//this.getBoard().clean();
-			//this.score += 20 + 50*this.board.getNbLastCleaned();
+			this.score += 20 + 50*this.board.getNbLastCleaned();
 			this.needNext = true;
 		}
 	}
@@ -126,14 +126,16 @@ public class TetrisImpl implements TetrisService {
 	@Override
 	public void step() {
 		if(this.board.isBottom()/* || needNext*/) {
-			this.board.clean();
-			this.needNext = true;
-			this.score += 20 + 50*this.board.getNbLastCleaned();
+			//this.board.clean();
+			if (!needNext)
+				this.score += 20 + 50*this.board.getNbLastCleaned();
+			else
+				this.needNext = true;
 			this.board.remove();
 			next();
-			if(isFinished) {
+			/*if(isFinished) {
 				// ???
-			}
+			}*/
 		} else {
 			this.board.step();
 			/*if(this.board.isBottom()) {

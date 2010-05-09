@@ -101,30 +101,30 @@ public class TetrisPanel extends JPanel implements KeyListener {
 				System.exit(1);
 		}
 		score.setText("Score: "+joueur.getTetris().getScore());
-		this.fenetre.repaint();
+		this.fenetre.paint(this.fenetre.getGraphics());
 	}
 	
-	public void goLeft(){
+	public synchronized void goLeft(){
 			this.joueur.goLeft();
 	}
 	
-	public void goRight(){
+	public synchronized void goRight(){
 			this.joueur.goRight();
 	}
 	
-	public void goDown(){
+	public synchronized void goDown(){
 			this.joueur.goDown();
 	}
 	
-	public void step(){
+	public synchronized void step(){
 		this.joueur.getTetris().step();
 	}
 	
-	public void rotateLeft(){
+	public synchronized void rotateLeft(){
 			this.joueur.rotateLeft();
 	}
 	
-	public void rotateRight(){
+	public synchronized void rotateRight(){
 			this.joueur.rotateRight();
 	}
 	

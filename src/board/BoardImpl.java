@@ -15,13 +15,16 @@ public class BoardImpl implements BoardService {
 	private boolean Conflict;
 	private int XMinBlock;
 	private int YMinBlock;
-	
+	private boolean isCleaned;
 	
 	@Override
 	public BlockContract getcurrentBlock() {
 		return this.block;
 	}
 	
+	public boolean isCleaned(){
+		return isCleaned;
+	}
 	
 	@Override
 	public GridContract getgrid() {
@@ -667,13 +670,17 @@ public class BoardImpl implements BoardService {
 		}
 		this.YMinBlock += length;
 		clean();
+		isCleaned = true;
 	}
 
 	
 	@Override
 	public void step() {
 		if(isBottom()) {
-			clean();
+			if (!isCleaned())
+				clean();
+			else
+				isCleaned = false;
 		}
 		else
 		{
@@ -741,7 +748,6 @@ public class BoardImpl implements BoardService {
 						}
 					}
 				}
-				
 			}
 		}
 	}
