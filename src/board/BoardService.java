@@ -30,11 +30,14 @@ public interface BoardService {
 	public int getBottomHeight();
 		//pre: x>=1 && x<=getgrid().getWidth()
 		//pre: y>=1 && y<=getgrid().getHeight()
+		//pre: isBlock()
 
 	/** Invariants
-	 * getXMinblock() >= 0 && getXblock() <= getgrid().getWidth()+1 - getcurrentBlock.getSize()
-	 * getYMinblock() >= 0 && getYblock() <= getgrid().getHeight()+1 - getcurrentBlock.getSize()
-	 * getNbLastCleaned >= 0
+	 * 1 <= getXblock(getcurrentBlock.getXMin()) && getXblock(getcurrentBlock.getXMax()) <= 
+			super.getgrid().getWidth()+1
+	 * 1 <= getYblock(getcurrentBlock.getYMin()) && getYblock(getcurrentBlock.getYMax()) <= 
+			super.getgrid().getHeight()+1
+	 * getNbLastCleaned() >= 0
 	 */
 	
 	/** Constructors
@@ -52,63 +55,93 @@ public interface BoardService {
 	
 	/**
 	 * pre: isBlock() && canRotateLeft()
-	 * post: getXMinBlock()@pre == getXMinBlock()
-	 * post: getYMinBlock()@pre == getYMinBlock()
+	 * post: getcurrentBlock() == getcurrentBlock()@pre
+	 * post: getgrid()== getgrid()@pre
+	 * post: getNbLastCleaned() == getNbLastCleaned()@pre
+	 * post: isBlock() == isBlock()@pre
+	 * post: getXMinBlock() == getXMinBlock()@pre
+	 * post: getYMinBlock() == getYMinBlock()@pre 
 	 */
 	public void doRotateLeft();
 	
 	/**
 	 * pre: isBlock() && cangoLeft()
+	 * post: getcurrentBlock() == getcurrentBlock()@pre
+	 * post: getgrid() == getgrid()@pre
+	 * post: getNbLastCleaned() == getNbLastCleaned()@pre
+	 * post: isBlock() == isBlock()@pre
 	 * post: getXMinBlock() == getXMinBlock()@pre -1
-	 * post: getYMinBlock()@pre == getYMinBlock()
-	 */
+	 * post: getYMinBlock() == getYMinBlock()@pre 
+	 */	
 	public void doLeft();
 	
 	/**
 	 * pre: isBlock() && canRotateRight()
-	 * post: getXMinBlock()@pre == getXMinBlock()
-	 * post: getYMinBlock()@pre == getYMinBlock()
-	 */
+	 * post: getcurrentBlock() == getcurrentBlock()@pre
+	 * post: getgrid() == getgrid()@pre
+	 * post: getNbLastCleaned() == getNbLastCleaned()@pre
+	 * post: isBlock() == isBlock()@pre
+	 * post: getXMinBlock() == getXMinBlock()@pre
+	 * post: getYMinBlock() == getYMinBlock()@pre 
+	 */	
 	public void doRotateRight();
 	
 	/**
 	 * pre: isBlock() && cangoRight()
+	 * post: getcurrentBlock() == getcurrentBlock()@pre
+	 * post: getgrid() == getgrid()@pre
+	 * post: getNbLastCleaned() == getNbLastCleaned()@pre
+	 * post: isBlock() == isBlock()@pre
 	 * post: getXMinBlock() == getXMinBlock()@pre +1
-	 * post: getYMinBlock()@pre == getYMinBlock()
+	 * post: getYMinBlock() == getYMinBlock()@pre
 	 */
 	public void doRight();
 	
 	/**
 	 * pre: isBlock()
-	 * post: getXMinBlock()@pre == getXMinBlock()
-	 * post: getYMinBlock()@pre + getBottomHeight() == getYMinBlock()
+	 * post: getcurrentBlock() == getcurrentBlock()@pre
+	 * post: getgrid() == getgrid()@pre
+	 * post: isBlock() == isBlock()@pre
+	 * post: getXMinBlock() == getXMinBlock()@pre
+	 * post:  getYMinBlock() == getYMinBlock()@pre + getBottomHeight()@pre
+	 * post: getBottomHeight() == 0 
 	 */
 	public void doBottom();
-	
+
 	/**
 	 * pre: isBlock()
-	 * post: getXMinBlock()@pre == getXMinBlock()
-	 * post: getYMinBlock()@pre + 1 == getYMinBlock()
+	 * post: getgrid() == getgrid()@pre
+	 * post: isBlock() == isBlock()@pre
+	 * post: getXMinBlock() == getXMinBlock()@pre 
+	 * post: getYMinBlock() getYMinBlock()@pre + 1
+	 * post: getBottomHeight() == getBottomHeight()@pre-1
 	 */
 	public void step();
 	
 	/**
 	 * pre: isBlock() == false
-	 * post: getcurrentBlock() == bloc
-	 * 
+	 * post: getcurrentBlock() == block
+	 * post: getgrid() == getgrid()@pre
+	 * post: isBlock()
 	 */
-	public void insert(BlockContract bloc);
-	
+	public void insert(BlockContract block);
+
 	/**
 	 * pre: isBlock()
-	 * post: isBlock() == false
-	 * post: getXMinBlock() == 0 && getYMinBlock() == 0
+	 * post: getcurrentBlock() == null
+	 * post: getgrid() == getgrid()@pre
+	 * post: getNbLastCleaned() == getNbLastCleaned()@pre
+	 * post: isBlock()== false
+	 * post: getXMinBlock() == 0 
+	 * post: getYMinBlock() == 0
 	 */
 	public void remove();
-	
+
 	/**
-	 * pre : isBottom() == true
-	 * post : getNbLastCleaned() >= getNbLastCleaned()@pre /**FAUX
+	 * pre : isBottom()
+	 * post: getcurrentBlock() == getcurrentBlock()@pre
+	 * post: getgrid() == getgrid()@pre
+	 * 
 	 */
 	public void clean();
 

@@ -12,7 +12,7 @@ public class JoueurImpl implements JoueurService {
 	}
 	
 	public boolean canPlay(){
-		return tetris.isRunning() && !tetris.isFinished();
+		return tetris.isRunning() && !tetris.isFinished() && !tetris.needNext();
 	}
 	
 	public void init() {

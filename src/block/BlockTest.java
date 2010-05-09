@@ -2,93 +2,14 @@ package block;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Set;
 
 import org.junit.Test;
 
 public class BlockTest {
-	
-	public void checkInvariants(BlockContract block) {
-		// inv1 : getType() == 'O' || 'L' || 'J' || 'T' || 'Z' || 'S' || 'I'
-		if (!((block.getType() == 'O') || (block.getType() == 'L') || (block.getType() == 'J') || (block.getType() == 'T') || (block.getType() == 'Z') || (block.getType() == 'S') || (block.getType() == 'I'))) {
-			throw new Error("Invariant (1) invalide");
-		}
-		// inv2 : getSize() == 2 || getSize() == 3 || getSize() == 4
-		if (!((block.getSize() == 2) || (block.getSize() == 3) || (block.getSize() == 4))) {
-			throw new Error("Invariant (2) invalide");
-		}
-		// inv3 : 0 <= getNbPos() && getNbPos <= 4
-		if (!((0 <= block.getNbPos()) && (block.getNbPos() <= 4))) {
-			throw new Error("Invariant (3) invalide");
-		}
-		Iterator<LinkedList<Integer>> it = block.getAllPos().iterator();
-		int XMin = block.getSize()+1, XMax = 0, YMin = block.getSize()+1, YMax = 0;
-		LinkedList<Integer> pos;
-		while(it.hasNext()) {
-			pos = it.next();
-			if(pos.getFirst() < XMin) {
-				XMin = pos.getFirst();
-			}
-			if (pos.getFirst() > XMax) {
-				XMax = pos.getFirst();
-			}
-			if(pos.getLast() < YMin) {
-				YMin = pos.getLast(); 
-			}
-			if (pos.getLast() > YMax) {
-				YMax = pos.getLast();
-			}
-		}
-		// inv4 : getXMin() == \findmin { first(p) \in getAllPos() }
-		if (!(block.getXMin() == XMin)) {
-			throw new Error("Invariant (4) invalide");
-		}
-		// inv5 : getXMax() == \findmax { first(p) \in getAllPos() }
-		if (!(block.getXMax() == XMax)) {
-			throw new Error("Invariant (5) invalide");
-		}
-		// inv6 : getYMin() == \findmin { second(p) \in getAllPos() }
-		if (!(block.getYMin() == YMin)) {
-			throw new Error("Invariant (6) invalide");
-		}
-		// inv7 : getYMax() == \findmax { second(p) \in getAllPos() }
-		if (!(block.getYMax() == YMax)) {
-			throw new Error("Invariant (7) invalide");
-		}
-		
-		// inv8 : \forall x:int, y:int \in getHasPos((x,y)) { getAllPos().contains((x,y)) }
-		for(int i=1; i<= block.getSize(); i++) {
-			for (int j=1; j<=block.getSize(); j++) {
-				if(block.hasPos(i, j)) {
-					LinkedList<Integer> paire = new LinkedList<Integer>();
-					paire.addFirst(i);
-					paire.addLast(j);
-					if(!block.getAllPos().contains(paire)) {
-						throw new Error("Invariant (8) invalide");
-					}
-				}
-			}
-		}
-		// inv9 : \forall x:int, y1:int, y2:int \in getHasPos((x,y1)) && getHasPos((x,y2)) { getLowPos().contains((x,max(y1,y2))) }
-		for(int i=1; i<=block.getSize(); i++) {
-			int max = 0;
-			for(int j=1; j<=block.getSize(); j++) {
-				if((block.hasPos(i, j)) && j > max) {
-					max = j;					
-				}
-			}
-
-			if(max >0) {
-				LinkedList<Integer> paire = new LinkedList<Integer>();
-				paire.addFirst(i);
-				paire.addLast(max);
-				if(!(block.getLowPos().contains(paire))) {
-					throw new Error("Invariant (9) invalide");
-				}
-			}
-		}
-	}
 	
 	@Test
 	public void testGetType() {
@@ -98,93 +19,78 @@ public class BlockTest {
 		
 		Type = 'O';
 		blockC.init(Type);
-		assertTrue(blockC.getType() == Type);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
-		
+		assertTrue(blockC.getType() == Type);
 		
 		Type = 'L';
 		blockC.init(Type);
-		assertTrue(blockC.getType() == Type);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
-		}		
+		}
+		assertTrue(blockC.getType() == Type);
 		
 		
 		Type = 'J';
 		blockC.init(Type);
-		assertTrue(blockC.getType() == Type);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getType() == Type);
 		
 		
 		Type = 'T';
 		blockC.init(Type);
-		assertTrue(blockC.getType() == Type);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getType() == Type);
 		
 		
 		Type = 'Z';
 		blockC.init(Type);
-		assertTrue(blockC.getType() == Type);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getType() == Type);
 		
 		
 		Type = 'S';
 		blockC.init(Type);
-		assertTrue(blockC.getType() == Type);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getType() == Type);
 		
 		
 		Type = 'I';
 		blockC.init(Type);
-		assertTrue(blockC.getType() == Type);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getType() == Type);
 	}
 	
 	@Test
@@ -195,93 +101,79 @@ public class BlockTest {
 		
 		Type = 'O';
 		blockC.init(Type);
-		assertTrue(blockC.getSize() == 2);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getSize() == 2);
 		
 		
 		Type = 'L';
 		blockC.init(Type);
-		assertTrue(blockC.getSize() == 3);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
-		}		
+		}
+		assertTrue(blockC.getSize() == 3);
 		
 		
 		Type = 'J';
 		blockC.init(Type);
-		assertTrue(blockC.getSize() == 3);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getSize() == 3);
 		
 		
 		Type = 'T';
 		blockC.init(Type);
-		assertTrue(blockC.getSize() == 3);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getSize() == 3);
 		
 		
 		Type = 'Z';
 		blockC.init(Type);
-		assertTrue(blockC.getSize() == 3);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getSize() == 3);
 		
 		
 		Type = 'S';
 		blockC.init(Type);
-		assertTrue(blockC.getSize() == 3);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getSize() == 3);
 		
 		
 		Type = 'I';
 		blockC.init(Type);
-		assertTrue(blockC.getSize() == 4);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
-		}		
+		}
+		assertTrue(blockC.getSize() == 4);	
 	}
 	
 	@Test
@@ -298,15 +190,13 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == 0);
 		
 		blockC.addPos(2, 2);
-		assertTrue(blockC.getNbPos() == 1);
-		
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getNbPos() == 1);
 		
 		
 		Type = 'L';
@@ -317,16 +207,14 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == 0);
 		
 		blockC.addPos(2, 2);
-		assertTrue(blockC.getNbPos() == 1);
-		
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
-		}		
-		
+		}
+		assertTrue(blockC.getNbPos() == 1);
+				
 		
 		Type = 'J';
 		blockC.init(Type);
@@ -336,15 +224,13 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == 0);
 		
 		blockC.addPos(2, 2);
-		assertTrue(blockC.getNbPos() == 1);
-		
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getNbPos() == 1);
 		
 		
 		Type = 'T';
@@ -355,16 +241,14 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == 0);
 		
 		blockC.addPos(2, 2);
-		assertTrue(blockC.getNbPos() == 1);
-		
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
-		
+		assertTrue(blockC.getNbPos() == 1);
+				
 		
 		Type = 'Z';
 		blockC.init(Type);
@@ -374,15 +258,13 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == 0);
 		
 		blockC.addPos(2, 2);
-		assertTrue(blockC.getNbPos() == 1);
-		
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getNbPos() == 1);
 		
 		
 		Type = 'S';
@@ -393,15 +275,13 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == 0);
 		
 		blockC.addPos(2, 2);
-		assertTrue(blockC.getNbPos() == 1);
-		
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getNbPos() == 1);
 		
 		
 		Type = 'I';
@@ -412,15 +292,13 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == 0);
 		
 		blockC.addPos(2, 2);
-		assertTrue(blockC.getNbPos() == 1);
-		
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getNbPos() == 1);
 	}
 	
 	@Test
@@ -431,93 +309,79 @@ public class BlockTest {
 		
 		Type = 'O';
 		blockC.init(Type);
-		assertTrue(blockC.getXMin() == 1);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getXMin() == 1);
 		
 		
 		Type = 'L';
 		blockC.init(Type);
-		assertTrue(blockC.getXMin() == 2);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
-		}		
+		}
+		assertTrue(blockC.getXMin() == 2);
 		
 		
 		Type = 'J';
 		blockC.init(Type);
-		assertTrue(blockC.getXMin() == 1);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getXMin() == 1);
 		
 		
 		Type = 'T';
 		blockC.init(Type);
-		assertTrue(blockC.getXMin() == 1);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getXMin() == 1);
 		
 		
 		Type = 'Z';
 		blockC.init(Type);
-		assertTrue(blockC.getXMin() == 1);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getXMin() == 1);
 		
 		
 		Type = 'S';
 		blockC.init(Type);
-		assertTrue(blockC.getXMin() == 1);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getXMin() == 1);
 		
 		
 		Type = 'I';
 		blockC.init(Type);
-		assertTrue(blockC.getXMin() == 2);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
-		}		
+		}
+		assertTrue(blockC.getXMin() == 2);
 	}
 	
 	@Test
@@ -528,93 +392,79 @@ public class BlockTest {
 		
 		Type = 'O';
 		blockC.init(Type);
-		assertTrue(blockC.getXMax() == 2);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
-		
+		assertTrue(blockC.getXMax() == 2);
+	
 		
 		Type = 'L';
 		blockC.init(Type);
-		assertTrue(blockC.getXMax() == 3);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
-		}		
+		}
+		assertTrue(blockC.getXMax() == 3);
 		
 		
 		Type = 'J';
 		blockC.init(Type);
-		assertTrue(blockC.getXMax() == 2);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getXMax() == 2);
 		
 		
 		Type = 'T';
 		blockC.init(Type);
-		assertTrue(blockC.getXMax() == 3);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getXMax() == 3);
 		
 		
 		Type = 'Z';
 		blockC.init(Type);
-		assertTrue(blockC.getXMax() == 3);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getXMax() == 3);
 		
 		
 		Type = 'S';
 		blockC.init(Type);
-		assertTrue(blockC.getXMax() == 3);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getXMax() == 3);
 		
 		
 		Type = 'I';
 		blockC.init(Type);
-		assertTrue(blockC.getXMax() == 2);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
-		}		
+		}
+		assertTrue(blockC.getXMax() == 2);		
 	}
 	
 	@Test
@@ -625,93 +475,79 @@ public class BlockTest {
 		
 		Type = 'O';
 		blockC.init(Type);
-		assertTrue(blockC.getYMin() == 1);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getYMin() == 1);
 		
 		
 		Type = 'L';
 		blockC.init(Type);
-		assertTrue(blockC.getYMin() == 1);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
-		}		
+		}
+		assertTrue(blockC.getYMin() == 1);
 		
 		
 		Type = 'J';
 		blockC.init(Type);
-		assertTrue(blockC.getYMin() == 1);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getYMin() == 1);
 		
 		
 		Type = 'T';
 		blockC.init(Type);
-		assertTrue(blockC.getYMin() == 2);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getYMin() == 2);
 		
 		
 		Type = 'Z';
 		blockC.init(Type);
-		assertTrue(blockC.getYMin() == 2);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getYMin() == 2);
 		
 		
 		Type = 'S';
 		blockC.init(Type);
-		assertTrue(blockC.getYMin() == 2);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getYMin() == 2);
 		
 		
 		Type = 'I';
 		blockC.init(Type);
-		assertTrue(blockC.getYMin() == 1);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getYMin() == 1);
 	}
 	
 	@Test
@@ -722,93 +558,79 @@ public class BlockTest {
 		
 		Type = 'O';
 		blockC.init(Type);
-		assertTrue(blockC.getYMax() == 2);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
-		
+		assertTrue(blockC.getYMax() == 2);
+	
 		
 		Type = 'L';
 		blockC.init(Type);
-		assertTrue(blockC.getYMax() == 3);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
-		}		
+		}
+		assertTrue(blockC.getYMax() == 3);
 		
 		
 		Type = 'J';
 		blockC.init(Type);
-		assertTrue(blockC.getYMax() == 3);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getYMax() == 3);
 		
 		
 		Type = 'T';
 		blockC.init(Type);
-		assertTrue(blockC.getYMax() == 3);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getYMax() == 3);
 		
 		
 		Type = 'Z';
 		blockC.init(Type);
-		assertTrue(blockC.getYMax() == 3);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getYMax() == 3);
 		
 		
 		Type = 'S';
 		blockC.init(Type);
-		assertTrue(blockC.getYMax() == 3);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		assertTrue(blockC.getYMax() == 3);
 		
 		
 		Type = 'I';
 		blockC.init(Type);
-		assertTrue(blockC.getYMax() == 4);
-	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
-		}	
+		}
+		assertTrue(blockC.getYMax() == 4);
 	}
 	
 	@Test
@@ -868,11 +690,10 @@ public class BlockTest {
 			assertTrue(false);
 		}
 		
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -928,11 +749,10 @@ public class BlockTest {
 			assertTrue(false);
 		}
 		
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}		
 		
@@ -988,11 +808,10 @@ public class BlockTest {
 			assertTrue(false);
 		}
 		
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1048,11 +867,10 @@ public class BlockTest {
 			assertTrue(false);
 		}
 				
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1108,11 +926,10 @@ public class BlockTest {
 			assertTrue(false);
 		}
 			
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1168,11 +985,10 @@ public class BlockTest {
 			assertTrue(false);
 		}
 			
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1228,11 +1044,10 @@ public class BlockTest {
 			assertTrue(false);
 		}
 		
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 	}
@@ -1263,11 +1078,10 @@ public class BlockTest {
 		assertTrue(blockC.getAllPos().contains(paire));
 		paire.clear();
 		
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1291,11 +1105,10 @@ public class BlockTest {
 		assertTrue(blockC.getAllPos().contains(paire));
 		paire.clear();
 		
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}		
 		
@@ -1319,11 +1132,10 @@ public class BlockTest {
 		assertTrue(blockC.getAllPos().contains(paire));
 		paire.clear();
 			
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1347,11 +1159,10 @@ public class BlockTest {
 		assertTrue(blockC.getAllPos().contains(paire));
 		paire.clear();
 	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1375,11 +1186,10 @@ public class BlockTest {
 		assertTrue(blockC.getAllPos().contains(paire));
 		paire.clear();
 	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1403,11 +1213,10 @@ public class BlockTest {
 		assertTrue(blockC.getAllPos().contains(paire));
 		paire.clear();
 	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1431,11 +1240,10 @@ public class BlockTest {
 		assertTrue(blockC.getAllPos().contains(paire));
 		paire.clear();
 	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 	}
@@ -1458,11 +1266,10 @@ public class BlockTest {
 		assertTrue(blockC.getLowPos().contains(paire));
 		paire.clear();
 		
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1478,13 +1285,12 @@ public class BlockTest {
 		assertTrue(blockC.getLowPos().contains(paire));
 		paire.clear();
 		
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
-		}		
+		}
 		
 		
 		Type = 'J';
@@ -1498,11 +1304,10 @@ public class BlockTest {
 		assertTrue(blockC.getLowPos().contains(paire));
 		paire.clear();
 			
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1522,11 +1327,10 @@ public class BlockTest {
 		assertTrue(blockC.getLowPos().contains(paire));
 		paire.clear();
 	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1546,11 +1350,10 @@ public class BlockTest {
 		assertTrue(blockC.getLowPos().contains(paire));
 		paire.clear();
 	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1570,11 +1373,10 @@ public class BlockTest {
 		assertTrue(blockC.getLowPos().contains(paire));
 		paire.clear();
 	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1586,13 +1388,13 @@ public class BlockTest {
 		assertTrue(blockC.getLowPos().contains(paire));
 		paire.clear();
 	
-		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
+		
 	}
 	
 	@Test
@@ -1620,9 +1422,9 @@ public class BlockTest {
 	
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1644,11 +1446,11 @@ public class BlockTest {
 	
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
-		}		
+		}	
 		
 		/* PostCondition 1 */
 		assertTrue(blockC.getType() == Type);
@@ -1668,9 +1470,9 @@ public class BlockTest {
 	
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1692,9 +1494,9 @@ public class BlockTest {
 	
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1716,9 +1518,9 @@ public class BlockTest {
 	
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1740,9 +1542,9 @@ public class BlockTest {
 	
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1764,9 +1566,9 @@ public class BlockTest {
 	
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1785,7 +1587,11 @@ public class BlockTest {
 		int getType_atPre;
 		int getSize_atPre;
 		int getNbPos_atPre;
+		int getXMin_atPre, getXMax_atPre, getYMin_atPre, getYMax_atPre;
 		boolean[][] hasPos_atPre;
+		Set<LinkedList<Integer>> getAllPos_atPre = new HashSet<LinkedList<Integer>>();
+		Iterator<LinkedList<Integer>> it;
+		LinkedList<Integer> xy = new LinkedList<Integer>();
 		int x;
 		int y;
 
@@ -1846,14 +1652,24 @@ public class BlockTest {
 		getType_atPre = blockC.getType();
 		getSize_atPre = blockC.getSize();
 		getNbPos_atPre = blockC.getNbPos();
+		getXMin_atPre = blockC.getXMin();
+		getXMax_atPre = blockC.getXMax();
+		getYMin_atPre = blockC.getYMin();
+		getYMax_atPre = blockC.getYMax();
 		hasPos_atPre = new boolean[blockC.getSize()][blockC.getSize()];
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				hasPos_atPre[i-1][j-1] = blockC.hasPos(i, j);
 			}
 		}
+		it = blockC.getAllPos().iterator();
+		while(it.hasNext()) {
+			getAllPos_atPre.add(it.next());
+		}
 		x = 1;
 		y = 1;
+		xy.addFirst(x);
+		xy.addLast(y);
 		
 		/* Précondition vérifiée */
 		try {
@@ -1865,9 +1681,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -1881,9 +1697,21 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == getNbPos_atPre+1);
 		
 		/* PostCondition 4 */
-		assertTrue(blockC.hasPos(x, y));
+		assertTrue((x < getXMin_atPre && blockC.getXMin() == x) || (blockC.getXMin() == getXMin_atPre));
 		
 		/* PostCondition 5 */
+		assertTrue((getXMax_atPre < x && blockC.getXMax() == x) || (blockC.getXMax() == getXMax_atPre));
+		
+		/* PostCondition 6 */
+		assertTrue((y < getYMin_atPre && blockC.getYMin() == y) || (blockC.getYMin() == getYMin_atPre));
+		
+		/* PostCondition 7 */
+		assertTrue((getYMax_atPre < y && blockC.getYMax() == y) || (blockC.getYMax() == getYMax_atPre));
+		
+		/* PostCondition 8 */
+		assertTrue(blockC.hasPos(x, y));
+		
+		/* PostCondition 9 */
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				if((i!=x) && (j!=y)) {
@@ -1891,6 +1719,17 @@ public class BlockTest {
 				}
 			}
 		}
+		
+		/* PostCondition 10 */
+		it = getAllPos_atPre.iterator();
+		while(it.hasNext()) {
+			assertTrue(blockC.getAllPos().contains(it.next()));
+		}
+		getAllPos_atPre.clear();
+		
+		/* PostCondition 11 */
+		assertTrue(blockC.getAllPos().contains(xy));
+		xy.clear();		
 		
 		
 		Type = 'L';
@@ -1950,14 +1789,25 @@ public class BlockTest {
 		getType_atPre = blockC.getType();
 		getSize_atPre = blockC.getSize();
 		getNbPos_atPre = blockC.getNbPos();
+		getXMin_atPre = blockC.getXMin();
+		getXMax_atPre = blockC.getXMax();
+		getYMin_atPre = blockC.getYMin();
+		getYMax_atPre = blockC.getYMax();
 		hasPos_atPre = new boolean[blockC.getSize()][blockC.getSize()];
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				hasPos_atPre[i-1][j-1] = blockC.hasPos(i, j);
 			}
 		}
+		it = blockC.getAllPos().iterator();
+		while(it.hasNext()) {
+			getAllPos_atPre.add(it.next());
+		}
 		x = 2;
 		y = 1;
+		xy.addFirst(x);
+		xy.addLast(y);
+		
 		
 		/* Précondition vérifiée */
 		try {
@@ -1969,11 +1819,11 @@ public class BlockTest {
 	
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
-		}		
+		}
 		
 		/* PostCondition 1 */
 		assertTrue(blockC.getType() == getType_atPre);
@@ -1985,9 +1835,21 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == getNbPos_atPre+1);
 		
 		/* PostCondition 4 */
-		assertTrue(blockC.hasPos(x, y));
+		assertTrue((x < getXMin_atPre && blockC.getXMin() == x) || (blockC.getXMin() == getXMin_atPre));
 		
 		/* PostCondition 5 */
+		assertTrue((getXMax_atPre < x && blockC.getXMax() == x) || (blockC.getXMax() == getXMax_atPre));
+		
+		/* PostCondition 6 */
+		assertTrue((y < getYMin_atPre && blockC.getYMin() == y) || (blockC.getYMin() == getYMin_atPre));
+		
+		/* PostCondition 7 */
+		assertTrue((getYMax_atPre < y && blockC.getYMax() == y) || (blockC.getYMax() == getYMax_atPre));
+		
+		/* PostCondition 8 */
+		assertTrue(blockC.hasPos(x, y));
+		
+		/* PostCondition 9 */
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				if((i!=x) && (j!=y)) {
@@ -1995,6 +1857,17 @@ public class BlockTest {
 				}
 			}
 		}
+		
+		/* PostCondition 10 */
+		it = getAllPos_atPre.iterator();
+		while(it.hasNext()) {
+			assertTrue(blockC.getAllPos().contains(it.next()));
+		}
+		getAllPos_atPre.clear();
+		
+		/* PostCondition 11 */
+		assertTrue(blockC.getAllPos().contains(xy));
+		xy.clear();
 		
 		
 		Type = 'J';
@@ -2054,14 +1927,24 @@ public class BlockTest {
 		getType_atPre = blockC.getType();
 		getSize_atPre = blockC.getSize();
 		getNbPos_atPre = blockC.getNbPos();
+		getXMin_atPre = blockC.getXMin();
+		getXMax_atPre = blockC.getXMax();
+		getYMin_atPre = blockC.getYMin();
+		getYMax_atPre = blockC.getYMax();
 		hasPos_atPre = new boolean[blockC.getSize()][blockC.getSize()];
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				hasPos_atPre[i-1][j-1] = blockC.hasPos(i, j);
 			}
 		}
+		it = blockC.getAllPos().iterator();
+		while(it.hasNext()) {
+			getAllPos_atPre.add(it.next());
+		}
 		x = 2;
 		y = 1;
+		xy.addFirst(x);
+		xy.addLast(y);
 		
 		/* Précondition vérifiée */
 		try {
@@ -2073,9 +1956,9 @@ public class BlockTest {
 	
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2089,9 +1972,21 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == getNbPos_atPre+1);
 		
 		/* PostCondition 4 */
-		assertTrue(blockC.hasPos(x, y));
+		assertTrue((x < getXMin_atPre && blockC.getXMin() == x) || (blockC.getXMin() == getXMin_atPre));
 		
 		/* PostCondition 5 */
+		assertTrue((getXMax_atPre < x && blockC.getXMax() == x) || (blockC.getXMax() == getXMax_atPre));
+		
+		/* PostCondition 6 */
+		assertTrue((y < getYMin_atPre && blockC.getYMin() == y) || (blockC.getYMin() == getYMin_atPre));
+		
+		/* PostCondition 7 */
+		assertTrue((getYMax_atPre < y && blockC.getYMax() == y) || (blockC.getYMax() == getYMax_atPre));
+		
+		/* PostCondition 8 */
+		assertTrue(blockC.hasPos(x, y));
+		
+		/* PostCondition 9 */
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				if((i!=x) && (j!=y)) {
@@ -2099,6 +1994,17 @@ public class BlockTest {
 				}
 			}
 		}
+		
+		/* PostCondition 10 */
+		it = getAllPos_atPre.iterator();
+		while(it.hasNext()) {
+			assertTrue(blockC.getAllPos().contains(it.next()));
+		}
+		getAllPos_atPre.clear();
+		
+		/* PostCondition 11 */
+		assertTrue(blockC.getAllPos().contains(xy));
+		xy.clear();
 		
 				
 		Type = 'T';
@@ -2158,14 +2064,24 @@ public class BlockTest {
 		getType_atPre = blockC.getType();
 		getSize_atPre = blockC.getSize();
 		getNbPos_atPre = blockC.getNbPos();
+		getXMin_atPre = blockC.getXMin();
+		getXMax_atPre = blockC.getXMax();
+		getYMin_atPre = blockC.getYMin();
+		getYMax_atPre = blockC.getYMax();
 		hasPos_atPre = new boolean[blockC.getSize()][blockC.getSize()];
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				hasPos_atPre[i-1][j-1] = blockC.hasPos(i, j);
 			}
 		}
+		it = blockC.getAllPos().iterator();
+		while(it.hasNext()) {
+			getAllPos_atPre.add(it.next());
+		}
 		x = 1;
 		y = 2;
+		xy.addFirst(x);
+		xy.addLast(y);
 		
 		/* Précondition vérifiée */
 		try {
@@ -2177,9 +2093,9 @@ public class BlockTest {
 	
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2193,9 +2109,21 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == getNbPos_atPre+1);
 		
 		/* PostCondition 4 */
-		assertTrue(blockC.hasPos(x, y));
+		assertTrue((x < getXMin_atPre && blockC.getXMin() == x) || (blockC.getXMin() == getXMin_atPre));
 		
 		/* PostCondition 5 */
+		assertTrue((getXMax_atPre < x && blockC.getXMax() == x) || (blockC.getXMax() == getXMax_atPre));
+		
+		/* PostCondition 6 */
+		assertTrue((y < getYMin_atPre && blockC.getYMin() == y) || (blockC.getYMin() == getYMin_atPre));
+		
+		/* PostCondition 7 */
+		assertTrue((getYMax_atPre < y && blockC.getYMax() == y) || (blockC.getYMax() == getYMax_atPre));
+		
+		/* PostCondition 8 */
+		assertTrue(blockC.hasPos(x, y));
+		
+		/* PostCondition 9 */
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				if((i!=x) && (j!=y)) {
@@ -2203,6 +2131,17 @@ public class BlockTest {
 				}
 			}
 		}
+		
+		/* PostCondition 10 */
+		it = getAllPos_atPre.iterator();
+		while(it.hasNext()) {
+			assertTrue(blockC.getAllPos().contains(it.next()));
+		}
+		getAllPos_atPre.clear();
+		
+		/* PostCondition 11 */
+		assertTrue(blockC.getAllPos().contains(xy));
+		xy.clear();
 		
 		
 		Type = 'Z';
@@ -2262,14 +2201,24 @@ public class BlockTest {
 		getType_atPre = blockC.getType();
 		getSize_atPre = blockC.getSize();
 		getNbPos_atPre = blockC.getNbPos();
+		getXMin_atPre = blockC.getXMin();
+		getXMax_atPre = blockC.getXMax();
+		getYMin_atPre = blockC.getYMin();
+		getYMax_atPre = blockC.getYMax();
 		hasPos_atPre = new boolean[blockC.getSize()][blockC.getSize()];
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				hasPos_atPre[i-1][j-1] = blockC.hasPos(i, j);
 			}
 		}
+		it = blockC.getAllPos().iterator();
+		while(it.hasNext()) {
+			getAllPos_atPre.add(it.next());
+		}
 		x = 1;
 		y = 2;
+		xy.addFirst(x);
+		xy.addLast(y);
 		
 		/* Précondition vérifiée */
 		try {
@@ -2281,9 +2230,9 @@ public class BlockTest {
 	
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2297,9 +2246,21 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == getNbPos_atPre+1);
 		
 		/* PostCondition 4 */
-		assertTrue(blockC.hasPos(x, y));
+		assertTrue((x < getXMin_atPre && blockC.getXMin() == x) || (blockC.getXMin() == getXMin_atPre));
 		
 		/* PostCondition 5 */
+		assertTrue((getXMax_atPre < x && blockC.getXMax() == x) || (blockC.getXMax() == getXMax_atPre));
+		
+		/* PostCondition 6 */
+		assertTrue((y < getYMin_atPre && blockC.getYMin() == y) || (blockC.getYMin() == getYMin_atPre));
+		
+		/* PostCondition 7 */
+		assertTrue((getYMax_atPre < y && blockC.getYMax() == y) || (blockC.getYMax() == getYMax_atPre));
+		
+		/* PostCondition 8 */
+		assertTrue(blockC.hasPos(x, y));
+		
+		/* PostCondition 9 */
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				if((i!=x) && (j!=y)) {
@@ -2307,6 +2268,17 @@ public class BlockTest {
 				}
 			}
 		}
+		
+		/* PostCondition 10 */
+		it = getAllPos_atPre.iterator();
+		while(it.hasNext()) {
+			assertTrue(blockC.getAllPos().contains(it.next()));
+		}
+		getAllPos_atPre.clear();
+		
+		/* PostCondition 11 */
+		assertTrue(blockC.getAllPos().contains(xy));
+		xy.clear();
 		
 		
 		Type = 'S';
@@ -2366,14 +2338,24 @@ public class BlockTest {
 		getType_atPre = blockC.getType();
 		getSize_atPre = blockC.getSize();
 		getNbPos_atPre = blockC.getNbPos();
+		getXMin_atPre = blockC.getXMin();
+		getXMax_atPre = blockC.getXMax();
+		getYMin_atPre = blockC.getYMin();
+		getYMax_atPre = blockC.getYMax();
 		hasPos_atPre = new boolean[blockC.getSize()][blockC.getSize()];
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				hasPos_atPre[i-1][j-1] = blockC.hasPos(i, j);
 			}
 		}
+		it = blockC.getAllPos().iterator();
+		while(it.hasNext()) {
+			getAllPos_atPre.add(it.next());
+		}
 		x = 1;
 		y = 3;
+		xy.addFirst(x);
+		xy.addLast(y);
 		
 		/* Précondition vérifiée */
 		try {
@@ -2385,9 +2367,9 @@ public class BlockTest {
 	
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2401,9 +2383,21 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == getNbPos_atPre+1);
 		
 		/* PostCondition 4 */
-		assertTrue(blockC.hasPos(x, y));
+		assertTrue((x < getXMin_atPre && blockC.getXMin() == x) || (blockC.getXMin() == getXMin_atPre));
 		
 		/* PostCondition 5 */
+		assertTrue((getXMax_atPre < x && blockC.getXMax() == x) || (blockC.getXMax() == getXMax_atPre));
+		
+		/* PostCondition 6 */
+		assertTrue((y < getYMin_atPre && blockC.getYMin() == y) || (blockC.getYMin() == getYMin_atPre));
+		
+		/* PostCondition 7 */
+		assertTrue((getYMax_atPre < y && blockC.getYMax() == y) || (blockC.getYMax() == getYMax_atPre));
+		
+		/* PostCondition 8 */
+		assertTrue(blockC.hasPos(x, y));
+		
+		/* PostCondition 9 */
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				if((i!=x) && (j!=y)) {
@@ -2411,6 +2405,17 @@ public class BlockTest {
 				}
 			}
 		}
+		
+		/* PostCondition 10 */
+		it = getAllPos_atPre.iterator();
+		while(it.hasNext()) {
+			assertTrue(blockC.getAllPos().contains(it.next()));
+		}
+		getAllPos_atPre.clear();
+		
+		/* PostCondition 11 */
+		assertTrue(blockC.getAllPos().contains(xy));
+		xy.clear();
 		
 		
 		Type = 'I';
@@ -2470,14 +2475,24 @@ public class BlockTest {
 		getType_atPre = blockC.getType();
 		getSize_atPre = blockC.getSize();
 		getNbPos_atPre = blockC.getNbPos();
+		getXMin_atPre = blockC.getXMin();
+		getXMax_atPre = blockC.getXMax();
+		getYMin_atPre = blockC.getYMin();
+		getYMax_atPre = blockC.getYMax();
 		hasPos_atPre = new boolean[blockC.getSize()][blockC.getSize()];
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				hasPos_atPre[i-1][j-1] = blockC.hasPos(i, j);
 			}
 		}
+		it = blockC.getAllPos().iterator();
+		while(it.hasNext()) {
+			getAllPos_atPre.add(it.next());
+		}
 		x = 2;
 		y = 1;
+		xy.addFirst(x);
+		xy.addLast(y);
 		
 		/* Précondition vérifiée */
 		try {
@@ -2489,9 +2504,9 @@ public class BlockTest {
 	
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2505,9 +2520,21 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == getNbPos_atPre+1);
 		
 		/* PostCondition 4 */
-		assertTrue(blockC.hasPos(x, y));
+		assertTrue((x < getXMin_atPre && blockC.getXMin() == x) || (blockC.getXMin() == getXMin_atPre));
 		
 		/* PostCondition 5 */
+		assertTrue((getXMax_atPre < x && blockC.getXMax() == x) || (blockC.getXMax() == getXMax_atPre));
+		
+		/* PostCondition 6 */
+		assertTrue((y < getYMin_atPre && blockC.getYMin() == y) || (blockC.getYMin() == getYMin_atPre));
+		
+		/* PostCondition 7 */
+		assertTrue((getYMax_atPre < y && blockC.getYMax() == y) || (blockC.getYMax() == getYMax_atPre));
+		
+		/* PostCondition 8 */
+		assertTrue(blockC.hasPos(x, y));
+		
+		/* PostCondition 9 */
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				if((i!=x) && (j!=y)) {
@@ -2515,6 +2542,17 @@ public class BlockTest {
 				}
 			}
 		}
+		
+		/* PostCondition 10 */
+		it = getAllPos_atPre.iterator();
+		while(it.hasNext()) {
+			assertTrue(blockC.getAllPos().contains(it.next()));
+		}
+		getAllPos_atPre.clear();
+		
+		/* PostCondition 11 */
+		assertTrue(blockC.getAllPos().contains(xy));
+		xy.clear();
 	}
 	
 	@Test
@@ -2533,12 +2571,12 @@ public class BlockTest {
 		getSize_atPre = blockC.getSize();
 		
 		blockC.removeAllPos();
-			
+					
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2552,11 +2590,29 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == 0);
 		
 		/* PostCondition 4 */
+		assertTrue(blockC.getXMin() == blockC.getSize()+1);
+		
+		/* PostCondition 5 */
+		assertTrue(blockC.getXMax() == 0);
+		
+		/* PostCondition 6 */
+		assertTrue(blockC.getYMin() == blockC.getSize()+1);
+		
+		/* PostCondition 7 */
+		assertTrue(blockC.getYMax() == 0);
+		
+		/* PostCondition 8 */
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				assertTrue(!blockC.hasPos(i, j));
 			}
 		}
+		
+		/* PostCondition 9 */
+		assertTrue(blockC.getAllPos().isEmpty());
+		
+		/* PostCondition 10 */
+		assertTrue(blockC.getLowPos().isEmpty());
 		
 		
 		Type = 'L';
@@ -2570,9 +2626,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2586,11 +2642,29 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == 0);
 		
 		/* PostCondition 4 */
+		assertTrue(blockC.getXMin() == blockC.getSize()+1);
+		
+		/* PostCondition 5 */
+		assertTrue(blockC.getXMax() == 0);
+		
+		/* PostCondition 6 */
+		assertTrue(blockC.getYMin() == blockC.getSize()+1);
+		
+		/* PostCondition 7 */
+		assertTrue(blockC.getYMax() == 0);
+		
+		/* PostCondition 8 */
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				assertTrue(!blockC.hasPos(i, j));
 			}
 		}
+		
+		/* PostCondition 9 */
+		assertTrue(blockC.getAllPos().isEmpty());
+		
+		/* PostCondition 10 */
+		assertTrue(blockC.getLowPos().isEmpty());
 				
 		
 		Type = 'J';
@@ -2604,9 +2678,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2620,11 +2694,29 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == 0);
 		
 		/* PostCondition 4 */
+		assertTrue(blockC.getXMin() == blockC.getSize()+1);
+		
+		/* PostCondition 5 */
+		assertTrue(blockC.getXMax() == 0);
+		
+		/* PostCondition 6 */
+		assertTrue(blockC.getYMin() == blockC.getSize()+1);
+		
+		/* PostCondition 7 */
+		assertTrue(blockC.getYMax() == 0);
+		
+		/* PostCondition 8 */
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				assertTrue(!blockC.hasPos(i, j));
 			}
 		}
+		
+		/* PostCondition 9 */
+		assertTrue(blockC.getAllPos().isEmpty());
+		
+		/* PostCondition 10 */
+		assertTrue(blockC.getLowPos().isEmpty());
 		
 				
 		Type = 'T';
@@ -2638,9 +2730,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2654,11 +2746,29 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == 0);
 		
 		/* PostCondition 4 */
+		assertTrue(blockC.getXMin() == blockC.getSize()+1);
+		
+		/* PostCondition 5 */
+		assertTrue(blockC.getXMax() == 0);
+		
+		/* PostCondition 6 */
+		assertTrue(blockC.getYMin() == blockC.getSize()+1);
+		
+		/* PostCondition 7 */
+		assertTrue(blockC.getYMax() == 0);
+		
+		/* PostCondition 8 */
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				assertTrue(!blockC.hasPos(i, j));
 			}
 		}
+		
+		/* PostCondition 9 */
+		assertTrue(blockC.getAllPos().isEmpty());
+		
+		/* PostCondition 10 */
+		assertTrue(blockC.getLowPos().isEmpty());
 		
 		
 		Type = 'Z';
@@ -2672,9 +2782,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2688,11 +2798,29 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == 0);
 		
 		/* PostCondition 4 */
+		assertTrue(blockC.getXMin() == blockC.getSize()+1);
+		
+		/* PostCondition 5 */
+		assertTrue(blockC.getXMax() == 0);
+		
+		/* PostCondition 6 */
+		assertTrue(blockC.getYMin() == blockC.getSize()+1);
+		
+		/* PostCondition 7 */
+		assertTrue(blockC.getYMax() == 0);
+		
+		/* PostCondition 8 */
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				assertTrue(!blockC.hasPos(i, j));
 			}
 		}
+		
+		/* PostCondition 9 */
+		assertTrue(blockC.getAllPos().isEmpty());
+		
+		/* PostCondition 10 */
+		assertTrue(blockC.getLowPos().isEmpty());
 		
 		
 		Type = 'S';
@@ -2706,9 +2834,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2722,11 +2850,29 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == 0);
 		
 		/* PostCondition 4 */
+		assertTrue(blockC.getXMin() == blockC.getSize()+1);
+		
+		/* PostCondition 5 */
+		assertTrue(blockC.getXMax() == 0);
+		
+		/* PostCondition 6 */
+		assertTrue(blockC.getYMin() == blockC.getSize()+1);
+		
+		/* PostCondition 7 */
+		assertTrue(blockC.getYMax() == 0);
+		
+		/* PostCondition 8 */
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				assertTrue(!blockC.hasPos(i, j));
 			}
 		}
+		
+		/* PostCondition 9 */
+		assertTrue(blockC.getAllPos().isEmpty());
+		
+		/* PostCondition 10 */
+		assertTrue(blockC.getLowPos().isEmpty());
 		
 		
 		Type = 'I';
@@ -2740,9 +2886,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2756,11 +2902,29 @@ public class BlockTest {
 		assertTrue(blockC.getNbPos() == 0);
 		
 		/* PostCondition 4 */
+		assertTrue(blockC.getXMin() == blockC.getSize()+1);
+		
+		/* PostCondition 5 */
+		assertTrue(blockC.getXMax() == 0);
+		
+		/* PostCondition 6 */
+		assertTrue(blockC.getYMin() == blockC.getSize()+1);
+		
+		/* PostCondition 7 */
+		assertTrue(blockC.getYMax() == 0);
+		
+		/* PostCondition 8 */
 		for(int i=1; i<=blockC.getSize(); i++) {
 			for(int j=1; j<=blockC.getSize(); j++) {
 				assertTrue(!blockC.hasPos(i, j));
 			}
-		}		
+		}
+		
+		/* PostCondition 9 */
+		assertTrue(blockC.getAllPos().isEmpty());
+		
+		/* PostCondition 10 */
+		assertTrue(blockC.getLowPos().isEmpty());		
 	}
 
 	@Test
@@ -2784,9 +2948,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2798,6 +2962,7 @@ public class BlockTest {
 		
 		/* PostCondition 3 */
 		assertTrue(blockC.getNbPos() == getNbPos_atPre);
+		
 		
 		Type = 'L';
 		blockC.init(Type);
@@ -2811,9 +2976,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2839,9 +3004,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2867,9 +3032,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2895,9 +3060,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2923,9 +3088,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2951,9 +3116,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -2988,9 +3153,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -3015,9 +3180,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -3043,9 +3208,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -3071,9 +3236,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -3099,9 +3264,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -3127,9 +3292,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		
@@ -3155,9 +3320,9 @@ public class BlockTest {
 			
 		/* Invariants */
 		try {
-			checkInvariants(blockC);
+			blockC.checkInvariants();
 			assertTrue(true);
-		} catch(Error err) {
+		} catch (Error err) {
 			assertTrue(false);
 		}
 		

@@ -1,5 +1,6 @@
 package board;
 
+import grid.GridContract;
 import block.BlockContract;
 
 public class BoardContract extends BoardDecorator {
@@ -8,196 +9,307 @@ public class BoardContract extends BoardDecorator {
 		super(f);
 	}
 
+	
 	public void checkInvariants(){
-		BlockContract bloc = super.getcurrentBlock();
+		BlockContract block = super.getcurrentBlock();
 		if (super.isBlock())
 		{
-			if (super.getXblock(bloc.getXMin()) < 1 || super.getXblock(bloc.getXMax()) > 
-			super.getgrid().getWidth()+1)
+			if (!(1<= super.getXblock(block.getXMin())  && super.getXblock(block.getXMax()) <= super.getgrid().getWidth()+1)) {
 				throw new Error("[BOARD]invariant(1) invalide");
+			}
 			
-			
-			if (super.getYblock(bloc.getYMin()) < 1 || super.getYblock(bloc.getYMax()) > 
-			super.getgrid().getHeight()+1)
+			if (!(1<= super.getYblock(block.getYMin())  && super.getYblock(block.getYMax()) <= super.getgrid().getHeight()+1))
 					throw new Error("[BOARD]invariant(2) invalide");
 		}
-		
-		
-		
-		if (super.getNbLastCleaned() < 0)
+				
+		if (!(super.getNbLastCleaned() >= 0)) {
 				throw new Error("[BOARD]invariant(3) invalide");
+		}
 	}
+	
 	
 	public void init(int x, int y){
-		if (x == 0 || y == 0 || y < x)
+		if (!(x > 0 && y > 0 && y >= x)) {
 			throw new Error("[BOARD]pre(1)(init) invalide");
-		
+		}
 		super.init(x, y);
-		
-		if (isBlock() != false)
-			throw new Error("[BOARD]post(1)(init) invalide");
-		if (getgrid().getWidth() != x || getgrid().getHeight() != y)
-			throw new Error("[BOARD]post(2)(init) invalide");
-		if (getNbLastCleaned() != 0)
-			throw new Error("[BOARD]post(3)(init) invalide");
-		if (getXMinBlock() != 0 || getYMinBlock() != 0)
-			throw new Error("[BOARD]post(4)(init) invalide");
-		
 		checkInvariants();
+		if (!(super.isBlock() == false)) {
+			throw new Error("[BOARD]post(1)(init) invalide");
+		}
+		if (!(super.getgrid().getWidth() == x && super.getgrid().getHeight() == y)) {
+			throw new Error("[BOARD]post(2)(init) invalide");
+		}
+		if (!(super.getNbLastCleaned() == 0)) {
+			throw new Error("[BOARD]post(3)(init) invalide");
+		}
+		if (!(super.getXMinBlock() == 0 && super.getYMinBlock() == 0)) {
+			throw new Error("[BOARD]post(4)(init) invalide");
+		}
 	}
+	
 	
 	public void doRotateLeft(){
-		checkInvariants();
-		if (isBlock() == false || canRotateLeft() == false)
+		if (!(super.isBlock() && super.canRotateLeft())) {
 			throw new Error("[BOARD]pre(1)(doRotateLeft) invalide");
-		
-		int getXMinBlock_atPre = getXMinBlock();
-		int getYMinBlock_atPre = getYMinBlock();
-		super.doRotateLeft();
-		
-		if (getXMinBlock_atPre != getXMinBlock())
-			throw new Error("[BOARD]post(1)(doRotateLeft) invalide");
-		if (getYMinBlock_atPre != getYMinBlock())
-			throw new Error("[BOARD]post(2)(doRotateLeft) invalide");
-		
+		}
 		checkInvariants();
+		BlockContract getcurrentBlock_atPre = super.getcurrentBlock();
+		GridContract getgrid_atPre = super.getgrid();
+		int getNbLastCleaned_atPre = super.getNbLastCleaned();
+		boolean isBlock_atPre = super.isBlock();
+		int getXMinBlock_atPre = super.getXMinBlock();
+		int getYMinBlock_atPre = super.getYMinBlock();
+		super.doRotateLeft();
+		checkInvariants();
+		if(!(super.getcurrentBlock() == getcurrentBlock_atPre)) {
+			throw new Error("[BOARD]post(1)(doRotateLeft) invalide");
+		}
+		if(!(super.getgrid() == getgrid_atPre)) {
+			throw new Error("[BOARD]post(2)(doRotateLeft) invalide");
+		}
+		if(!(super.getNbLastCleaned() == getNbLastCleaned_atPre)) {
+			throw new Error("[BOARD]post(3)(doRotateLeft) invalide");
+		}
+		if(!(super.isBlock() == isBlock_atPre)) {
+			throw new Error("[BOARD]post(4)(doRotateLeft) invalide");
+		}
+		if (!(super.getXMinBlock() == getXMinBlock_atPre)) {
+			throw new Error("[BOARD]post(5)(doRotateLeft) invalide");
+		}
+		if (!(super.getYMinBlock() == getYMinBlock_atPre)) {
+			throw new Error("[BOARD]post(6)(doRotateLeft) invalide");
+		}		
+	}
+
+		
+	public void doLeft(){
+		if(!(super.isBlock() && super.cangoLeft())) {
+			throw new Error("[BOARD]pre(1)(doLeft) invalide");
+		}
+		checkInvariants();
+		BlockContract getcurrentBlock_atPre = super.getcurrentBlock();
+		GridContract getgrid_atPre = super.getgrid();
+		int getNbLastCleaned_atPre = super.getNbLastCleaned();
+		boolean isBlock_atPre = super.isBlock();
+		int getXMinBlock_atPre = super.getXMinBlock();
+		int getYMinBlock_atPre = super.getYMinBlock();
+		super.doLeft();
+		checkInvariants();
+		if(!(super.getcurrentBlock() == getcurrentBlock_atPre)) {
+			throw new Error("[BOARD]post(1)(doLeft) invalide");
+		}
+		if(!(super.getgrid() == getgrid_atPre)) {
+			throw new Error("[BOARD]post(2)(doLeft) invalide");
+		}
+		if(!(super.getNbLastCleaned() == getNbLastCleaned_atPre)) {
+			throw new Error("[BOARD]post(3)(doLeft) invalide");
+		}
+		if(!(super.isBlock() == isBlock_atPre)) {
+			throw new Error("[BOARD]post(4)(doLeft) invalide");
+		}
+		if (!(super.getXMinBlock() == getXMinBlock_atPre-1)) {
+			throw new Error("[BOARD]post(5)(doLeft) invalide");
+		}
+		if (!(super.getYMinBlock() == getYMinBlock_atPre)) {
+			throw new Error("[BOARD]post(6)(doLeft) invalide");
+		}
 	}
 	
-	public void doLeft(){
-		checkInvariants();
-		if (isBlock() == false || cangoLeft() == false)
-			throw new Error("[BOARD]pre(1)(doLeft) invalide");
-		
-		int getXMinBlock_atPre = getXMinBlock();
-		int getYMinBlock_atPre = getYMinBlock();
-		super.doLeft();
-		
-		if (getXMinBlock_atPre-1 != getXMinBlock())
-			throw new Error("[BOARD]post(1)(doLeft) invalide");
-		if (getYMinBlock_atPre != getYMinBlock())
-			throw new Error("[BOARD]post(2)(doLeft) invalide");
-		
-		checkInvariants();
-	}
 	
 	public void doRotateRight(){
-		checkInvariants();
-		if (isBlock() == false || canRotateRight() == false)
+		if (!(super.isBlock() && super.canRotateRight())) {
 			throw new Error("[BOARD]pre(1)(doRotateRight) invalide");
-		
-		int getXMinBlock_atPre = getXMinBlock();
-		int getYMinBlock_atPre = getYMinBlock();
-		
-		super.doRotateRight();
-		
-		if (getXMinBlock_atPre != getXMinBlock())
-			throw new Error("[BOARD]post(1)(doRotateRight) invalide");
-		if (getYMinBlock_atPre != getYMinBlock())
-			throw new Error("[BOARD]post(2)(doRotateRight) invalide");
-		
-		
+		}
 		checkInvariants();
+		BlockContract getcurrentBlock_atPre = super.getcurrentBlock();
+		GridContract getgrid_atPre = super.getgrid();
+		int getNbLastCleaned_atPre = super.getNbLastCleaned();
+		boolean isBlock_atPre = super.isBlock();
+		int getXMinBlock_atPre = super.getXMinBlock();
+		int getYMinBlock_atPre = super.getYMinBlock();
+		super.doRotateRight();
+		checkInvariants();
+		if(!(super.getcurrentBlock() == getcurrentBlock_atPre)) {
+			throw new Error("[BOARD]post(1)(doRotateRight) invalide");
+		}
+		if(!(super.getgrid() == getgrid_atPre)) {
+			throw new Error("[BOARD]post(2)(doRotateRight) invalide");
+		}
+		if(!(super.getNbLastCleaned() == getNbLastCleaned_atPre)) {
+			throw new Error("[BOARD]post(3)(doRotateRight) invalide");
+		}
+		if(!(super.isBlock() == isBlock_atPre)) {
+			throw new Error("[BOARD]post(4)(doRotateRight) invalide");
+		}
+		if (!(super.getXMinBlock() == getXMinBlock_atPre)) {
+			throw new Error("[BOARD]post(5)(doRotateRight) invalide");
+		}
+		if (!(super.getYMinBlock() == getYMinBlock_atPre)) {
+			throw new Error("[BOARD]post(6)(doRotateRight) invalide");
+		}
 	}
 	
 	public void doRight(){
-		checkInvariants();
-		if (isBlock() == false || cangoRight() == false)
+		if(!(super.isBlock() && super.cangoRight())) {
 			throw new Error("[BOARD]pre(1)(doRight) invalide");
-		
-		int getXMinBlock_atPre = getXMinBlock();
-		int getYMinBlock_atPre = getYMinBlock();
-		super.doRight();
-		
-		if (getXMinBlock_atPre+1 != getXMinBlock())
-			throw new Error("[BOARD]post(1)(doRight) invalide");
-		if (getYMinBlock_atPre != getYMinBlock())
-			throw new Error("[BOARD]post(2)(doRight) invalide");
-		
+		}
 		checkInvariants();
+		BlockContract getcurrentBlock_atPre = super.getcurrentBlock();
+		GridContract getgrid_atPre = super.getgrid();
+		int getNbLastCleaned_atPre = super.getNbLastCleaned();
+		boolean isBlock_atPre = super.isBlock();
+		int getXMinBlock_atPre = super.getXMinBlock();
+		int getYMinBlock_atPre = super.getYMinBlock();
+		super.doRight();
+		checkInvariants();
+		if(!(super.getcurrentBlock() == getcurrentBlock_atPre)) {
+			throw new Error("[BOARD]post(1)(doRight) invalide");
+		}
+		if(!(super.getgrid() == getgrid_atPre)) {
+			throw new Error("[BOARD]post(2)(doRight) invalide");
+		}
+		if(!(super.getNbLastCleaned() == getNbLastCleaned_atPre)) {
+			throw new Error("[BOARD]post(3)(doRight) invalide");
+		}
+		if(!(super.isBlock() == isBlock_atPre)) {
+			throw new Error("[BOARD]post(4)(doRight) invalide");
+		}
+		if (!( super.getXMinBlock() == getXMinBlock_atPre+1)) {
+			throw new Error("[BOARD]post(5)(doRight) invalide");
+		}
+		if (!(super.getYMinBlock() == getYMinBlock_atPre)) {
+			throw new Error("[BOARD]post(6)(doRight) invalide");
+		}
 	}
+	
 	
 	public void doBottom(){
-		checkInvariants();
-		if (isBlock() == false)
+		if(!(super.isBlock())) {
 			throw new Error("[BOARD]pre(1)(doBottom) invalide");
-		
-		int getXMinBlock_atPre = getXMinBlock();
-		int getYMinBlock_atPre = getYMinBlock();
-		int getBottomHeight_atPre = getBottomHeight();
-		super.doBottom();
-		
-		if (getXMinBlock_atPre != getXMinBlock())
-			throw new Error("[BOARD]post(1)(doBottom) invalide");
-		if ((getYMinBlock_atPre+getBottomHeight_atPre) != getYMinBlock())
-			throw new Error("[BOARD]post(2)(doBottom) invalide");
-		
+		}
 		checkInvariants();
+		BlockContract getcurrentBlock_atPre = super.getcurrentBlock();
+		GridContract getgrid_atPre = super.getgrid();
+		boolean isBlock_atPre = super.isBlock();
+		int getXMinBlock_atPre = super.getXMinBlock();
+		int getYMinBlock_atPre = super.getYMinBlock();
+		int getBottomHeight_atPre = super.getBottomHeight();
+		super.doBottom();
+		checkInvariants();
+		if(!(super.getcurrentBlock() == getcurrentBlock_atPre)) {
+			throw new Error("[BOARD]post(1)(doBottom) invalide");
+		}
+		if(!(super.getgrid() == getgrid_atPre)) {
+			throw new Error("[BOARD]post(2)(doBottom) invalide");
+		}
+		if(!(super.isBlock() == isBlock_atPre)) {
+			throw new Error("[BOARD]post(3)(doBottom) invalide");
+		}
+		if (!(super.getXMinBlock() == getXMinBlock_atPre)) {
+			throw new Error("[BOARD]post(4)(doBottom) invalide");
+		}
+		if (!(super.getYMinBlock() == getYMinBlock_atPre+getBottomHeight_atPre)) {
+			throw new Error("[BOARD]post(5)(doBottom) invalide");
+		}
+		if(!(super.getBottomHeight() == 0)) {
+			throw new Error("[BOARD]post(6)(doBottom) invalide");
+		}
 	}
+	
 	
 	public void step(){
-		checkInvariants();
-		if(isBlock() == false)
+		if(!(super.isBlock())) {
 			throw new Error("[BOARD]pre(1)(step) invalide");
-		
-		int getXMinBlock_atPre = getXMinBlock();
-		int getYMinBlock_atPre = getYMinBlock();
-		super.step();
-		
-		if (getXMinBlock_atPre != getXMinBlock())
-			throw new Error("[BOARD]post(1)(step) invalide");
-		if (!isBottom() && getYMinBlock_atPre+1 != getYMinBlock())
-			throw new Error("[BOARD]post(2)(step) invalide");
-		
+		}
 		checkInvariants();
+		GridContract getgrid_atPre = super.getgrid();
+		boolean isBlock_atPre = super.isBlock();
+		int getXMinBlock_atPre = super.getXMinBlock();
+		int getYMinBlock_atPre = super.getYMinBlock();
+		int getBottomHeight_atPre = super.getBottomHeight();
+		super.step();
+		checkInvariants();
+		if(!(super.getgrid() == getgrid_atPre)) {
+			throw new Error("[BOARD]post(1)(step) invalide");
+		}
+		if(!(super.isBlock() == isBlock_atPre)) {
+			throw new Error("[BOARD]post(2)(step) invalide");
+		}
+		if(!(super.getXMinBlock() == getXMinBlock_atPre)) {
+			throw new Error("[BOARD]post(3)(step) invalide");
+		}
+		if (!(super.getYMinBlock() == getYMinBlock_atPre+1)) {
+			throw new Error("[BOARD]post(4)(step) invalide");
+		}
+		if (!(super.getBottomHeight() == getBottomHeight_atPre-1)) {
+			throw new Error("[BOARD]post(5)(step) invalide");
+		}
 	}
 	
-	public void insert(BlockContract bloc){
-		checkInvariants();
-		if (isBlock() == true)
+	
+	public void insert(BlockContract block){
+		if(!(super.isBlock() == false)) {
 			throw new Error("[BOARD]pre(1)(insert) invalide");
-		
-		super.insert(bloc);
-		
-		/*post: Block:init(Random {2,3,4}) Vérif*/
-		if (isBlock() == false)
-			throw new Error("[BOARD]post(1)(insert) invalide");
-		if (getcurrentBlock() != bloc)
-			throw new Error("[BOARD]post(2)(insert) invalide");
-		if (getXMinBlock() == 0 || getYMinBlock() == 0)
-			throw new Error("[BOARD]post(3)(insert) invalide");
+		}
 		checkInvariants();
+		GridContract getgrid_atPre = super.getgrid();
+		super.insert(block);
+		checkInvariants();
+		if(!(super.getcurrentBlock() == block)) {
+			throw new Error("[BOARD]post(1)(insert) invalide");
+		}
+		if(!(super.getgrid() == getgrid_atPre)) {
+			throw new Error("[BOARD]post(2)(insert) invalide");
+		}
+		if(!(super.isBlock())) {
+			throw new Error("[BOARD]post(3)(insert) invalide");
+		}
 	}
 	
 	public void remove(){
-		checkInvariants();
-		
-		if(isBlock() == false)
+		if(!(super.isBlock())) {
 			throw new Error("[BOARD]pre(1)(remove) invalide");
-		
+		}
+		checkInvariants();
+		GridContract getgrid_atPre = super.getgrid();
+		int getNbLastCleaned_atPre = super.getNbLastCleaned();
 		super.remove();
-		
-		if (isBlock() != false)
+		checkInvariants();
+		if(!(super.getcurrentBlock() == null)) {
 			throw new Error("[BOARD]post(1)(remove) invalide");
-		
-		if (getXMinBlock() != 0 && getYMinBlock() != 0)
+		}
+		if(!(super.getgrid() == getgrid_atPre)) {
 			throw new Error("[BOARD]post(2)(remove) invalide");
-		
-		checkInvariants();
+		}
+		if(!(super.getNbLastCleaned() == getNbLastCleaned_atPre)) {
+			throw new Error("[BOARD]post(3)(remove) invalide");
+		}
+		if(!(super.isBlock() == false)) {
+			throw new Error("[BOARD]post(4)(remove) invalide");
+		}
+		if (!(super.getXMinBlock() == 0)) {
+			throw new Error("[BOARD]post(5)(remove) invalide");
+		}
+		if (!(super.getYMinBlock() == 0)) {
+			throw new Error("[BOARD]post(6)(remove) invalide");
+		}
 	}
-	
 	public void clean() {
-		checkInvariants();
-		
-		if (!(isBottom() == true))
+		if(!(super.isBottom())) {
 			throw new Error("[BOARD]pre(1)(clean) invalide");
-		
-		
-		int getNbLastCleaned_atPre = getNbLastCleaned();
-		super.clean();
-		/*if (getNbLastCleaned() < getNbLastCleaned_atPre)
-			throw new Error("[BOARD]post(1)(clean) invalide");*/
-		
+		}
 		checkInvariants();
+		BlockContract getcurrentBlock_atPre = super.getcurrentBlock();
+		GridContract getgrid_atPre = super.getgrid();
+		super.clean();
+		checkInvariants();
+		if(!(super.getcurrentBlock() == getcurrentBlock_atPre)) {
+			throw new Error("[BOARD]post(1)(clean) invalide");
+		}
+		if(!(super.getgrid() == getgrid_atPre)) {
+			throw new Error("[BOARD]post(2)(clean) invalide");
+		}
 	}
 	
 }

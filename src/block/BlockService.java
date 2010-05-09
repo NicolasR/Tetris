@@ -41,30 +41,42 @@ public interface BlockService {
 	/* CONSTRUCTORS */
 	// Pre : type == 'O' || type == 'L' ||  type == 'J' || type == 'T' || type == 'Z' || type == 'S' || type == 'I'
 	// Post1 : getType() == type
-	// Post2 : getNbPos() == 4 
+	// Post2 : getNbPos() == 4
 	public void init(char type);
 	
 	/* OPERATORS */
 	// Pre : 1 <= x && x <= getSize() && 1 <= y && y <= getSize() && !hasPos(x,y)
-	// Post1 : getType() = getType()@pre
-	// Post2 : getSize() = getSize()@pre
+	// Post1 : getType() == getType()@pre
+	// Post2 : getSize() == getSize()@pre
 	// Post3 : getNbPos() == getNbPos@pre + 1
-	// Post4 : hasPos(x,y) == true
-	// Post5 : \forall x1:int in [1,size], y1:int in [1,size] { x1 != x && y1 != y && hasPos(x1,y1) == hasPos(x1,y1)@pre } 
+	// Post4 : (x < getXMin()@pre && getXMin() == x) || (getXMin() == getXMin()@pre)
+	// Post5 : (getXMax()@pre < x && getXMax() == x) || (getXMax() == getXMax()@pre)
+	// Post6 : (y < getYMin()@pre && getYMin() == y) || (getYMin() == getYMin()@pre)
+	// Post7 : (getYMax()@pre < y && getYMax() == y) || (getYMax() == getYMax()@pre)
+	// Post8 : hasPos(x,y) == true
+	// Post9 : \forall x1:int in [1,size], y1:int in [1,size] { x1 != x && y1 != y && hasPos(x1,y1) == hasPos(x1,y1)@pre }
+	// Post10 :  \forall x1:int, y1:int \in getHasPos((x1,y1))@pre { getAllPos().contains((x1,y1)) }
+	// Post11 :  getAllPos().contains((x,y))
 	public void addPos(int x, int y);
 	
-	// Post1 : getType() = getType()@pre
-	// Post2 : getSize() = getSize()@pre
+	// Post1 : getType() == getType()@pre
+	// Post2 : getSize() == getSize()@pre
 	// Post3 : getNbPos() == 0
-	// Post4 : \forall x:int in [1,size] { \forall y:int in [1,size] { !hasPos(x,y) } }
+	// Post4 : getXMin() == getSize()+1
+	// Post5 : getXMax() == 0
+	// Post6 : getYMin() == getSize()+1
+	// Post7 : getYMax() == 0	
+	// Post8 : \forall x:int in [1,size] { \forall y:int in [1,size] { !hasPos(x,y) } }
+	// Post9 : getAllPos() == null
+	// Post10 : getLowPos() == null
 	public void removeAllPos();
 	
-	// Post1 : getType() = getType()@pre
+	// Post1 : getType() == getType()@pre
 	// Post2 : getSize() == getSize()@pre;
 	// Post3 : getNbPos() == getNbPos()@pre;
 	public void rotateLeft();
 	
-	// Post1 : getType() = getType()@pre
+	// Post1 : getType() == getType()@pre
 	// Post2 : getSize() == getSize()@pre;
 	// Post3 : getNbPos() == getNbPos()@pre;
 	public void rotateRight();

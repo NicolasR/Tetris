@@ -1,5 +1,6 @@
 package block;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
@@ -189,12 +190,21 @@ public class BlockContract extends BlockDecorator {
 		char getType_atPre = super.getType();
 		int getSize_atPre = super.getSize();
 		int getNbPos_atPre = super.getNbPos();
+		int getXMin_atPre = super.getXMin();
+		int getXMax_atPre = super.getXMax();
+		int getYMin_atPre = super.getYMin();
+		int getYMax_atPre = super.getYMax();
 		boolean[][] hasPos_atPre = new boolean[super.getSize()][super.getSize()];
 		for(int i=1; i<= super.getSize(); i++) {
 			for (int j=1; j<=super.getSize(); j++) {
 				hasPos_atPre[i-1][j-1] = super.hasPos(i, j);
 			}
-		}			
+		}
+		Set<LinkedList<Integer>> getAllPos_atPre = new HashSet<LinkedList<Integer>>();
+		Iterator<LinkedList<Integer>> it = super.getAllPos().iterator();
+		while(it.hasNext()) {
+			getAllPos_atPre.add(it.next());
+		}		
 		super.addPos(x, y);
 		checkInvariants();
 		if(!(super.getType() == getType_atPre)) {
@@ -206,19 +216,45 @@ public class BlockContract extends BlockDecorator {
 		if(!(super.getNbPos() == getNbPos_atPre+1)) {
 			throw new Error("[BLOCK]post (3) (addPos) invalide");
 		}
-		if(!(super.hasPos(x, y))) {
+		if(!((x < getXMin_atPre && super.getXMin() == x) || (super.getXMin() == getXMin_atPre))) {
 			throw new Error("[BLOCK]post (4) (addPos) invalide");
+		}
+		if(!((getXMax_atPre < x && super.getXMax() == x) || (super.getXMax() == getXMax_atPre))) {
+			throw new Error("[BLOCK]post (5) (addPos) invalide");
+		}
+		if(!((y < getYMin_atPre && super.getYMin() == y) || (super.getYMin() == getYMin_atPre))) {
+			throw new Error("[BLOCK]post (6) (addPos) invalide");
+		}
+		if(!((getYMax_atPre < y && super.getYMax() == y) || (super.getYMax() == getYMax_atPre))) {
+			throw new Error("[BLOCK]post (7) (addPos) invalide");
+		}
+		if(!(super.hasPos(x, y))) {
+			throw new Error("[BLOCK]post (8) (addPos) invalide");
 		}
 		for(int i=1; i<= super.getSize(); i++) {
 			for (int j=1; j<=super.getSize(); j++) {
 				if ((i!=x) && (j!=y)) {
 					if(!(super.hasPos(i, j) == hasPos_atPre[i-1][j-1])) {
-						throw new Error("[BLOCK]post (5) (addPos) invalide");
+						throw new Error("[BLOCK]post (9) (addPos) invalide");
 					}
 				}
 				
 			}
-		}		
+		}
+		it = getAllPos_atPre.iterator();
+		while(it.hasNext()) {
+			if(!(super.getAllPos().contains(it.next()))) {
+				throw new Error("[BLOCK]post (10) (addPos) invalide");
+			}
+		}
+		LinkedList<Integer> xy = new LinkedList<Integer>();
+		xy.addFirst(x);
+		xy.addLast(y);
+		if(!(super.getAllPos().contains(xy))) {
+			throw new Error("[BLOCK]post (11) (addPos) invalide");
+		}
+		
+		
 	}
 
 	public void removeAllPos() {
@@ -236,14 +272,31 @@ public class BlockContract extends BlockDecorator {
 		if(!(super.getNbPos() == 0)) {
 			throw new Error("post (3) (removeAllPos) invalide");
 		}
+		if(!(super.getXMin() == super.getSize()+1)) {
+			throw new Error("post (4) (removeAllPos) invalide");
+		}
+		if(!(super.getXMax() == 0)) {
+			throw new Error("post (5) (removeAllPos) invalide");
+		}
+		if(!(super.getYMin() == super.getSize()+1)) {
+			throw new Error("post (6) (removeAllPos) invalide");
+		}
+		if(!(super.getYMax() == 0)) {
+			throw new Error("post (7) (removeAllPos) invalide");
+		}
 		for(int i=1; i<= super.getSize(); i++) {
 			for (int j=1; j<=super.getSize(); j++) {
 				if(!(!(super.hasPos(i, j)))) {
-					throw new Error("post (4) (removeAllPos) invalide");
+					throw new Error("post (8) (removeAllPos) invalide");
 				}
 			}
 		}
-		
+		if(!(super.getAllPos().isEmpty())) {
+			throw new Error("post (9) (removeAllPos) invalide");
+		}
+		if(!(super.getLowPos().isEmpty())) {
+			throw new Error("post (10) (removeAllPos) invalide");
+		}
 	}
 
 	public void rotateLeft() {
