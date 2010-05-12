@@ -11,11 +11,13 @@ import javax.swing.JPanel;
 
 import joueur.JoueurContract;
 
-import tetris.TetrisContract;
-
 
 public class TetrisPanel extends JPanel implements KeyListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8545642574194371642L;
 	private GridContract grid;
 	private JoueurContract joueur;
 	private JFrame fenetre;

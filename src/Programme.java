@@ -12,10 +12,12 @@ import javax.swing.JPanel;
 import joueur.JoueurContract;
 import joueur.JoueurImpl;
 
-import tetris.TetrisContract;
-import tetris.TetrisImpl;
-
 public class Programme extends JPanel implements KeyListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2104825133643372892L;
 
 	public Programme(){
 		setDoubleBuffered(true);
