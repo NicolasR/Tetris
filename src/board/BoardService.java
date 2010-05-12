@@ -43,6 +43,7 @@ public interface BoardService {
 	/** Constructors
 	 * Initialise
 	 * pre: x > 0 && y > 0 && y >= x
+	 * post: getgrid() = Grid:init(x, y);
 	 * post: isBlock() == false
 	 * post: getgrid().getWidth() == x && getgrid().getHeight() == y
 	 * post: getNbLastCleaned() == 0
@@ -60,7 +61,8 @@ public interface BoardService {
 	 * post: getNbLastCleaned() == getNbLastCleaned()@pre
 	 * post: isBlock() == isBlock()@pre
 	 * post: getXMinBlock() == getXMinBlock()@pre
-	 * post: getYMinBlock() == getYMinBlock()@pre 
+	 * post: getYMinBlock() == getYMinBlock()@pre
+	 * post: getcurrentBlock() == getcurrentBlock()@pre.rotateLeft()
 	 */
 	public void doRotateLeft();
 	
@@ -82,7 +84,8 @@ public interface BoardService {
 	 * post: getNbLastCleaned() == getNbLastCleaned()@pre
 	 * post: isBlock() == isBlock()@pre
 	 * post: getXMinBlock() == getXMinBlock()@pre
-	 * post: getYMinBlock() == getYMinBlock()@pre 
+	 * post: getYMinBlock() == getYMinBlock()@pre
+	 * post: getcurrentBlock() == getcurrentBlock()@pre.rotateRight()
 	 */	
 	public void doRotateRight();
 	

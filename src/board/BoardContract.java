@@ -34,17 +34,29 @@ public class BoardContract extends BoardDecorator {
 		}
 		super.init(x, y);
 		checkInvariants();
-		if (!(super.isBlock() == false)) {
-			throw new Error("[BOARD]post(1)(init) invalide");
+		
+		//POST Grid:init
+		if (!(getgrid().getWidth() == x && getgrid().getHeight() == y))
+			throw new Error("[BOARD]post(1.1)(init) invalide");
+		
+		for (int xtemp=1;xtemp <= getgrid().getWidth();xtemp++){
+			for (int ytemp=1;ytemp <= getgrid().getHeight();ytemp++){
+				if (!(!getgrid().isOccupied(xtemp,ytemp) && getgrid().canPut(xtemp, ytemp)))
+					throw new Error("[BOARD]post(1.2)(init) invalide");
+			}
 		}
-		if (!(super.getgrid().getWidth() == x && super.getgrid().getHeight() == y)) {
+		
+		if (!(super.isBlock() == false)) {
 			throw new Error("[BOARD]post(2)(init) invalide");
 		}
-		if (!(super.getNbLastCleaned() == 0)) {
+		if (!(super.getgrid().getWidth() == x && super.getgrid().getHeight() == y)) {
 			throw new Error("[BOARD]post(3)(init) invalide");
 		}
-		if (!(super.getXMinBlock() == 0 && super.getYMinBlock() == 0)) {
+		if (!(super.getNbLastCleaned() == 0)) {
 			throw new Error("[BOARD]post(4)(init) invalide");
+		}
+		if (!(super.getXMinBlock() == 0 && super.getYMinBlock() == 0)) {
+			throw new Error("[BOARD]post(5)(init) invalide");
 		}
 	}
 	
@@ -60,8 +72,14 @@ public class BoardContract extends BoardDecorator {
 		boolean isBlock_atPre = super.isBlock();
 		int getXMinBlock_atPre = super.getXMinBlock();
 		int getYMinBlock_atPre = super.getYMinBlock();
+		
+		char getType_atPre = getcurrentBlock().getType();
+		int getSize_atPre = getcurrentBlock().getSize();
+		int getNbPos_atPre = getcurrentBlock().getNbPos();
+		
 		super.doRotateLeft();
 		checkInvariants();
+		
 		if(!(super.getcurrentBlock() == getcurrentBlock_atPre)) {
 			throw new Error("[BOARD]post(1)(doRotateLeft) invalide");
 		}
@@ -79,7 +97,19 @@ public class BoardContract extends BoardDecorator {
 		}
 		if (!(super.getYMinBlock() == getYMinBlock_atPre)) {
 			throw new Error("[BOARD]post(6)(doRotateLeft) invalide");
-		}		
+		}
+		
+		//block:rotateLeft
+		BlockContract block = getcurrentBlock();
+		if(!(block.getType() == getType_atPre)) {
+			throw new Error("[BOARD]post(7.1)(doRotateLeft) invalide");
+		}
+		if(!(block.getSize() == getSize_atPre)) {
+			throw new Error("[BOARD]post(7.2)(doRotateLeft) invalide");
+		}
+		if(!(block.getNbPos() == getNbPos_atPre)) {
+			throw new Error("[BOARD]post(7.3)(doRotateLeft) invalide");
+		}
 	}
 
 		

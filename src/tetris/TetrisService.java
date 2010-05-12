@@ -19,7 +19,7 @@ public interface TetrisService {
 	/** Constructor
 	 * Initialise
 	 * post: getScore() == 0
-	 * post: getBoard() == Board:init(10,22) ?????????
+	 * post: getBoard() == Board:init(10,22)
 	 * post: isRunning() == true
 	 * post: needNext() == true
 	 */
@@ -30,7 +30,7 @@ public interface TetrisService {
 	 * pre: isRunning() == true
 	 * post: getScore()@pre == getScore()
 	 * post: needNext() == false
-	 * post: getBoard() == getBoard()@pre.goLeft() ????????
+	 * post: getBoard() == getBoard()@pre.goLeft()
 	 */
 	public void goLeft();
 	
@@ -38,7 +38,7 @@ public interface TetrisService {
 	 * pre: isRunning() == true
 	 * post: getScore()@pre == getScore()
 	 * post: needNext() == false
-	 * post: getBoard() == getBoard()@pre.goRight() ????????????
+	 * post: getBoard() == getBoard()@pre.goRight()
 	 */
 	public void goRight();
 	
@@ -46,7 +46,7 @@ public interface TetrisService {
 	 * pre: isRunning() == true
 	 * post: getScore() == getScore@pre
 	 * post: getBoard()@pre.isBottom() <=> needNext() == true
-	 * post: getBoard() == getBoard()@pre.doBottom() ?????????
+	 * post: getBoard() == getBoard()@pre.doBottom()
 	 */
 	public void goDown();
 	
@@ -54,7 +54,7 @@ public interface TetrisService {
 	 * pre: isRunning() == true
 	 * post: getScore()@pre == getScore()
 	 * post: needNext() == false
-	 * post: getBoard() == getBoard()@pre.doRotateLeft() ??????????
+	 * post: getBoard() == getBoard()@pre.doRotateLeft()
 	 */
 	public void rotateLeft();
 	
@@ -62,7 +62,7 @@ public interface TetrisService {
 	 * pre: isRunning() == true
 	 * post: getScore()@pre == getScore()
 	 * post: needNext() == false
-	 * post: getBoard() == getBoard()@pre.doRotateRight() ?????????
+	 * post: getBoard() == getBoard()@pre.doRotateRight()
 	 */
 	public void rotateRight();
 	
@@ -72,7 +72,7 @@ public interface TetrisService {
 	 * post: not(getBoard()@pre.isBottom()) <=> needNext() == needNext()@pre
 	 * post: needNext() == true => getScore() == getScore@pre + 20 + (Board:getNbLastCleaned()*50)
 	 * post: not(getBoard()@pre.isBottom()) <=> getScore()@pre == getScore()
-	 * post: getBoard() == getBoard()@pre.step() ???????
+	 * post: getBoard() == getBoard()@pre.step()
 	 */
 	public void step();
 	
@@ -81,7 +81,7 @@ public interface TetrisService {
 	 * post: getScore()@pre == getScore()
 	 * post: getScore() == getScore@pre + 20 + (Board:getNbLastCleaned()*50)
 	 * post: needNext() == false
-	 * post: getBoard() ==getBoard()@pre.insert(Block:init(???)) bloc aléatoire.... ?????
+	 * post: getBoard() ==getBoard()@pre.insert(Block:init(Random))
 	 */
 	public void next();
 	
