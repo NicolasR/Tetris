@@ -139,8 +139,8 @@ public class Fenetre extends JFrame implements KeyListener{
 				System.exit(1);
 		}
 		this.panel.setScore(joueur.getTetris().getScore());
-		//this.fenetre.paint(this.fenetre.getGraphics());
-		this.repaint();
+		//this.paint(this.fenetre.getGraphics());
+		//this.repaint();
 	}
 	
 	public synchronized void goLeft(){

@@ -242,7 +242,7 @@ public class BoardContract extends BoardDecorator {
 		if (!(super.getYMinBlock() == getYMinBlock_atPre+getBottomHeight_atPre)) {
 			throw new Error("[BOARD]post(5)(doBottom) invalide");
 		}
-		if(!(super.getBottomHeight() == 0 /*|| isBottom()*/)) {
+		if(!(super.getBottomHeight() == 0 || isBottom())) {
 			throw new Error("[BOARD]post(6)(doBottom) invalide");
 		}
 	}
