@@ -34,6 +34,7 @@ public class TetrisPanel extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g){
+		super.paintComponent(g);
 		g.setColor(Color.white);
 		g.fillRect(10,10, 20*10, 20*22);
 		g.setColor(Color.black);
