@@ -1,13 +1,13 @@
 import javax.swing.JFrame;
 
-import joueur.JoueurContract;
+import joueur.JoueurService;
 
 
 public class Runner extends Thread implements Runnable {
-	private JoueurContract joueur;
+	private JoueurService joueur;
 	private TetrisPanel pane;
 	
-	public Runner(JoueurContract joueur, JFrame Fenetre, TetrisPanel pane){
+	public Runner(JoueurService joueur, JFrame Fenetre, TetrisPanel pane){
 		this.joueur = joueur;
 		this.pane = pane;
 	}

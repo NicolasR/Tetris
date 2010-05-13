@@ -1,6 +1,6 @@
 package grid;
 
-public abstract class GridDecorator {
+public abstract class GridDecorator implements GridService{
 	GridService delegate;
 	
 	public GridDecorator(GridService f){

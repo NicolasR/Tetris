@@ -1,13 +1,13 @@
 package joueur;
 
-import tetris.TetrisContract;
-import tetris.TetrisImpl;
+import programme.Factory;
+import tetris.TetrisService;
 
 public class JoueurImpl implements JoueurService {
 
-	private TetrisContract tetris;
+	private TetrisService tetris;
 	
-	public TetrisContract getTetris() {
+	public TetrisService getTetris() {
 		return this.tetris;
 	}
 	
@@ -16,7 +16,7 @@ public class JoueurImpl implements JoueurService {
 	}
 	
 	public void init() {
-		this.tetris = new TetrisContract(new TetrisImpl());
+		this.tetris = Factory.createTetris();
 	}
 	
 	public void goLeft() {

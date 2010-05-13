@@ -1,4 +1,8 @@
-import grid.GridContract;
+import grid.GridService;
+import board.BoardService;
+import joueur.JoueurService;
+import tetris.TetrisService;
+import block.BlockService;
 
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -51,8 +55,10 @@ public class Programme extends JPanel implements KeyListener {
 		final JFrame fenetre = new JFrame("Tetris");
 		JoueurContract joueur = new JoueurContract(new JoueurImpl());
 		joueur.init();
+		System.out.println(joueur.getTetris().getBoard()==null);
 		joueur.getTetris().init();
-		GridContract grid = joueur.getTetris().getBoard().getgrid();
+		System.out.println(joueur.getTetris().getBoard()==null);
+		GridService grid = joueur.getTetris().getBoard().getgrid();
 		TetrisPanel pane = new TetrisPanel(grid,joueur,fenetre);
 		fenetre.setContentPane(pane);
 		joueur.getTetris().next();

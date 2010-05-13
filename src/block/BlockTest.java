@@ -9,18 +9,19 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import programme.Factory;
+
 public class BlockTest {
 	
 	@Test
 	public void testGetType() {
-		BlockImpl blockI = new BlockImpl();
-		BlockContract blockC = new BlockContract(blockI);
+		BlockService blockC = Factory.createBlock();
 		char Type;
 		
 		Type = 'O';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -30,7 +31,7 @@ public class BlockTest {
 		Type = 'L';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -41,7 +42,7 @@ public class BlockTest {
 		Type = 'J';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -52,7 +53,7 @@ public class BlockTest {
 		Type = 'T';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -63,7 +64,7 @@ public class BlockTest {
 		Type = 'Z';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -74,7 +75,7 @@ public class BlockTest {
 		Type = 'S';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -85,7 +86,7 @@ public class BlockTest {
 		Type = 'I';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -95,14 +96,13 @@ public class BlockTest {
 	
 	@Test
 	public void testGetSize() {
-		BlockImpl blockI = new BlockImpl();
-		BlockContract blockC = new BlockContract(blockI);
+		BlockService blockC = Factory.createBlock();
 		char Type;
 		
 		Type = 'O';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -113,7 +113,7 @@ public class BlockTest {
 		Type = 'L';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -124,7 +124,7 @@ public class BlockTest {
 		Type = 'J';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -135,7 +135,7 @@ public class BlockTest {
 		Type = 'T';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -146,7 +146,7 @@ public class BlockTest {
 		Type = 'Z';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -157,7 +157,7 @@ public class BlockTest {
 		Type = 'S';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -168,7 +168,7 @@ public class BlockTest {
 		Type = 'I';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -178,8 +178,7 @@ public class BlockTest {
 	
 	@Test
 	public void testGetNbPos() {
-		BlockImpl blockI = new BlockImpl();
-		BlockContract blockC = new BlockContract(blockI);
+		BlockService blockC = Factory.createBlock();
 		char Type;
 		
 		Type = 'O';
@@ -191,7 +190,7 @@ public class BlockTest {
 		
 		blockC.addPos(2, 2);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -208,7 +207,7 @@ public class BlockTest {
 		
 		blockC.addPos(2, 2);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -225,7 +224,7 @@ public class BlockTest {
 		
 		blockC.addPos(2, 2);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -242,7 +241,7 @@ public class BlockTest {
 		
 		blockC.addPos(2, 2);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -259,7 +258,7 @@ public class BlockTest {
 		
 		blockC.addPos(2, 2);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -276,7 +275,7 @@ public class BlockTest {
 		
 		blockC.addPos(2, 2);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -293,7 +292,7 @@ public class BlockTest {
 		
 		blockC.addPos(2, 2);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -303,14 +302,13 @@ public class BlockTest {
 	
 	@Test
 	public void testGetXMin() {
-		BlockImpl blockI = new BlockImpl();
-		BlockContract blockC = new BlockContract(blockI);
+		BlockService blockC = Factory.createBlock();
 		char Type;
 		
 		Type = 'O';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -321,7 +319,7 @@ public class BlockTest {
 		Type = 'L';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -332,7 +330,7 @@ public class BlockTest {
 		Type = 'J';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -343,7 +341,7 @@ public class BlockTest {
 		Type = 'T';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -354,7 +352,7 @@ public class BlockTest {
 		Type = 'Z';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -365,7 +363,7 @@ public class BlockTest {
 		Type = 'S';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -376,7 +374,7 @@ public class BlockTest {
 		Type = 'I';
 		blockC.init(Type);
 		try {
-			blockC.checkInvariants();
+			((BlockContract) blockC).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);

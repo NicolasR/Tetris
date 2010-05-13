@@ -1,5 +1,6 @@
-import grid.GridContract;
+import grid.GridService;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
@@ -9,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import joueur.JoueurContract;
+import joueur.JoueurService;
 
 
 public class TetrisPanel extends JPanel implements KeyListener {
@@ -18,8 +19,8 @@ public class TetrisPanel extends JPanel implements KeyListener {
 	 * 
 	 */
 	private static final long serialVersionUID = -8545642574194371642L;
-	private GridContract grid;
-	private JoueurContract joueur;
+	private GridService grid;
+	private JoueurService joueur;
 	private JFrame fenetre;
 	private JLabel score;
 	static final int GOLEFT = 1;
@@ -29,7 +30,7 @@ public class TetrisPanel extends JPanel implements KeyListener {
 	static final int ROTATERIGHT = 5;
 	static final int STEP = 6;
 	
-	public TetrisPanel (GridContract grid, JoueurContract joueur, JFrame fenetre){
+	public TetrisPanel (GridService grid, JoueurService joueur, JFrame fenetre){
 		this.grid = grid;
 		this.joueur = joueur;
 		this.fenetre = fenetre;
@@ -42,6 +43,9 @@ public class TetrisPanel extends JPanel implements KeyListener {
 	}
 	
 	public void paintComponent(Graphics g){
+		g.setColor(Color.white);
+		g.fillRect(10,10, 20*10, 20*22);
+		g.setColor(Color.black);
         for(int i=1;i<=10;i++){
         	for(int j=1;j<=22;j++){
         		if (this.grid.isOccupied(i, j))
@@ -49,7 +53,6 @@ public class TetrisPanel extends JPanel implements KeyListener {
         	}
         }
         g.drawRect(10, 10, 200, 440);
-		
 	}   
 	
 	public void keyPressed(KeyEvent e) {
@@ -103,7 +106,8 @@ public class TetrisPanel extends JPanel implements KeyListener {
 				System.exit(1);
 		}
 		score.setText("Score: "+joueur.getTetris().getScore());
-		this.fenetre.paint(this.fenetre.getGraphics());
+		//this.fenetre.paint(this.fenetre.getGraphics());
+		this.paint(this.getGraphics());
 	}
 	
 	public synchronized void goLeft(){

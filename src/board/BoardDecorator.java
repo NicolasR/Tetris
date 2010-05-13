@@ -1,16 +1,16 @@
 package board;
 
-import block.BlockContract;
-import grid.GridContract;
+import block.BlockService;
+import grid.GridService;
 
-public abstract class BoardDecorator {
+public abstract class BoardDecorator implements BoardService{
 	BoardService delegate;
 	
 	public BoardDecorator(BoardService f){
 		this.delegate = f;
 	}
 	
-	public BlockContract getcurrentBlock(){
+	public BlockService getcurrentBlock(){
 		return this.delegate.getcurrentBlock();
 	}
 	
@@ -26,7 +26,7 @@ public abstract class BoardDecorator {
 		return this.delegate.getBottomHeight();
 	}
 	
-	public GridContract getgrid(){
+	public GridService getgrid(){
 		return this.delegate.getgrid();
 	}
 	
@@ -98,8 +98,8 @@ public abstract class BoardDecorator {
 		this.delegate.step();
 	}
 	
-	public void insert(BlockContract bloc){
-		this.delegate.insert(bloc);
+	public void insert(BlockService block){
+		this.delegate.insert(block);
 	}
 	
 	public void remove(){

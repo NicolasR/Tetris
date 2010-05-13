@@ -4,11 +4,13 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import tetris.TetrisContract;
+import programme.Factory;
+
+import tetris.TetrisService;
 
 public class JoueurTest {
 	
-	public void checkInvariants(JoueurContract joueur) {
+	public void checkInvariants(JoueurService joueur) {
 		// inv : getTetris() != null
 		if(!(joueur.getTetris() != null)) {
 			throw new Error("Invariant invalide");
@@ -17,7 +19,7 @@ public class JoueurTest {
 	
 	@Test
 	public void testGetTetris() {
-		JoueurContract joueur = new JoueurContract(new JoueurImpl());
+		JoueurService joueur = Factory.createJoueur();
 		joueur.init();
 		try {
 			joueur.getTetris();
@@ -37,7 +39,7 @@ public class JoueurTest {
 	
 	@Test
 	public void testInit() {
-		JoueurContract joueur = new JoueurContract(new JoueurImpl());
+		JoueurService joueur = Factory.createJoueur();
 		try {
 			joueur.init();
 			assertTrue(true);
@@ -56,11 +58,13 @@ public class JoueurTest {
 	
 	@Test
 	public void testGoLeft() {
-		JoueurContract joueur = new JoueurContract(new JoueurImpl());
+		JoueurService joueur = Factory.createJoueur();
 		joueur.init();
+		joueur.getTetris().init();
+		joueur.getTetris().next();
 		
 		/* Captures */
-		TetrisContract getTetris_atPre = joueur.getTetris();
+		TetrisService getTetris_atPre = joueur.getTetris();
 		
 		try {
 			joueur.goLeft();
@@ -83,11 +87,13 @@ public class JoueurTest {
 	
 	@Test
 	public void testGoRight() {
-		JoueurContract joueur = new JoueurContract(new JoueurImpl());
+		JoueurService joueur = Factory.createJoueur();
 		joueur.init();
+		joueur.getTetris().init();
+		joueur.getTetris().next();
 		
 		/* Captures */
-		TetrisContract getTetris_atPre = joueur.getTetris();
+		TetrisService getTetris_atPre = joueur.getTetris();
 		
 		try {
 			joueur.goRight();
@@ -110,11 +116,13 @@ public class JoueurTest {
 	
 	@Test
 	public void testGoDown() {
-		JoueurContract joueur = new JoueurContract(new JoueurImpl());
+		JoueurService joueur = Factory.createJoueur();
 		joueur.init();
+		joueur.getTetris().init();
+		joueur.getTetris().next();
 		
 		/* Captures */
-		TetrisContract getTetris_atPre = joueur.getTetris();
+		TetrisService getTetris_atPre = joueur.getTetris();
 		
 		try {
 			joueur.goDown();
@@ -137,11 +145,11 @@ public class JoueurTest {
 	
 	@Test
 	public void testRotateLeft() {
-		JoueurContract joueur = new JoueurContract(new JoueurImpl());
+		JoueurService joueur = Factory.createJoueur();
 		joueur.init();
 		
 		/* Captures */
-		TetrisContract getTetris_atPre = joueur.getTetris();
+		TetrisService getTetris_atPre = joueur.getTetris();
 		
 		try {
 			joueur.rotateLeft();
@@ -164,11 +172,11 @@ public class JoueurTest {
 	
 	@Test
 	public void testRotateRight() {
-		JoueurContract joueur = new JoueurContract(new JoueurImpl());
+		JoueurService joueur = Factory.createJoueur();
 		joueur.init();
 		
 		/* Captures */
-		TetrisContract getTetris_atPre = joueur.getTetris();
+		TetrisService getTetris_atPre = joueur.getTetris();
 		
 		try {
 			joueur.rotateRight();

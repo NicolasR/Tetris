@@ -5,14 +5,15 @@ import static org.junit.Assert.assertTrue;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import programme.Factory;
+
 public class TetrisTest{
 	
-	private static TetrisContract tetris;
+	private static TetrisService tetris;
 	
 	@BeforeClass
 	public static void initialize(){
-		TetrisImpl impl = new TetrisImpl();
-		tetris = new TetrisContract(impl);
+		tetris = Factory.createTetris();
 	}
 	
 	@Test
