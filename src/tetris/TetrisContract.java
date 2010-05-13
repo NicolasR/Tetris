@@ -1,8 +1,8 @@
 package tetris;
 
-import grid.GridService;
-import block.BlockService;
-import board.BoardService;
+import grid.GridContract;
+import block.BlockContract;
+import board.BoardContract;
 
 public class TetrisContract extends TetrisDecorator {
 
@@ -37,7 +37,7 @@ public class TetrisContract extends TetrisDecorator {
 		
 		
 		//POST BOARD:init
-		BoardService board = getBoard();
+		BoardContract board = getBoard();
 		if (!(getBoard().isBlock() == false)) {
 			throw new Error("[TETRIS]post(2.1)(init) invalide");
 		}
@@ -66,8 +66,8 @@ public class TetrisContract extends TetrisDecorator {
 			throw new Error("[TETRIS]pre(1)(goLeft) invalide");
 		
 		int getScore_atPre = getScore();
-		BlockService getcurrentBlock_atPre = getBoard().getcurrentBlock();
-		GridService getgrid_atPre = getBoard().getgrid();
+		BlockContract getcurrentBlock_atPre = getBoard().getcurrentBlock();
+		GridContract getgrid_atPre = getBoard().getgrid();
 		int getNbLastCleaned_atPre = getBoard().getNbLastCleaned();
 		boolean isBlock_atPre = getBoard().isBlock();
 		int getXMinBlock_atPre = getBoard().getXMinBlock();
@@ -82,7 +82,7 @@ public class TetrisContract extends TetrisDecorator {
 			throw new Error("[TETRIS]post(2)(goLeft) invalide");
 		
 		//POST BOARD:doLeft
-		BoardService board = getBoard();
+		BoardContract board = getBoard();
 		if(!(board.getcurrentBlock() == getcurrentBlock_atPre)) {
 			throw new Error("[TETRIS]post(3.1)(goLeft) invalide");
 		}
@@ -115,8 +115,8 @@ public class TetrisContract extends TetrisDecorator {
 		
 		int getScore_atPre = getScore();
 		
-		BlockService getcurrentBlock_atPre = getBoard().getcurrentBlock();
-		GridService getgrid_atPre = getBoard().getgrid();
+		BlockContract getcurrentBlock_atPre = getBoard().getcurrentBlock();
+		GridContract getgrid_atPre = getBoard().getgrid();
 		int getNbLastCleaned_atPre = getBoard().getNbLastCleaned();
 		boolean isBlock_atPre = getBoard().isBlock();
 		int getXMinBlock_atPre = getBoard().getXMinBlock();
@@ -131,7 +131,7 @@ public class TetrisContract extends TetrisDecorator {
 			throw new Error("[TETRIS]post(2)(goRight) invalide");
 		
 		//POST BOARD:doRight
-		BoardService board = getBoard();
+		BoardContract board = getBoard();
 		if(!(board.getcurrentBlock() == getcurrentBlock_atPre)) {
 			throw new Error("[TETRIS]post(3.1)(goRight) invalide");
 		}
@@ -161,8 +161,8 @@ public class TetrisContract extends TetrisDecorator {
 		
 		boolean isBottom_atPre = getBoard().isBottom();
 		int getScore_atPre = getScore();
-		BlockService getcurrentBlock_atPre = getBoard().getcurrentBlock();
-		GridService getgrid_atPre = getBoard().getgrid();
+		BlockContract getcurrentBlock_atPre = getBoard().getcurrentBlock();
+		GridContract getgrid_atPre = getBoard().getgrid();
 		boolean isBlock_atPre = getBoard().isBlock();
 		int getXMinBlock_atPre = getBoard().getXMinBlock();
 		int getYMinBlock_atPre = getBoard().getYMinBlock();
@@ -179,7 +179,7 @@ public class TetrisContract extends TetrisDecorator {
 		}
 
 		//POST BOARD:doBottom
-		BoardService board = getBoard();
+		BoardContract board = getBoard();
 		if(!(board.getcurrentBlock() == getcurrentBlock_atPre)) {
 			throw new Error("[TETRIS]post(3.1)(goDown) invalide");
 		}
@@ -207,8 +207,8 @@ public class TetrisContract extends TetrisDecorator {
 			throw new Error("[TETRIS]pre(1)(rotateLeft) invalide");
 		
 		int getScore_atPre = getScore();
-		BlockService getcurrentBlock_atPre = getBoard().getcurrentBlock();
-		GridService getgrid_atPre = getBoard().getgrid();
+		BlockContract getcurrentBlock_atPre = getBoard().getcurrentBlock();
+		GridContract getgrid_atPre = getBoard().getgrid();
 		int getNbLastCleaned_atPre = getBoard().getNbLastCleaned();
 		boolean isBlock_atPre = getBoard().isBlock();
 		int getXMinBlock_atPre = getBoard().getXMinBlock();
@@ -222,7 +222,7 @@ public class TetrisContract extends TetrisDecorator {
 			throw new Error("[TETRIS]post(2)(rotateLeft) invalide");
 		
 		//POST BOARD:doRotateLeft
-		BoardService board = getBoard();
+		BoardContract board = getBoard();
 		if(!(board.getcurrentBlock() == getcurrentBlock_atPre)) {
 			throw new Error("[TETRIS]post(3.1)(rotateLeft) invalide");
 		}
@@ -251,8 +251,8 @@ public class TetrisContract extends TetrisDecorator {
 			throw new Error("[TETRIS]pre(1)(rotateRight) invalide");
 		
 		int getScore_atPre = getScore();
-		BlockService getcurrentBlock_atPre = getBoard().getcurrentBlock();
-		GridService getgrid_atPre = getBoard().getgrid();
+		BlockContract getcurrentBlock_atPre = getBoard().getcurrentBlock();
+		GridContract getgrid_atPre = getBoard().getgrid();
 		int getNbLastCleaned_atPre = getBoard().getNbLastCleaned();
 		boolean isBlock_atPre = getBoard().isBlock();
 		int getXMinBlock_atPre = getBoard().getXMinBlock();
@@ -266,7 +266,7 @@ public class TetrisContract extends TetrisDecorator {
 			throw new Error("[TETRIS]post(2)(rotateRight) invalide");
 		
 		//POST BOARD:doRotateRight
-		BoardService board = getBoard();
+		BoardContract board = getBoard();
 		if(!(board.getcurrentBlock() == getcurrentBlock_atPre)) {
 			throw new Error("[TETRIS]post(3.1)(rotateRight) invalide");
 		}
@@ -297,7 +297,7 @@ public class TetrisContract extends TetrisDecorator {
 		boolean isBottom_atPre = getBoard().isBottom();
 		boolean needNext_atPre = needNext();
 		
-		GridService getgrid_atPre = getBoard().getgrid();
+		GridContract getgrid_atPre = getBoard().getgrid();
 		boolean isBlock_atPre = getBoard().isBlock();
 		int getXMinBlock_atPre = getBoard().getXMinBlock();
 		int getYMinBlock_atPre = getBoard().getYMinBlock();
@@ -324,7 +324,7 @@ public class TetrisContract extends TetrisDecorator {
 		}
 		
 		//POST BOARD:step
-		BoardService board = getBoard();
+		BoardContract board = getBoard();
 		if(!(board.getgrid() == getgrid_atPre)) {
 			throw new Error("[TETRIS]post(3.1)(step) invalide");
 		}
@@ -354,7 +354,7 @@ public class TetrisContract extends TetrisDecorator {
 			throw new Error("[TETRIS]pre(1)(next) invalide");
 		
 		int getScore_atPre = getScore();
-		GridService getgrid_atPre = getBoard().getgrid();
+		GridContract getgrid_atPre = getBoard().getgrid();
 		
 		super.next();
 		
@@ -364,7 +364,7 @@ public class TetrisContract extends TetrisDecorator {
 			throw new Error("[TETRIS]post(2)(next) invalide");
 		
 		//POST BOARD:insert
-		BoardService board = getBoard();
+		BoardContract board = getBoard();
 		
 		if(!(board.getgrid() == getgrid_atPre)) {
 			throw new Error("[TETRIS]post(3.2)(next) invalide");

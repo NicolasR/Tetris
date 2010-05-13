@@ -9,11 +9,12 @@ import programme.Factory;
 
 public class TetrisTest{
 	
-	private static TetrisService tetris;
+	private static TetrisContract tetris;
 	
 	@BeforeClass
 	public static void initialize(){
-		tetris = Factory.createTetris();
+		TetrisImpl impl = new TetrisImpl();
+		tetris = new TetrisContract(impl);
 	}
 	
 	@Test

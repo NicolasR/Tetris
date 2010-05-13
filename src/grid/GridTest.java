@@ -9,11 +9,12 @@ import programme.Factory;
 
 public class GridTest{
 	
-	private static GridService grid;
+	private static GridContract grid;
 	
 	@BeforeClass
 	public static void initialize(){
-		grid = Factory.createGrid();
+		GridImpl impl = new GridImpl();
+		grid = new GridContract(impl);
 	}
 	
 	@Test
@@ -25,7 +26,7 @@ public class GridTest{
 			assertTrue(true);
 		}
 		
-		grid = Factory.createGrid();
+		grid = new GridContract(new GridImpl());
 		grid.init(10,22);
 		boolean oracle_post = (grid.getWidth() == 10) && (grid.getHeight() == 22);
 		assertTrue(oracle_post);	
@@ -89,7 +90,7 @@ public class GridTest{
 	
 	@Test
 	public void testput(){
-		grid = Factory.createGrid();
+		grid = new GridContract(new GridImpl());
 		grid.init(10, 22);
 		
 		grid.put(1, 1);

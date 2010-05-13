@@ -1,13 +1,13 @@
 package board;
 
-import block.BlockService;
+import block.BlockContract;
 import grid.*;
 
 public interface BoardService {
 	
 	/** Observators*/
-	public BlockService getcurrentBlock();
-	public GridService getgrid();
+	public BlockContract getcurrentBlock();
+	public GridContract getgrid();
 	public int getNbLastCleaned();
 	public boolean canRotateLeft();
 		//pre: isBlock()
@@ -127,7 +127,7 @@ public interface BoardService {
 	 * post: getgrid() == getgrid()@pre
 	 * post: isBlock()
 	 */
-	public void insert(BlockService block);
+	public void insert(BlockContract block);
 
 	/**
 	 * pre: isBlock()

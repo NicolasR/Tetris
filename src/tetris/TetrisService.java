@@ -1,6 +1,6 @@
 package tetris;
 
-import board.BoardService;
+import board.*;
 
 public interface TetrisService {
 	/** Observators */
@@ -9,7 +9,7 @@ public interface TetrisService {
 	public boolean isRunning();
 	public boolean needNext();
 		//pre: isRunning == true
-	public BoardService getBoard();
+	public BoardContract getBoard();
 	
 	/** Invariants
 	 * getScore() >= 0

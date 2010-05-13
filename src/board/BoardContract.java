@@ -1,7 +1,7 @@
 package board;
 
-import grid.GridService;
-import block.BlockService;
+import grid.GridContract;
+import block.BlockContract;
 
 public class BoardContract extends BoardDecorator {
 
@@ -11,7 +11,7 @@ public class BoardContract extends BoardDecorator {
 
 	
 	public void checkInvariants(){
-		BlockService block = super.getcurrentBlock();
+		BlockContract block = super.getcurrentBlock();
 		if (super.isBlock())
 		{
 			if (!(1<= super.getXblock(block.getXMin())  && super.getXblock(block.getXMax()) <= super.getgrid().getWidth()+1)) {
@@ -66,8 +66,8 @@ public class BoardContract extends BoardDecorator {
 			throw new Error("[BOARD]pre(1)(doRotateLeft) invalide");
 		}
 		checkInvariants();
-		BlockService getcurrentBlock_atPre = super.getcurrentBlock();
-		GridService getgrid_atPre = super.getgrid();
+		BlockContract getcurrentBlock_atPre = super.getcurrentBlock();
+		GridContract getgrid_atPre = super.getgrid();
 		int getNbLastCleaned_atPre = super.getNbLastCleaned();
 		boolean isBlock_atPre = super.isBlock();
 		int getXMinBlock_atPre = super.getXMinBlock();
@@ -100,7 +100,7 @@ public class BoardContract extends BoardDecorator {
 		}
 		
 		//block:rotateLeft
-		BlockService block = getcurrentBlock();
+		BlockContract block = getcurrentBlock();
 		if(!(block.getType() == getType_atPre)) {
 			throw new Error("[BOARD]post(7.1)(doRotateLeft) invalide");
 		}
@@ -118,8 +118,8 @@ public class BoardContract extends BoardDecorator {
 			throw new Error("[BOARD]pre(1)(doLeft) invalide");
 		}
 		checkInvariants();
-		BlockService getcurrentBlock_atPre = super.getcurrentBlock();
-		GridService getgrid_atPre = super.getgrid();
+		BlockContract getcurrentBlock_atPre = super.getcurrentBlock();
+		GridContract getgrid_atPre = super.getgrid();
 		int getNbLastCleaned_atPre = super.getNbLastCleaned();
 		boolean isBlock_atPre = super.isBlock();
 		int getXMinBlock_atPre = super.getXMinBlock();
@@ -152,8 +152,8 @@ public class BoardContract extends BoardDecorator {
 			throw new Error("[BOARD]pre(1)(doRotateRight) invalide");
 		}
 		checkInvariants();
-		BlockService getcurrentBlock_atPre = super.getcurrentBlock();
-		GridService getgrid_atPre = super.getgrid();
+		BlockContract getcurrentBlock_atPre = super.getcurrentBlock();
+		GridContract getgrid_atPre = super.getgrid();
 		int getNbLastCleaned_atPre = super.getNbLastCleaned();
 		boolean isBlock_atPre = super.isBlock();
 		int getXMinBlock_atPre = super.getXMinBlock();
@@ -185,8 +185,8 @@ public class BoardContract extends BoardDecorator {
 			throw new Error("[BOARD]pre(1)(doRight) invalide");
 		}
 		checkInvariants();
-		BlockService getcurrentBlock_atPre = super.getcurrentBlock();
-		GridService getgrid_atPre = super.getgrid();
+		BlockContract getcurrentBlock_atPre = super.getcurrentBlock();
+		GridContract getgrid_atPre = super.getgrid();
 		int getNbLastCleaned_atPre = super.getNbLastCleaned();
 		boolean isBlock_atPre = super.isBlock();
 		int getXMinBlock_atPre = super.getXMinBlock();
@@ -219,8 +219,8 @@ public class BoardContract extends BoardDecorator {
 			throw new Error("[BOARD]pre(1)(doBottom) invalide");
 		}
 		checkInvariants();
-		BlockService getcurrentBlock_atPre = super.getcurrentBlock();
-		GridService getgrid_atPre = super.getgrid();
+		BlockContract getcurrentBlock_atPre = super.getcurrentBlock();
+		GridContract getgrid_atPre = super.getgrid();
 		boolean isBlock_atPre = super.isBlock();
 		int getXMinBlock_atPre = super.getXMinBlock();
 		int getYMinBlock_atPre = super.getYMinBlock();
@@ -253,7 +253,7 @@ public class BoardContract extends BoardDecorator {
 			throw new Error("[BOARD]pre(1)(step) invalide");
 		}
 		checkInvariants();
-		GridService getgrid_atPre = super.getgrid();
+		GridContract getgrid_atPre = super.getgrid();
 		boolean isBlock_atPre = super.isBlock();
 		int getXMinBlock_atPre = super.getXMinBlock();
 		int getYMinBlock_atPre = super.getYMinBlock();
@@ -278,12 +278,12 @@ public class BoardContract extends BoardDecorator {
 	}
 	
 	
-	public void insert(BlockService block){
+	public void insert(BlockContract block){
 		if(!(super.isBlock() == false)) {
 			throw new Error("[BOARD]pre(1)(insert) invalide");
 		}
 		checkInvariants();
-		GridService getgrid_atPre = super.getgrid();
+		GridContract getgrid_atPre = super.getgrid();
 		super.insert(block);
 		checkInvariants();
 		if(!(super.getcurrentBlock() == block)) {
@@ -302,7 +302,7 @@ public class BoardContract extends BoardDecorator {
 			throw new Error("[BOARD]pre(1)(remove) invalide");
 		}
 		checkInvariants();
-		GridService getgrid_atPre = super.getgrid();
+		GridContract getgrid_atPre = super.getgrid();
 		int getNbLastCleaned_atPre = super.getNbLastCleaned();
 		super.remove();
 		checkInvariants();
@@ -330,8 +330,8 @@ public class BoardContract extends BoardDecorator {
 			throw new Error("[BOARD]pre(1)(clean) invalide");
 		}
 		checkInvariants();
-		BlockService getcurrentBlock_atPre = super.getcurrentBlock();
-		GridService getgrid_atPre = super.getgrid();
+		BlockContract getcurrentBlock_atPre = super.getcurrentBlock();
+		GridContract getgrid_atPre = super.getgrid();
 		super.clean();
 		checkInvariants();
 		if(!(super.getcurrentBlock() == getcurrentBlock_atPre)) {

@@ -1,17 +1,16 @@
 package board;
 
-import grid.GridService;
+import grid.GridContract;
+import grid.GridImpl;
 
 import java.util.LinkedList;
 
-import programme.Factory;
-
-import block.BlockService;
+import block.BlockContract;
 
 public class BoardImpl implements BoardService {
 
-	private BlockService block;
-	private GridService grid;
+	private BlockContract block;
+	private GridContract grid;
 	private int NbLastCleaned;
 	private boolean Conflict;
 	private int XMinBlock;
@@ -19,7 +18,7 @@ public class BoardImpl implements BoardService {
 	private boolean isCleaned;
 	
 	@Override
-	public BlockService getcurrentBlock() {
+	public BlockContract getcurrentBlock() {
 		return this.block;
 	}
 	
@@ -28,7 +27,7 @@ public class BoardImpl implements BoardService {
 	}
 	
 	@Override
-	public GridService getgrid() {
+	public GridContract getgrid() {
 		return this.grid;
 	}
 	
@@ -583,7 +582,7 @@ public class BoardImpl implements BoardService {
 	@Override
 	public void init(int x, int y) {
 		block = null;
-		grid = Factory.createGrid();
+		grid = new GridContract(new GridImpl());
 		grid.init(x, y);
 		NbLastCleaned = 0;
 		XMinBlock = 0;
@@ -699,7 +698,7 @@ public class BoardImpl implements BoardService {
 		}
 	}
 	@Override
-	public void insert(BlockService block) {
+	public void insert(BlockContract block) {
 		this.block = block;
 		this.XMinBlock = grid.getWidth() - (2 + block.getSize());
 		this.YMinBlock = 1;

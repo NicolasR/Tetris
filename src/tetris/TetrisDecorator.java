@@ -1,6 +1,6 @@
 package tetris;
 
-import board.BoardService;
+import board.*;
 
 public abstract class TetrisDecorator implements TetrisService{
 	TetrisService delegate;
@@ -25,7 +25,7 @@ public abstract class TetrisDecorator implements TetrisService{
 		return this.delegate.needNext();
 	}
 
-	public BoardService getBoard(){
+	public BoardContract getBoard(){
 		return this.delegate.getBoard();
 	}
 	

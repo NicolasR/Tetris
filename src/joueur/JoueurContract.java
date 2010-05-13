@@ -1,7 +1,6 @@
 package joueur;
 
-import programme.Factory;
-import tetris.TetrisService;
+import tetris.TetrisContract;
 
 public class JoueurContract extends JoueurDecorator {
 
@@ -16,9 +15,9 @@ public class JoueurContract extends JoueurDecorator {
 		}
 	}
 	
-	public TetrisService getTetris() {
+	public TetrisContract getTetris() {
 		checkInvariants();
-		TetrisService tetris = Factory.createTetris();
+		TetrisContract tetris = super.getTetris();
 		checkInvariants();
 		return tetris;
 	}
@@ -30,7 +29,7 @@ public class JoueurContract extends JoueurDecorator {
 	
 	public void goLeft() {
 		checkInvariants();
-		TetrisService getTetris_atPre = super.getTetris();
+		TetrisContract getTetris_atPre = super.getTetris();
 		
 		int getScore_atPre = getTetris().getScore();
 		boolean isBottom_atPre = getTetris().getBoard().isBottom();
@@ -42,7 +41,7 @@ public class JoueurContract extends JoueurDecorator {
 		}
 		
 		//POST TETRIS:goLeft
-		TetrisService tetris = getTetris();
+		TetrisContract tetris = getTetris();
 		if (!(tetris.getScore() == getScore_atPre))
 			throw new Error("[JOUEUR]post(2.1)(goLeft) invalide");
 		
@@ -53,7 +52,7 @@ public class JoueurContract extends JoueurDecorator {
 	
 	public void goRight() {
 		checkInvariants();
-		TetrisService getTetris_atPre = super.getTetris();
+		TetrisContract getTetris_atPre = super.getTetris();
 		boolean isBottom_atPre = getTetris().getBoard().isBottom();
 		
 		int getScore_atPre = getTetris().getScore();
@@ -66,7 +65,7 @@ public class JoueurContract extends JoueurDecorator {
 		}
 		
 		//POST TETRIS:goRight
-		TetrisService tetris = getTetris();
+		TetrisContract tetris = getTetris();
 		if (!(tetris.getScore() == getScore_atPre))
 			throw new Error("[JOUEUR]post(2.1)(goRight) invalide");
 		if (!isBottom_atPre)
@@ -76,7 +75,7 @@ public class JoueurContract extends JoueurDecorator {
 	
 	public void goDown() {
 		checkInvariants();
-		TetrisService getTetris_atPre = super.getTetris();
+		TetrisContract getTetris_atPre = super.getTetris();
 		
 		boolean isBottom_atPre = getTetris().getBoard().isBottom();
 		int getScore_atPre = getTetris().getScore();
@@ -89,7 +88,7 @@ public class JoueurContract extends JoueurDecorator {
 		}
 		
 		//POST TETRIS:goDown
-		TetrisService tetris = getTetris();
+		TetrisContract tetris = getTetris();
 		if (!isBottom_atPre){
 			if (!(getScore_atPre+20+50*(tetris.getBoard().getNbLastCleaned()) == tetris.getScore()))
 				throw new Error("[JOUEUR]post(2.1)(goDown) invalide");
@@ -101,7 +100,7 @@ public class JoueurContract extends JoueurDecorator {
 	
 	public void rotateLeft() {
 		checkInvariants();
-		TetrisService getTetris_atPre = super.getTetris();
+		TetrisContract getTetris_atPre = super.getTetris();
 		
 		int getScore_atPre = getTetris().getScore();
 		
@@ -113,7 +112,7 @@ public class JoueurContract extends JoueurDecorator {
 		}
 		
 		//POST TETRIS:rotateLeft
-		TetrisService tetris = getTetris();
+		TetrisContract tetris = getTetris();
 		if (!(tetris.getScore() == getScore_atPre))
 			throw new Error("[JOUEUR]post(2.1)(rotateLeft) invalide");
 		if (!(tetris.needNext() == false))
@@ -122,7 +121,7 @@ public class JoueurContract extends JoueurDecorator {
 	
 	public void rotateRight() {
 		checkInvariants();
-		TetrisService getTetris_atPre = super.getTetris();
+		TetrisContract getTetris_atPre = super.getTetris();
 		
 		int getScore_atPre = getTetris().getScore();
 		
@@ -134,7 +133,7 @@ public class JoueurContract extends JoueurDecorator {
 		}
 		
 		//POST TETRIS:rotateRight
-		TetrisService tetris = getTetris();
+		TetrisContract tetris = getTetris();
 		if (!(tetris.getScore() == getScore_atPre))
 			throw new Error("[JOUEUR]post(2.1)(rotateRight) invalide");
 		if (!(tetris.needNext() == false))

@@ -1,32 +1,25 @@
-import javax.swing.JFrame;
-
-import joueur.JoueurService;
+import joueur.JoueurContract;
 
 
 public class Runner extends Thread implements Runnable {
-	private JoueurService joueur;
-	private TetrisPanel pane;
+	private JoueurContract joueur;
+	private Fenetre fenetre;
 	
-	public Runner(JoueurService joueur, JFrame Fenetre, TetrisPanel pane){
+	public Runner(JoueurContract joueur, Fenetre fenetre){
 		this.joueur = joueur;
-		this.pane = pane;
+		this.fenetre = fenetre;
 	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		
 		while(!joueur.getTetris().isFinished()){
 		try {
 			Thread.sleep(700);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//tetris.rotateRight();
-		pane.doAction(TetrisPanel.STEP);
-		//fenetre.repaint();
-		//System.out.println("OK");
+		fenetre.doAction(Fenetre.STEP);
 		}
 		System.out.println("Fini: "+joueur.getTetris().getScore());
 	}
