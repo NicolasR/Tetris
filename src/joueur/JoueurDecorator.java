@@ -1,6 +1,6 @@
 package joueur;
 
-import tetris.TetrisContract;
+import tetris.TetrisService;
 
 public abstract class JoueurDecorator implements JoueurService {
 
@@ -10,7 +10,7 @@ public abstract class JoueurDecorator implements JoueurService {
 		this.delegate = delegate;
 	}
 	
-	public TetrisContract getTetris() {
+	public TetrisService getTetris() {
 		return this.delegate.getTetris();
 	}
 	

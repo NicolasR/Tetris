@@ -1,6 +1,6 @@
 package joueur;
 
-import tetris.TetrisContract;
+import tetris.TetrisService;
 
 public class JoueurContract extends JoueurDecorator {
 
@@ -15,9 +15,9 @@ public class JoueurContract extends JoueurDecorator {
 		}
 	}
 	
-	public TetrisContract getTetris() {
+	public TetrisService getTetris() {
 		checkInvariants();
-		TetrisContract tetris = super.getTetris();
+		TetrisService tetris = super.getTetris();
 		checkInvariants();
 		return tetris;
 	}
@@ -29,10 +29,12 @@ public class JoueurContract extends JoueurDecorator {
 	
 	public void goLeft() {
 		checkInvariants();
-		TetrisContract getTetris_atPre = super.getTetris();
+		TetrisService getTetris_atPre = super.getTetris();
 		
 		int getScore_atPre = getTetris().getScore();
 		boolean isBottom_atPre = getTetris().getBoard().isBottom();
+		boolean canPlay_atPre = canPlay();
+		
 		super.goLeft();
 		checkInvariants();
 		
@@ -41,21 +43,25 @@ public class JoueurContract extends JoueurDecorator {
 		}
 		
 		//POST TETRIS:goLeft
-		TetrisContract tetris = getTetris();
-		if (!(tetris.getScore() == getScore_atPre))
-			throw new Error("[JOUEUR]post(2.1)(goLeft) invalide");
+		if(canPlay_atPre){
+			TetrisService tetris = getTetris();
+			if (!(tetris.getScore() == getScore_atPre))
+				throw new Error("[JOUEUR]post(2.1)(goLeft) invalide");
 		
-		if (!isBottom_atPre)
+		//if (!isBottom_atPre)
 			if (!(tetris.needNext() == false))
 				throw new Error("[JOUEUR]post(2.2)(goLeft) invalide");
+		}
 	}
 	
 	public void goRight() {
 		checkInvariants();
-		TetrisContract getTetris_atPre = super.getTetris();
+		TetrisService getTetris_atPre = super.getTetris();
 		boolean isBottom_atPre = getTetris().getBoard().isBottom();
 		
 		int getScore_atPre = getTetris().getScore();
+		
+		boolean canPlay_atPre = canPlay();
 		
 		super.goRight();
 		checkInvariants();
@@ -65,20 +71,25 @@ public class JoueurContract extends JoueurDecorator {
 		}
 		
 		//POST TETRIS:goRight
-		TetrisContract tetris = getTetris();
-		if (!(tetris.getScore() == getScore_atPre))
-			throw new Error("[JOUEUR]post(2.1)(goRight) invalide");
-		if (!isBottom_atPre)
-			if (!(tetris.needNext() == false))
-				throw new Error("[JOUEUR]post(2.2)(goRight) invalide");
+		
+		if(canPlay_atPre){
+			TetrisService tetris = getTetris();
+			if (!(tetris.getScore() == getScore_atPre))
+				throw new Error("[JOUEUR]post(2.1)(goRight) invalide");
+			//if (!isBottom_atPre)
+				if (!(tetris.needNext() == false))
+					throw new Error("[JOUEUR]post(2.2)(goRight) invalide");
+		}
 	}
 	
 	public void goDown() {
 		checkInvariants();
-		TetrisContract getTetris_atPre = super.getTetris();
+		TetrisService getTetris_atPre = super.getTetris();
 		
 		boolean isBottom_atPre = getTetris().getBoard().isBottom();
 		int getScore_atPre = getTetris().getScore();
+		
+		boolean canPlay_atPre = canPlay();
 		
 		super.goDown();
 		checkInvariants();
@@ -88,22 +99,25 @@ public class JoueurContract extends JoueurDecorator {
 		}
 		
 		//POST TETRIS:goDown
-		TetrisContract tetris = getTetris();
-		if (!isBottom_atPre){
-			if (!(getScore_atPre+20+50*(tetris.getBoard().getNbLastCleaned()) == tetris.getScore()))
-				throw new Error("[JOUEUR]post(2.1)(goDown) invalide");
+		if(!canPlay_atPre){
+			TetrisService tetris = getTetris();
+			if (!isBottom_atPre){
+				if (!(getScore_atPre+20+50*(tetris.getBoard().getNbLastCleaned()) == tetris.getScore()))
+					throw new Error("[JOUEUR]post(2.1)(goDown) invalide");
 			
-			if (!(tetris.needNext() == true))
-				throw new Error("[JOUEUR]post(2.2)(goDown) invalide");
+				if (!(tetris.needNext() == true))
+					throw new Error("[JOUEUR]post(2.2)(goDown) invalide");
+			}
 		}
 	}
 	
 	public void rotateLeft() {
 		checkInvariants();
-		TetrisContract getTetris_atPre = super.getTetris();
+		TetrisService getTetris_atPre = super.getTetris();
 		
 		int getScore_atPre = getTetris().getScore();
 		
+		boolean canPlay_atPre = canPlay();
 		super.rotateLeft();
 		checkInvariants();
 		
@@ -112,18 +126,22 @@ public class JoueurContract extends JoueurDecorator {
 		}
 		
 		//POST TETRIS:rotateLeft
-		TetrisContract tetris = getTetris();
-		if (!(tetris.getScore() == getScore_atPre))
-			throw new Error("[JOUEUR]post(2.1)(rotateLeft) invalide");
-		if (!(tetris.needNext() == false))
-			throw new Error("[JOUEUR]post(2.2)(rotateLeft) invalide");
+		if (canPlay_atPre){
+			TetrisService tetris = getTetris();
+			if (!(tetris.getScore() == getScore_atPre))
+				throw new Error("[JOUEUR]post(2.1)(rotateLeft) invalide");
+			if (!(tetris.needNext() == false))
+				throw new Error("[JOUEUR]post(2.2)(rotateLeft) invalide");
+		}
 	}
 	
 	public void rotateRight() {
 		checkInvariants();
-		TetrisContract getTetris_atPre = super.getTetris();
+		TetrisService getTetris_atPre = super.getTetris();
 		
 		int getScore_atPre = getTetris().getScore();
+		
+		boolean canPlay_atPre = canPlay();
 		
 		super.rotateRight();
 		checkInvariants();
@@ -133,11 +151,13 @@ public class JoueurContract extends JoueurDecorator {
 		}
 		
 		//POST TETRIS:rotateRight
-		TetrisContract tetris = getTetris();
-		if (!(tetris.getScore() == getScore_atPre))
-			throw new Error("[JOUEUR]post(2.1)(rotateRight) invalide");
-		if (!(tetris.needNext() == false))
-			throw new Error("[JOUEUR]post(2.2)(rotateRight) invalide");
+		if (canPlay_atPre){
+			TetrisService tetris = getTetris();
+			if (!(tetris.getScore() == getScore_atPre))
+				throw new Error("[JOUEUR]post(2.1)(rotateRight) invalide");
+			if (!(tetris.needNext() == false))
+				throw new Error("[JOUEUR]post(2.2)(rotateRight) invalide");
+		}
 	}
 
 	@Override

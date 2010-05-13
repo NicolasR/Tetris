@@ -68,9 +68,10 @@ public class Fenetre extends JFrame implements KeyListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-				joueur.getTetris().next();
-				this.runner.start();
-				Thread t = new Thread() {
+			joueur.getTetris().next();
+			this.runner.start();
+			
+				/*Thread t = new Thread() {
 			        public void run() {
 			          while(true){
 			  				try {
@@ -84,7 +85,7 @@ public class Fenetre extends JFrame implements KeyListener{
 
 			          }
 			        }
-				};
+				};*/
 		}
 	}
 	
@@ -139,7 +140,7 @@ public class Fenetre extends JFrame implements KeyListener{
 				System.exit(1);
 		}
 		this.panel.setScore(joueur.getTetris().getScore());
-		//this.paint(this.fenetre.getGraphics());
+		this.paint(this.fenetre.getGraphics());
 		//this.repaint();
 	}
 	

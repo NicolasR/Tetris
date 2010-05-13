@@ -1,6 +1,6 @@
 package joueur;
 
-import tetris.TetrisContract;
+import tetris.TetrisService;
 
 public interface JoueurService {
 
@@ -8,7 +8,7 @@ public interface JoueurService {
 	// inv : getTetris() != null
 	
 	/* OBSERVATORS */	
-	public TetrisContract getTetris();
+	public TetrisService getTetris();
 	public boolean canPlay();
 	
 	/* CONSTRUCTORS */

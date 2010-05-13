@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import tetris.TetrisContract;
+import tetris.TetrisService;
 
 public class JoueurTest {
 	
@@ -62,7 +62,7 @@ public class JoueurTest {
 		joueur.getTetris().next();
 		
 		/* Captures */
-		TetrisContract getTetris_atPre = joueur.getTetris();
+		TetrisService getTetris_atPre = joueur.getTetris();
 		
 		try {
 			joueur.goLeft();
@@ -91,7 +91,7 @@ public class JoueurTest {
 		joueur.getTetris().next();
 		
 		/* Captures */
-		TetrisContract getTetris_atPre = joueur.getTetris();
+		TetrisService getTetris_atPre = joueur.getTetris();
 		
 		try {
 			joueur.goRight();
@@ -120,7 +120,7 @@ public class JoueurTest {
 		joueur.getTetris().next();
 		
 		/* Captures */
-		TetrisContract getTetris_atPre = joueur.getTetris();
+		TetrisService getTetris_atPre = joueur.getTetris();
 		
 		try {
 			joueur.goDown();
@@ -147,7 +147,7 @@ public class JoueurTest {
 		joueur.init();
 		
 		/* Captures */
-		TetrisContract getTetris_atPre = joueur.getTetris();
+		TetrisService getTetris_atPre = joueur.getTetris();
 		
 		try {
 			joueur.rotateLeft();
@@ -174,7 +174,7 @@ public class JoueurTest {
 		joueur.init();
 		
 		/* Captures */
-		TetrisContract getTetris_atPre = joueur.getTetris();
+		TetrisService getTetris_atPre = joueur.getTetris();
 		
 		try {
 			joueur.rotateRight();
