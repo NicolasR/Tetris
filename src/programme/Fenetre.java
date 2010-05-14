@@ -29,12 +29,11 @@ public class Fenetre extends JFrame implements KeyListener{
 	 */
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menuJeu = new JMenu("Jeu");
-	private JMenuItem JeuDemarrer = new JMenuItem("D�marrer");
+	private JMenuItem JeuDemarrer = new JMenuItem("Démarrer");
 	private JMenuItem JeuQuitter = new JMenuItem("Quitter");
 	private TetrisPanel panel;
 	private Runner runner;
 	private JoueurService joueur;
-	private Fenetre fenetre = this;
 	
 	public Fenetre(JoueurService joueur2){
 		this.joueur = joueur2;
@@ -48,7 +47,7 @@ public class Fenetre extends JFrame implements KeyListener{
 		this.panel = new TetrisPanel(joueur2,this);
 		this.setContentPane(panel);
 		this.runner = new Runner(joueur2, this);
-		JeuDemarrer.addActionListener(new DemarrerListener(joueur2,runner));
+		JeuDemarrer.addActionListener(new DemarrerListener(this));
 		
 		this.menuJeu.add(JeuDemarrer);
 		this.menuJeu.add(JeuQuitter);
@@ -60,23 +59,25 @@ public class Fenetre extends JFrame implements KeyListener{
 	}
 	
 	public class DemarrerListener implements ActionListener{
-		private JoueurService joueur;
-		private Runner runner;
+		private Fenetre fenetre;
 		
-		public DemarrerListener(JoueurService joueur, Runner runner){
-			this.joueur = joueur;
-			this.runner = runner;
+		public DemarrerListener(Fenetre fenetre){
+			this.fenetre = fenetre;
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			joueur.getTetris().next();
-			this.runner.start();
+			if(!joueur.getTetris().isRunning()){
+				joueur.getTetris().init();
+				panel.setGrid(joueur.getTetris().getBoard().getgrid());
+				joueur.getTetris().next();
+				runner = new Runner(joueur, fenetre);
+				runner.start();
+			}
 		}
 	}
 	
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
 		int code = e.getKeyCode();
 		switch(code){
 			//CRTL gauche
@@ -126,8 +127,8 @@ public class Fenetre extends JFrame implements KeyListener{
 				System.exit(1);
 		}
 		this.panel.setScore(joueur.getTetris().getScore());
-		this.paint(this.fenetre.getGraphics());
-		//this.repaint();
+		//this.paint(fenetre.getGraphics());
+		this.repaint();
 	}
 	
 	public synchronized void goLeft(){
@@ -156,13 +157,11 @@ public class Fenetre extends JFrame implements KeyListener{
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 }

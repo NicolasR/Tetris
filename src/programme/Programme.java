@@ -18,13 +18,13 @@ public class Programme extends JPanel{
 		setDoubleBuffered(true);
 		this.joueur = Factory.createJoueur();
 		this.joueur.init();
-		this.joueur.getTetris().init();
+		//this.joueur.getTetris().init();
 		this.fenetre = new Fenetre(joueur);
 	}
 	
 	public void init(){
 		fenetre.setVisible(true);
-		fenetre.setSize(800, 600);
+		fenetre.setSize(320, 520);
 	}
 	
 	public void paintComponent(Graphics g){

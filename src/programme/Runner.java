@@ -24,5 +24,6 @@ public class Runner extends Thread implements Runnable {
 		fenetre.doAction(Fenetre.STEP);
 		}
 		System.out.println("Fini: "+joueur.getTetris().getScore());
+		joueur.init();
 	}
 }

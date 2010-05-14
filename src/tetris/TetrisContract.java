@@ -323,7 +323,7 @@ public class TetrisContract extends TetrisDecorator {
 				if (!(getScore() == getScore_atPre + 20 + (getBoard().getNbLastCleaned()*50)))
 					throw new Error("[TETRIS]post(2)(step) invalide");
 			}
-			if(!(needNext() == false))
+			if(isRunning() && !(needNext() == false))
 				throw new Error("[TETRIS]post(3)(step) invalide");
 		}
 		else{
