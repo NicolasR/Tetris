@@ -10,7 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import joueur.JoueurContract;
+import joueur.JoueurService;
 
 
 public class Fenetre extends JFrame implements KeyListener{
@@ -33,11 +33,11 @@ public class Fenetre extends JFrame implements KeyListener{
 	private JMenuItem JeuQuitter = new JMenuItem("Quitter");
 	private TetrisPanel panel;
 	private Runner runner;
-	private JoueurContract joueur;
+	private JoueurService joueur;
 	private Fenetre fenetre = this;
 	
-	public Fenetre(JoueurContract joueur){
-		this.joueur = joueur;
+	public Fenetre(JoueurService joueur2){
+		this.joueur = joueur2;
 		JeuQuitter.addActionListener(new ActionListener() {
 			
 			@Override
@@ -45,10 +45,10 @@ public class Fenetre extends JFrame implements KeyListener{
 				System.exit(0);
 			}
 		});
-		this.panel = new TetrisPanel(joueur,this);
+		this.panel = new TetrisPanel(joueur2,this);
 		this.setContentPane(panel);
-		this.runner = new Runner(joueur, this);
-		JeuDemarrer.addActionListener(new DemarrerListener(joueur,runner));
+		this.runner = new Runner(joueur2, this);
+		JeuDemarrer.addActionListener(new DemarrerListener(joueur2,runner));
 		
 		this.menuJeu.add(JeuDemarrer);
 		this.menuJeu.add(JeuQuitter);
@@ -60,10 +60,10 @@ public class Fenetre extends JFrame implements KeyListener{
 	}
 	
 	public class DemarrerListener implements ActionListener{
-		private JoueurContract joueur;
+		private JoueurService joueur;
 		private Runner runner;
 		
-		public DemarrerListener(JoueurContract joueur, Runner runner){
+		public DemarrerListener(JoueurService joueur, Runner runner){
 			this.joueur = joueur;
 			this.runner = runner;
 		}
@@ -72,22 +72,6 @@ public class Fenetre extends JFrame implements KeyListener{
 		public void actionPerformed(ActionEvent e) {
 			joueur.getTetris().next();
 			this.runner.start();
-			
-				/*Thread t = new Thread() {
-			        public void run() {
-			          while(true){
-			  				try {
-								sleep(10);
-								fenetre.repaint();
-							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-			  				//System.out.println("Where we go we don't need roads");
-
-			          }
-			        }
-				};*/
 		}
 	}
 	
@@ -113,7 +97,7 @@ public class Fenetre extends JFrame implements KeyListener{
 				doAction(GODOWN);
 				break;
 			default:
-				System.out.println("Touche: "+e.getKeyCode());
+				//System.out.println("Touche: "+e.getKeyCode());
 		}
 	}
 	

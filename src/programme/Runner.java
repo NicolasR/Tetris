@@ -1,14 +1,14 @@
 package programme;
 
-import joueur.JoueurContract;
+import joueur.JoueurService;
 
 
 public class Runner extends Thread implements Runnable {
-	private JoueurContract joueur;
+	private JoueurService joueur;
 	private Fenetre fenetre;
 	
-	public Runner(JoueurContract joueur, Fenetre fenetre){
-		this.joueur = joueur;
+	public Runner(JoueurService joueur2, Fenetre fenetre){
+		this.joueur = joueur2;
 		this.fenetre = fenetre;
 	}
 

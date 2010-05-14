@@ -53,18 +53,6 @@
 \end{tabbing}
 \begin{itemize}
  \item[$\circ$] \textit{invariants}\\
-<<<<<<< HEAD:rapport.tex
-$\textit{getType}(B) = O \parallel \textit{getType}(B) = L \parallel \textit{getType}(B) = J \parallel \textit{getType}(B) = T \parallel \\
-\>\textit{getType}(B) = Z \parallel \textit{getType}(B) = S \parallel \textit{getType}(B) = I$\\
-$\textit{getSize}(B) = 2 \parallel \textit{getSize}(B) = 3 \parallel \textit{getSize}(B) = 4$\\
-$0 <= \textit{getNbPos}(B)$ \&\& $\textit{getNbPos}(B) <= 4$\\
-$getXMin(B) = min~\left\{~first(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
-$getXMax(B) = max~\left\{~first(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
-$getYMin(B) = min~\left\{~second(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
-$getYMax(B) = max~\left\{~second(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
-$\textit{getAllPos} = \left\{~(x,y) \in Pair<1..\textit{getSize}(B),1..\textit{getSize}(B)~|~\textit{hasPos(B,x,y)}~\right\}$ \\
-$\textit{getAllPos} = \left\{~(x,y) \in \textit{\textit{getAllPos}(B)}~|~\neg \exists (x,y2) \in \textit{\textit{getAllPos}}(B), y2>y~\right\}$ \\
-=======
 \textit{getType}(B) = O $\parallel$ \textit{getType}(B) = L $\parallel$ \textit{getType}(B) = J $\parallel$ \textit{getType}(B) = T $\parallel$ \\
 \textit{getType}(B) = Z $\parallel$ \textit{getType}(B) = S $\parallel$ \textit{getType}(B) = I\\
 \textit{getSize}(B) = 2 $\parallel$ \textit{getSize}(B) = 3 $\parallel$ \textit{getSize}(B) = 4\\
@@ -75,7 +63,6 @@ $\textit{getAllPos} = \left\{~(x,y) \in \textit{\textit{getAllPos}(B)}~|~\neg \e
 \textit{getYMax}(B) = max~$\left\{~second(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
 \textit{getAllPos} = $\left\{~(x,y) \in Pair<1..\textit{getSize}(B),1..\textit{getSize}(B)>~|~\textit{hasPos(B,x,y)}~\right\}$ \\
 \textit{getAllPos} = $\left\{~(x,y) \in \textit{\textit{getAllPos}(B)}~|~\neg \exists (x,y2) \in \textit{\textit{getAllPos}}(B), y2>y~\right\}$ \\
->>>>>>> 921652edb37e11eaecc3a5d430cb491251671e2e:rapport.tex
  
  \item[$\circ$] \textit{init}\\
 \textit{getType}(\textit{init}(type)) = type\\
@@ -92,11 +79,7 @@ $\textit{getAllPos} = \left\{~(x,y) \in \textit{\textit{getAllPos}(B)}~|~\neg \e
 \textit{hasPos}(\textit{addPos}(B,x,y)) = true\\
 $\forall$ x1, y1, x1 $\ne$ x $\vee$ y1 $\ne$ y $\Rightarrow$ \textit{hasPos}(\textit{addPos}(B,x,y),x1,y1) = \textit{hasPos}(B,x1,y1)\\
 $\forall x1, y1 \in \textit{getAllPos} = \left\{~(x1,y1) \in \textit{getAllPos}(\textit{addPos}(B,x,y))~\right\}$\\
-<<<<<<< HEAD:rapport.tex
-$(x,y) \in \textit{getAllPos}(\textit{addPos}(B,x,y))$\\
-=======
 (x,y) $\in$ \textit{getAllPos}(\textit{addPos}(B,x,y))\\
->>>>>>> 921652edb37e11eaecc3a5d430cb491251671e2e:rapport.tex
 
  \item[$\circ$] \textit{removeAllPos}\\
 \textit{getType}(\textit{removeAllPos}(B)) = \textit{getType}(B)\\
@@ -440,14 +423,9 @@ init: -$>$ [Tetris]\\\\
  \textit{getBoard}(\textit{goRight}(T)) = \textbf{Board:}\textit{doRight}(\textit{getBoard}(T))\\
 
 \item[$\circ$] goDown\\
-<<<<<<< HEAD:rapport.tex
- \textit{getScore}(\textit{goDown}(T)) = \textit{getScore}(T) + 20 + \textbf{Board:}\textit{getNbLastCleaned}(\textit{getBoard}(\textit{goDown}(T)))*50\\
- \textit{needNext}(\textit{goDown}(T)) = true\\
-=======
 \textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getScore}(\textit{goDown}(T)) = \textit{getScore}(T) + 20 + \textbf{Board:}\textit{getNbLastCleaned}(\textit{getBoard}(\textit{goDown}(T)))*50\\
 $\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getScore}(\textit{goDown}(T)) = \textit{getScore}(T)\\
 $\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{needNext}(\textit{goDown}(T)) = true\\
->>>>>>> 921652edb37e11eaecc3a5d430cb491251671e2e:rapport.tex
  \textit{getBoard}(\textit{goDown}(T)) = \textbf{Board:}\textit{doBottom}(\textit{getBoard}(T))\\
 
 \item[$\circ$] rotateLeft\\
