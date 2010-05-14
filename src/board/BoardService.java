@@ -28,8 +28,6 @@ public interface BoardService {
 	public int getXMinBlock();
 	public int getYMinBlock();
 	public int getBottomHeight();
-		//pre: x>=1 && x<=getgrid().getWidth()
-		//pre: y>=1 && y<=getgrid().getHeight()
 		//pre: isBlock()
 
 	/** Invariants

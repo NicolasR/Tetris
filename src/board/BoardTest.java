@@ -1,13 +1,11 @@
 package board;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 import grid.GridService;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import programme.Factory;
-
 import block.BlockService;
 
 public class BoardTest{

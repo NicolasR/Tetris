@@ -29,13 +29,21 @@
     </javac>
   </target>
 
-  <target name="run" depends="compile"
-          description="run examples">
-    <echo>================ Run Object Main ================</echo>
-    <java classname="Contrats.ContratsTest1"
-          classpath="${build}">
-       <arg value="100"/>
+  <target name="run1" depends="compile"
+          description="run Tetris with Contracts">
+    <echo>================ Run Tetris with Contracts ================</echo>
+    <java classname="programme.Launch" classpath="${build}" fork="true">
+       <arg value="true"/>
     </java>
+  </target>
+	
+  <target name="run2" depends="compile"
+	      description="run Tetris without Contracts">
+	<echo>================ Run Tetris without Contracts ================</echo>
+	<java classname="programme.Launch"
+	          classpath="${build}" fork="true">
+	   <arg value="false"/>
+	</java>
   </target>
 
   <target name="tests" depends="init,compile" description="Lancer les tests JUNIT">
