@@ -23,8 +23,10 @@ public class Programme extends JPanel{
 	}
 	
 	public void init(){
-		fenetre.setVisible(true);
 		fenetre.setSize(320, 520);
+		fenetre.setLocationRelativeTo(null);
+		fenetre.setResizable(false);
+		fenetre.setVisible(true);
 	}
 	
 	public void paintComponent(Graphics g){
