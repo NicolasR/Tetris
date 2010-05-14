@@ -1,27 +1,23 @@
 package board;
 
 import static org.junit.Assert.*;
-import grid.GridContract;
+import grid.GridService;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import block.BlockContract;
-import block.BlockImpl;
+import programme.Factory;
+
+import block.BlockService;
 
 public class BoardTest{
 	
-	private static BoardImpl impl;
-	private static BoardContract board;
+	private static BoardService board;
 	
-	@BeforeClass
-	public static void initialize(){
-		impl = new BoardImpl();
-	}
-	
+
 	@Test
 	public void testinit(){
-		board = new BoardContract(impl);
+		board = Factory.createBoard();
 		try{
 			board.init(-1,10);
 			assertTrue(false);
@@ -49,7 +45,7 @@ public class BoardTest{
 		}
 		
 		try {
-			board.checkInvariants();
+			((BoardContract) board).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -62,7 +58,7 @@ public class BoardTest{
 	
 	@Test
 	public void testdoRotateLeft(){
-		board = new BoardContract(impl);
+		board = Factory.createBoard();
 		board.init(10, 22);
 		try{
 			board.doRotateLeft();
@@ -70,12 +66,12 @@ public class BoardTest{
 		}catch(Error e){
 			assertTrue(true);
 		}		
-		BlockContract block = new BlockContract(new BlockImpl());
+		BlockService block = Factory.createBlock();
 		block.init('L');
 		board.insert(block);
 		
-		BlockContract getcurrentBlock_atPre = board.getcurrentBlock();
-		GridContract getgrid_atPre = board.getgrid();
+		BlockService getcurrentBlock_atPre = board.getcurrentBlock();
+		GridService getgrid_atPre = board.getgrid();
 		int getNbLastCleaned_atPre = board.getNbLastCleaned();
 		boolean isBlock_atPre = board.isBlock();
 		int getXMinBlock_atPre = board.getXMinBlock();
@@ -91,7 +87,7 @@ public class BoardTest{
 		}
 		
 		try {
-			board.checkInvariants();
+			((BoardContract) board).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -108,7 +104,7 @@ public class BoardTest{
 	
 	@Test
 	public void testdoLeft(){
-		board = new BoardContract(impl);
+		board = Factory.createBoard();
 		board.init(10, 22);
 		try{
 			board.doLeft();
@@ -116,12 +112,12 @@ public class BoardTest{
 		}catch(Error e){
 			assertTrue(true);
 		}		
-		BlockContract block = new BlockContract(new BlockImpl());
+		BlockService block = Factory.createBlock();
 		block.init('L');
 		board.insert(block);
 		
-		BlockContract getcurrentBlock_atPre = board.getcurrentBlock();
-		GridContract getgrid_atPre = board.getgrid();
+		BlockService getcurrentBlock_atPre = board.getcurrentBlock();
+		GridService getgrid_atPre = board.getgrid();
 		int getNbLastCleaned_atPre = board.getNbLastCleaned();
 		boolean isBlock_atPre = board.isBlock();
 		int getXMinBlock_atPre = board.getXMinBlock();
@@ -137,7 +133,7 @@ public class BoardTest{
 		}
 		
 		try {
-			board.checkInvariants();
+			((BoardContract) board).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -154,7 +150,7 @@ public class BoardTest{
 	
 	@Test
 	public void testdoRotateRight(){
-		board = new BoardContract(impl);
+		board = Factory.createBoard();
 		board.init(10, 22);
 		try{
 			board.doRotateRight();
@@ -162,12 +158,12 @@ public class BoardTest{
 		}catch(Error e){
 			assertTrue(true);
 		}		
-		BlockContract block = new BlockContract(new BlockImpl());
+		BlockService block = Factory.createBlock();
 		block.init('L');
 		board.insert(block);
 		
-		BlockContract getcurrentBlock_atPre = board.getcurrentBlock();
-		GridContract getgrid_atPre = board.getgrid();
+		BlockService getcurrentBlock_atPre = board.getcurrentBlock();
+		GridService getgrid_atPre = board.getgrid();
 		int getNbLastCleaned_atPre = board.getNbLastCleaned();
 		boolean isBlock_atPre = board.isBlock();
 		int getXMinBlock_atPre = board.getXMinBlock();
@@ -183,7 +179,7 @@ public class BoardTest{
 		}
 		
 		try {
-			board.checkInvariants();
+			((BoardContract) board).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -200,7 +196,7 @@ public class BoardTest{
 
 	@Test
 	public void testdoRight(){
-		board = new BoardContract(impl);
+		board = Factory.createBoard();
 		board.init(10, 22);
 		try{
 			board.doRight();
@@ -208,12 +204,12 @@ public class BoardTest{
 		}catch(Error e){
 			assertTrue(true);
 		}		
-		BlockContract block = new BlockContract(new BlockImpl());
+		BlockService block = Factory.createBlock();
 		block.init('L');
 		board.insert(block);
 		
-		BlockContract getcurrentBlock_atPre = board.getcurrentBlock();
-		GridContract getgrid_atPre = board.getgrid();
+		BlockService getcurrentBlock_atPre = board.getcurrentBlock();
+		GridService getgrid_atPre = board.getgrid();
 		int getNbLastCleaned_atPre = board.getNbLastCleaned();
 		boolean isBlock_atPre = board.isBlock();
 		int getXMinBlock_atPre = board.getXMinBlock();
@@ -229,7 +225,7 @@ public class BoardTest{
 		}
 		
 		try {
-			board.checkInvariants();
+			((BoardContract) board).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -246,7 +242,7 @@ public class BoardTest{
 		
 	@Test
 	public void testdoBottom(){
-		board = new BoardContract(impl);
+		board = Factory.createBoard();
 		board.init(10, 22);
 		try{
 			board.doBottom();
@@ -254,12 +250,12 @@ public class BoardTest{
 		}catch(Error e){
 			assertTrue(true);
 		}		
-		BlockContract block = new BlockContract(new BlockImpl());
+		BlockService block = Factory.createBlock();
 		block.init('L');
 		board.insert(block);
 		
-		BlockContract getcurrentBlock_atPre = board.getcurrentBlock();
-		GridContract getgrid_atPre = board.getgrid();
+		BlockService getcurrentBlock_atPre = board.getcurrentBlock();
+		GridService getgrid_atPre = board.getgrid();
 		boolean isBlock_atPre = board.isBlock();
 		int getXMinBlock_atPre = board.getXMinBlock();
 		int getYMinBlock_atPre = board.getYMinBlock();
@@ -273,7 +269,7 @@ public class BoardTest{
 		}
 		
 		try {
-			board.checkInvariants();
+			((BoardContract) board).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -289,7 +285,7 @@ public class BoardTest{
 
 	@Test
 	public void testStep(){
-		board = new BoardContract(impl);
+		board = Factory.createBoard();
 		board.init(10, 22);
 		try{
 			board.step();
@@ -297,11 +293,11 @@ public class BoardTest{
 		}catch(Error e){
 			assertTrue(true);
 		}		
-		BlockContract block = new BlockContract(new BlockImpl());
+		BlockService block = Factory.createBlock();
 		block.init('L');
 		board.insert(block);
 		
-		GridContract getgrid_atPre = board.getgrid();
+		GridService getgrid_atPre = board.getgrid();
 		boolean isBlock_atPre = board.isBlock();
 		int getXMinBlock_atPre = board.getXMinBlock();
 		int getYMinBlock_atPre = board.getYMinBlock();
@@ -315,7 +311,7 @@ public class BoardTest{
 		}
 		
 		try {
-			board.checkInvariants();
+			((BoardContract) board).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -331,12 +327,12 @@ public class BoardTest{
 	
 	@Test
 	public void testinsert(){
-		board = new BoardContract(impl);
+		board = Factory.createBoard();
 		board.init(10, 22);
-		BlockContract block = new BlockContract(new BlockImpl());
+		BlockService block = Factory.createBlock();
 		block.init('L');
 		board.insert(block);
-		BlockContract block2 = new BlockContract(new BlockImpl());
+		BlockService block2 = Factory.createBlock();
 		block2.init('J');
 		try{
 			board.insert(block2);
@@ -347,7 +343,7 @@ public class BoardTest{
 		
 		board.remove();
 		
-		GridContract getgrid_atPre = board.getgrid();
+		GridService getgrid_atPre = board.getgrid();
 		
 		try{
 			board.insert(block2);
@@ -357,7 +353,7 @@ public class BoardTest{
 		}
 		
 		try {
-			board.checkInvariants();
+			((BoardContract) board).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -371,7 +367,7 @@ public class BoardTest{
 	
 	@Test
 	public void testremove(){
-		board = new BoardContract(impl);
+		board = Factory.createBoard();
 		board.init(10, 22);
 		try{
 			board.remove();
@@ -379,11 +375,11 @@ public class BoardTest{
 		}catch(Error e){
 			assertTrue(true);
 		}		
-		BlockContract block = new BlockContract(new BlockImpl());
+		BlockService block = Factory.createBlock();
 		block.init('L');
 		board.insert(block);
 		
-		GridContract getgrid_atPre = board.getgrid();
+		GridService getgrid_atPre = board.getgrid();
 		int getNbLastCleaned_atPre = board.getNbLastCleaned();
 		
 		try{
@@ -393,7 +389,7 @@ public class BoardTest{
 		}
 		
 		try {
-			board.checkInvariants();
+			((BoardContract) board).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -410,9 +406,9 @@ public class BoardTest{
 
 	@Test
 	public void testclean(){
-		board = new BoardContract(impl);
+		board = Factory.createBoard();
 		board.init(10, 22);
-		BlockContract block = new BlockContract(new BlockImpl());
+		BlockService block = Factory.createBlock();
 		block.init('O');
 		board.insert(block);
 		try{
@@ -424,8 +420,8 @@ public class BoardTest{
 		
 		board.doBottom();
 		
-		BlockContract getcurrentBlock_atPre = board.getcurrentBlock();
-		GridContract getgrid_atPre = board.getgrid();
+		BlockService getcurrentBlock_atPre = board.getcurrentBlock();
+		GridService getgrid_atPre = board.getgrid();
 		
 		try{
 			board.clean();
@@ -434,7 +430,7 @@ public class BoardTest{
 		}
 		
 		try {
-			board.checkInvariants();
+			((BoardContract) board).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);
@@ -444,7 +440,7 @@ public class BoardTest{
 		assertTrue(board.getgrid() == getgrid_atPre);
 		
 		
-		board = new BoardContract(impl);
+		board = Factory.createBoard();
 		board.init(10, 22);
 		board.insert(block);
 		try{
@@ -493,7 +489,7 @@ public class BoardTest{
 		}
 		
 		try {
-			board.checkInvariants();
+			((BoardContract) board).checkInvariants();
 			assertTrue(true);
 		} catch (Error err) {
 			assertTrue(false);

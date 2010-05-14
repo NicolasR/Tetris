@@ -4,11 +4,13 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import programme.Factory;
+
 import tetris.TetrisService;
 
 public class JoueurTest {
 	
-	public void checkInvariants(JoueurContract joueur) {
+	public void checkInvariants(JoueurService joueur) {
 		// inv : getTetris() != null
 		if(!(joueur.getTetris() != null)) {
 			throw new Error("Invariant invalide");
@@ -17,7 +19,7 @@ public class JoueurTest {
 	
 	@Test
 	public void testGetTetris() {
-		JoueurContract joueur = new JoueurContract(new JoueurImpl());
+		JoueurService joueur = Factory.createJoueur();
 		joueur.init();
 		try {
 			joueur.getTetris();
@@ -28,7 +30,7 @@ public class JoueurTest {
 		
 		/* Invariants */
 		try {
-			checkInvariants(joueur);
+			checkInvariants((JoueurContract) joueur);
 			assertTrue(true);
 		} catch(Error err) {
 			assertTrue(false);
@@ -37,7 +39,7 @@ public class JoueurTest {
 	
 	@Test
 	public void testInit() {
-		JoueurContract joueur = new JoueurContract(new JoueurImpl());
+		JoueurService joueur = Factory.createJoueur();
 		try {
 			joueur.init();
 			assertTrue(true);
@@ -47,7 +49,7 @@ public class JoueurTest {
 		
 		/* Invariants */
 		try {
-			checkInvariants(joueur);
+			checkInvariants((JoueurContract) joueur);
 			assertTrue(true);
 		} catch(Error err) {
 			assertTrue(false);
@@ -56,7 +58,7 @@ public class JoueurTest {
 	
 	@Test
 	public void testGoLeft() {
-		JoueurContract joueur = new JoueurContract(new JoueurImpl());
+		JoueurService joueur = Factory.createJoueur();
 		joueur.init();
 		joueur.getTetris().init();
 		joueur.getTetris().next();
@@ -73,7 +75,7 @@ public class JoueurTest {
 		
 		/* Invariants */
 		try {
-			checkInvariants(joueur);
+			checkInvariants((JoueurContract) joueur);
 			assertTrue(true);
 		} catch(Error err) {
 			assertTrue(false);
@@ -85,7 +87,7 @@ public class JoueurTest {
 	
 	@Test
 	public void testGoRight() {
-		JoueurContract joueur = new JoueurContract(new JoueurImpl());
+		JoueurService joueur = Factory.createJoueur();
 		joueur.init();
 		joueur.getTetris().init();
 		joueur.getTetris().next();
@@ -114,7 +116,7 @@ public class JoueurTest {
 	
 	@Test
 	public void testGoDown() {
-		JoueurContract joueur = new JoueurContract(new JoueurImpl());
+		JoueurService joueur = Factory.createJoueur();
 		joueur.init();
 		joueur.getTetris().init();
 		joueur.getTetris().next();
@@ -131,7 +133,7 @@ public class JoueurTest {
 		
 		/* Invariants */
 		try {
-			checkInvariants(joueur);
+			checkInvariants((JoueurContract) joueur);
 			assertTrue(true);
 		} catch(Error err) {
 			assertTrue(false);
@@ -143,7 +145,7 @@ public class JoueurTest {
 	
 	@Test
 	public void testRotateLeft() {
-		JoueurContract joueur = new JoueurContract(new JoueurImpl());
+		JoueurService joueur = Factory.createJoueur();
 		joueur.init();
 		
 		/* Captures */
@@ -158,7 +160,7 @@ public class JoueurTest {
 		
 		/* Invariants */
 		try {
-			checkInvariants(joueur);
+			checkInvariants((JoueurContract) joueur);
 			assertTrue(true);
 		} catch(Error err) {
 			assertTrue(false);
@@ -170,7 +172,7 @@ public class JoueurTest {
 	
 	@Test
 	public void testRotateRight() {
-		JoueurContract joueur = new JoueurContract(new JoueurImpl());
+		JoueurService joueur = Factory.createJoueur();
 		joueur.init();
 		
 		/* Captures */
@@ -185,7 +187,7 @@ public class JoueurTest {
 		
 		/* Invariants */
 		try {
-			checkInvariants(joueur);
+			checkInvariants((JoueurContract) joueur);
 			assertTrue(true);
 		} catch(Error err) {
 			assertTrue(false);

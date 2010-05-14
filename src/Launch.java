@@ -1,3 +1,5 @@
+import programme.Factory;
+
 
 public class Launch {
 
@@ -5,6 +7,7 @@ public class Launch {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		Factory.needToUseContract(false);
 		Programme p = new Programme();
 		p.init();
 		// TODO Auto-generated method stub

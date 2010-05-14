@@ -2,9 +2,10 @@ package tetris;
 
 import java.util.Random;
 
-import block.BlockContract;
-import block.BlockImpl;
-import board.*;
+import programme.Factory;
+
+import block.BlockService;
+import board.BoardService;
 
 public class TetrisImpl implements TetrisService {
 
@@ -12,10 +13,10 @@ public class TetrisImpl implements TetrisService {
 	private boolean isFinished;
 	private boolean isRunning;
 	private boolean needNext;
-	private BoardContract board;
+	private BoardService board;
 	
 	@Override
-	public BoardContract getBoard() {
+	public BoardService getBoard() {
 		return this.board;
 	}
 
@@ -54,7 +55,7 @@ public class TetrisImpl implements TetrisService {
 		this.isFinished = false;
 		this.isRunning = true;
 		this.needNext = true;
-		this.board = new BoardContract(new BoardImpl());
+		this.board = Factory.createBoard();
 		this.board.init(10, 22);
 	}
 
@@ -99,7 +100,7 @@ public class TetrisImpl implements TetrisService {
 			default:
 				type = 'I';
 		}
-		BlockContract bloc = new BlockContract(new BlockImpl());
+		BlockService bloc = Factory.createBlock();
 		bloc.init(type);
 		this.board.insert(bloc);
 		if (this.board.isConflict()){
