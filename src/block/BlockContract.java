@@ -170,7 +170,7 @@ public class BlockContract extends BlockDecorator {
 
 	public void init(char type) {
 		if(!((type == 'O') || (type == 'L') || (type == 'J') || (type == 'T') || (type == 'Z') || (type == 'S') || (type == 'I'))) {
-			throw new Error("[BLOCK]pre init) invalide");
+			throw new Error("[BLOCK]pre (init) invalide");
 		}
 		super.init(type);
 		checkInvariants();

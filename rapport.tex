@@ -22,7 +22,7 @@
 
 \begin{tabbing}
 \underline{Service}: \textbf{Block}\\
-\underline{Type}: char, int, bool, Set<T>, Paire<T>\\\\
+\underline{Type}: char, int, bool, Set$<T>$, Paire$<T>$\\\\
 
 \underline{Observators}:\\
 \textit{getType}: [Block] -$>$ char\\
@@ -33,7 +33,7 @@
 \textit{getYMin}: [Block] -$>$ int\\
 \textit{getYMax}: [Block] -$>$ int\\
 \textit{hasPos}: [Block] * int * int -$>$ bool\\
-\underline{précondition}: \=\textit{hasPos}(B,x,y) \underline{require} $1 <= x$ \&\& $x <= \textit{getSize}(B)$ \&\& $1 <= y$ \&\& $y <= \textit{getSize}(B)$\\
+\underline{précondition}: \=\textit{hasPos}(B,x,y) \underline{require} 1 $<=$ x \&\& x $<=$ \textit{getSize}(B) \&\& 1 $<=$ y \&\& y $<=$ \textit{getSize}(B)\\
 \textit{getAllPos}: [Block] -$>$ Set$<$Paire$<$int,int$>>$\\
 \textit{getLowPos}: [Block] -$>$ Set$<$Paire$<$int,int$>>$\\\\
 
@@ -43,7 +43,7 @@
 
 \underline{Opérations}:\\
 \textit{addPos}: [Block] * int * int -$>$ [Block]\\
-\underline{précondition}: \=\textit{addPos}(B,x,y) \underline{require} $1 <= x$ \&\& $x <= \textit{getSize}(B)$ \&\& $1 <= y$ \&\& $y <= \textit{getSize}(B)$ \\
+\underline{précondition}: \=\textit{addPos}(B,x,y) \underline{require} 1 $<=$ x \&\& x $<=$ \textit{getSize}(B) \&\& 1 $<=$ y \&\& y $<=$ \textit{getSize}(B) \\
 \>\&\& $\neg$\textit{hasPos}(B,x,y) \\
 \textit{removeAllPos}: [Block] -$>$ [Block]\\
 \textit{RotateLeft}: [Block] -$>$ [Block]\\
@@ -53,16 +53,16 @@
 \end{tabbing}
 \begin{itemize}
  \item[$\circ$] \textit{invariants}\\
-$\textit{getType}(B) = O \parallel \textit{getType} = L \parallel \textit{getType}(B) = J \parallel \textit{getType}(B) = T \parallel \\
-\>\textit{getType}(B) = Z \parallel \textit{getType}(B) = S \parallel \textit{getType}(B) = I$\\
-$\textit{getSize}(B) = 2 \parallel \textit{getSize}(B) = 3 \parallel \textit{getSize}(B) = 4$\\
-$0 <= \textit{getNbPos}(B)$ \&\& $\textit{getNbPos}(B) <= 4$\\
-$getXMin(B) = min~\left\{~first(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
-$getXMax(B) = max~\left\{~first(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
-$getYMin(B) = min~\left\{~second(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
-$getYMax(B) = max~\left\{~second(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
-$\textit{getAllPos} = \left\{~(x,y) \in Pair<1..\textit{getSize}(B),1..\textit{getSize}(B)~|~\textit{hasPos(B,x,Y)}~\right\}$ \\
-$\textit{getAllPos} = \left\{~(x,y) \in \textit{\textit{getAllPos}(B)}~|~\neg \exists (x,y2) \in \textit{\textit{getAllPos}(B)}, y2>y~\right\}$ \\
+\textit{getType}(B) = O $\parallel$ \textit{getType}(B) = L $\parallel$ \textit{getType}(B) = J $\parallel$ \textit{getType}(B) = T $\parallel$ \\
+\textit{getType}(B) = Z $\parallel$ \textit{getType}(B) = S $\parallel$ \textit{getType}(B) = I\\
+\textit{getSize}(B) = 2 $\parallel$ \textit{getSize}(B) = 3 $\parallel$ \textit{getSize}(B) = 4\\
+0 $<$= \textit{getNbPos}(B) \&\& \textit{getNbPos}(B) $<$= 4\\
+\textit{getXMin}(B) = min~$\left\{~first(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
+\textit{getXMax}(B) = max~$\left\{~first(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
+\textit{getYMin}(B) = min~$\left\{~second(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
+\textit{getYMax}(B) = max~$\left\{~second(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
+\textit{getAllPos} = $\left\{~(x,y) \in Pair<1..\textit{getSize}(B),1..\textit{getSize}(B)>~|~\textit{hasPos(B,x,y)}~\right\}$ \\
+\textit{getAllPos} = $\left\{~(x,y) \in \textit{\textit{getAllPos}(B)}~|~\neg \exists (x,y2) \in \textit{\textit{getAllPos}}(B), y2>y~\right\}$ \\
  
  \item[$\circ$] \textit{init}\\
 \textit{getType}(\textit{init}(type)) = type\\
@@ -72,14 +72,14 @@ $\textit{getAllPos} = \left\{~(x,y) \in \textit{\textit{getAllPos}(B)}~|~\neg \e
 \textit{getType}(\textit{addPos}(B,x,y)) = \textit{getType}(B)\\
 \textit{getSize}(\textit{addPos}(B,x,y)) = \textit{getSize}(B)\\
 \textit{getNbPos}(\textit{addPos}(B,x,y)) = \textit{getNbPos}(B)+1\\
-$(x < \textit{getXMin}(B) \&\& \textit{getXMin}(\textit{addPos}(B,x,y)) = x)~\|~ (\textit{getXMin}(\textit{addPos}(B,x,y)) = \textit{getXMin}(B))$\\
-$(\textit{getXMax}(B) < x \&\& \textit{getXMax}((\textit{addPos}(B,x,y)) = x)~ \|~ (\textit{getXMax}(\textit{addPos}(B,x,y)) = \textit{getXMax}(B))$\\
-$(y < \textit{getYMin}(B) \&\& \textit{getYMin}(\textit{addPos}(B,x,y)) = y)~ \|~ (\textit{getYMin}(\textit{addPos}(B,x,y)) = \textit{getYMin}(B))$\\
-$(\textit{getYMax}(B) < y \&\& \textit{getYMax}(\textit{addPos}(B,x,y)) = y) ~\|~ (\textit{getYMax}(\textit{addPos}(B,x,y)) = \textit{getYMax}(B))$\\
+(x $<$ \textit{getXMin}(B) \&\& \textit{getXMin}(\textit{addPos}(B,x,y)) = x)~$\|$~ (\textit{getXMin}(\textit{addPos}(B,x,y)) = \textit{getXMin}(B))\\
+(\textit{getXMax}(B) $<$ x \&\& \textit{getXMax}((\textit{addPos}(B,x,y)) = x)~ $\|$~ (\textit{getXMax}(\textit{addPos}(B,x,y)) = \textit{getXMax}(B))\\
+(y $<$ \textit{getYMin}(B) \&\& \textit{getYMin}(\textit{addPos}(B,x,y)) = y)~ $\|$~ (\textit{getYMin}(\textit{addPos}(B,x,y)) = \textit{getYMin}(B))\\
+(\textit{getYMax}(B) $<$ y \&\& \textit{getYMax}(\textit{addPos}(B,x,y)) = y) ~$\|$~ (\textit{getYMax}(\textit{addPos}(B,x,y)) = \textit{getYMax}(B))\\
 \textit{hasPos}(\textit{addPos}(B,x,y)) = true\\
 $\forall$ x1, y1, x1 $\ne$ x $\vee$ y1 $\ne$ y $\Rightarrow$ \textit{hasPos}(\textit{addPos}(B,x,y),x1,y1) = \textit{hasPos}(B,x1,y1)\\
-$\forall x1, y1 \in \textit{getAllPos} = \left\{~(x1,y1) \in \textit{\textit{getAllPos}(\textit{addPos}(B,x,y))}~\right\}$\\
-$(x,y) \in \textit{\textit{getAllPos}(\textit{addPos}(B,x,y))}$\\
+$\forall x1, y1 \in \textit{getAllPos} = \left\{~(x1,y1) \in \textit{getAllPos}(\textit{addPos}(B,x,y))~\right\}$\\
+(x,y) $\in$ \textit{getAllPos}(\textit{addPos}(B,x,y))\\
 
  \item[$\circ$] \textit{removeAllPos}\\
 \textit{getType}(\textit{removeAllPos}(B)) = \textit{getType}(B)\\
@@ -89,7 +89,7 @@ $(x,y) \in \textit{\textit{getAllPos}(\textit{addPos}(B,x,y))}$\\
 \textit{getXMax}(\textit{removeAllPos}(B)) = 0\\
 \textit{getYMin}(\textit{removeAllPos}(B)) = \textit{getSize}(B)+1\\
 \textit{getYMax}(\textit{removeAllPos}(B)) = 0\\
-$\forall$ x, y $\neg$ \textit{hasPos}(B)\\
+$\forall$ x, y $\neg$ \textit{hasPos}(\textit{removeAllPos}(B),x,y)\\
 \textit{getAllPos}(\textit{removeAllPos}(B)) = null\\
 \textit{getLowPos}(\textit{removeAllPos}(B)) = null\\
 
@@ -110,7 +110,7 @@ $\forall$ x, y $\neg$ \textit{hasPos}(B)\\
 \begin{tabbing}
 \underline{Service}: \textbf{Board}\\
 \underline{Type}: int, bool\\
-Require: Block, Grid\\\\
+\underline{Require}: Block, Grid\\\\
 
 \underline{Observators}:\\
 \textit{getCurrentBlock}: [Board] -$>$ Block\\
@@ -152,7 +152,7 @@ Require: Block, Grid\\\\
 \textit{step}: [Board] -$>$ [Board]\\
 \underline{précondition}: \=\textit{step}(B) \underline{require} \textit{isBlock}(B)\\
 \textit{insert}: [Board] * Block -$>$ [Board]\\
-\underline{précondition}: \=\textit{insert}(B) \underline{require} $\neg\textit{isBlock}(B)$\\
+\underline{précondition}: \=\textit{insert}(B) \underline{require} $\neg$\textit{isBlock}(B)\\
 \textit{remove}: [Board] -$>$ [Board]\\
 \underline{précondition}: \=\textit{remove}(B) \underline{require} \textit{isBlock}(B)\\
 \textit{clean}: [Board] -$>$ [Board]\\
@@ -162,9 +162,9 @@ Require: Block, Grid\\\\
 \end{tabbing}
 \begin{itemize}
  \item[$\circ$] \textit{invariants}\\
-$1<=\textit{getXblock}(B,\textbf{Block:}\textit{getXMin}(\textit{getcurrentBlock}(B)))$ \&\&\\ $\textit{getXblock}(B,\textbf{Block:}\textit{getXMax}(\textit{getcurrentBlock}(B)))<=\textbf{Grid:}\textit{getWidth}(\textit{getgrid}(B))+1$\\
-$1<=\textit{getYblock}(B,\textbf{Block:}\textit{getYMin}(\textit{getcurrentBlock}(B)))$ \&\&\\ $\textit{getYblock}(B,\textbf{Block:}\textit{getYMax}(\textit{getcurrentBlock}(B)))<=\textbf{Grid:}\textit{getHeight}(\textit{getgrid}(B))+1$\\
-$\textit{getNbLastCleaned}(B) >= 0$\\
+1$<=$\textit{getXblock}(B,\textbf{Block:}\textit{getXMin}(\textit{getcurrentBlock}(B))) \&\&\\ \textit{getXblock}(B,\textbf{Block:}\textit{getXMax}(\textit{getcurrentBlock}(B)))$<=$\textbf{Grid:}\textit{getWidth}(\textit{getgrid}(B))+1\\
+1$<=$\textit{getYblock}(B,\textbf{Block:}\textit{getYMin}(\textit{getcurrentBlock}(B))) \&\&\\ \textit{getYblock}(B,\textbf{Block:}\textit{getYMax}(\textit{getcurrentBlock}(B)))$<=$\textbf{Grid:}\textit{getHeight}(\textit{getgrid}(B))+1\\
+\textit{getNbLastCleaned}(B) $>=$ 0\\
  
  \item[$\circ$] \textit{init}\\
 \textit{isBlock}(\textit{init}(x,y)) = false\\
@@ -181,6 +181,7 @@ $\textit{getYMinBlock}(\textit{init}(x,y)) = 0$\\
 \textit{isBlock}(\textit{doRotateLeft}(B)) = \textit{isBlock}(B)\\
 \textit{getXMinBlock}(\textit{doRotateLeft}(B)) = \textit{getXMinBlock}(B)\\
 \textit{getYMinBlock}(\textit{doRotateLeft}(B)) = \textit{getYMinBlock}(B)\\
+\textit{getcurrentBlock}(\textit{doRotateLeft}(B)) = \textbf{Block}:\textit{rotateLeft}(\textit{getcurrentBlock}(B))\\
 
  \item[$\circ$] \textit{doLeft}\\
 \textit{getcurrentBlock}(\textit{doLeft}(B)) = \textit{getcurrentBlock}(B)\\
@@ -197,6 +198,7 @@ $\textit{getYMinBlock}(\textit{init}(x,y)) = 0$\\
 \textit{isBlock}(\textit{doRotateRight}(B)) = \textit{isBlock}(B)\\
 \textit{getXMinBlock}(\textit{doRotateRight}(B)) = \textit{getXMinBlock}(B)\\
 \textit{getYMinBlock}(\textit{doRotateRight}(B)) = \textit{getYMinBlock}(B)\\
+\textit{getcurrentBlock}(\textit{doRotateRight}(B)) = \textbf{Block}:\textit{rotateRight}(\textit{getcurrentBlock}(B))\\
 
  \item[$\circ$] \textit{doRight}\\
 \textit{getcurrentBlock}(\textit{doRight}(B)) = \textit{getcurrentBlock}(B)\\
@@ -251,13 +253,13 @@ $\textit{getYMinBlock}(\textit{init}(x,y)) = 0$\\
 \textit{getWidth}: [Grid] -$>$ int\\
 \textit{getHeight}: [Grid] -$>$ int\\
 \textit{isOccupied}: [Grid] * int * int -$>$ bool\\
-\underline{précondition}: \=\textit{isOccupied}(G,x,y) \underline{require} $x >= 1$ \&\& $x <= getWidth(G)$ \&\& $y >= 1$ \&\& \\
-\>$y <= getHeight(G)$\\
+\underline{précondition}: \=\textit{isOccupied}(G,x,y) \underline{require} x $>=$ 1 \&\& x $<=$ getWidth(G) \&\& y $>=$ 1 \&\& \\
+\>y $<=$ getHeight(G)\\
 \textit{canPut}: [Grid] * int * int -$>$ bool\\\\
 
 \underline{Constructor}:\\
 \textit{init}: int * int -$>$ [Grid]\\
-\underline{précondition}: \textit{init}(x,y) \underline{require} $x > 0$ \&\& $y > 0$ \&\& $y >= x$\\\\
+\underline{précondition}: \textit{init}(x,y) \underline{require} x $>$ 0 \&\& y $>$ 0 \&\& y $>=$ x\\\\
 
 \underline{Opérations}:\\
 \textit{put}: [Grid] * int * int -$>$ [Grid]\\
@@ -273,36 +275,36 @@ $\textit{getYMinBlock}(\textit{init}(x,y)) = 0$\\
 \begin{itemize}
  \item[$\circ$] \textit{invariants}\\
 $\forall$ x (1 $<=$ x \&\& x $<=$ \textit{getWidth}(G))\{\\
-$\forall$ y (1 $<=$ y \&\& y $<=$ \textit{getHeight}(G))\{ \textit{isOccupied}(G,x,y) = $\
-$\textit{canPut}(G,x,y) \}\\
+$\forall$ y (1 $<=$ y \&\& y $<=$ \textit{getHeight}(G))\{ \textit{isOccupied}(G,x,y) = 
+$\neg$\textit{canPut}(G,x,y) \}\\
 \}\\
  
  \item[$\circ$] \textit{init}\\
- \textit{getWidth}(\textit{init}()) = x \&\& \textit{getHeight}(\textit{init}()) = y\\
-$\forall$ x in (1 $<=$ x \&\& x $<=$ \textit{getWidth}(\textit{init}()))\{\\
-$\forall$ y in (1 $<=$ y \&\& y $<=$ \textit{getHeight}(\textit{init}()))\{ $\neg$\textit{isOccupied}(\textit{init}(),x,y) \&\& \textit{canPut}(\textit{init}(),x,y)\}\\
+ \textit{getWidth}(\textit{init}(w,h)) = w \&\& \textit{getHeight}(\textit{init}(w,h)) = h\\
+$\forall$ x in (1 $<=$ x \&\& x $<=$ \textit{getWidth}(\textit{init}(w,h)))\{\\
+$\forall$ y in (1 $<=$ y \&\& y $<=$ \textit{getHeight}(\textit{init}(w,h)))\{ $\neg$\textit{isOccupied}(\textit{init}(w,h),x,y) \&\& \textit{canPut}(\textit{init}(w,h),x,y)\}\\
 \}\\
 
  \item[$\circ$] \textit{put}\\
-$\neg$\textit{isOccupied}(\textit{put}(G),x,y) = \textit{isOccupied}(G,x,y)\\
- $\neg$canPut(put(G),x,y)\\
- $\forall$ i (1 $<=$ i \&\& x $\ne$ i \&\& i $<=$ \textit{getWidth}(\textit{put}(G)))\{\\
- $\forall$ j in (1 $<=$ j \&\& j $\ne$ y \&\& j $<=$ \textit{getHeight}(\textit{put}(G)))\{\\
- \textit{isOccupied}(\textit{put}(G),i,j) = \textit{isOccupied}(G,i,j) \}\\
+$\neg$\textit{isOccupied}(\textit{put}(G,x,y),x,y) = \textit{isOccupied}(G,x,y)\\
+ $\neg$canPut(put(G,x,y),x,y)\\
+ $\forall$ i (1 $<=$ i \&\& x $\ne$ i \&\& i $<=$ \textit{getWidth}(\textit{put}(G,x,y)))\{\\
+ $\forall$ j in (1 $<=$ j \&\& j $\ne$ y \&\& j $<=$ \textit{getHeight}(\textit{put}(G,x,y)))\{\\
+ \textit{isOccupied}(\textit{put}(G,x,y),i,j) = \textit{isOccupied}(G,i,j) \}\\
  \}\\
  $\forall$ i in (1 $<=$ i \&\& x $\ne$ i \&\& i $<=$ \textit{getWidth}(\textit{put}(G)))\{\\
  $\forall$ j in (1 $<=$ j \&\& j $\ne$ y \&\& j $<=$ \textit{getHeight}(\textit{put}(G)))\{\textit{canPut}(\textit{put}(G),i,j)\}\\
  \}\\
 
  \item[$\circ$] \textit{remove}\\
- \textit{isOccupied}(\textit{remove}(G),x,y) = $\neg$\textit{isOccupied}(G,x,y)\\
- \textit{canPut}(\textit{remove}(G),x,y)\\
- $\forall$ i in (1 $<=$ i \&\& x $\ne$ i \&\& i $<=$ \textit{getWidth}(\textit{remove}(G)))\{\\
- $\forall$ j in (1 $<=$ j \&\& j $\ne$ y \&\& j $<=$ \textit{getHeight}(\textit{remove}(G)))\{\\
- \textit{isOccupied}(\textit{remove}(G),i,j) = $\neg$\textit{isOccupied}(G,i,j)\}\\
+ \textit{isOccupied}(\textit{remove}(G,x,y),x,y) = $\neg$\textit{isOccupied}(G,x,y)\\
+ \textit{canPut}(\textit{remove}(G,x,y),x,y)\\
+ $\forall$ i in (1 $<=$ i \&\& x $\ne$ i \&\& i $<=$ \textit{getWidth}(\textit{remove}(G,x,y)))\{\\
+ $\forall$ j in (1 $<=$ j \&\& j $\ne$ y \&\& j $<=$ \textit{getHeight}(\textit{remove}(G,x,y)))\{\\
+ \textit{isOccupied}(\textit{remove}(G,x,y),i,j) = $\neg$\textit{isOccupied}(G,i,j)\}\\
  \}\\
- $\forall$ i in (1 $<=$ i \&\& x $\ne$ i \&\& i $<=$ \textit{getWidth}(\textit{remove}(G)))\{\\
- $\forall$ j in (1 $<=$ j \&\& j $\ne$ y \&\& j $<=$ \textit{getHeight}(\textit{remove}(G)))\{\textit{canPut}(\textit{remove}(G),i,j)\}\\
+ $\forall$ i in (1 $<=$ i \&\& x $\ne$ i \&\& i $<=$ \textit{getWidth}(\textit{remove}(G,x,y)))\{\\
+ $\forall$ j in (1 $<=$ j \&\& j $\ne$ y \&\& j $<=$ \textit{getHeight}(\textit{remove}(G,x,y)))\{\textit{canPut}(\textit{remove}(G,x,y),i,j)\}\\
  \}\\
 \end{itemize}
 \newpage
@@ -312,7 +314,7 @@ $\neg$\textit{isOccupied}(\textit{put}(G),x,y) = \textit{isOccupied}(G,x,y)\\
 \begin{tabbing}
 \underline{Service}: \textbf{Joueur}\\
 \underline{Type}: int, bool\\
-Require: Tetris\\\\
+\textit{Require}: Tetris\\\\
 
 \underline{Observators}:\\
 \textit{getTetris}: [Joueur] -$>$ Tetris\\
@@ -342,24 +344,24 @@ $\textit{getTetris}(J) \neq null$\\
  \item[$\circ$] \textit{init}\\
 
  \item[$\circ$] \textit{goLeft}\\
-\textit{Tetris}(\textit{goLeft}(J)) = \textit{getTetris}(J)@pre\\
-\textit{getTetris}(\textit{goLeft}(J)) = Tetris:\textit{goLeft}(\textit{getTetris}(J)@pre)\\
+\textit{getTetris}(\textit{goLeft}(J)) = \textit{getTetris}(J)\\
+\textit{getTetris}(\textit{goLeft}(J)) = \textbf{Tetris:}\textit{goLeft}(\textit{getTetris}(J))\\
 
  \item[$\circ$] \textit{goRight}\\
-\textit{Tetris}(\textit{goRight}(J)) = \textit{getTetris}(J)@pre\\
-\textit{getTetris}(\textit{goRight}(J)) = Tetris:\textit{goRight}(\textit{getTetris}(J)@pre)\\
+\textit{getTetris}(\textit{goRight}(J)) = \textit{getTetris}(J)\\
+\textit{getTetris}(\textit{goRight}(J)) = \textbf{Tetris:}\textit{goRight}(\textit{getTetris}(J)e)\\
 
  \item[$\circ$] \textit{goDown}\\
-\textit{Tetris}(\textit{goDown}(J)) = \textit{getTetris}(J)@pre\\
-\textit{getTetris}(\textit{goDown}(J)) = Tetris:\textit{goDown}(\textit{getDown}(J)@pre)\\
+\textit{getTetris}(\textit{goDown}(J)) = \textit{getTetris}(J)\\
+\textit{getTetris}(\textit{goDown}(J)) = \textbf{Tetris:}\textit{goDown}(\textit{getTetris}(J))\\
 
  \item[$\circ$] \textit{rotateLeft}\\
-\textit{Tetris}(\textit{rotateLeft}(J)) = \textit{getTetris}(J)@pre\\
-\textit{getTetris}(\textit{rotateLeft}(J)) = Tetris:\textit{rotateLeft}(\textit{getTetris}(J)@pre)\\
+\textit{getTetris}(\textit{rotateLeft}(J)) = \textit{getTetris}(J)\\
+\textit{getTetris}(\textit{rotateLeft}(J)) = \textbf{Tetris:}\textit{rotateLeft}(\textit{getTetris}(J))\\
 
  \item[$\circ$] \textit{rotateRight}\\
-\textit{Tetris}(\textit{rotateRight}(J)) = \textit{getTetris}(J)@pre\\
-\textit{getTetris}(\textit{rotateRight}(J)) = Tetris:\textit{rotateRight}(\textit{getTetris}(J)@pre)\\
+\textit{getTetris}(\textit{rotateRight}(J)) = \textit{getTetris}(J)\\
+\textit{getTetris}(\textit{rotateRight}(J)) = \textbf{Tetris:}\textit{rotateRight}(\textit{getTetris}(J))\\
 
 \end{itemize}
 \newpage
@@ -421,11 +423,12 @@ init: -$>$ [Tetris]\\\\
  \textit{getBoard}(\textit{goRight}(T)) = \textbf{Board:}\textit{doRight}(\textit{getBoard}(T))\\
 
 \item[$\circ$] goDown\\
- \textit{getScore}(\textit{goDown}(T)) = \textit{getScore}(T) + 20 + \textbf{Board:}\textit{getNbLastCleaned}(\textit{getBoard}(\textit{goDown}(T)))*50\\
- \textit{needNext}(\textit{goDown}(T)) = true\\
- \textit{getBoard}(\textit{goDown}(T)) == \textbf{Board:}\textit{doBottom}(\textit{getBoard}(T))\\
+\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getScore}(\textit{goDown}(T)) = \textit{getScore}(T) + 20 + \textbf{Board:}\textit{getNbLastCleaned}(\textit{getBoard}(\textit{goDown}(T)))*50\\
+$\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getScore}(\textit{goDown}(T)) = \textit{getScore}(T)\\
+$\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{needNext}(\textit{goDown}(T)) = true\\
+ \textit{getBoard}(\textit{goDown}(T)) = \textbf{Board:}\textit{doBottom}(\textit{getBoard}(T))\\
 
-\item[$\circ$] otateLeft\\
+\item[$\circ$] rotateLeft\\
  \textit{getScore}(\textit{rotateLeft}(T)) = \textit{getScore}(T)\\
  \textit{needNext}(\textit{rotateLeft}(T)) = false\\
  \textit{getBoard}(\textit{rotateLeft}(T)) = \textbf{Board:}\textit{doRotateLeft}(\textit{getBoard}(T))\\
@@ -436,9 +439,12 @@ init: -$>$ [Tetris]\\\\
  \textit{getBoard}(\textit{rotateRight}(T)) = \textbf{Board:}\textit{doRotateRight}(\textit{getBoard}(T))\\
 
 \item[$\circ$] step\\
- \textit{getScore}(\textit{step}(T)) = \textit{getScore}(T)\\
- \textit{needNext}(\textit{step}(T)) = false\\
- \textit{getBoard}(\textit{step}(T)) = \textbf{Board:}\textit{step}(\textit{getBoard}(T))\\
+\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) \&\& \textit{needNext}(B) $=>$\\ \textit{getScore}(\textit{step}(T)) = \textit{getScore}(T)\\
+\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) \&\& $\neg$\textit{needNext}(B) $=>$\\ \textit{getScore}(\textit{step}(T)) = \textit{getScore}(T) + 20 + \textbf{Board:}\textit{getNbLastCleaned}(\textit{getBoard}(\textit{step}(T)))*50\\
+\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{needNext}(\textit{step}(T)) = false\\
+$\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getScore}(\textit{step}(T)) = \textit{getScore}(T)\\
+$\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{needNext}(\textit{step}(T)) = \textit{needNext}(T)\\
+$\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getBoard}(\textit{step}(T)) = \textbf{Board:}\textit{step}(\textit{getBoard}(T))
 
 \item[$\circ$] next\\
  \textit{getScore}(\textit{next}(T)) = \textit{getScore}(T)\\

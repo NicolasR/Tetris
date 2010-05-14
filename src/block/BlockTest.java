@@ -9,8 +9,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import programme.Factory;
-
 public class BlockTest {
 	
 	@Test

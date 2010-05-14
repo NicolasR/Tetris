@@ -27,7 +27,7 @@ public class Fenetre extends JFrame implements KeyListener{
 	 */
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menuJeu = new JMenu("Jeu");
-	private JMenuItem JeuDemarrer = new JMenuItem("DÃ©marrer");
+	private JMenuItem JeuDemarrer = new JMenuItem("Démarrer");
 	private JMenuItem JeuQuitter = new JMenuItem("Quitter");
 	private TetrisPanel panel;
 	private Runner runner;
@@ -94,11 +94,11 @@ public class Fenetre extends JFrame implements KeyListener{
 		int code = e.getKeyCode();
 		switch(code){
 			//CRTL gauche
-			case KeyEvent.VK_CONTROL:
+			case KeyEvent.VK_A:
 				doAction(ROTATELEFT);
 				break;
 			//ALT gauche
-			case KeyEvent.VK_ALT:
+			case KeyEvent.VK_Z:
 				doAction(ROTATERIGHT);
 				break;
 			case KeyEvent.VK_LEFT:

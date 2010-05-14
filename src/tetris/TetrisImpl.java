@@ -127,8 +127,10 @@ public class TetrisImpl implements TetrisService {
 	public void step() {
 		if(this.board.isBottom()/* || needNext*/) {
 			//this.board.clean();
-			if (!needNext)
+			if (!needNext) {
 				this.score += 20 + 50*this.board.getNbLastCleaned();
+				System.out.println("ICI "+score);
+			}
 			else
 				this.needNext = true;
 			this.board.remove();

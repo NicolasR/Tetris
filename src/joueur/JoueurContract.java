@@ -32,7 +32,6 @@ public class JoueurContract extends JoueurDecorator {
 		TetrisService getTetris_atPre = super.getTetris();
 		
 		int getScore_atPre = getTetris().getScore();
-		boolean isBottom_atPre = getTetris().getBoard().isBottom();
 		boolean canPlay_atPre = canPlay();
 		
 		super.goLeft();
@@ -57,7 +56,6 @@ public class JoueurContract extends JoueurDecorator {
 	public void goRight() {
 		checkInvariants();
 		TetrisService getTetris_atPre = super.getTetris();
-		boolean isBottom_atPre = getTetris().getBoard().isBottom();
 		
 		int getScore_atPre = getTetris().getScore();
 		

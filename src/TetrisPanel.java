@@ -3,8 +3,6 @@ import grid.GridService;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,7 +23,7 @@ public class TetrisPanel extends JPanel{
 	
 	public TetrisPanel (JoueurService joueur, JFrame fenetre){
 		this.joueur = joueur;
-		this.grid = joueur.getTetris().getBoard().getgrid();
+		this.grid = this.joueur.getTetris().getBoard().getgrid();
 		this.score = new JLabel("Score: ");
 		setDoubleBuffered(true);
 		GridLayout layout = new GridLayout();
