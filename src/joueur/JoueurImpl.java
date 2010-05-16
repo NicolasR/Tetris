@@ -19,6 +19,11 @@ public class JoueurImpl implements JoueurService {
 		this.tetris = Factory.createTetris();
 	}
 	
+	public void startGame(){
+		if (!canPlay())
+			this.tetris.next();
+	}
+	
 	public void goLeft() {
 		if (canPlay())
 			this.tetris.goLeft();

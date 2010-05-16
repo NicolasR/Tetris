@@ -24,18 +24,22 @@ public interface BoardService {
 	public boolean isConflict();
 		//pre: isBlock()
 	public int getXblock(int x);
+		//pre: x >= getcurrentBlock.getXMin() && x<= getcurrentBlock.getXMax()
 	public int getYblock(int y);
+		//pre: y >= getcurrentBlock.getYMin() && x<= getcurrentBlock.getYMax()
 	public int getXMinBlock();
 	public int getYMinBlock();
 	public int getBottomHeight();
 		//pre: isBlock()
 
 	/** Invariants
-	 * 1 <= getXblock(getcurrentBlock.getXMin()) && getXblock(getcurrentBlock.getXMax()) <= 
+	 * isBlock() <=> 1 <= getXblock(getcurrentBlock.getXMin()) && getXblock(getcurrentBlock.getXMax()) <= 
 			super.getgrid().getWidth()+1
-	 * 1 <= getYblock(getcurrentBlock.getYMin()) && getYblock(getcurrentBlock.getYMax()) <= 
-			super.getgrid().getHeight()+1
+	 * isBlock() <=> 1 <= getYblock(getcurrentBlock.getYMin()) && getYblock(getcurrentBlock.getYMax()) <= 
+			super.getgrid().getHeight()+4
 	 * getNbLastCleaned() >= 0
+	 * isBlock() <=> getXMinBlock() >= 0 && getXMinBlock() <= getgrid().getWidth()
+	 * isBlock() <=> getYMinBlock() >=0 && getYMinBlock() <= getgrid().getHeight()
 	 */
 	
 	/** Constructors
@@ -54,8 +58,6 @@ public interface BoardService {
 	
 	/**
 	 * pre: isBlock() && canRotateLeft()
-	 * post: getcurrentBlock() == getcurrentBlock()@pre
-	 * post: getgrid()== getgrid()@pre
 	 * post: getNbLastCleaned() == getNbLastCleaned()@pre
 	 * post: isBlock() == isBlock()@pre
 	 * post: getXMinBlock() == getXMinBlock()@pre
@@ -66,8 +68,9 @@ public interface BoardService {
 	
 	/**
 	 * pre: isBlock() && cangoLeft()
-	 * post: getcurrentBlock() == getcurrentBlock()@pre
-	 * post: getgrid() == getgrid()@pre
+	 * post: getcurrentBlock().getSize() == getcurrentBlock().getSize()@pre
+	 * post: getcurrentBlock().getType() == getcurrentBlock().getType()@pre
+	 * post: getcurrentBlock().getNbPos() == getcurrentBlock().getNbPos()@pre
 	 * post: getNbLastCleaned() == getNbLastCleaned()@pre
 	 * post: isBlock() == isBlock()@pre
 	 * post: getXMinBlock() == getXMinBlock()@pre -1
@@ -77,8 +80,6 @@ public interface BoardService {
 	
 	/**
 	 * pre: isBlock() && canRotateRight()
-	 * post: getcurrentBlock() == getcurrentBlock()@pre
-	 * post: getgrid() == getgrid()@pre
 	 * post: getNbLastCleaned() == getNbLastCleaned()@pre
 	 * post: isBlock() == isBlock()@pre
 	 * post: getXMinBlock() == getXMinBlock()@pre
@@ -89,8 +90,9 @@ public interface BoardService {
 	
 	/**
 	 * pre: isBlock() && cangoRight()
-	 * post: getcurrentBlock() == getcurrentBlock()@pre
-	 * post: getgrid() == getgrid()@pre
+	 * post: getcurrentBlock().getSize() == getcurrentBlock().getSize()@pre
+	 * post: getcurrentBlock().getType() == getcurrentBlock().getType()@pre
+	 * post: getcurrentBlock().getNbPos() == getcurrentBlock().getNbPos()@pre
 	 * post: getNbLastCleaned() == getNbLastCleaned()@pre
 	 * post: isBlock() == isBlock()@pre
 	 * post: getXMinBlock() == getXMinBlock()@pre +1
@@ -100,37 +102,41 @@ public interface BoardService {
 	
 	/**
 	 * pre: isBlock()
-	 * post: getcurrentBlock() == getcurrentBlock()@pre
-	 * post: getgrid() == getgrid()@pre
+	 * post: getcurrentBlock().getSize() == getcurrentBlock().getSize()@pre
+	 * post: getcurrentBlock().getType() == getcurrentBlock().getType()@pre
+	 * post: getcurrentBlock().getNbPos() == getcurrentBlock().getNbPos()@pre
 	 * post: isBlock() == isBlock()@pre
 	 * post: getXMinBlock() == getXMinBlock()@pre
-	 * post:  getYMinBlock() == getYMinBlock()@pre + getBottomHeight()@pre
-	 * post: getBottomHeight() == 0 
+	 * post: getYMinBlock() == getYMinBlock()@pre + getBottomHeight()@pre
+	 * post: getBottomHeight() == 0 || isBottom()
 	 */
 	public void doBottom();
 
 	/**
 	 * pre: isBlock()
-	 * post: getgrid() == getgrid()@pre
-	 * post: isBlock() == isBlock()@pre
-	 * post: getXMinBlock() == getXMinBlock()@pre 
-	 * post: getYMinBlock() getYMinBlock()@pre + 1
-	 * post: getBottomHeight() == getBottomHeight()@pre-1
+	 * post: !isBottom()@pre <=> isBlock() == isBlock()@pre
+	 * post: !isBottom()@pre <=> getXMinBlock() == getXMinBlock()@pre 
+	 * post: !isBottom()@pre <=> getYMinBlock() getYMinBlock()@pre + 1
+	 * post: !isBottom()@pre <=> getBottomHeight() == getBottomHeight()@pre-1
 	 */
 	public void step();
 	
 	/**
 	 * pre: isBlock() == false
 	 * post: getcurrentBlock() == block
-	 * post: getgrid() == getgrid()@pre
 	 * post: isBlock()
+	 * post: getcurrentBlock().getSize() == getcurrentBlock().getSize()@pre
+	 * post: getcurrentBlock().getType() == getcurrentBlock().getType()@pre
+	 * post: getcurrentBlock().getNbPos() == getcurrentBlock().getNbPos()@pre
 	 */
 	public void insert(BlockService block);
 
 	/**
 	 * pre: isBlock()
 	 * post: getcurrentBlock() == null
-	 * post: getgrid() == getgrid()@pre
+	 * post: \forall x in (1<=x && x<= getgrid().getWidth())
+	 * 			\forall y in (1<=y && y<= getgrid().getWidth())
+	 * 				getgrid().isOccupied(x,y)@pre == getgrid().isOccupied(x,y)
 	 * post: getNbLastCleaned() == getNbLastCleaned()@pre
 	 * post: isBlock()== false
 	 * post: getXMinBlock() == 0 
@@ -139,10 +145,13 @@ public interface BoardService {
 	public void remove();
 
 	/**
-	 * pre : isBottom()
-	 * post: getcurrentBlock() == getcurrentBlock()@pre
-	 * post: getgrid() == getgrid()@pre
-	 * 
+	 * pre: isBottom()
+	 * pre: isBlock()
+	 * post: isBlock() = isBlock()@pre
+	 * post: isBottom() = isBottom()@pre
+	 * post: getcurrentBlock().getSize() == getcurrentBlock().getSize()@pre
+	 * post: getcurrentBlock().getType() == getcurrentBlock().getType()@pre
+	 * post: getcurrentBlock().getNbPos() == getcurrentBlock().getNbPos()@pre
 	 */
 	public void clean();
 

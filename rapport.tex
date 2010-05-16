@@ -125,10 +125,16 @@ $\forall$ x, y $\neg$ \textit{hasPos}(\textit{removeAllPos}(B),x,y)\\
 \textit{cangoRight}: [Board] -$>$ bool\\
 \underline{précondition}: \=\textit{cangoRight}(B) \underline{require} \textit{isBlock}(B)\\
 \textit{isBlock}: [Board] -$>$ bool\\
+\textit{isBottom}: [Board] -$>$ bool\\
+\underline{précondition}: \=\textit{isBottom}(B) \underline{require} \textit{isBlock}(B)\\
 \textit{isConflict}: [Board] -$>$ bool\\
 \underline{précondition}: \=\textit{isConflict}(B) \underline{require} \textit{isBlock}(B)\\
-\textit{getXblock}: [Board] -$>$ int\\
-\textit{getYblock}: [Board] -$>$ int\\
+\textit{getXblock}: [Board] * int -$>$ int\\
+\underline{précondition}: \=\textit{getXblock}(B,x) \underline{require} x $>=$ \textit{getcurrentBlock}(\textit{getXMin}(B)) \\
+\>\&\& x $<=$ \textit{getcurrentBlock}(\textit{getXMax}(B)) \\
+\textit{getYblock}: [Board] * int -$>$ int\\
+\underline{précondition}: \=\textit{getYblock}(B,y) \underline{require} y $>=$ \textit{getcurrentBlock}(\textit{getYMin}(B)) \\
+\>\&\& y $<=$ \textit{getcurrentBlock}(\textit{getYMax}(B)) \\
 \textit{getXMinBlock}: [Board] -$>$ int\\
 \textit{getYMinBlock}: [Board] -$>$ int\\
 \textit{getBottomHeight}: [Board] -$>$ int\\
@@ -156,7 +162,7 @@ $\forall$ x, y $\neg$ \textit{hasPos}(\textit{removeAllPos}(B),x,y)\\
 \textit{remove}: [Board] -$>$ [Board]\\
 \underline{précondition}: \=\textit{remove}(B) \underline{require} \textit{isBlock}(B)\\
 \textit{clean}: [Board] -$>$ [Board]\\
-\underline{précondition}: \=\textit{clean}(B) \underline{require} \textit{isBottom}(B)\\\\
+\underline{précondition}: \=\textit{clean}(B) \underline{require} \textit{isBlock}(B) \&\& \textit{isBottom}(B)\\\\
 
 \underline{Observations}:
 \end{tabbing}
@@ -165,8 +171,11 @@ $\forall$ x, y $\neg$ \textit{hasPos}(\textit{removeAllPos}(B),x,y)\\
 1$<=$\textit{getXblock}(B,\textbf{Block:}\textit{getXMin}(\textit{getcurrentBlock}(B))) \&\&\\ \textit{getXblock}(B,\textbf{Block:}\textit{getXMax}(\textit{getcurrentBlock}(B)))$<=$\textbf{Grid:}\textit{getWidth}(\textit{getgrid}(B))+1\\
 1$<=$\textit{getYblock}(B,\textbf{Block:}\textit{getYMin}(\textit{getcurrentBlock}(B))) \&\&\\ \textit{getYblock}(B,\textbf{Block:}\textit{getYMax}(\textit{getcurrentBlock}(B)))$<=$\textbf{Grid:}\textit{getHeight}(\textit{getgrid}(B))+1\\
 \textit{getNbLastCleaned}(B) $>=$ 0\\
- 
+\textit{isBlock}(B) $<=>$ \textit{getXMinBlock}(B) $>=$ 0 \&\& \textit{getXMinBlock}(B) $<=$ \textit{getgrid}(\textit{getWidth}(B)))\\
+\textit{isBlock}(B) $<=>$ \textit{getYMinBlock}(B) $>=$ 0 \&\& \textit{getYMinBlock}(B) $<=$ \textit{getgrid}(\textit{getHeight}(B)))\\
+
  \item[$\circ$] \textit{init}\\
+\textit{getgrid}(B) = \textbf{Grid:}\textit{init}(x,y)\\
 \textit{isBlock}(\textit{init}(x,y)) = false\\
 \textbf{Grid:}\textit{getWidth}(\textit{getgrid}(\textit{init}(x,y))) = x \\
 \textbf{Grid:}\textit{getHeight}(\textit{getgrid}(\textit{init}(x,y))) = y\\
@@ -175,8 +184,8 @@ $\textit{getXMinBlock}(\textit{init}(x,y)) = 0$\\
 $\textit{getYMinBlock}(\textit{init}(x,y)) = 0$\\
 
  \item[$\circ$] \textit{doRotateLeft}\\
-\textit{getcurrentBlock}(\textit{doRotateLeft}(B)) = \textit{getcurrentBlock}(B)\\
-\textit{getgrid}(\textit{doRotateLeft}(B)) = \textit{getgrid}(B)\\
+%\textit{getcurrentBlock}(\textit{doRotateLeft}(B)) = \textit{getcurrentBlock}(B)\\
+%\textit{getgrid}(\textit{doRotateLeft}(B)) = \textit{getgrid}(B)\\
 \textit{getNbLastCleaned}(\textit{doRotateLeft}(B)) = \textit{getNbLastCleaned}(B)\\
 \textit{isBlock}(\textit{doRotateLeft}(B)) = \textit{isBlock}(B)\\
 \textit{getXMinBlock}(\textit{doRotateLeft}(B)) = \textit{getXMinBlock}(B)\\
@@ -184,16 +193,19 @@ $\textit{getYMinBlock}(\textit{init}(x,y)) = 0$\\
 \textit{getcurrentBlock}(\textit{doRotateLeft}(B)) = \textbf{Block}:\textit{rotateLeft}(\textit{getcurrentBlock}(B))\\
 
  \item[$\circ$] \textit{doLeft}\\
-\textit{getcurrentBlock}(\textit{doLeft}(B)) = \textit{getcurrentBlock}(B)\\
-\textit{getgrid}(\textit{doLeft}(B)) = \textit{getgrid}(B)\\
+%\textit{getcurrentBlock}(\textit{doLeft}(B)) = \textit{getcurrentBlock}(B)\\
+%\textit{getgrid}(\textit{doLeft}(B)) = \textit{getgrid}(B)\\
+\textit{getcurrentBlock}(\textit{getSize}(\textit{doLeft}(B))) = \textit{getcurrentBlock}(\textit{getSize}(B))\\
+\textit{getcurrentBlock}(\textit{getType}(\textit{doLeft}(B)) = \textit{getcurrentBlock}(\textit{getType(B))\\
+\textit{getcurrentBlock}(\textit{getNbPos}(}(\textit{doLeft}(B))) = \textit{getcurrentBlock}(\textit{getNbPos}(B))\\
 \textit{getNbLastCleaned}(\textit{doLeft}(B)) = \textit{getNbLastCleaned}(B)\\
 \textit{isBlock}(\textit{doLeft}(B)) = \textit{isBlock}(B)\\
 \textit{getXMinBlock}(\textit{doLeft}(B)) = \textit{getXMinBlock}(B)-1\\
 \textit{getYMinBlock}(\textit{doLeft}(B)) = \textit{getYMinBlock}(B)\\
 
  \item[$\circ$] \textit{doRotateRight}\\
-\textit{getcurrentBlock}(\textit{doRotateRight}(B)) = \textit{getcurrentBlock}(B)\\
-\textit{getgrid}(\textit{doRotateRight}(B)) = \textit{getgrid}(B)\\
+%\textit{getcurrentBlock}(\textit{doRotateRight}(B)) = \textit{getcurrentBlock}(B)\\
+%\textit{getgrid}(\textit{doRotateRight}(B)) = \textit{getgrid}(B)\\
 \textit{getNbLastCleaned}(\textit{v}(B)) = \textit{getNbLastCleaned}(B)\\
 \textit{isBlock}(\textit{doRotateRight}(B)) = \textit{isBlock}(B)\\
 \textit{getXMinBlock}(\textit{doRotateRight}(B)) = \textit{getXMinBlock}(B)\\
@@ -201,44 +213,61 @@ $\textit{getYMinBlock}(\textit{init}(x,y)) = 0$\\
 \textit{getcurrentBlock}(\textit{doRotateRight}(B)) = \textbf{Block}:\textit{rotateRight}(\textit{getcurrentBlock}(B))\\
 
  \item[$\circ$] \textit{doRight}\\
-\textit{getcurrentBlock}(\textit{doRight}(B)) = \textit{getcurrentBlock}(B)\\
-\textit{getgrid}(\textit{doRight}(B)) = \textit{getgrid}(B)\\
+%\textit{getcurrentBlock}(\textit{doRight}(B)) = \textit{getcurrentBlock}(B)\\
+%\textit{getgrid}(\textit{doRight}(B)) = \textit{getgrid}(B)\\
+\textit{getcurrentBlock}(\textit{getSize}(\textit{doRight}(B))) = \textit{getcurrentBlock}(\textit{getSize}(B))\\
+\textit{getcurrentSize}(\textit{getType}(\textit{doRight}(B))) = \textit{getcurrentBlock}(\textit{getType}(B))\\
+\textit{getcurrentNbPos}(\textit{getNbPos}(\textit{doRight}(B))) = \textit{getcurrentBlock}(\textit{getNbPos}(B))\\
 \textit{getNbLastCleaned}(\textit{doRight}(B)) = \textit{getNbLastCleaned}(B)\\
 \textit{isBlock}(\textit{doRight}(B)) = \textit{isBlock}(B)\\
 \textit{getXMinBlock}(\textit{doRight}(B)) = \textit{getXMinBlock}(B)+1\\
 \textit{getYMinBlock}(\textit{doRight}(B)) = \textit{getYMinBlock}(B)\\
 
  \item[$\circ$] \textit{doBottom}\\
-\textit{getcurrentBlock}(\textit{doBottom}(B)) = \textit{getcurrentBlock}(B)\\
-\textit{getgrid}(\textit{doBottom}(B)) = \textit{getgrid}(B)\\
+%\textit{getcurrentBlock}(\textit{doBottom}(B)) = \textit{getcurrentBlock}(B)\\
+%\textit{getgrid}(\textit{doBottom}(B)) = \textit{getgrid}(B)\\
+\textit{getcurrentBlock}(\textit{getSize}(\textit{doBottom}(B))) = \textit{getcurrentBlock}(\textit{getSize}(B))\\
+\textit{getcurrentBlock}(\textit{getType}(\textit{doBottom}(B))) = \textit{getcurrentBlock}(\textit{getType}(B))\\
+\textit{getcurrentBlock}(\textit{getNbPos}(\textit{doBottom}(B))) = \textit{getcurrentBlock}(\textit{getNbPos}(B))\\
 \textit{isBlock}(\textit{doBottom}(B)) = \textit{isBlock}(B)\\
 \textit{getXMinBlock}(\textit{doBottom}(B)) = \textit{getXMinBlock}(B)\\
 \textit{getYMinBlock}(\textit{doBottom}(B)) = \textit{getYMinBlock}(B) + \textit{getBottomHeight}(B)\\
 \textit{getBottomHeight}(\textit{doBottom}(B)) = 0\\
 
  \item[$\circ$] \textit{step}\\
-\textit{getgrid}(\textit{step}(B)) = \textit{getgrid}(B)\\
-\textit{isBlock}(\textit{step}(B)) = \textit{isBlock}(B)\\
-\textit{getXMinBlock}(\textit{step}(B)) = \textit{getXMinBlock}(B)\\
-\textit{getYMinBlock}(\textit{step}(B)) = \textit{getYMinBlock}(B) + 1\\
-\textit{getBottomHeight}(\textit{step}(B)) = \textit{getBottomHeight}(B) - 1\\
+%\textit{getgrid}(\textit{step}(B)) = \textit{getgrid}(B)\\
+$\neg$\textit{isBottom}(B) $<=>$ \textit{isBlock}(\textit{step}(B)) = \textit{isBlock}(B)\\
+$\neg$\textit{isBottom}(B) $<=>$ \textit{getXMinBlock}(\textit{step}(B)) = \textit{getXMinBlock}(B)\\
+$\neg$\textit{isBottom}(B) $<=>$ \textit{getYMinBlock}(\textit{step}(B)) = \textit{getYMinBlock}(B) + 1\\
+$\neg$\textit{isBottom}(B) $<=>$ \textit{getBottomHeight}(\textit{step}(B)) = \textit{getBottomHeight}(B) - 1\\
  
  \item[$\circ$] \textit{insert}\\
 \textit{getCurrentBlock}(\textit{insert}(B, block)) = block\\
-\textit{getgrid}(\textit{insert}(B, block)) = \textit{getgrid}(B)\\
+%\textit{getgrid}(\textit{insert}(B, block)) = \textit{getgrid}(B)\\
 \textit{isBlock}(\textit{insert}(B, block)) = true\\
+\textit{getSize}(block,\textit{insert}(B))) = \textit{getcurrentBlock}(\textit{getSize}(B))\\
+\textit{getType}(block,\textit{insert}(B))) = \textit{getcurrentBlock}(\textit{getType}(B))\\
+\textit{getNbPos}(block,\textit{insert}(B))) = \textit{getcurrentBlock}(\textit{getNbPos}(B))\\
 
  \item[$\circ$] \textit{remove}\\
 \textit{getcurrentBlock}(\textit{remove}(B)) = null\\
-\textit{getgrid}(\textit{remove}(B)) = \textit{getgrid}(B)\\
+%\textit{getgrid}(\textit{remove}(B)) = \textit{getgrid}(B)\\
+$\forall$ x (1 $<=$ x \&\& x $<=$ \textit{getgrid}(\textit{getWidth}(B)))\{\\
+$\forall$ y (1 $<=$ y \&\& y $<=$ \textit{getgrid}(\textit{getHeight}(B)))\{\\ \textit{getgrid}(\textit{isOccupied}(\textit{remove}(B),x,y)) = \textit{getgrid}(\textit{isOccupied}(B,x,y)) \\
+\}\\
 \textit{getNbLastCleaned}(\textit{remove}(B)) = \textit{getNbLastCleaned}(B)\\
 \textit{isBlock}(\textit{remove}(B)) = false\\
 \textit{getXMinBlock}(\textit{remove}(B)) = 0\\
 \textit{getYMinBlock}(\textit{remove}(B)) = 0\\
 
  \item[$\circ$] \textit{clean}\\
-\textit{getcurrentBlock}(\textit{clean}(B)) = \textit{getcurrentBlock}(B)\\
-\textit{getgrid}(\textit{clean}(B)) = \textit{getgrid}(B)\\
+%\textit{getcurrentBlock}(\textit{clean}(B)) = \textit{getcurrentBlock}(B)\\
+%\textit{getgrid}(\textit{clean}(B)) = \textit{getgrid}(B)\\
+\textit{isBlock}(\textit{remove}(B)) = false\\
+\textit{isBottom}(\textit{remove}(B)) = false\\
+\textit{getcurrentBlock}(\textit{getSize}(\textit{insert}(B))) = \textit{getcurrentBlock}(\textit{getSize}(B))\\
+\textit{getcurrentBlock}(\textit{getType}(\textit{insert}(B))) = \textit{getcurrentBlock}(\textit{getType}(B))\\
+\textit{getcurrentBlock}(\textit{getNbPos}(\textit{insert}(B))) = \textit{getcurrentBlock}(\textit{getNbPos}(B))\\
 
 \end{itemize}
 \newpage
@@ -324,6 +353,8 @@ $\neg$\textit{isOccupied}(\textit{put}(G,x,y),x,y) = \textit{isOccupied}(G,x,y)\
 \textit{init}: -$>$ [Joueur]\\\\
 
 \underline{Opérations}:\\
+\textit{startGame}: [Joueur] -$>$ [Joueur]\\
+\underline{précondition}: \=\textit{startGame}(J) \underline{require} \textit{canPlay}(J)\\
 \textit{goLeft}: [Joueur] -$>$ [Joueur]\\
 \underline{précondition}: \=\textit{goLeft}(J) \underline{require} \textit{canPlay}(J)\\
 \textit{goRight}: [Joueur] -$>$ [Joueur]\\
@@ -343,13 +374,17 @@ $\textit{getTetris}(J) \neq null$\\
  
  \item[$\circ$] \textit{init}\\
 
+\item[$\circ$] \textit{startGame}\\
+\textit{getTetris}(\textit{startGame}(J)) = \textit{getTetris}(J)\\
+\textit{getTetris}(\textit{startGame}(J)) = \textbf{Tetris:}\textit{next}(\textit{getTetris}(J))\\
+
  \item[$\circ$] \textit{goLeft}\\
 \textit{getTetris}(\textit{goLeft}(J)) = \textit{getTetris}(J)\\
 \textit{getTetris}(\textit{goLeft}(J)) = \textbf{Tetris:}\textit{goLeft}(\textit{getTetris}(J))\\
 
  \item[$\circ$] \textit{goRight}\\
 \textit{getTetris}(\textit{goRight}(J)) = \textit{getTetris}(J)\\
-\textit{getTetris}(\textit{goRight}(J)) = \textbf{Tetris:}\textit{goRight}(\textit{getTetris}(J)e)\\
+\textit{getTetris}(\textit{goRight}(J)) = \textbf{Tetris:}\textit{goRight}(\textit{getTetris}(J))\\
 
  \item[$\circ$] \textit{goDown}\\
 \textit{getTetris}(\textit{goDown}(J)) = \textit{getTetris}(J)\\

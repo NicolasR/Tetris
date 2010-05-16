@@ -18,8 +18,8 @@ public interface TetrisService {
 	
 	/** Constructor
 	 * Initialise
-	 * post: getScore() == 0
 	 * post: getBoard() == Board:init(10,22)
+	 * post: getScore() == 0
 	 * post: isRunning() == true
 	 * post: needNext() == true
 	 */

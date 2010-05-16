@@ -15,6 +15,14 @@ public class JoueurContract extends JoueurDecorator {
 		}
 	}
 	
+	@Override
+	public boolean canPlay() {
+		checkInvariants();
+		boolean canPlay = super.canPlay();
+		checkInvariants();
+		return canPlay;
+	}
+	
 	public TetrisService getTetris() {
 		checkInvariants();
 		TetrisService tetris = super.getTetris();
@@ -25,6 +33,26 @@ public class JoueurContract extends JoueurDecorator {
 	public void init() {
 		super.init();
 		checkInvariants();
+	}
+	
+	@Override
+	public void startGame() {
+		checkInvariants();
+		if (canPlay())
+			throw new Error("[JOUEUR]pre(1)(startGame) invalide");
+		
+		boolean canPlay_atPre = canPlay();
+		int getScore_atPre = getTetris().getScore();
+		super.getTetris().next();
+		
+		if (!(canPlay() != canPlay_atPre))
+			throw new Error("[JOUEUR]post(1)(startGame) invalide");
+		
+		//POST TETRIS:next
+		if (!(getTetris().getScore() == getScore_atPre))
+			throw new Error("[Joueur]post(1.1)(startGame) invalide");
+		if (!(getTetris().needNext() == false))
+			throw new Error("[Joueur]post(1.2)(startGame) invalide");		
 	}
 	
 	public void goLeft() {
@@ -84,11 +112,13 @@ public class JoueurContract extends JoueurDecorator {
 		checkInvariants();
 		TetrisService getTetris_atPre = super.getTetris();
 		
-		boolean isBottom_atPre = getTetris().getBoard().isBottom();
-		int getScore_atPre = getTetris().getScore();
-		
 		boolean canPlay_atPre = canPlay();
-		
+		boolean isBottom_atPre;
+		if (canPlay())
+			isBottom_atPre = getTetris().getBoard().isBottom();
+		else
+			isBottom_atPre = false;
+		int getScore_atPre = getTetris().getScore();
 		super.goDown();
 		checkInvariants();
 		
@@ -97,7 +127,7 @@ public class JoueurContract extends JoueurDecorator {
 		}
 		
 		//POST TETRIS:goDown
-		if(!canPlay_atPre){
+		if(canPlay_atPre){
 			TetrisService tetris = getTetris();
 			if (!isBottom_atPre){
 				if (!(getScore_atPre+20+50*(tetris.getBoard().getNbLastCleaned()) == tetris.getScore()))
@@ -156,14 +186,6 @@ public class JoueurContract extends JoueurDecorator {
 			if (!(tetris.needNext() == false))
 				throw new Error("[JOUEUR]post(2.2)(rotateRight) invalide");
 		}
-	}
-
-	@Override
-	public boolean canPlay() {
-		checkInvariants();
-		boolean canPlay = super.canPlay();
-		checkInvariants();
-		return canPlay;
 	}
 	
 }

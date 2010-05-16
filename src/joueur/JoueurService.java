@@ -15,6 +15,12 @@ public interface JoueurService {
 	public void init();
 	
 	/* OPERATORS */	
+	
+	//pre: canPlay() == false
+	//post: canPlay() != canPlay()@pre
+	//post: getTetris() == Tetris:next()
+	public void startGame();
+	
 	//Pre: canPlay() == true
 	// Post : getTetris() == getTetris@pre
 	//Post: getTetris() = Tetris:goLeft()

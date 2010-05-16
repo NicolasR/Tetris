@@ -65,6 +65,7 @@ public class TetrisContract extends TetrisDecorator {
 		
 		checkInvariants();
 		
+		//captures
 		int getScore_atPre = getScore();
 		BlockService getcurrentBlock_atPre = getBoard().getcurrentBlock();
 		GridService getgrid_atPre = getBoard().getgrid();
@@ -75,7 +76,6 @@ public class TetrisContract extends TetrisDecorator {
 		boolean cangoLeft_atPre = getBoard().cangoLeft();
 		
 		super.goLeft();
-		
 		checkInvariants();
 		
 		if (!(getScore() == getScore_atPre))

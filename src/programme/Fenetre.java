@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import joueur.JoueurService;
 
@@ -31,6 +32,8 @@ public class Fenetre extends JFrame implements KeyListener{
 	private JMenu menuJeu = new JMenu("Jeu");
 	private JMenuItem JeuDemarrer = new JMenuItem("Démarrer");
 	private JMenuItem JeuQuitter = new JMenuItem("Quitter");
+	private JMenu menuAPropos = new JMenu("?");
+	private JMenuItem APropos = new JMenuItem("A propos");
 	private TetrisPanel panel;
 	private Runner runner;
 	private JoueurService joueur;
@@ -51,8 +54,13 @@ public class Fenetre extends JFrame implements KeyListener{
 		
 		this.menuJeu.add(JeuDemarrer);
 		this.menuJeu.add(JeuQuitter);
+		this.menuAPropos.add(APropos);
+		APropos.addActionListener(new AProposListener(this));
+		
 		this.menuBar.add(menuJeu);
+		this.menuBar.add(menuAPropos);
 		this.setJMenuBar(menuBar);
+		
 		this.setTitle("Tetris");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		addKeyListener(this);
@@ -70,10 +78,23 @@ public class Fenetre extends JFrame implements KeyListener{
 			if(!joueur.getTetris().isRunning()){
 				joueur.getTetris().init();
 				panel.setGrid(joueur.getTetris().getBoard().getgrid());
-				joueur.getTetris().next();
+				joueur.startGame();
 				runner = new Runner(joueur, fenetre);
 				runner.start();
 			}
+		}
+	}
+	
+	public class AProposListener implements ActionListener{
+		
+		public AProposListener(Fenetre fenetre){
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String message = "Application créée par Pauline CHAMOREAU et Nicolas RIGNAULT\n" +
+					"dans le cadre du projet de Composants de l'année 2009-2010";
+			JOptionPane.showMessageDialog(null, message, "A propos", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	
