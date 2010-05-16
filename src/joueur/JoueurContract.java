@@ -34,12 +34,6 @@ public class JoueurContract extends JoueurDecorator {
 		super.init();
 		checkInvariants();
 		
-		if (!(getTetris().getScore() == 0))
-			throw new Error("[Joueur]post(1.1)(init) invalide");
-		if (!(getTetris().isRunning() == true))
-			throw new Error("[Joueur]post(1.2)(init) invalide");
-		if (!(getTetris().needNext() == true))
-			throw new Error("[Joueur]post(1.3)(init) invalide");
 	}
 	
 	@Override

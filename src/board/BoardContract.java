@@ -8,7 +8,6 @@ public class BoardContract extends BoardDecorator {
 		super(f);
 	}
 
-	
 	public void checkInvariants(){
 		BlockService block = super.getcurrentBlock();
 		if (super.isBlock())
@@ -33,6 +32,114 @@ public class BoardContract extends BoardDecorator {
 		
 	}
 	
+	public boolean canRotateLeft(){
+		checkInvariants();
+		
+		if (!isBlock())
+			throw new Error("[BOARD]pre(1)(canRotateLeft) invalide");
+		
+		boolean result = super.canRotateLeft();
+		 
+		checkInvariants();
+		return result;
+	}
+	
+	public boolean canRotateRight(){
+		checkInvariants();
+		
+		if (!isBlock())
+			throw new Error("[BOARD]pre(1)(canRotateRight) invalide");
+		
+		boolean result = super.canRotateRight();
+		 
+		checkInvariants();
+		return result;
+	}
+	
+	public boolean cangoLeft(){
+		checkInvariants();
+		
+		if (!isBlock())
+			throw new Error("[BOARD]pre(1)(cangoLeft) invalide");
+		
+		boolean result = super.cangoLeft();
+		 
+		checkInvariants();
+		return result;
+	}
+	
+	public boolean cangoRight(){
+		checkInvariants();
+		
+		if (!isBlock())
+			throw new Error("[BOARD]pre(1)(cangoRight) invalide");
+		
+		boolean result = super.cangoRight();
+		 
+		checkInvariants();
+		return result;
+	}
+	
+	public boolean isBottom(){
+		checkInvariants();
+		
+		if (!isBlock())
+			throw new Error("[BOARD]pre(1)(isBottom) invalide");
+		
+		boolean result = super.isBottom();
+		checkInvariants();
+		
+		return result;
+	}
+	
+	public boolean isConflict(){
+		checkInvariants();
+		
+		if (!isBlock())
+			throw new Error("[BOARD]pre(1)(isConflict) invalide");
+		
+		boolean result = super.isConflict();
+		checkInvariants();
+		
+		return result;
+	}
+	
+	public int getXblock(int x){
+		checkInvariants();
+		
+		if (!isBlock())
+			throw new Error("[BOARD]pre(1)(getXblock) invalide");
+		
+		int result = super.getXblock(x);
+		checkInvariants();
+		
+		return result;
+	}
+	
+	public int getYblock(int y){
+		checkInvariants();
+		
+		if (!isBlock())
+			throw new Error("[BOARD]pre(1)(getYblock) invalide");
+		
+		int result = super.getYblock(y);
+		checkInvariants();
+		
+		return result;
+	}
+	
+	public int getBottomHeight(){
+		checkInvariants();
+		
+		if (!isBlock())
+			throw new Error("[BOARD]pre(1)(getBottomHeight) invalide");
+		
+		int result = super.getBottomHeight();
+		
+		checkInvariants();
+		
+		return result;
+	}
 	
 	public void init(int x, int y){
 		if (!(x > 0 && y > 0 && y >= x)) {

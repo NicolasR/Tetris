@@ -12,9 +12,7 @@ public interface JoueurService {
 	public boolean canPlay();
 	
 	/* CONSTRUCTORS */
-	/*
-	 * post: getBoard() == Board:init(10,22)
-	 */
+
 	public void init();
 	
 	/* OPERATORS */	
