@@ -196,10 +196,10 @@ public class TetrisContract extends TetrisDecorator {
 		if (!(board.getXMinBlock() == getXMinBlock_atPre)) {
 			throw new Error("[TETRIS]post(3.4)(goDown) invalide");
 		}
-		if (!(board.getYMinBlock() == getYMinBlock_atPre+getBottomHeight_atPre)) {
+		if (!(board.getYMinBlock() == getYMinBlock_atPre+getBottomHeight_atPre+board.getNbLastCleaned())) {
 			throw new Error("[TETRIS]post(3.5)(goDown) invalide");
 		}
-		if(!(board.getBottomHeight() == 0)) {
+		if(!(board.getBottomHeight() == 0 || board.isBottom())) {
 			throw new Error("[TETRIS]post(3.6)(goDown) invalide");
 		}
 	}
@@ -315,14 +315,14 @@ public class TetrisContract extends TetrisDecorator {
 		checkInvariants();
 		
 		if (isBottom_atPre){
-			if (needNext_atPre) {
+			/*if (needNext_atPre) {
 				if(!(getScore() == getScore_atPre))
 					throw new Error("[TETRIS]post(1)(step) invalide");
-			}
-			else {
+			}*/
+			//else {
 				if (!(getScore() == getScore_atPre + 20 + (getBoard().getNbLastCleaned()*50)))
 					throw new Error("[TETRIS]post(2)(step) invalide");
-			}
+			/*}*/
 			if(isRunning() && !(needNext() == false))
 				throw new Error("[TETRIS]post(3)(step) invalide");
 		}

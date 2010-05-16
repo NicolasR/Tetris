@@ -1,5 +1,7 @@
 package board;
 
+import java.util.LinkedList;
+
 import grid.GridService;
 import block.BlockService;
 
@@ -239,7 +241,7 @@ public class BoardContract extends BoardDecorator {
 		if (!(super.getXMinBlock() == getXMinBlock_atPre)) {
 			throw new Error("[BOARD]post(4)(doBottom) invalide");
 		}
-		if (!(super.getYMinBlock() == getYMinBlock_atPre+getBottomHeight_atPre)) {
+		if (!(super.getYMinBlock() == getYMinBlock_atPre+getBottomHeight_atPre+getNbLastCleaned())) {
 			throw new Error("[BOARD]post(5)(doBottom) invalide");
 		}
 		if(!(super.getBottomHeight() == 0 || isBottom())) {
@@ -258,23 +260,26 @@ public class BoardContract extends BoardDecorator {
 		int getXMinBlock_atPre = super.getXMinBlock();
 		int getYMinBlock_atPre = super.getYMinBlock();
 		int getBottomHeight_atPre = super.getBottomHeight();
+		boolean isBottom_atPre = super.isBottom();
 		super.step();
 		checkInvariants();
 		if(!(super.getgrid() == getgrid_atPre)) {
 			throw new Error("[BOARD]post(1)(step) invalide");
 		}
-		if(!(super.isBlock() == isBlock_atPre)) {
-			throw new Error("[BOARD]post(2)(step) invalide");
-		}
-		if(!(super.getXMinBlock() == getXMinBlock_atPre)) {
-			throw new Error("[BOARD]post(3)(step) invalide");
-		}
+		
+		if (!isBottom_atPre){
+			if(!(super.isBlock() == isBlock_atPre)) {
+				throw new Error("[BOARD]post(2)(step) invalide");
+			}
+			if(!(super.getXMinBlock() == getXMinBlock_atPre)) {
+				throw new Error("[BOARD]post(3)(step) invalide");
+			}
 		if (!(super.getYMinBlock() == getYMinBlock_atPre+1)) {
 			throw new Error("[BOARD]post(4)(step) invalide");
 		}
 		if (!(super.getBottomHeight() == getBottomHeight_atPre-1)) {
 			throw new Error("[BOARD]post(5)(step) invalide");
-		}
+		}}
 	}
 	
 	

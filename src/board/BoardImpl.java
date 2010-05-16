@@ -527,7 +527,8 @@ public class BoardImpl implements BoardService {
 	@Override
 	public boolean isBottom() {
 		for(LinkedList<Integer> p: block.getLowPos()){
-			if((getYblock(p.getLast()) == grid.getHeight()) || (getgrid().isOccupied(getXblock(p.getFirst()), getYblock(p.getLast())+1)))
+			if((getYblock(p.getLast()) == grid.getHeight()) 
+					|| (!getgrid().canPut(getXblock(p.getFirst()), getYblock(p.getLast())+1)))
 				return true;
 		}
 		return false;
@@ -565,16 +566,20 @@ public class BoardImpl implements BoardService {
 	
 	@Override
 	public int getBottomHeight() {
-		int length = 1;
-		while(true){
-			for(LinkedList<Integer> p: block.getLowPos()){
-				int x = getXblock(p.getFirst());
-				int y = getYblock(p.getLast())+length;
-				if (!grid.canPut(x, y))
-					return length-1;
+		int lengthmax = grid.getHeight();
+		int length;
+		for(LinkedList<Integer> p: block.getLowPos()){
+			int x = getXblock(p.getFirst());
+			int y = getYblock(p.getLast());
+			length = 0;
+			while(grid.canPut(x, y+1)){
+				length++;
+				y++;
 			}
-			length += 1;
+			if (length < lengthmax)
+				lengthmax = length;
 		}
+		return lengthmax;
 	}
 
 
@@ -682,6 +687,7 @@ public class BoardImpl implements BoardService {
 				clean();
 			else
 				isCleaned = false;
+			remove();
 		}
 		else
 		{
@@ -749,6 +755,7 @@ public class BoardImpl implements BoardService {
 						}
 					}
 				}
+				this.YMinBlock += 1;
 			}
 		}
 	}
