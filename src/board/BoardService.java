@@ -7,6 +7,7 @@ public interface BoardService {
 	
 	/** Observators*/
 	public BlockService getcurrentBlock();
+	public boolean isCleaned();
 	public GridService getgrid();
 	public int getNbLastCleaned();
 	public boolean canRotateLeft();

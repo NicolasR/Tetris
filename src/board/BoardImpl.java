@@ -23,9 +23,11 @@ public class BoardImpl implements BoardService {
 		return this.block;
 	}
 	
+	
 	public boolean isCleaned(){
 		return isCleaned;
 	}
+	
 	
 	@Override
 	public GridService getgrid() {
@@ -581,8 +583,6 @@ public class BoardImpl implements BoardService {
 		}
 		return lengthmax;
 	}
-
-
 	
 	
 	@Override
@@ -594,7 +594,6 @@ public class BoardImpl implements BoardService {
 		XMinBlock = 0;
 		YMinBlock = 0;
 	}
-
 	
 	
 	@Override
@@ -704,6 +703,8 @@ public class BoardImpl implements BoardService {
 			this.YMinBlock += 1;
 		}
 	}
+
+	
 	@Override
 	public void insert(BlockService block) {
 		this.block = block;
@@ -721,6 +722,7 @@ public class BoardImpl implements BoardService {
 			}
 		}
 	}
+
 	
 	@Override
 	public void remove() {

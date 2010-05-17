@@ -22,6 +22,10 @@ public abstract class JoueurDecorator implements JoueurService {
 		this.delegate.init();
 	}
 	
+	public void startGame(){
+		this.delegate.startGame();
+	}
+	
 	public void goLeft() {
 		this.delegate.goLeft();
 	}

@@ -14,6 +14,10 @@ public abstract class BoardDecorator implements BoardService{
 		return this.delegate.getcurrentBlock();
 	}
 	
+	public boolean isCleaned(){
+		return this.delegate.isCleaned();
+	}
+	
 	public int getXMinBlock(){
 		return this.delegate.getXMinBlock();
 	}

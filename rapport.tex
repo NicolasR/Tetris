@@ -89,7 +89,7 @@ $\forall x1, y1 \in \textit{getAllPos} = \left\{~(x1,y1) \in \textit{getAllPos}(
 \textit{getXMax}(\textit{removeAllPos}(B)) = 0\\
 \textit{getYMin}(\textit{removeAllPos}(B)) = \textit{getSize}(B)+1\\
 \textit{getYMax}(\textit{removeAllPos}(B)) = 0\\
-$\forall$ x, y $\neg$ \textit{hasPos}(\textit{removeAllPos}(B),x,y)\\
+$\forall$ (x, y) $\in$ [1..getSize(B),1..getSize(B)],  $\neg$ \textit{hasPos}(\textit{removeAllPos}(B),x,y)\\
 \textit{getAllPos}(\textit{removeAllPos}(B)) = null\\
 \textit{getLowPos}(\textit{removeAllPos}(B)) = null\\
 
@@ -114,6 +114,7 @@ $\forall$ x, y $\neg$ \textit{hasPos}(\textit{removeAllPos}(B),x,y)\\
 
 \underline{Observators}:\\
 \textit{getCurrentBlock}: [Board] -$>$ Block\\
+\textit{isCleaned}: [Board] $->$ bool\\
 \textit{getBrid}: [Board] -$>$ Grid\\
 \textit{getNbLastCleaned}: [Board] -$>$ int\\
 \textit{canRotateLeft}: [Board] -$>$ bool\\
@@ -354,7 +355,7 @@ $\neg$\textit{isOccupied}(\textit{put}(G,x,y),x,y) = \textit{isOccupied}(G,x,y)\
 
 \underline{Opérations}:\\
 \textit{startGame}: [Joueur] -$>$ [Joueur]\\
-\underline{précondition}: \=\textit{startGame}(J) \underline{require} \textit{canPlay}(J)\\
+\underline{précondition}: \=\textit{startGame}(J) \underline{require} $\neg$\textit{canPlay}(J)\\
 \textit{goLeft}: [Joueur] -$>$ [Joueur]\\
 \underline{précondition}: \=\textit{goLeft}(J) \underline{require} \textit{canPlay}(J)\\
 \textit{goRight}: [Joueur] -$>$ [Joueur]\\

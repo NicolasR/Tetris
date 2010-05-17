@@ -104,7 +104,7 @@ public class GridContract extends GridDecorator {
 			throw new Error("[GRID]pre(2)(remove) invalide");
 		
 		if (!(y >= 1 && y <= getHeight()))
-			throw new Error("[GRID]pre(2)(remove) invalide");
+			throw new Error("[GRID]pre(3)(remove) invalide");
 		
 		boolean grid_atPre[][] = new boolean[getWidth()][getHeight()];
 		for(int xtemp=1;xtemp<=getWidth();xtemp++)
