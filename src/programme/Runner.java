@@ -26,7 +26,7 @@ public class Runner extends Thread implements Runnable {
 		fenetre.doAction(Fenetre.STEP);
 		}
 		//System.out.println("Fini: "+joueur.getTetris().getScore());
-		String message = "Partie terminÃ©e!\nVotre score est de : "+joueur.getTetris().getScore();
+		String message = "Partie terminée!\nVotre score est de : "+joueur.getTetris().getScore();
 		JOptionPane.showMessageDialog(null, message, "Tetris", JOptionPane.INFORMATION_MESSAGE);
 		joueur.init();
 	}

@@ -100,6 +100,7 @@ public class TetrisTest{
 		
 		assertTrue(tetris.getScore() == getScore_atPre);
 		assertTrue(tetris.needNext() == false);
+		assertTrue(tetris.isRunning());
 		
 		assertTrue(tetris.getBoard().getcurrentBlock() == getcurrentBlock_atPre);
 		assertTrue(tetris.getBoard().getgrid() == getgrid_atPre);
@@ -139,6 +140,7 @@ public class TetrisTest{
 		
 		assertTrue(tetris.getScore() == getScore_atPre);
 		assertTrue(tetris.needNext() == false);
+		assertTrue(tetris.isRunning());
 		
 		assertTrue(tetris.getBoard().getcurrentBlock() == getcurrentBlock_atPre);
 		assertTrue(tetris.getBoard().getgrid() == getgrid_atPre);
@@ -177,6 +179,8 @@ public class TetrisTest{
 		}
 		
 		assertTrue(tetris.getScore() == getScore_atPre+20+50*(tetris.getBoard().getNbLastCleaned()));
+		assertTrue(tetris.needNext());
+		assertTrue(tetris.isRunning());
 		
 		assertTrue(tetris.getBoard().getcurrentBlock() == getcurrentBlock_atPre);
 		assertTrue(tetris.getBoard().getgrid() == getgrid_atPre);
@@ -216,6 +220,7 @@ public class TetrisTest{
 		
 		assertTrue(tetris.getScore() == getScore_atPre);
 		assertTrue(tetris.needNext() == false);
+		assertTrue(tetris.isRunning());
 		
 		assertTrue(tetris.getBoard().getcurrentBlock() == getcurrentBlock_atPre);
 		assertTrue(tetris.getBoard().getgrid() == getgrid_atPre);
@@ -332,7 +337,7 @@ public class TetrisTest{
 			assertTrue(false);
 		}
 
-		assertTrue(tetris.getScore() == getScore_atPre);
+		assertTrue(tetris.getScore() == getScore_atPre+ 20 + (tetris.getBoard().getNbLastCleaned()*50));
 		assertTrue(tetris.needNext() == false);	
 	}
 
