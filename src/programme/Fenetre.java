@@ -30,7 +30,7 @@ public class Fenetre extends JFrame implements KeyListener{
 	 */
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menuJeu = new JMenu("Jeu");
-	private JMenuItem JeuDemarrer = new JMenuItem("Démarrer");
+	private JMenuItem JeuDemarrer = new JMenuItem("Demarrer");
 	private JMenuItem JeuQuitter = new JMenuItem("Quitter");
 	private JMenu menuAPropos = new JMenu("?");
 	private JMenuItem APropos = new JMenuItem("A propos");
@@ -92,8 +92,8 @@ public class Fenetre extends JFrame implements KeyListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String message = "Application créée par Pauline CHAMOREAU et Nicolas RIGNAULT\n" +
-					"dans le cadre du projet de Composants de l'année 2009-2010";
+			String message = "Application creee par Pauline CHAMOREAU et Nicolas RIGNAULT\n" +
+					"dans le cadre du projet de Composants de l'annee 2009-2010";
 			JOptionPane.showMessageDialog(null, message, "A propos", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
