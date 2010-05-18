@@ -234,7 +234,7 @@ $\textit{getYMinBlock}(\textit{init}(x,y)) = 0$\\
 \textit{getcurrentBlock}(\textit{getNbPos}(\textit{doBottom}(B))) = \textit{getcurrentBlock}(\textit{getNbPos}(B))\\
 \textit{isBlock}(\textit{doBottom}(B)) = \textit{isBlock}(B)\\
 \textit{getXMinBlock}(\textit{doBottom}(B)) = \textit{getXMinBlock}(B)\\
-\textit{getYMinBlock}(\textit{doBottom}(B)) = \textit{getYMinBlock}(B) + \textit{getBottomHeight}(B) +  \textit{getNbLastCleaned}(B)\\
+\textit{getYMinBlock}(\textit{doBottom}(B)) = \textit{getYMinBlock}(B) + \textit{getBottomHeight}(B) +  \textit{getNbLastCleaned}(\textit{doBottom}(B))\\
 \textit{getBottomHeight}(\textit{doBottom}(B)) - \textit{getNbLastCleaned}(B) = 0 $||$ \textit{isBottom}(B)\\
 
  \item[$\circ$] \textit{step}\\
