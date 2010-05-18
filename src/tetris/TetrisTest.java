@@ -336,8 +336,10 @@ public class TetrisTest{
 		} catch (Error err) {
 			assertTrue(false);
 		}
-
-		assertTrue(tetris.getScore() == getScore_atPre+ 20 + (tetris.getBoard().getNbLastCleaned()*50));
+		
+		//Car GoDown donc calcul déjà fait
+		assertTrue(tetris.getScore() == getScore_atPre);
+		
 		assertTrue(tetris.needNext() == false);	
 	}
 

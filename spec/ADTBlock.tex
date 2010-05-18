@@ -1,0 +1,108 @@
+\documentclass[a4paper,11pt,titlepage]{article}
+\usepackage[latin1]{inputenc} %support de l'utf8
+%\usepackage[T1]{fontenc} %support des accents
+\usepackage[francais]{babel} %support de la langue
+\usepackage{geometry}
+\geometry{hscale=0.70,vscale=0.70,centering}
+
+% Title Page
+\title{Projet de Composants: TETRIS}
+\author{Pauline CHAMOREAU \and Nicolas RIGNAULT}
+
+
+\begin{document}
+%\maketitle
+
+%\tableofcontents
+
+%\newpage
+%\section{Spécifications}
+
+\paragraph{ADT Block}
+
+\begin{tabbing}
+\underline{Service}: \textbf{Block}\\
+\underline{Type}: char, int, bool, Set$<T>$, Paire$<T>$\\\\
+
+\underline{Observators}:\\
+\textit{getType}: [Block] -$>$ char\\
+\textit{getSize}: [Block] -$>$ int\\
+\textit{getNbPos}: [Block] -$>$ int\\
+\textit{getXMin}: [Block] -$>$ int\\
+\textit{getXMax}: [Block] -$>$ int\\
+\textit{getYMin}: [Block] -$>$ int\\
+\textit{getYMax}: [Block] -$>$ int\\
+\textit{hasPos}: [Block] * int * int -$>$ bool\\
+\underline{précondition}: \=\textit{hasPos}(B,x,y) \underline{require} 1 $<=$ x \&\& x $<=$ \textit{getSize}(B) \&\& 1 $<=$ y \&\& y $<=$ \textit{getSize}(B)\\
+\textit{getAllPos}: [Block] -$>$ Set$<$Paire$<$int,int$>>$\\
+\textit{getLowPos}: [Block] -$>$ Set$<$Paire$<$int,int$>>$\\\\
+
+\underline{Constructor}:\\
+\textit{init}: char -$>$ [Block]\\
+\underline{précondition}: \textit{init}(t) \underline{require} $t = O \parallel t = L \parallel t = J \parallel t = T \parallel t = Z \parallel t = S \parallel t = I$\\\\
+
+\underline{Opérations}:\\
+\textit{addPos}: [Block] * int * int -$>$ [Block]\\
+\underline{précondition}: \=\textit{addPos}(B,x,y) \underline{require} 1 $<=$ x \&\& x $<=$ \textit{getSize}(B) \&\& 1 $<=$ y \&\& y $<=$ \textit{getSize}(B) \\
+\>\&\& $\neg$\textit{hasPos}(B,x,y) \\
+\textit{removeAllPos}: [Block] -$>$ [Block]\\
+\textit{RotateLeft}: [Block] -$>$ [Block]\\
+\textit{rotateRight}: [Block] -$>$ [Block]\\\\
+
+\underline{Observations}:
+\end{tabbing}
+\begin{itemize}
+ \item[$\circ$] \textit{invariants}\\
+\textit{getType}(B) = O $\parallel$ \textit{getType}(B) = L $\parallel$ \textit{getType}(B) = J $\parallel$ \textit{getType}(B) = T $\parallel$ \\
+\textit{getType}(B) = Z $\parallel$ \textit{getType}(B) = S $\parallel$ \textit{getType}(B) = I\\
+\textit{getSize}(B) = 2 $\parallel$ \textit{getSize}(B) = 3 $\parallel$ \textit{getSize}(B) = 4\\
+0 $<$= \textit{getNbPos}(B) \&\& \textit{getNbPos}(B) $<$= 4\\
+\textit{getXMin}(B) = min~$\left\{~first(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
+\textit{getXMax}(B) = max~$\left\{~first(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
+\textit{getYMin}(B) = min~$\left\{~second(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
+\textit{getYMax}(B) = max~$\left\{~second(p)~|~p \in \textit{getAllPos}(B)~\right\}$ \\
+\textit{getAllPos} = $\left\{~(x,y) \in Pair<1..\textit{getSize}(B),1..\textit{getSize}(B)>~|~\textit{hasPos(B,x,y)}~\right\}$ \\
+\textit{getAllPos} = $\left\{~(x,y) \in \textit{\textit{getAllPos}(B)}~|~\neg \exists (x,y2) \in \textit{\textit{getAllPos}}(B), y2>y~\right\}$ \\
+ 
+ \item[$\circ$] \textit{init}\\
+\textit{getType}(\textit{init}(type)) = type\\
+\textit{getNbPos}(\textit{init}(type)) = 4\\
+
+ \item[$\circ$] \textit{addPos}\\
+\textit{getType}(\textit{addPos}(B,x,y)) = \textit{getType}(B)\\
+\textit{getSize}(\textit{addPos}(B,x,y)) = \textit{getSize}(B)\\
+\textit{getNbPos}(\textit{addPos}(B,x,y)) = \textit{getNbPos}(B)+1\\
+(x $<$ \textit{getXMin}(B) \&\& \textit{getXMin}(\textit{addPos}(B,x,y)) = x)~$\|$~ (\textit{getXMin}(\textit{addPos}(B,x,y)) = \textit{getXMin}(B))\\
+(\textit{getXMax}(B) $<$ x \&\& \textit{getXMax}((\textit{addPos}(B,x,y)) = x)~ $\|$~ (\textit{getXMax}(\textit{addPos}(B,x,y)) = \textit{getXMax}(B))\\
+(y $<$ \textit{getYMin}(B) \&\& \textit{getYMin}(\textit{addPos}(B,x,y)) = y)~ $\|$~ (\textit{getYMin}(\textit{addPos}(B,x,y)) = \textit{getYMin}(B))\\
+(\textit{getYMax}(B) $<$ y \&\& \textit{getYMax}(\textit{addPos}(B,x,y)) = y) ~$\|$~ (\textit{getYMax}(\textit{addPos}(B,x,y)) = \textit{getYMax}(B))\\
+\textit{hasPos}(\textit{addPos}(B,x,y)) = true\\
+$\forall$ x1, y1, x1 $\ne$ x $\vee$ y1 $\ne$ y $\Rightarrow$ \textit{hasPos}(\textit{addPos}(B,x,y),x1,y1) = \textit{hasPos}(B,x1,y1)\\
+$\forall x1, y1 \in \textit{getAllPos} = \left\{~(x1,y1) \in \textit{getAllPos}(\textit{addPos}(B,x,y))~\right\}$\\
+(x,y) $\in$ \textit{getAllPos}(\textit{addPos}(B,x,y))\\
+
+ \item[$\circ$] \textit{removeAllPos}\\
+\textit{getType}(\textit{removeAllPos}(B)) = \textit{getType}(B)\\
+\textit{getSize}(\textit{removeAllPos}(B)) = \textit{getSize}(B)\\
+\textit{getNbPos}(\textit{removeAllPos}(B)) = \textit{getNbPos}(B)\\
+\textit{getXMin}(\textit{removeAllPos}(B)) = \textit{getSize}(B)+1\\
+\textit{getXMax}(\textit{removeAllPos}(B)) = 0\\
+\textit{getYMin}(\textit{removeAllPos}(B)) = \textit{getSize}(B)+1\\
+\textit{getYMax}(\textit{removeAllPos}(B)) = 0\\
+$\forall$ (x, y) $\in$ [1..getSize(B),1..getSize(B)],  $\neg$ \textit{hasPos}(\textit{removeAllPos}(B),x,y)\\
+\textit{getAllPos}(\textit{removeAllPos}(B)) = null\\
+\textit{getLowPos}(\textit{removeAllPos}(B)) = null\\
+
+ \item[$\circ$] \textit{rotateLeft}\\
+\textit{getType}(\textit{rotateLeft}(B)) = \textit{getType}(B)\\
+\textit{getSize}(\textit{rotateLeft}(B)) = \textit{getSize}(B)\\
+\textit{getNbPos}(\textit{rotateLeft}(B)) = \textit{getNbPos}(B)\\
+
+ \newpage
+ \item[$\circ$] \textit{rotateRight}\\
+\textit{getType}(\textit{rotateRight}(B)) = \textit{getType}(B)\\
+\textit{getSize}(\textit{rotateRight}(B)) = \textit{getSize}(B)\\
+\textit{getNbPos}(\textit{rotateRight}(B)) = \textit{getNbPos}(B)\\
+\end{itemize}
+
+\end{document}          

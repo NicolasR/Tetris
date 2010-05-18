@@ -1,0 +1,84 @@
+\documentclass[a4paper,11pt,titlepage]{article}
+\usepackage[latin1]{inputenc} %support de l'utf8
+%\usepackage[T1]{fontenc} %support des accents
+\usepackage[francais]{babel} %support de la langue
+\usepackage{geometry}
+\geometry{hscale=0.70,vscale=0.70,centering}
+
+% Title Page
+\title{Projet de Composants: TETRIS}
+\author{Pauline CHAMOREAU \and Nicolas RIGNAULT}
+
+
+\begin{document}
+%\maketitle
+
+%\tableofcontents
+
+%\newpage
+%\section{Spécifications}
+
+\paragraph{ADT Joueur}
+
+\begin{tabbing}
+\underline{Service}: \textbf{Joueur}\\
+\underline{Type}: int, bool\\
+\textit{Require}: Tetris\\\\
+
+\underline{Observators}:\\
+\textit{getTetris}: [Joueur] -$>$ Tetris\\
+\textit{canPlay}: [Joueur] -$>$ bool\\\\
+
+\underline{Constructor}:\\
+\textit{init}: -$>$ [Joueur]\\\\
+
+\underline{Opérations}:\\
+\textit{startGame}: [Joueur] -$>$ [Joueur]\\
+\underline{précondition}: \=\textit{startGame}(J) \underline{require} $\neg$\textit{canPlay}(J)\\
+\textit{goLeft}: [Joueur] -$>$ [Joueur]\\
+\underline{précondition}: \=\textit{goLeft}(J) \underline{require} \textit{canPlay}(J)\\
+\textit{goRight}: [Joueur] -$>$ [Joueur]\\
+\underline{précondition}: \=\textit{goRight}(J) \underline{require} \textit{canPlay}(J)\\
+\textit{goDown}: [Joueur] -$>$ [Joueur]\\
+\underline{précondition}: \=\textit{goDown}(J) \underline{require} \textit{canPlay}(J)\\
+\textit{rotateLeft}: [Joueur] -$>$ [Joueur]\\
+\underline{précondition}: \=\textit{rotateLeft}(J) \underline{require} \textit{canPlay}(J)\\
+\textit{rotateRight}: [Joueur] -$>$ [Joueur]\\
+\underline{précondition}: \=\textit{rotateRight}(J) \underline{require} \textit{canPlay}(J)\\\\
+
+\underline{Observations}:
+\end{tabbing}
+\begin{itemize}
+ \item[$\circ$] \textit{invariants}\\
+$\textit{getTetris}(J) \neq null$\\
+ 
+ \item[$\circ$] \textit{init}\\
+
+\item[$\circ$] \textit{startGame}\\
+\textit{getTetris}(\textit{startGame}(J)) = \textit{getTetris}(J)\\
+\textit{getTetris}(\textit{startGame}(J)) = \textbf{Tetris:}\textit{next}(\textit{getTetris}(J))\\
+
+ \item[$\circ$] \textit{goLeft}\\
+\textit{getTetris}(\textit{goLeft}(J)) = \textit{getTetris}(J)\\
+\textit{getTetris}(\textit{goLeft}(J)) = \textbf{Tetris:}\textit{goLeft}(\textit{getTetris}(J))\\
+
+ \newpage
+ \item[$\circ$] \textit{goRight}\\
+\textit{getTetris}(\textit{goRight}(J)) = \textit{getTetris}(J)\\
+\textit{getTetris}(\textit{goRight}(J)) = \textbf{Tetris:}\textit{goRight}(\textit{getTetris}(J))\\
+
+ \item[$\circ$] \textit{goDown}\\
+\textit{getTetris}(\textit{goDown}(J)) = \textit{getTetris}(J)\\
+\textit{getTetris}(\textit{goDown}(J)) = \textbf{Tetris:}\textit{goDown}(\textit{getTetris}(J))\\
+
+ \item[$\circ$] \textit{rotateLeft}\\
+\textit{getTetris}(\textit{rotateLeft}(J)) = \textit{getTetris}(J)\\
+\textit{getTetris}(\textit{rotateLeft}(J)) = \textbf{Tetris:}\textit{rotateLeft}(\textit{getTetris}(J))\\
+
+ \item[$\circ$] \textit{rotateRight}\\
+\textit{getTetris}(\textit{rotateRight}(J)) = \textit{getTetris}(J)\\
+\textit{getTetris}(\textit{rotateRight}(J)) = \textbf{Tetris:}\textit{rotateRight}(\textit{getTetris}(J))\\
+
+\end{itemize}
+
+\end{document}          

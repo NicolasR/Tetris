@@ -98,6 +98,7 @@ $\forall$ (x, y) $\in$ [1..getSize(B),1..getSize(B)],  $\neg$ \textit{hasPos}(\t
 \textit{getSize}(\textit{rotateLeft}(B)) = \textit{getSize}(B)\\
 \textit{getNbPos}(\textit{rotateLeft}(B)) = \textit{getNbPos}(B)\\
 
+ \newpage
  \item[$\circ$] \textit{rotateRight}\\
 \textit{getType}(\textit{rotateRight}(B)) = \textit{getType}(B)\\
 \textit{getSize}(\textit{rotateRight}(B)) = \textit{getSize}(B)\\
@@ -170,7 +171,7 @@ $\forall$ (x, y) $\in$ [1..getSize(B),1..getSize(B)],  $\neg$ \textit{hasPos}(\t
 \begin{itemize}
  \item[$\circ$] \textit{invariants}\\
 1$<=$\textit{getXblock}(B,\textbf{Block:}\textit{getXMin}(\textit{getcurrentBlock}(B))) \&\&\\ \textit{getXblock}(B,\textbf{Block:}\textit{getXMax}(\textit{getcurrentBlock}(B)))$<=$\textbf{Grid:}\textit{getWidth}(\textit{getgrid}(B))+1\\
-1$<=$\textit{getYblock}(B,\textbf{Block:}\textit{getYMin}(\textit{getcurrentBlock}(B))) \&\&\\ \textit{getYblock}(B,\textbf{Block:}\textit{getYMax}(\textit{getcurrentBlock}(B)))$<=$\textbf{Grid:}\textit{getHeight}(\textit{getgrid}(B))+1\\
+1$<=$\textit{getYblock}(B,\textbf{Block:}\textit{getYMin}(\textit{getcurrentBlock}(B))) \&\&\\ \textit{getYblock}(B,\textbf{Block:}\textit{getYMax}(\textit{getcurrentBlock}(B)))$<=$\textbf{Grid:}\textit{getHeight}(\textit{getgrid}(B))+4\\
 \textit{getNbLastCleaned}(B) $>=$ 0\\
 \textit{isBlock}(B) $<=>$ \textit{getXMinBlock}(B) $>=$ 0 \&\& \textit{getXMinBlock}(B) $<=$ \textit{getgrid}(\textit{getWidth}(B)))\\
 \textit{isBlock}(B) $<=>$ \textit{getYMinBlock}(B) $>=$ 0 \&\& \textit{getYMinBlock}(B) $<=$ \textit{getgrid}(\textit{getHeight}(B)))+1\\
@@ -193,6 +194,7 @@ $\textit{getYMinBlock}(\textit{init}(x,y)) = 0$\\
 \textit{getYMinBlock}(\textit{doRotateLeft}(B)) = \textit{getYMinBlock}(B)\\
 \textit{getcurrentBlock}(\textit{doRotateLeft}(B)) = \textbf{Block}:\textit{rotateLeft}(\textit{getcurrentBlock}(B))\\
 
+ \newpage
  \item[$\circ$] \textit{doLeft}\\
 %\textit{getcurrentBlock}(\textit{doLeft}(B)) = \textit{getcurrentBlock}(B)\\
 %\textit{getgrid}(\textit{doLeft}(B)) = \textit{getgrid}(B)\\
@@ -242,6 +244,7 @@ $\neg$\textit{isBottom}(B) $<=>$ \textit{getXMinBlock}(\textit{step}(B)) = \text
 $\neg$\textit{isBottom}(B) $<=>$ \textit{getYMinBlock}(\textit{step}(B)) = \textit{getYMinBlock}(B) + 1\\
 $\neg$\textit{isBottom}(B) $<=>$ \textit{getBottomHeight}(\textit{step}(B)) = \textit{getBottomHeight}(B) - 1\\
  
+ \newpage
  \item[$\circ$] \textit{insert}\\
 \textit{getCurrentBlock}(\textit{insert}(B, block)) = block\\
 %\textit{getgrid}(\textit{insert}(B, block)) = \textit{getgrid}(B)\\
@@ -314,7 +317,8 @@ $\neg$\textit{canPut}(G,x,y) \}\\
 $\forall$ x in (1 $<=$ x \&\& x $<=$ \textit{getWidth}(\textit{init}(w,h)))\{\\
 $\forall$ y in (1 $<=$ y \&\& y $<=$ \textit{getHeight}(\textit{init}(w,h)))\{ $\neg$\textit{isOccupied}(\textit{init}(w,h),x,y) \&\& \textit{canPut}(\textit{init}(w,h),x,y)\}\\
 \}\\
-
+ 
+ \newpage
  \item[$\circ$] \textit{put}\\
 $\neg$\textit{isOccupied}(\textit{put}(G,x,y),x,y) = \textit{isOccupied}(G,x,y)\\
  $\neg$canPut(put(G,x,y),x,y)\\
@@ -383,6 +387,7 @@ $\textit{getTetris}(J) \neq null$\\
 \textit{getTetris}(\textit{goLeft}(J)) = \textit{getTetris}(J)\\
 \textit{getTetris}(\textit{goLeft}(J)) = \textbf{Tetris:}\textit{goLeft}(\textit{getTetris}(J))\\
 
+ \newpage
  \item[$\circ$] \textit{goRight}\\
 \textit{getTetris}(\textit{goRight}(J)) = \textit{getTetris}(J)\\
 \textit{getTetris}(\textit{goRight}(J)) = \textbf{Tetris:}\textit{goRight}(\textit{getTetris}(J))\\
@@ -479,6 +484,7 @@ $\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{needNe
  \textit{isRunning}(\textit{rotateRight}(T)) = true\\
  \textit{getBoard}(\textit{rotateRight}(T)) = \textbf{Board:}\textit{doRotateRight}(\textit{getBoard}(T))\\
 
+\newpage
 \item[$\circ$] step\\
 \textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) \&\& \textit{needNext}(\textit{getBoard}(T)) $<=>$\\ \textit{getScore}(\textit{step}(T)) = \textit{getScore}(T)\\
 \textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) \&\& $\neg$\textit{needNext}(\textit{getBoard}(T)) $<=>$\\ \textit{getScore}(\textit{step}(T)) = \textit{getScore}(T) + 20 + \textbf{Board:}\textit{getNbLastCleaned}(\textit{getBoard}(\textit{step}(T)))*50\\
@@ -493,6 +499,40 @@ $\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $<=>$ \textit{getBo
 
 \end{itemize}
 \newpage
+
+\section{Manuel}
+
+L'application peut être lancée avec ant. Les commandes suivantes sont disponibles:
+\begin{itemize}
+ \item ``compile'': compile les fichiers sources se trouvant dans \textit{src} vers \textit{build}.
+ \item ``run1'': appelle également ``compile'' puis exécute le Tetris avec les contrats (exécution plus lente).
+ \item ``run2'': appelle également ``compile'' puis exécute le Tetris sans les contrats (exécution normale).
+ \item ``tests'': exécute tous les tests JUnit disponibles et affiche les résultats.
+ \item ``dist'': génère la distribution.
+ \item ``clean'': supprime les fichiers compilés et les fichiers temporaires.\\
+\end{itemize}
+
+La différence de programmation entre l'exécution avec les contrats (``run1'') et sans les contrats (``run2'') se fait uniquement au niveau de la Factory. Un attribut détermine si elle doit ou non renvoyer un service avec implémentation des contrats ou non.\\
+
+Les commandes du Tetris sont les suivantes:
+\begin{itemize}
+ \item Flèche Gauche: Aller à gauche.
+ \item Flèche Droite: Aller à droite.
+ \item Flèche Bas: Aller tout en bas de la grille.
+ \item C: Rotation du bloc vers la gauche.
+ \item V: Rotation du bloc vers la droite.
+\end{itemize}
+
+
+\section{Livraison}
+
+Une archive jar contenant tous les fichiers du projet avec:
+\begin{itemize}
+ \item Un répertoire \textit{src} contenant les sources du projet.
+ \item Un répertoire \textit{spec} contenant les spécifications pour chaque service, dans des fichiers séparés.
+ \item Un répertoire \textit{lib} contenant les librairies nécessaires à l'éxecutions de toutes les fonctionnalités.
+ \item Une version .pdf et une version .dvi de ce rapport.
+\end{itemize}
 
 
 \end{document}          

@@ -375,7 +375,6 @@ public class BoardContract extends BoardDecorator {
 		if (!(getYMinBlock() == getYMinBlock_atPre+getBottomHeight_atPre+getNbLastCleaned())) {
 			throw new Error("[BOARD]post(6)(doBottom) invalide");
 		}
-		
 		if(!(getBottomHeight()-getNbLastCleaned() == 0 || isBottom())) {
 			throw new Error("[BOARD]post(7)(doBottom) invalide");
 		}

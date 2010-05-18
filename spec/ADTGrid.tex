@@ -1,0 +1,87 @@
+\documentclass[a4paper,11pt,titlepage]{article}
+\usepackage[latin1]{inputenc} %support de l'utf8
+%\usepackage[T1]{fontenc} %support des accents
+\usepackage[francais]{babel} %support de la langue
+\usepackage{geometry}
+\geometry{hscale=0.70,vscale=0.70,centering}
+
+% Title Page
+\title{Projet de Composants: TETRIS}
+\author{Pauline CHAMOREAU \and Nicolas RIGNAULT}
+
+
+\begin{document}
+%\maketitle
+
+%\tableofcontents
+
+%\newpage
+%\section{Spécifications}
+
+\paragraph{ADT Grid}
+
+\begin{tabbing}
+\underline{Service}: \textbf{Grid}\\
+\underline{Type}: int, bool\\\\
+
+\underline{Observators}:\\
+\textit{getWidth}: [Grid] -$>$ int\\
+\textit{getHeight}: [Grid] -$>$ int\\
+\textit{isOccupied}: [Grid] * int * int -$>$ bool\\
+\underline{précondition}: \=\textit{isOccupied}(G,x,y) \underline{require} x $>=$ 1 \&\& x $<=$ getWidth(G) \&\& y $>=$ 1 \&\& \\
+\>y $<=$ getHeight(G)\\
+\textit{canPut}: [Grid] * int * int -$>$ bool\\\\
+
+\underline{Constructor}:\\
+\textit{init}: int * int -$>$ [Grid]\\
+\underline{précondition}: \textit{init}(x,y) \underline{require} x $>$ 0 \&\& y $>$ 0 \&\& y $>=$ x\\\\
+
+\underline{Opérations}:\\
+\textit{put}: [Grid] * int * int -$>$ [Grid]\\
+\underline{précondition}: \=\textit{put}(G,x,y) \underline{require} \textit{canPut}(G,x,y) \&\& x $>=$ 1 \&\& x$<=$ getWidth(G) \&\&\\
+\> y $>=1$ \&\& y $<=$ getHeight(G) \\\\
+
+\textit{remove}: [Grid] * int * int -$>$ [Grid]\\
+\underline{précondition}: \=\textit{remove}(G,x,y) \underline{require} \textit{isOccupied}(G,x,y) \&\& x $>=$ 1 \&\& x$<=$ getWidth(G) \&\&\\
+\>y $>=1$ \&\& y $<=$ getHeight(G) \\\\
+
+\underline{Observations}:
+\end{tabbing}
+\begin{itemize}
+ \item[$\circ$] \textit{invariants}\\
+$\forall$ x (1 $<=$ x \&\& x $<=$ \textit{getWidth}(G))\{\\
+$\forall$ y (1 $<=$ y \&\& y $<=$ \textit{getHeight}(G))\{ \textit{isOccupied}(G,x,y) = 
+$\neg$\textit{canPut}(G,x,y) \}\\
+\}\\
+ 
+ \item[$\circ$] \textit{init}\\
+ \textit{getWidth}(\textit{init}(w,h)) = w \&\& \textit{getHeight}(\textit{init}(w,h)) = h\\
+$\forall$ x in (1 $<=$ x \&\& x $<=$ \textit{getWidth}(\textit{init}(w,h)))\{\\
+$\forall$ y in (1 $<=$ y \&\& y $<=$ \textit{getHeight}(\textit{init}(w,h)))\{ $\neg$\textit{isOccupied}(\textit{init}(w,h),x,y) \&\& \textit{canPut}(\textit{init}(w,h),x,y)\}\\
+\}\\
+ 
+ \newpage
+ \item[$\circ$] \textit{put}\\
+$\neg$\textit{isOccupied}(\textit{put}(G,x,y),x,y) = \textit{isOccupied}(G,x,y)\\
+ $\neg$canPut(put(G,x,y),x,y)\\
+ $\forall$ i (1 $<=$ i \&\& x $\ne$ i \&\& i $<=$ \textit{getWidth}(\textit{put}(G,x,y)))\{\\
+ $\forall$ j in (1 $<=$ j \&\& j $\ne$ y \&\& j $<=$ \textit{getHeight}(\textit{put}(G,x,y)))\{\\
+ \textit{isOccupied}(\textit{put}(G,x,y),i,j) = \textit{isOccupied}(G,i,j) \}\\
+ \}\\
+ $\forall$ i in (1 $<=$ i \&\& x $\ne$ i \&\& i $<=$ \textit{getWidth}(\textit{put}(G)))\{\\
+ $\forall$ j in (1 $<=$ j \&\& j $\ne$ y \&\& j $<=$ \textit{getHeight}(\textit{put}(G)))\{\textit{canPut}(\textit{put}(G),i,j)\}\\
+ \}\\
+
+ \item[$\circ$] \textit{remove}\\
+ \textit{isOccupied}(\textit{remove}(G,x,y),x,y) = $\neg$\textit{isOccupied}(G,x,y)\\
+ \textit{canPut}(\textit{remove}(G,x,y),x,y)\\
+ $\forall$ i in (1 $<=$ i \&\& x $\ne$ i \&\& i $<=$ \textit{getWidth}(\textit{remove}(G,x,y)))\{\\
+ $\forall$ j in (1 $<=$ j \&\& j $\ne$ y \&\& j $<=$ \textit{getHeight}(\textit{remove}(G,x,y)))\{\\
+ \textit{isOccupied}(\textit{remove}(G,x,y),i,j) = $\neg$\textit{isOccupied}(G,i,j)\}\\
+ \}\\
+ $\forall$ i in (1 $<=$ i \&\& x $\ne$ i \&\& i $<=$ \textit{getWidth}(\textit{remove}(G,x,y)))\{\\
+ $\forall$ j in (1 $<=$ j \&\& j $\ne$ y \&\& j $<=$ \textit{getHeight}(\textit{remove}(G,x,y)))\{\textit{canPut}(\textit{remove}(G,x,y),i,j)\}\\
+ \}\\
+\end{itemize}
+
+\end{document}          

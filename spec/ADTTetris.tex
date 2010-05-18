@@ -1,0 +1,113 @@
+\documentclass[a4paper,11pt,titlepage]{article}
+\usepackage[latin1]{inputenc} %support de l'utf8
+%\usepackage[T1]{fontenc} %support des accents
+\usepackage[francais]{babel} %support de la langue
+\usepackage{geometry}
+\geometry{hscale=0.70,vscale=0.70,centering}
+
+% Title Page
+\title{Projet de Composants: TETRIS}
+\author{Pauline CHAMOREAU \and Nicolas RIGNAULT}
+
+
+\begin{document}
+%\maketitle
+
+%\tableofcontents
+
+%\newpage
+%\section{Spécifications}
+
+\paragraph{ADT Tetris}
+\begin{tabbing}
+\underline{Service}: Tetris\\
+\underline{Type}: int, bool\\
+\underline{Require}: Board, Block\\\\
+
+\underline{Observators}:\\
+\textit{getScore}: [Tetris] -$>$ int\\
+\textit{isFinished}: [Tetris] -$>$ bool\\
+\textit{isRunning}: [Tetris] -$>$ bool\\
+\textit{needNext}: [Tetris] -$>$ bool\\
+\underline{précondition}: needText(T) \underline{require} isRunning(T)\\
+\textit{getBoard}: [Tetris] -$>$ Board\\\\
+
+\underline{Constructor}:\\
+init: -$>$ [Tetris]\\\\
+
+\underline{Opérations}:\\
+\textit{goLeft}: [Tetris] -$>$ [Tetris]\\
+\underline{précondition}: \textit{goLeft}(T) require \textit{isRunning}(T)\\\\
+\textit{goRight}: [Tetris] -$>$ [Tetris]\\
+\underline{précondition}: \textit{goRight}(T) \underline{require} \textit{isRunning}(T)\\\\
+\textit{goDown}: [Tetris] -$>$ [Tetris]\\
+\underline{précondition}: \textit{goDown}(T) \underline{require} \textit{isRunning}(T)\\\\
+\textit{rotateLeft}: [Tetris] -$>$ [Tetris]\\
+\underline{précondition}: \textit{rotateLeft}(T) \underline{require} \textit{isRunning}(T)\\\\
+\textit{rotateRight}: [Tetris] -$>$ [Tetris]\\
+\underline{précondition}: \textit{rotateRight}(T) \underline{require} \textit{isRunning}(T)\\\\
+\textit{step}: [Tetris] -$>$ [Tetris]\\
+\underline{précondition}: \textit{step}(T) \underline{require} \textit{isRunning}(T)\\\\
+\textit{next}: [Tetris] -$>$ [Tetris]\\
+\underline{précondition}: \textit{next}(T) \underline{require} \textit{needNext}(T)\\\\
+
+\underline{Observations}:
+\end{tabbing}
+\begin{itemize}
+ \item[$\circ$] invariants\\
+ \textit{getScore}(T) $>=$ 0\\
+ \textit{isFinished}(T) = $\neg$\textit{isRunning}(T)\\
+
+ \item[$\circ$] init\\
+ \textit{getScore}(\textit{init}()) = 0\\
+ \textit{getBoard}(\textit{init}()) = \textbf{Board:}\textit{init}(10,22)\\
+ \textit{isRunning}(\textit{init}()) = true\\
+ \textit{needNext}(\textit{init}()) = true\\
+
+ \item[$\circ$] goLeft\\
+ \textit{getScore}(\textit{goLeft}(T)) = \textit{getScore}(T)\\
+ \textit{needNext}(\textit{goLeft}(T)) = false\\
+ \textit{isRunning}(\textit{goLeft}(T)) = true\\
+ \textit{getBoard}(\textit{goLeft}(T)) = \textbf{Board:}\textit{doLeft}(\textit{getBoard}(T))\\
+
+\item[$\circ$] goRight\\
+ \textit{getScore}(\textit{goRight}(T)) = \textit{getScore}(T)\\
+ \textit{needNext}(\textit{goRight}(T)) = false\\
+  \textit{isRunning}(\textit{goRight}(T)) = true\\
+ \textit{getBoard}(\textit{goRight}(T)) = \textbf{Board:}\textit{doRight}(\textit{getBoard}(T))\\
+
+\item[$\circ$] goDown\\
+\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getScore}(\textit{goDown}(T)) = \textit{getScore}(T)\\
+$\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getScore}(\textit{goDown}(T)) = \textit{getScore}(T) + 20 + \textbf{Board:}\textit{getNbLastCleaned}(\textit{getBoard}(\textit{goDown}(T)))*50\\
+$\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{needNext}(\textit{goDown}(T)) = true\\
+\textit{isRunning}(\textit{goDown}(T)) = true\\
+ \textit{getBoard}(\textit{goDown}(T)) = \textbf{Board:}\textit{doBottom}(\textit{getBoard}(T))\\
+
+\item[$\circ$] rotateLeft\\
+ \textit{getScore}(\textit{rotateLeft}(T)) = \textit{getScore}(T)\\
+ \textit{needNext}(\textit{rotateLeft}(T)) = false\\
+ \textit{isRunning}(\textit{rotateLeft}(T)) = true\\
+ \textit{getBoard}(\textit{rotateLeft}(T)) = \textbf{Board:}\textit{doRotateLeft}(\textit{getBoard}(T))\\
+
+\item[$\circ$] rotateRight\\
+ \textit{getScore}(\textit{rotateRight}(T)) = \textit{getScore}(T)\\
+ \textit{needNext}(\textit{rotateRight}(T)) = false\\
+ \textit{isRunning}(\textit{rotateRight}(T)) = true\\
+ \textit{getBoard}(\textit{rotateRight}(T)) = \textbf{Board:}\textit{doRotateRight}(\textit{getBoard}(T))\\
+
+\newpage
+\item[$\circ$] step\\
+\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) \&\& \textit{needNext}(\textit{getBoard}(T)) $<=>$\\ \textit{getScore}(\textit{step}(T)) = \textit{getScore}(T)\\
+\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) \&\& $\neg$\textit{needNext}(\textit{getBoard}(T)) $<=>$\\ \textit{getScore}(\textit{step}(T)) = \textit{getScore}(T) + 20 + \textbf{Board:}\textit{getNbLastCleaned}(\textit{getBoard}(\textit{step}(T)))*50\\
+\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) \&\& $<=>$ \textit{needNext}(\textit{step}(T)) = false\\
+$\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getScore}(\textit{step}(T)) = \textit{getScore}(T)\\
+$\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $<=>$ \textit{getBoard}(\textit{step}(T)) = \textbf{Board:}\textit{step}(\textit{getBoard}(T))\\
+
+\item[$\circ$] next\\
+ \textit{getScore}(\textit{next}(T)) = \textit{getScore}(T)\\
+ \textit{needNext}(\textit{next}(T)) = false\\
+ \textit{getBoard}(\textit{next}(T)) = \textbf{Board:}\textit{insert}(\textit{getBoard}(), \textbf{Block:}\textit{init}(b))\\
+
+\end{itemize}
+
+\end{document}          

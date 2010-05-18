@@ -71,6 +71,20 @@
     includes="Tetris/**/*" excludes="**/.svn">
     	<exclude name="Tetris/.git/**"/>
     	<exclude name="Tetris/bin/**"/>
+    	<exclude name="Tetris/spec/*.aux"/>
+    	<exclude name="Tetris/spec/*.tex"/>
+    	<exclude name="Tetris/spec/*.loc"/>
+    	<exclude name="Tetris/spec/*.toc"/>
+    	<exclude name="Tetris/spec/*.log"/>
+    	<exclude name="Tetris/spec/*.backup"/>
+    	<exclude name="Tetris/spec/*~"/>
+    	<exclude name="Tetris/*.aux"/>
+    	<exclude name="Tetris/*.tex"/>
+    	<exclude name="Tetris/*.loc"/>
+    	<exclude name="Tetris/*.toc"/>
+    	<exclude name="Tetris/*.log"/>
+    	<exclude name="Tetris/*.backup"/>
+    	<exclude name="Tetris/*~"/>
   	</jar>
   </target>
 
