@@ -170,7 +170,7 @@ $\forall$ (x, y) $\in$ [1..getSize(B),1..getSize(B)],  $\neg$ \textit{hasPos}(\t
 \begin{itemize}
  \item[$\circ$] \textit{invariants}\\
 1$<=$\textit{getXblock}(B,\textbf{Block:}\textit{getXMin}(\textit{getcurrentBlock}(B))) \&\&\\ \textit{getXblock}(B,\textbf{Block:}\textit{getXMax}(\textit{getcurrentBlock}(B)))$<=$\textbf{Grid:}\textit{getWidth}(\textit{getgrid}(B))+1\\
-1$<=$\textit{getYblock}(B,\textbf{Block:}\textit{getYMin}(\textit{getcurrentBlock}(B))) \&\&\\ \textit{getYblock}(B,\textbf{Block:}\textit{getYMax}(\textit{getcurrentBlock}(B)))$<=$\textbf{Grid:}\textit{getHeight}(\textit{getgrid}(B))+1\\
+1$<=$\textit{getYblock}(B,\textbf{Block:}\textit{getYMin}(\textit{getcurrentBlock}(B))) \&\&\\ \textit{getYblock}(B,\textbf{Block:}\textit{getYMax}(\textit{getcurrentBlock}(B)))$<=$\textbf{Grid:}\textit{getHeight}(\textit{getgrid}(B))+4\\
 \textit{getNbLastCleaned}(B) $>=$ 0\\
 \textit{isBlock}(B) $<=>$ \textit{getXMinBlock}(B) $>=$ 0 \&\& \textit{getXMinBlock}(B) $<=$ \textit{getgrid}(\textit{getWidth}(B)))\\
 \textit{isBlock}(B) $<=>$ \textit{getYMinBlock}(B) $>=$ 0 \&\& \textit{getYMinBlock}(B) $<=$ \textit{getgrid}(\textit{getHeight}(B)))+1\\
@@ -232,8 +232,8 @@ $\textit{getYMinBlock}(\textit{init}(x,y)) = 0$\\
 \textit{getcurrentBlock}(\textit{getNbPos}(\textit{doBottom}(B))) = \textit{getcurrentBlock}(\textit{getNbPos}(B))\\
 \textit{isBlock}(\textit{doBottom}(B)) = \textit{isBlock}(B)\\
 \textit{getXMinBlock}(\textit{doBottom}(B)) = \textit{getXMinBlock}(B)\\
-\textit{getYMinBlock}(\textit{doBottom}(B)) = \textit{getYMinBlock}(B) + \textit{getBottomHeight}(B) +  \textit{getNbLastCleaned}(B)\\
-\textit{getBottomHeight}(\textit{doBottom}(B)) = 0\\
+\textit{getYMinBlock}(\textit{doBottom}(B)) = \textit{getYMinBlock}(B) + \textit{getBottomHeight}(B) +  \textit{getNbLastCleaned}(\textit{doBottom}(B))\\
+\textit{getBottomHeight}(\textit{doBottom}(B)) - \textit{getNbLastCleaned}(B) = 0 $||$ \textit{isBottom}(B)\\
 
  \item[$\circ$] \textit{step}\\
 %\textit{getgrid}(\textit{step}(B)) = \textit{getgrid}(B)\\

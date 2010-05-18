@@ -85,10 +85,8 @@ public interface TetrisService {
 	
 	/**
 	 * pre: needNext() == true
-	 * post: isBottom() && needNext()@pre <=> getScore() == getScore()@pre
-	 * post: isBottom() && !needNext()@pre <=> getScore() == getScore_atPre + 20 + (getBoard().getNbLastCleaned()*50)
-	 * post: isBottom() && needNext() == false
-	 * post: !isBottom() <=> getScore() == getScore()@pre
+	 * post: getScore() == getScore()@pre
+	 * post: needNext() == false
 	 * post: getBoard() == getBoard()@pre.insert(Block:init(Random))
 	 */
 	public void next();

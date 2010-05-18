@@ -108,8 +108,8 @@ public interface BoardService {
 	 * post: getcurrentBlock().getNbPos() == getcurrentBlock().getNbPos()@pre
 	 * post: isBlock() == isBlock()@pre
 	 * post: getXMinBlock() == getXMinBlock()@pre
-	 * post: getYMinBlock() == getYMinBlock()@pre + getBottomHeight()@pre
-	 * post: getBottomHeight() == 0 || isBottom()
+	 * post: getYMinBlock() == getYMinBlock()@pre + getBottomHeight()@pre + getNbLastCleaned()
+	 * post: getBottomHeight()-getNbLastCleaned() == 0 || isBottom()
 	 */
 	public void doBottom();
 
