@@ -40,7 +40,7 @@ public interface BoardService {
 			super.getgrid().getHeight()+4
 	 * getNbLastCleaned() >= 0
 	 * isBlock() <=> getXMinBlock() >= 0 && getXMinBlock() <= getgrid().getWidth()
-	 * isBlock() <=> getYMinBlock() >=0 && getYMinBlock() <= getgrid().getHeight()
+	 * isBlock() <=> getYMinBlock() >=0 && getYMinBlock() <= getgrid().getHeight()+1
 	 */
 	
 	/** Constructors

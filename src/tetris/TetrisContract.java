@@ -330,7 +330,7 @@ public class TetrisContract extends TetrisDecorator {
 		
 		if(isRunning()) {
 		if (isBottom_atPre){
-			if (needNext()) {
+			if (needNext_atPre) {
 				if(!(getScore() == getScore_atPre))
 					throw new Error("[TETRIS]post(1)(step) invalide");
 			}
