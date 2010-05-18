@@ -109,7 +109,7 @@ public interface BoardService {
 	 * post: isBlock() == isBlock()@pre
 	 * post: getXMinBlock() == getXMinBlock()@pre
 	 * post: getYMinBlock() == getYMinBlock()@pre + getBottomHeight()@pre
-	 * post: getBottomHeight() == 0 || isBottom()
+	 * post: getBottomHeight()-getNbLastCleaned() == 0 || isBottom()
 	 */
 	public void doBottom();
 
