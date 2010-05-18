@@ -173,7 +173,7 @@ $\forall$ (x, y) $\in$ [1..getSize(B),1..getSize(B)],  $\neg$ \textit{hasPos}(\t
 1$<=$\textit{getYblock}(B,\textbf{Block:}\textit{getYMin}(\textit{getcurrentBlock}(B))) \&\&\\ \textit{getYblock}(B,\textbf{Block:}\textit{getYMax}(\textit{getcurrentBlock}(B)))$<=$\textbf{Grid:}\textit{getHeight}(\textit{getgrid}(B))+1\\
 \textit{getNbLastCleaned}(B) $>=$ 0\\
 \textit{isBlock}(B) $<=>$ \textit{getXMinBlock}(B) $>=$ 0 \&\& \textit{getXMinBlock}(B) $<=$ \textit{getgrid}(\textit{getWidth}(B)))\\
-\textit{isBlock}(B) $<=>$ \textit{getYMinBlock}(B) $>=$ 0 \&\& \textit{getYMinBlock}(B) $<=$ \textit{getgrid}(\textit{getHeight}(B)))\\
+\textit{isBlock}(B) $<=>$ \textit{getYMinBlock}(B) $>=$ 0 \&\& \textit{getYMinBlock}(B) $<=$ \textit{getgrid}(\textit{getHeight}(B)))+1\\
 
  \item[$\circ$] \textit{init}\\
 \textit{getgrid}(B) = \textbf{Grid:}\textit{init}(x,y)\\
@@ -480,12 +480,11 @@ $\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{needNe
  \textit{getBoard}(\textit{rotateRight}(T)) = \textbf{Board:}\textit{doRotateRight}(\textit{getBoard}(T))\\
 
 \item[$\circ$] step\\
-\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) \&\& \textit{needNext}(B) $=>$\\ \textit{getScore}(\textit{step}(T)) = \textit{getScore}(T)\\
-\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) \&\& $\neg$\textit{needNext}(B) $=>$\\ \textit{getScore}(\textit{step}(T)) = \textit{getScore}(T) + 20 + \textbf{Board:}\textit{getNbLastCleaned}(\textit{getBoard}(\textit{step}(T)))*50\\
-\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{needNext}(\textit{step}(T)) = false\\
+\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) \&\& \textit{needNext}(\textit{getBoard}(T)) $<=>$\\ \textit{getScore}(\textit{step}(T)) = \textit{getScore}(T)\\
+\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) \&\& $\neg$\textit{needNext}(\textit{getBoard}(T)) $<=>$\\ \textit{getScore}(\textit{step}(T)) = \textit{getScore}(T) + 20 + \textbf{Board:}\textit{getNbLastCleaned}(\textit{getBoard}(\textit{step}(T)))*50\\
+\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) \&\& $<=>$ \textit{needNext}(\textit{step}(T)) = false\\
 $\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getScore}(\textit{step}(T)) = \textit{getScore}(T)\\
-$\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{needNext}(\textit{step}(T)) = \textit{needNext}(T)\\
-$\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getBoard}(\textit{step}(T)) = \textbf{Board:}\textit{step}(\textit{getBoard}(T))\\
+$\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $<=>$ \textit{getBoard}(\textit{step}(T)) = \textbf{Board:}\textit{step}(\textit{getBoard}(T))\\
 
 \item[$\circ$] next\\
  \textit{getScore}(\textit{next}(T)) = \textit{getScore}(T)\\
