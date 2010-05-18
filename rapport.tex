@@ -443,35 +443,40 @@ init: -$>$ [Tetris]\\\\
  \textit{isFinished}(T) = $\neg$\textit{isRunning}(T)\\
 
  \item[$\circ$] init\\
- \textit{getScore}(init()) = 0\\
- \textit{getBoard}(init()) = \textbf{Board:}\textit{init}(10,22)\\
- \textit{isRunning}(init()) = true\\
- \textit{needNext}(init()) = true\\
+ \textit{getScore}(\textit{init}()) = 0\\
+ \textit{getBoard}(\textit{init}()) = \textbf{Board:}\textit{init}(10,22)\\
+ \textit{isRunning}(\textit{init}()) = true\\
+ \textit{needNext}(\textit{init}()) = true\\
 
  \item[$\circ$] goLeft\\
- \textit{getScore}(goLeft(T)) = \textit{getScore}(T)\\
- \textit{needNext}(goLeft(T)) = false\\
- \textit{getBoard}(goLeft(T)) = \textbf{Board:}\textit{doLeft}(\textit{getBoard}(T))\\
+ \textit{getScore}(\textit{goLeft}(T)) = \textit{getScore}(T)\\
+ \textit{needNext}(\textit{goLeft}(T)) = false\\
+ \textit{isRunning}(\textit{goLeft}(T)) = true\\
+ \textit{getBoard}(\textit{goLeft}(T)) = \textbf{Board:}\textit{doLeft}(\textit{getBoard}(T))\\
 
 \item[$\circ$] goRight\\
  \textit{getScore}(\textit{goRight}(T)) = \textit{getScore}(T)\\
  \textit{needNext}(\textit{goRight}(T)) = false\\
+  \textit{isRunning}(\textit{goRight}(T)) = true\\
  \textit{getBoard}(\textit{goRight}(T)) = \textbf{Board:}\textit{doRight}(\textit{getBoard}(T))\\
 
 \item[$\circ$] goDown\\
-\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getScore}(\textit{goDown}(T)) = \textit{getScore}(T) + 20 + \textbf{Board:}\textit{getNbLastCleaned}(\textit{getBoard}(\textit{goDown}(T)))*50\\
-$\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getScore}(\textit{goDown}(T)) = \textit{getScore}(T)\\
+\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getScore}(\textit{goDown}(T)) = \textit{getScore}(T)\\
+$\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getScore}(\textit{goDown}(T)) = \textit{getScore}(T) + 20 + \textbf{Board:}\textit{getNbLastCleaned}(\textit{getBoard}(\textit{goDown}(T)))*50\\
 $\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{needNext}(\textit{goDown}(T)) = true\\
+\textit{isRunning}(\textit{goDown}(T)) = true\\
  \textit{getBoard}(\textit{goDown}(T)) = \textbf{Board:}\textit{doBottom}(\textit{getBoard}(T))\\
 
 \item[$\circ$] rotateLeft\\
  \textit{getScore}(\textit{rotateLeft}(T)) = \textit{getScore}(T)\\
  \textit{needNext}(\textit{rotateLeft}(T)) = false\\
+ \textit{isRunning}(\textit{rotateLeft}(T)) = true\\
  \textit{getBoard}(\textit{rotateLeft}(T)) = \textbf{Board:}\textit{doRotateLeft}(\textit{getBoard}(T))\\
 
 \item[$\circ$] rotateRight\\
  \textit{getScore}(\textit{rotateRight}(T)) = \textit{getScore}(T)\\
  \textit{needNext}(\textit{rotateRight}(T)) = false\\
+ \textit{isRunning}(\textit{rotateRight}(T)) = true\\
  \textit{getBoard}(\textit{rotateRight}(T)) = \textbf{Board:}\textit{doRotateRight}(\textit{getBoard}(T))\\
 
 \item[$\circ$] step\\
@@ -480,7 +485,7 @@ $\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{needNe
 \textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{needNext}(\textit{step}(T)) = false\\
 $\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getScore}(\textit{step}(T)) = \textit{getScore}(T)\\
 $\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{needNext}(\textit{step}(T)) = \textit{needNext}(T)\\
-$\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getBoard}(\textit{step}(T)) = \textbf{Board:}\textit{step}(\textit{getBoard}(T))
+$\neg$\textbf{Board:}\textit{isBottom}(\textit{getBoard}(T)) $=>$ \textit{getBoard}(\textit{step}(T)) = \textbf{Board:}\textit{step}(\textit{getBoard}(T))\\
 
 \item[$\circ$] next\\
  \textit{getScore}(\textit{next}(T)) = \textit{getScore}(T)\\

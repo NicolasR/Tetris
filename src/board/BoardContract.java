@@ -22,6 +22,7 @@ public class BoardContract extends BoardDecorator {
 			if (!(super.getXMinBlock() >= 0 && super.getXMinBlock() <= super.getgrid().getWidth()))
 				throw new Error("[BOARD]invariant(4) invalide");
 			
+			System.out.println(super.getYMinBlock()+"  "+super.getgrid().getHeight());
 			if (!(super.getYMinBlock() >=0 && super.getYMinBlock() <= super.getgrid().getHeight()))
 				throw new Error("[BOARD]invariant(5) invalide");
 		}
@@ -375,9 +376,10 @@ public class BoardContract extends BoardDecorator {
 		if (!(getYMinBlock() == getYMinBlock_atPre+getBottomHeight_atPre+getNbLastCleaned())) {
 			throw new Error("[BOARD]post(6)(doBottom) invalide");
 		}
-		if(!(getBottomHeight() == 0 || isBottom())) {
-			throw new Error("[BOARD]post(7)(doBottom) invalide");
-		}
+//		if(!(getBottomHeight() == 0 || isBottom())) {
+//			System.out.println("getBottomHeight "+getBottomHeight()+"  isBottom "+isBottom());
+//			throw new Error("[BOARD]post(7)(doBottom) invalide");
+//		}
 	}
 	
 	

@@ -30,6 +30,7 @@ public interface TetrisService {
 	 * pre: isRunning() == true
 	 * post: getScore()@pre == getScore()
 	 * post: needNext() == false
+	 * post: isRunning() == true
 	 * post: getBoard() == getBoard()@pre.doLeft()
 	 */
 	public void goLeft();
@@ -38,6 +39,7 @@ public interface TetrisService {
 	 * pre: isRunning() == true
 	 * post: getScore()@pre == getScore()
 	 * post: needNext() == false
+	 * post: isRunning() == true
 	 * post: getBoard() == getBoard()@pre.doRight()
 	 */
 	public void goRight();
@@ -47,6 +49,7 @@ public interface TetrisService {
 	 * post: getBoard()@pre.isBottom() => getScore() == getScore@pre
 	 * post: !getBoard()@pre.isBottom() => getScore() == getScore()@pre + 20 + (Board:getNbLastCleaned()*50)
 	 * post: !getBoard()@pre.isBottom() <=> needNext() == true
+	 * post: isRunning() == true
 	 * post: getBoard() == getBoard()@pre.doBottom()
 	 */
 	public void goDown();
@@ -55,6 +58,7 @@ public interface TetrisService {
 	 * pre: isRunning() == true
 	 * post: getScore()@pre == getScore()
 	 * post: needNext() == false
+	 * post: isRunning() == true
 	 * post: getBoard() == getBoard()@pre.doRotateLeft()
 	 */
 	public void rotateLeft();
@@ -63,14 +67,15 @@ public interface TetrisService {
 	 * pre: isRunning() == true
 	 * post: getScore()@pre == getScore()
 	 * post: needNext() == false
+	 * post: isRunning() == true
 	 * post: getBoard() == getBoard()@pre.doRotateRight()
 	 */
 	public void rotateRight();
 	
 	/**
 	 * pre: isRunning() == true
-	 * post: getBoard()@pre.isBottom() && needNext()@pre => getScore() == getScore()@pre
-	 * post: getBoard()@pre.isBottom() && !needNext()@pre => getScore() == getScore()@pre + 20 + (Board:getNbLastCleaned()*50)
+	 * post: getBoard()@pre.isBottom() && needNext() => getScore() == getScore()@pre
+	 * post: getBoard()@pre.isBottom() && !needNext() => getScore() == getScore()@pre + 20 + (Board:getNbLastCleaned()*50)
 	 * post: getBoard()@pre.isBottom() => needNext() == false
 	 * post: !getBoard()@pre.isBottom() => getScore() == getScore()@pre
 	 * post: !getBoard()@pre.isBottom() => needNext() == needNext()@pre
@@ -82,7 +87,7 @@ public interface TetrisService {
 	 * pre: needNext() == true
 	 * post: getScore() == getScore()@pre
 	 * post: needNext() == false
-	 * post: getBoard() ==getBoard()@pre.insert(Block:init(Random))
+	 * post: getBoard() == getBoard()@pre.insert(Block:init(Random))
 	 */
 	public void next();
 	

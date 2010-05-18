@@ -82,27 +82,29 @@ public class TetrisContract extends TetrisDecorator {
 			throw new Error("[TETRIS]post(1)(goLeft) invalide");
 		if (!(needNext() == false))
 			throw new Error("[TETRIS]post(2)(goLeft) invalide");
+		if(!(isRunning() == true))
+			throw new Error("[TETRIS]post(3)(goLeft) invalide");
 		
 		//POST BOARD:doLeft
 		BoardService board = getBoard();
 		if(!(board.getcurrentBlock() == getcurrentBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.1)(goLeft) invalide");
+			throw new Error("[TETRIS]post(4.1)(goLeft) invalide");
 		}
 		if(!(board.getgrid() == getgrid_atPre)) {
-			throw new Error("[TETRIS]post(3.2)(goLeft) invalide");
+			throw new Error("[TETRIS]post(4.2)(goLeft) invalide");
 		}
 		if(!(board.getNbLastCleaned() == getNbLastCleaned_atPre)) {
-			throw new Error("[TETRIS]post(3.3)(goLeft) invalide");
+			throw new Error("[TETRIS]post(4.3)(goLeft) invalide");
 		}
 		if(!(board.isBlock() == isBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.4)(goLeft) invalide");
+			throw new Error("[TETRIS]post(4.4)(goLeft) invalide");
 		}
 		if (cangoLeft_atPre)
 			if (!(board.getXMinBlock() == getXMinBlock_atPre-1)) {
-				throw new Error("[TETRIS]post(3.5)(goLeft) invalide");
+				throw new Error("[TETRIS]post(4.5)(goLeft) invalide");
 			}
 		if (!(board.getYMinBlock() == getYMinBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.6)(goLeft) invalide");
+			throw new Error("[TETRIS]post(4.6)(goLeft) invalide");
 		}
 		
 	}
@@ -131,27 +133,29 @@ public class TetrisContract extends TetrisDecorator {
 			throw new Error("[TETRIS]post(1)(goRight) invalide");
 		if (!(needNext() == false))
 			throw new Error("[TETRIS]post(2)(goRight) invalide");
+		if(!(isRunning() == true))
+			throw new Error("[TETRIS]post(3)(goRight) invalide");
 		
 		//POST BOARD:doRight
 		BoardService board = getBoard();
 		if(!(board.getcurrentBlock() == getcurrentBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.1)(goRight) invalide");
+			throw new Error("[TETRIS]post(4.1)(goRight) invalide");
 		}
 		if(!(board.getgrid() == getgrid_atPre)) {
-			throw new Error("[TETRIS]post(3.2)(goRight) invalide");
+			throw new Error("[TETRIS]post(4.2)(goRight) invalide");
 		}
 		if(!(board.getNbLastCleaned() == getNbLastCleaned_atPre)) {
-			throw new Error("[TETRIS]post(3.3)(goRight) invalide");
+			throw new Error("[TETRIS]post(4.3)(goRight) invalide");
 		}
 		if(!(board.isBlock() == isBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.4)(goRight) invalide");
+			throw new Error("[TETRIS]post(4.4)(goRight) invalide");
 		}
 		if (cangoRight_atPre)
 			if (!( board.getXMinBlock() == getXMinBlock_atPre+1)) {
-				throw new Error("[TETRIS]post(3.5)(goRight) invalide");
+				throw new Error("[TETRIS]post(4.5)(goRight) invalide");
 			}
 		if (!(board.getYMinBlock() == getYMinBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.6)(goRight) invalide");
+			throw new Error("[TETRIS]post(4.6)(goRight) invalide");
 		}
 	}
 	
@@ -174,33 +178,39 @@ public class TetrisContract extends TetrisDecorator {
 		
 		checkInvariants();
 		
-		if (!isBottom_atPre){
-			if (!(getScore_atPre+20+50*(getBoard().getNbLastCleaned()) == getScore()))
+		if (isBottom_atPre){
+			if (!(getScore() == getScore_atPre))
 				throw new Error("[TETRIS]post(1)(goDown) invalide");
+		}
+		else {
+			if (!(getScore_atPre+20+50*(getBoard().getNbLastCleaned()) == getScore()))
+				throw new Error("[TETRIS]post(2)(goDown) invalide");
 			
 			if (!(needNext() == true))
-				throw new Error("[TETRIS]post(2)(goDown) invalide");
+				throw new Error("[TETRIS]post(3)(goDown) invalide");
 		}
+		if (!(isRunning()))
+			throw new Error("[TETRIS]post(4)(goDown) invalide");
 
 		//POST BOARD:doBottom
 		BoardService board = getBoard();
 		if(!(board.getcurrentBlock() == getcurrentBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.1)(goDown) invalide");
+			throw new Error("[TETRIS]post(5.1)(goDown) invalide");
 		}
 		if(!(board.getgrid() == getgrid_atPre)) {
-			throw new Error("[TETRIS]post(3.2)(goDown) invalide");
+			throw new Error("[TETRIS]post(5.2)(goDown) invalide");
 		}
 		if(!(board.isBlock() == isBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.3)(goDown) invalide");
+			throw new Error("[TETRIS]post(5.3)(goDown) invalide");
 		}
 		if (!(board.getXMinBlock() == getXMinBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.4)(goDown) invalide");
+			throw new Error("[TETRIS]post(5.4)(goDown) invalide");
 		}
 		if (!(board.getYMinBlock() == getYMinBlock_atPre+getBottomHeight_atPre+board.getNbLastCleaned())) {
-			throw new Error("[TETRIS]post(3.5)(goDown) invalide");
+			throw new Error("[TETRIS]post(5.5)(goDown) invalide");
 		}
 		if(!(board.getBottomHeight() == 0 || board.isBottom())) {
-			throw new Error("[TETRIS]post(3.6)(goDown) invalide");
+			throw new Error("[TETRIS]post(5.6)(goDown) invalide");
 		}
 	}
 	
@@ -226,26 +236,28 @@ public class TetrisContract extends TetrisDecorator {
 			throw new Error("[TETRIS]post(1)(rotateLeft) invalide");
 		if (!(needNext() == false))
 			throw new Error("[TETRIS]post(2)(rotateLeft) invalide");
+		if(!(isRunning() == true))
+			throw new Error("[TETRIS]post(3)(rotateLeft) invalide");
 		
 		//POST BOARD:doRotateLeft
 		BoardService board = getBoard();
 		if(!(board.getcurrentBlock() == getcurrentBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.1)(rotateLeft) invalide");
+			throw new Error("[TETRIS]post(4.1)(rotateLeft) invalide");
 		}
 		if(!(board.getgrid() == getgrid_atPre)) {
-			throw new Error("[TETRIS]post(3.2)(rotateLeft) invalide");
+			throw new Error("[TETRIS]post(4.2)(rotateLeft) invalide");
 		}
 		if(!(board.getNbLastCleaned() == getNbLastCleaned_atPre)) {
-			throw new Error("[TETRIS]post(3.3)(rotateLeft) invalide");
+			throw new Error("[TETRIS]post(4.3)(rotateLeft) invalide");
 		}
 		if(!(board.isBlock() == isBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.4)(rotateLeft) invalide");
+			throw new Error("[TETRIS]post(4.4)(rotateLeft) invalide");
 		}
 		if (!(board.getXMinBlock() == getXMinBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.5)(rotateLeft) invalide");
+			throw new Error("[TETRIS]post(4.5)(rotateLeft) invalide");
 		}
 		if (!(board.getYMinBlock() == getYMinBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.6)(rotateLeft) invalide");
+			throw new Error("[TETRIS]post(4.6)(rotateLeft) invalide");
 		}
 	}
 	
@@ -271,26 +283,28 @@ public class TetrisContract extends TetrisDecorator {
 			throw new Error("[TETRIS]post(1)(rotateRight) invalide");
 		if (!(needNext() == false))
 			throw new Error("[TETRIS]post(2)(rotateRight) invalide");
+		if(!(isRunning() == true))
+			throw new Error("[TETRIS]post(3)(rotateRight) invalide");
 		
 		//POST BOARD:doRotateRight
 		BoardService board = getBoard();
 		if(!(board.getcurrentBlock() == getcurrentBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.1)(rotateRight) invalide");
+			throw new Error("[TETRIS]post(4.1)(rotateRight) invalide");
 		}
 		if(!(board.getgrid() == getgrid_atPre)) {
-			throw new Error("[TETRIS]post(3.2)(rotateRight) invalide");
+			throw new Error("[TETRIS]post(4.2)(rotateRight) invalide");
 		}
 		if(!(board.getNbLastCleaned() == getNbLastCleaned_atPre)) {
-			throw new Error("[TETRIS]post(3.3)(rotateRight) invalide");
+			throw new Error("[TETRIS]post(4.3)(rotateRight) invalide");
 		}
 		if(!(board.isBlock() == isBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.4)(rotateRight) invalide");
+			throw new Error("[TETRIS]post(4.4)(rotateRight) invalide");
 		}
 		if (!(board.getXMinBlock() == getXMinBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.5)(rotateRight) invalide");
+			throw new Error("[TETRIS]post(4.5)(rotateRight) invalide");
 		}
 		if (!(board.getYMinBlock() == getYMinBlock_atPre)) {
-			throw new Error("[TETRIS]post(3.6)(rotateRight) invalide");
+			throw new Error("[TETRIS]post(4.6)(rotateRight) invalide");
 		}
 	}
 	
@@ -314,16 +328,17 @@ public class TetrisContract extends TetrisDecorator {
 		
 		checkInvariants();
 		
+		if(isRunning()) {
 		if (isBottom_atPre){
-			/*if (needNext_atPre) {
+			if (needNext()) {
 				if(!(getScore() == getScore_atPre))
 					throw new Error("[TETRIS]post(1)(step) invalide");
-			}*/
-			//else {
+			}
+			else {
 				if (!(getScore() == getScore_atPre + 20 + (getBoard().getNbLastCleaned()*50)))
 					throw new Error("[TETRIS]post(2)(step) invalide");
-			/*}*/
-			if(isRunning() && !(needNext() == false))
+			}
+			if(!(needNext() == false))
 				throw new Error("[TETRIS]post(3)(step) invalide");
 		}
 		else{
@@ -335,23 +350,24 @@ public class TetrisContract extends TetrisDecorator {
 			//POST BOARD:step
 			BoardService board = getBoard();
 			if(!(board.getgrid() == getgrid_atPre)) {
-				throw new Error("[TETRIS]post(3.1)(step) invalide");
+				throw new Error("[TETRIS]post(6.1)(step) invalide");
 			}
 			if(!(board.isBlock() == isBlock_atPre)) {
-				throw new Error("[TETRIS]post(3.2)(step) invalide");
+				throw new Error("[TETRIS]post(6.2)(step) invalide");
 			}
 			if (!isBottom_atPre){
 				if(!(board.getXMinBlock() == getXMinBlock_atPre)) {
-					throw new Error("[TETRIS]post(3.3)(step) invalide");
+					throw new Error("[TETRIS]post(6.3)(step) invalide");
 				}
 
 				if (!(board.getYMinBlock() == getYMinBlock_atPre+1)) {
-					throw new Error("[TETRIS]post(3.4)(step) invalide");
+					throw new Error("[TETRIS]post(6.4)(step) invalide");
 				}
 				if (!(board.getBottomHeight() == getBottomHeight_atPre-1)) {
-					throw new Error("[TETRIS]post(3.5)(step) invalide");
+					throw new Error("[TETRIS]post(6.5)(step) invalide");
 				}
 			}			
+		}
 		}
 	}
 	
